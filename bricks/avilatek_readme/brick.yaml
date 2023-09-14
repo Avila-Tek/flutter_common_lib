@@ -1,0 +1,61 @@
+name: avilatek_readme
+description: Generates a standard README file under the standards of Avila Tek Flutter projects
+
+# The following defines the brick repository url.
+# Uncomment and update the following line before publishing the brick.
+# repository: https://github.com/my_org/my_repo
+
+# The following defines the version and build number for your brick.
+# A version number is three numbers separated by dots, like 1.2.34
+# followed by an optional build number (separated by a +).
+version: 0.1.0+1
+
+# The following defines the environment for the current brick.
+# It includes the version of mason that the brick requires.
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+# Variables specify dynamic values that your brick depends on.
+# Zero or more variables can be specified for a given brick.
+# Each variable has:
+#  * a type (string, number, boolean, enum, array, or list)
+#  * an optional short description
+#  * an optional default value
+#  * an optional list of default values (array only)
+#  * an optional prompt phrase used when asking for the variable
+#  * a list of values (enums only)
+#  * an optional separator (list only)
+vars:
+  project_name:
+    type: string
+    description: Name of the project. Will be used as the header of the README file.
+    default: Avila Tek Flutter Project
+    prompt: What is the name of the project?
+
+  description:
+    type: string
+    description: Description of the project.
+    default: This project was created using the Avila Tek Flutter Project template.
+    prompt: What is the description of the project?
+
+  uses_fvm:
+    type: boolean
+    description: Whether the project uses FVM or not. This will add a section to the README file pointing it out and explaining how to install FVM.
+    default: false
+    prompt: Does the project use FVM?
+
+  uses_melos:
+    type: boolean
+    description: Whether the project uses Melos or not. This will add a section to the README file pointing it out and explaining how to install Melos.
+    default: false
+    prompt: Does the project use Melos?
+
+  ci:
+    type: enum
+    description: The CI service used by the project. This will add a section to the README file pointing it out and explaining how to configure or use the CI service.
+    default: none
+    values:
+      - none
+      - github
+      - codemagic
+    prompt: Which CI service does the project use?
