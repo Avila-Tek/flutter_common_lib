@@ -15,3 +15,5 @@ bricks:
     path: bricks/avilatek_readme
   avilatek_codemagic:
     path: bricks/avilatek_codemagic
+  feature_brick:
+    path: bricks/feature_brick
