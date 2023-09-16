@@ -1,4 +1,4 @@
-# Avila Tek Flutter Project
+# Avila Tek Common Library
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
@@ -6,11 +6,25 @@
 
 Generated with `brick:avilatek_readme`[^1].
 
-This project was created using the Avila Tek Flutter Project template.
+This README was made with brick:avilatek_readme. This is a common library for Avila Tek Flutter projects.
+
+
+## Table of content
+- [Avila Tek Common Library](#project_name)
+  - [Table of content](#table-of-content)
+  - [Getting Started 🚀](#getting-started-)
+  - [Running Tests 🧪](#running-tests-)
+  - [Working with Translations 🌐](#working-with-translations-)
+    - [Adding Strings](#adding-strings)
+    - [Adding Supported Locales](#adding-supported-locales)
+    - [Adding Translations](#adding-translations)
+
 
 ---
 
 ## Getting Started 🚀
+
+
 
 This project contains 3 flavors:
 
@@ -22,6 +36,7 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
+
 $ flutter run --flavor development --target lib/main_development.dart
 
 # Staging
@@ -31,9 +46,11 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*Avila Tek Flutter Project works on iOS, Android, Web, and Windows._
+_\*Avila Tek Common Library works on iOS, Android, Web, and Windows._
 
 ---
+
+
 
 ## Running Tests 🧪
 

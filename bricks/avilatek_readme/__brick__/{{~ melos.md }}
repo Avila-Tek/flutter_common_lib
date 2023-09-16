@@ -1,0 +1,6 @@
+
+### Melos
+
+This project uses Melos. You must install [package:melos](https://pub.dev/packages/melos).
+
+Before compiling the project for the first time, you must run `melos bootstrap` or `melos bs` at the root of the project to get the dependencies of all apps and packages of this project.

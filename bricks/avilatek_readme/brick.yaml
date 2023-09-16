@@ -50,6 +50,12 @@ vars:
     default: false
     prompt: Does the project use Melos?
 
+  uses_go_router:
+    type: boolean
+    description: Whether the project uses Go Router or not. This will add a section to the README file pointing it out and explaining how to use it.
+    default: false
+    prompt: Does the project use Go Router?
+
   ci:
     type: enum
     description: The CI service used by the project. This will add a section to the README file pointing it out and explaining how to configure or use the CI service.

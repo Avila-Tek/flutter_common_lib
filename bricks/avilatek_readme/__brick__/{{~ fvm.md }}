@@ -1,0 +1,5 @@
+### FVM
+
+This project uses FVM. In order to use the proper version of Flutter for this project, you must have installed [package:fvm](https://fvm.app/docs/getting_started/installation).
+
+All `flutter` and `dart` commands must be run under the `fvm` command to use the proper version (examples below).

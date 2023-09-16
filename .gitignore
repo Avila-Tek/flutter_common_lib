@@ -1,3 +1,8 @@
-pubspec_overrides.yaml
 .mason
+.dart_tool
+.packages
 mason.yaml
+mason-lock.json
+pubspec.lock
+**/build/**
+pubspec_overrides.yaml

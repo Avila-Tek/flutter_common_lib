@@ -8,9 +8,23 @@ Generated with `brick:avilatek_readme`[^1].
 
 {{description}}
 
+
+## Table of content
+- [{{project_name}}](#project_name)
+  - [Table of content](#table-of-content)
+  - [Getting Started 🚀](#getting-started-){{#uses_fvm}}<br/>- [FVM](#fvm){{/uses_fvm}}{{#uses_melos}}<br/>- [Melos](#melos){{/uses_melos}}
+  - [Running Tests 🧪](#running-tests-)
+  - [Working with Translations 🌐](#working-with-translations-)
+    - [Adding Strings](#adding-strings)
+    - [Adding Supported Locales](#adding-supported-locales)
+    - [Adding Translations](#adding-translations)
+
+
 ---
 
 ## Getting Started 🚀
+{{#uses_fvm}}{{> fvm.md }}{{/uses_fvm}}
+{{#uses_melos}}{{ > melos.md }}{{/uses_melos}}
 
 This project contains 3 flavors:
 
@@ -22,25 +36,28 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/main_development.dart
+
+${{#uses_fvm}} fvm{{/uses_fvm}} flutter run --flavor development --target lib/main_development.dart
 
 # Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
+${{#uses_fvm}} fvm{{/uses_fvm}} flutter run --flavor staging --target lib/main_staging.dart
 
 # Production
-$ flutter run --flavor production --target lib/main_production.dart
+${{#uses_fvm}} fvm{{/uses_fvm}} flutter run --flavor production --target lib/main_production.dart
 ```
 
 _\*{{project_name}} works on iOS, Android, Web, and Windows._
 
 ---
 
+{{#uses_go_router}}{{~ go_router.md }}{{/uses_go_router}}
+
 ## Running Tests 🧪
 
 To run all unit and widget tests use the following command:
 
 ```sh
-$ flutter test --coverage --test-randomize-ordering-seed random
+${{#uses_fvm}} fvm{{/uses_fvm}} flutter test --coverage --test-randomize-ordering-seed random
 ```
 
 To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
