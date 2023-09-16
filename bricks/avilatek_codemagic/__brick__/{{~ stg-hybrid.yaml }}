@@ -7,7 +7,7 @@
         - avilatek_upload_ks
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: {{bundle_identifier}}
+        bundle_identifier: {{bundle_identifier}}.stg
       groups:
         - play_store_credentials
         - staging
