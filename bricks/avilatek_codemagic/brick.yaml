@@ -1,0 +1,75 @@
+name: avilatek_codemagic
+description: A new brick created with the Mason CLI.
+
+# The following defines the brick repository url.
+# Uncomment and update the following line before publishing the brick.
+# repository: https://github.com/my_org/my_repo
+
+# The following defines the version and build number for your brick.
+# A version number is three numbers separated by dots, like 1.2.34
+# followed by an optional build number (separated by a +).
+version: 0.1.0+1
+
+# The following defines the environment for the current brick.
+# It includes the version of mason that the brick requires.
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+# Variables specify dynamic values that your brick depends on.
+# Zero or more variables can be specified for a given brick.
+# Each variable has:
+#  * a type (string, number, boolean, enum, array, or list)
+#  * an optional short description
+#  * an optional default value
+#  * an optional list of default values (array only)
+#  * an optional prompt phrase used when asking for the variable
+#  * a list of values (enums only)
+#  * an optional separator (list only)
+vars:
+  flutter_version:
+    type: string
+    description: The Flutter version that will be used to build the project on Codemagic.
+    default: 3.10.5
+    prompt: What Flutter version does your project use?
+
+  bundle_identifier:
+    type: string
+    description: The bundle identifier of the project. Must be the same bundle identifier used on the target project.
+    default: com.avilatek.example
+    prompt: What is the bundle identifier of your project?
+
+  # groups:
+  #   type: array
+  #   description: The groups that will be used to set up the secrets on Codemagic.
+  #   defaults: [play_store_credentials, production, staging]
+  #   prompt: What groups will be used to set up the secrets on Codemagic?
+  #   values:
+  #     - play_store_credentials
+  #     - production
+  #     - staging
+
+  flavors:
+    type: array
+    description: The flavors that will be used to build the project on Codemagic.
+    defaults: [production, staging]
+    prompt: What flavors will be used to build the project on Codemagic?
+    values:
+      - production
+      - staging
+      - development
+
+  path_to_main_files:
+    type: string
+    description: The path to the main files of the project. Must be the same path used on the target project.
+    default: lib
+    prompt: What is the path to the main files of your project?
+
+  beta_groups:
+    type: list
+    description: Beta groups of TestFlight in App Store Connect.
+    prompt: What are the beta groups of TestFlight in App Store Connect?
+
+  email_recipients:
+    type: list
+    description: Build status email recipients.
+    prompt: What are the email recipients? (These emails will receive notifications about Codemagic builds)

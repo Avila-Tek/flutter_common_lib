@@ -1,7 +1,6 @@
 .mason
 .dart_tool
 .packages
-mason.yaml
 mason-lock.json
 pubspec.lock
 **/build/**

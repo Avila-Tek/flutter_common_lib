@@ -1,0 +1,3 @@
+workflows:
+{{#show_staging}}{{> stg-hybrid.yaml }}{{/show_staging}}
+{{#show_production}}{{> prod-hybrid.yaml }}{{/show_production}}
