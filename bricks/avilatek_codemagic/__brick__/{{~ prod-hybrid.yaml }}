@@ -46,7 +46,7 @@
         script: |
           flutter build ipa --release \
             --flavor production \
-            --target {{production_main_path}} \
+            --target {{{production_main_path}}} \
             --export-options-plist=/Users/builder/export_options.plist
       - name: Set up local.properties
         script: |
@@ -61,7 +61,7 @@
           EOF
       - name: Build AAB with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
         script: |
-          flutter build appbundle --release --flavor production --target {{production_main_path}}
+          flutter build appbundle --release --flavor production --target {{{production_main_path}}}
 
     artifacts:
       - build/ios/ipa/*.ipa
