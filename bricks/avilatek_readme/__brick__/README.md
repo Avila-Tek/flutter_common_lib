@@ -13,6 +13,7 @@ Generated with `brick:avilatek_readme`[^1].
 - [{{project_name}}](#project_name)
   - [Table of content](#table-of-content)
   - [Getting Started 🚀](#getting-started-){{#uses_fvm}}<br/>- [FVM](#fvm){{/uses_fvm}}{{#uses_melos}}<br/>- [Melos](#melos){{/uses_melos}}
+  - {{#uses_go_router}}[Navigating with Go Router 🧭](#navigating-with-go-router-){{/uses_go_router}}
   - [Running Tests 🧪](#running-tests-)
   - [Working with Translations 🌐](#working-with-translations-)
     - [Adding Strings](#adding-strings)
@@ -50,7 +51,7 @@ _\*{{project_name}} works on iOS, Android, Web, and Windows._
 
 ---
 
-{{#uses_go_router}}{{~ go_router.md }}{{/uses_go_router}}
+{{#uses_go_router}}{{> go_router.md }}{{/uses_go_router}}
 
 ## Running Tests 🧪
 
