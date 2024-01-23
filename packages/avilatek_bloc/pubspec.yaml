@@ -10,7 +10,6 @@ environment:
 dependencies:
   bloc: ^8.1.2
   bloc_concurrency: ^0.2.3
-  bloc_test: ^9.1.5
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -18,8 +17,8 @@ dependencies:
   permission_handler: ^11.0.1
 
 dev_dependencies:
+  bloc_test: ^9.1.5
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  bloc_test: ^9.1.5
   very_good_analysis: ^5.0.0
