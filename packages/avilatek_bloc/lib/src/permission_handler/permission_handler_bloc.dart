@@ -84,13 +84,11 @@ class PermissionHandlerBloc
     Emitter<PermissionHandlerState> emit,
   ) async {
     final currentPermission = state.permission;
-    log('permission requested $currentPermission');
+
     if (currentPermission == null) return;
 
     // Attempt to request the permission.
     final permissionStatus = await currentPermission.request();
-
-    log('permission requested $currentPermission result $permissionStatus');
 
     // Emits a new state with the updated information, indicating whether
     // the request was successful or if the user needs to manually grant
