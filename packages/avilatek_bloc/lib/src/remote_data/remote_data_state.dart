@@ -1,5 +1,19 @@
 import 'package:equatable/equatable.dart';
 
+///
+extension RemoteDataStateX on RemoteDataState<dynamic> {
+  /// Returns `true` if the state is not initialized and has no data to show.
+  bool get isUnititialized => this is! RemoteDataInitialized;
+
+  /// Returns `true` if the state is initialized and has data.
+  bool get isInitialized => this is RemoteDataInitialized;
+
+  /// Returns `true` if the state is either [RemoteDataInitialFetching] or
+  /// [RemoteDataRefetching].
+  bool get isFetching =>
+      this is RemoteDataRefetching || this is RemoteDataInitialFetching;
+}
+
 /// Base class for all states of the [RemoteDataBloc<T>].
 abstract class RemoteDataState<T> extends Equatable {
   ///

@@ -28,6 +28,7 @@ class RemoteDataEventHandler<T> {
       }
 
       final data = await fetchAndParseData(state, event);
+
       emit(RemoteDataLoaded(data));
     } catch (e) {
       emit(RemoteDataInitialFetchingError(e));

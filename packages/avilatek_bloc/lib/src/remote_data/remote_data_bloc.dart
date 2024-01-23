@@ -4,6 +4,9 @@ import 'package:avilatek_bloc/src/remote_data/remote_data_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+export 'package:avilatek_bloc/src/remote_data/remote_data_event.dart';
+export 'package:avilatek_bloc/src/remote_data/remote_data_state.dart';
+
 /// Abstract Bloc implementation for simple hydrated "Fetch and Store Data"
 /// Blocs.
 ///
