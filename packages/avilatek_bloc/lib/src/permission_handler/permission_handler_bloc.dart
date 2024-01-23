@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -24,16 +25,18 @@ class PermissionHandlerBloc
         ) {
     // Registers an event handler for the PermissionHandlerVerificationStarted.
     on<PermissionHandlerVerificationStarted>(
-      onVerificationStarted,
+      _onVerificationStarted,
       transformer: sequential(), // Ensures events are processed sequentially.
     );
-    on<PermissionHandlerRequested>(onRequestPermission);
+    on<PermissionHandlerRequested>(_onRequestPermission);
+    on<_PermissionHandlerPermissionTicked>(_permissionStatusTicked);
+    on<PermissionHandlerOpenSettingsPressed>(_onOpenSettingsPressed);
 
-    startBatchVerification();
+    _startBatchVerification();
   }
 
   /// Initiates verification for a batch of permissions.
-  void startBatchVerification() {
+  void _startBatchVerification() {
     // Iterates through each permission in the list and initiates verification.
     for (final permission in _permissionsToValidate) {
       // Adds a PermissionHandlerVerificationStarted event for the permission.
@@ -44,9 +47,10 @@ class PermissionHandlerBloc
 
   // Private list of permissions to be validated.
   final List<Permission> _permissionsToValidate;
+  StreamSubscription<void>? _permissionSettingsSubscription;
 
   /// Handles the PermissionHandlerVerificationStarted event.
-  FutureOr<void> onVerificationStarted(
+  FutureOr<void> _onVerificationStarted(
     PermissionHandlerVerificationStarted event,
     Emitter<PermissionHandlerState> emit,
   ) async {
@@ -75,15 +79,18 @@ class PermissionHandlerBloc
   /// is not permanently denied.
   /// If the permission is permanently denied, the user must manually grant it
   /// through the device's settings.
-  Future<void> onRequestPermission(
+  Future<void> _onRequestPermission(
     PermissionHandlerRequested event,
     Emitter<PermissionHandlerState> emit,
   ) async {
     final currentPermission = state.permission;
+    log('permission requested $currentPermission');
     if (currentPermission == null) return;
 
     // Attempt to request the permission.
     final permissionStatus = await currentPermission.request();
+
+    log('permission requested $currentPermission result $permissionStatus');
 
     // Emits a new state with the updated information, indicating whether
     // the request was successful or if the user needs to manually grant
@@ -97,6 +104,36 @@ class PermissionHandlerBloc
     );
 
     /// Continue with next permissions
-    startBatchVerification();
+    _startBatchVerification();
+  }
+
+  Future<void> _onOpenSettingsPressed(
+    PermissionHandlerOpenSettingsPressed event,
+    Emitter<PermissionHandlerState> emit,
+  ) async {
+    await openAppSettings();
+    await _permissionSettingsSubscription?.cancel();
+    _permissionSettingsSubscription =
+        Stream<void>.periodic(const Duration(seconds: 1)).listen((_) {
+      add(_PermissionHandlerPermissionTicked(permission: event.permission));
+    });
+  }
+
+  Future<void> _permissionStatusTicked(
+    _PermissionHandlerPermissionTicked event,
+    Emitter<PermissionHandlerState> emit,
+  ) async {
+    // Fetches the current status of the permission.
+    final permissionStatus = await event.permission.status;
+    if (permissionStatus.isGranted) {
+      await _permissionSettingsSubscription?.cancel();
+      _startBatchVerification();
+    }
+  }
+
+  @override
+  Future<void> close() async {
+    await _permissionSettingsSubscription?.cancel();
+    return super.close();
   }
 }

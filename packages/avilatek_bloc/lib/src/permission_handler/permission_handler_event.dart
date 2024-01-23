@@ -17,3 +17,18 @@ class PermissionHandlerVerificationStarted extends PermissionHandlerEvent {
 /// If the permission is permanently denied, the user must manually grant it
 /// through the device's settings.
 class PermissionHandlerRequested extends PermissionHandlerEvent {}
+
+/// This event only functions if the permission is permanently denied.
+class PermissionHandlerOpenSettingsPressed extends PermissionHandlerEvent {
+  const PermissionHandlerOpenSettingsPressed({
+    required this.permission,
+  });
+  final Permission permission;
+}
+
+class _PermissionHandlerPermissionTicked extends PermissionHandlerEvent {
+  const _PermissionHandlerPermissionTicked({
+    required this.permission,
+  });
+  final Permission permission;
+}

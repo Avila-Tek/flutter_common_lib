@@ -17,13 +17,25 @@ class PermissionHandlerListener extends StatelessWidget {
   });
 
   /// Optional callback for when a permission is denied.
-  final void Function(Permission, PermissionStatus)? onDenied;
+  final void Function(
+    BuildContext context,
+    Permission permission,
+    PermissionStatus permissionStatus,
+  )? onDenied;
 
   /// Optional callback for when a permission is permanently denied.
-  final void Function(Permission, PermissionStatus)? onPermanentlyDenied;
+  final void Function(
+    BuildContext context,
+    Permission permission,
+    PermissionStatus permissionStatus,
+  )? onPermanentlyDenied;
 
   /// Optional callback for when a permission is granted.
-  final void Function(Permission, PermissionStatus)? onGranted;
+  final void Function(
+    BuildContext context,
+    Permission permission,
+    PermissionStatus permissionStatus,
+  )? onGranted;
 
   /// The child widget that will be wrapped by this listener.
   final Widget child;
@@ -41,14 +53,14 @@ class PermissionHandlerListener extends StatelessWidget {
 
         // Call appropriate callbacks based on the permission status:
         if (permissionStatus.isDenied && onDenied != null) {
-          onDenied!(permission, permissionStatus);
+          onDenied!(context, permission, permissionStatus);
         }
         if (permissionStatus.isPermanentlyDenied &&
             onPermanentlyDenied != null) {
-          onPermanentlyDenied!(permission, permissionStatus);
+          onPermanentlyDenied!(context, permission, permissionStatus);
         }
         if (permissionStatus.isGranted && onGranted != null) {
-          onGranted!(permission, permissionStatus);
+          onGranted!(context, permission, permissionStatus);
         }
       },
       child: child,
