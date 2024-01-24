@@ -21,6 +21,20 @@ class PokemonBloc extends RemoteDataBloc<Pokemon> {
     add(const FetchRemoteData<Pokemon>());
   }
 
+  void getNextPokemon() {
+    _id += 1;
+
+    add(const FetchRemoteData<Pokemon>());
+  }
+
+  void getPreviousPokemon() {
+    if (_id > 1) {
+      _id -= 1;
+
+      add(const FetchRemoteData<Pokemon>());
+    }
+  }
+
   @override
   Future<Pokemon> fetchAndParseData(
     RemoteDataState oldState,

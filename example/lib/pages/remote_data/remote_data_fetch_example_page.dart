@@ -141,14 +141,34 @@ class _RemoteDataFetchExampleBodyState
                 const SizedBox(height: 17),
                 const Text('Search Pokémon by ID'),
                 const SizedBox(height: 8),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 150),
-                  child: TextField(
-                    controller: controller,
-                    enabled: !state.isFetching,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: state.isFetching
+                          ? null
+                          : () =>
+                              context.read<PokemonBloc>().getPreviousPokemon(),
+                      child: const Icon(Icons.arrow_back),
+                    ),
+                    const SizedBox(width: 8),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 75),
+                      child: TextField(
+                        controller: controller,
+                        enabled: !state.isFetching,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    TextButton(
+                      onPressed: state.isFetching
+                          ? null
+                          : () => context.read<PokemonBloc>().getNextPokemon(),
+                      child: const Icon(Icons.arrow_forward),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: state.isFetching
                       ? null
