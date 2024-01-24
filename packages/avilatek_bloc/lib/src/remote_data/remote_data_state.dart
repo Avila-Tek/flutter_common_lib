@@ -12,6 +12,12 @@ extension RemoteDataStateX on RemoteDataState<dynamic> {
   /// [RemoteDataRefetching].
   bool get isFetching =>
       this is RemoteDataRefetching || this is RemoteDataInitialFetching;
+
+  /// Returns `true` if the state is [RemoteDataInitialFetching].
+  bool get isInitialFetching => this is RemoteDataInitialFetching;
+
+  /// Returns `true` if the state is [RemoteDataRefetching].
+  bool get isRefetching => this is RemoteDataRefetching;
 }
 
 /// Base class for all states of the [RemoteDataBloc<T>].

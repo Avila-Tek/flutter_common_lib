@@ -5,8 +5,11 @@ import 'package:example/pages/remote_data/models/pokemon.dart';
 import 'package:http/http.dart' as http;
 
 class PokemonBloc extends RemoteDataBloc<Pokemon> {
-  PokemonBloc({int initialPokemonId = 1}) : _id = initialPokemonId {
-    add(const FetchRemoteData<Pokemon>());
+  PokemonBloc({
+    int initialPokemonId = 1,
+    bool simulateInitialFetchingError = false,
+  }) : _id = initialPokemonId {
+    add(FetchRemoteData<Pokemon>(simulateError: simulateInitialFetchingError));
   }
 
   int get id => _id;
