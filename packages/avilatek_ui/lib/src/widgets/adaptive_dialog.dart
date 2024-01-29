@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,9 @@ class AdaptiveAlertDialog extends StatelessWidget {
 
   final List<AdaptiveDialogAction> actions;
 
+  /// Optional widget to place as title.
+  ///
+  /// Only one of [title] and [titleText] can be specified.
   final Widget? title;
 
   final Widget? content;
@@ -59,6 +63,65 @@ class AdaptiveAlertDialog extends StatelessWidget {
           )
           .toList(),
     );
+  }
+}
+
+class AdaptiveInputDialog extends StatelessWidget {
+  AdaptiveInputDialog({
+    required this.title,
+    required this.placeholder,
+    required this.actions,
+    required this.controller,
+    super.key,
+  });
+
+  final Widget title;
+  final String placeholder;
+  final List<AdaptiveDialogAction> actions;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return CupertinoAlertDialog(
+        title: title,
+        content: CupertinoTextField(
+          controller: controller,
+          placeholder: placeholder,
+        ),
+        actions: actions
+            .map(
+              (action) => CupertinoDialogAction(
+                onPressed: () {
+                  action.onPressed?.call();
+                  Navigator.of(context).pop();
+                },
+                isDefaultAction: action.isPrimaryAction,
+                child: action.child,
+              ),
+            )
+            .toList(),
+      );
+    } else {
+      return AlertDialog(
+        title: title,
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: placeholder),
+        ),
+        actions: actions
+            .map(
+              (action) => TextButton(
+                child: action.child,
+                onPressed: () {
+                  action.onPressed?.call();
+                  Navigator.of(context).pop();
+                },
+              ),
+            )
+            .toList(),
+      );
+    }
   }
 }
 
