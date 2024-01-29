@@ -1,3 +1,4 @@
+import 'package:example/pages/field_with_title/field_with_title_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +117,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Remote Data Fetch Bloc Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FieldWithTitleExample(),
+                  ),
+                );
+              },
+              child: const Text('Field With Title Example'),
             ),
           ],
         ),
