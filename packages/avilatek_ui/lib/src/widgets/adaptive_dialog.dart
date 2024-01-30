@@ -1,31 +1,48 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/// {@template adaptive_dialog}
-/// Adaptive alert dialog that shows a CupertinoAlertDialog on iOS and an
-/// AlertDialog on the other platforms.
-/// {@endtemplate}
+class AdaptiveDialogActionStyle {
+  final Color? textColor;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+
+  const AdaptiveDialogActionStyle({
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+  });
+}
+
+class AdaptiveDialogAction {
+  const AdaptiveDialogAction({
+    required this.child,
+    this.onPressed,
+    this.isPrimaryAction = false,
+    this.style,
+  });
+
+  final Widget child;
+  final void Function()? onPressed;
+  final bool isPrimaryAction;
+  final AdaptiveDialogActionStyle? style;
+}
+
 class AdaptiveAlertDialog extends StatelessWidget {
-  /// {@macro adaptive_dialog}
   const AdaptiveAlertDialog({
     required this.actions,
     this.title,
     this.content,
+    this.style,
     super.key,
   });
 
   final List<AdaptiveDialogAction> actions;
-
-  /// Optional widget to place as title.
-  ///
-  /// Only one of [title] and [titleText] can be specified.
   final Widget? title;
-
   final Widget? content;
+  final AdaptiveDialogActionStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +71,16 @@ class AdaptiveAlertDialog extends StatelessWidget {
       actions: actions
           .map(
             (action) => TextButton(
-              child: action.child,
               onPressed: () {
                 action.onPressed?.call();
                 Navigator.of(context).pop();
               },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  style?.textColor ?? action.style?.textColor,
+                ),
+              ),
+              child: action.child,
             ),
           )
           .toList(),
@@ -67,18 +89,20 @@ class AdaptiveAlertDialog extends StatelessWidget {
 }
 
 class AdaptiveInputDialog extends StatelessWidget {
-  AdaptiveInputDialog({
+  const AdaptiveInputDialog({
     required this.title,
     required this.placeholder,
     required this.actions,
     required this.controller,
     super.key,
+    this.style,
   });
 
   final Widget title;
   final String placeholder;
   final List<AdaptiveDialogAction> actions;
   final TextEditingController controller;
+  final AdaptiveDialogActionStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -112,41 +136,20 @@ class AdaptiveInputDialog extends StatelessWidget {
         actions: actions
             .map(
               (action) => TextButton(
-                child: action.child,
                 onPressed: () {
                   action.onPressed?.call();
                   Navigator.of(context).pop();
                 },
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(
+                    style?.textColor ?? action.style?.textColor,
+                  ),
+                ),
+                child: action.child,
               ),
             )
             .toList(),
       );
     }
   }
-}
-
-/// {@template adaptive_dialog_action}
-/// Action for the [AdaptiveAlertDialog].
-///
-/// [child] is the action's widget.
-///
-/// [onPressed] is the action's callback.
-/// {@endtemplate}
-class AdaptiveDialogAction {
-  /// {@macro adaptive_dialog_action}
-  const AdaptiveDialogAction({
-    required this.child,
-    this.onPressed,
-    this.isPrimaryAction = false,
-  });
-
-  final Widget child;
-
-  /// Do not call [Navigator.of(context).pop()] in [onPressed]. It will be
-  /// called automatically.
-  final void Function()? onPressed;
-
-  /// Whether this action is the default action of the dialog. Only have effect
-  /// on iOS.
-  final bool isPrimaryAction;
 }
