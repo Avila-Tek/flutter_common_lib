@@ -29,13 +29,18 @@ class AdaptiveDialogExample extends StatelessWidget {
                     content: const Text('This is an adaptive dialog'),
                     actions: [
                       AdaptiveDialogAction(
-                        child: const Text('Cancel'),
+                        style: const AdaptiveDialogActionStyle(
+                          textColor: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        child: const Text('Cancel (style modified)'),
                         onPressed: () {
                           log('Cancelled 😎');
                         },
                       ),
                       AdaptiveDialogAction(
-                        child: const Text('OK'),
+                        child: const Text('OK (no modified)'),
                         onPressed: () {
                           log('OK 🤗');
                         },
