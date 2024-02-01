@@ -1,8 +1,8 @@
 import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:flutter/material.dart';
 
-class FieldWithTitleExample extends StatelessWidget {
-  const FieldWithTitleExample({
+class TitleWrapperExample extends StatelessWidget {
+  const TitleWrapperExample({
     super.key,
   });
 
@@ -15,24 +15,11 @@ class FieldWithTitleExample extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(
           vertical: 20,
+          horizontal: 16,
         ),
         children: [
-          const WidgetWithTitle(
-            titleText: 'FieldWithTitle using a titleText',
-            style: WidgetWithTitleThemeData(
-              titleSpacing: 0,
-              titleStyle: TextStyle(
-                fontSize: 18,
-                color: Colors.purple,
-              ),
-            ),
-            child: TextField(),
-          ),
-          const Divider(
-            height: 70,
-          ),
-          WidgetWithTitle(
-            titleText: 'FieldWithTitle using a titleText and a footer',
+          TitleWrapper(
+            title: const Text('FieldWithTitle using a titleText and a footer'),
             footer: const Text('This is a footer'),
             child: SizedBox(
               height: 150,
@@ -59,7 +46,7 @@ class FieldWithTitleExample extends StatelessWidget {
           const Divider(
             height: 70,
           ),
-          WidgetWithTitle(
+          TitleWrapper(
             title: const Row(
               children: [
                 Icon(Icons.list),
