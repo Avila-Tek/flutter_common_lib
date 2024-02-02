@@ -3,40 +3,40 @@
 import 'package:avilatek_ui/src/ui/avila_snackbar/default_avila_snackbar_colors.dart';
 import 'package:flutter/material.dart';
 
-/// to handle failure, success, help and warning `AvilaSnackbarContentType` class is being used
-class AvilaSnackbarContentType {
+/// to handle failure, success, help and warning `AvilaSnackBarContentType` class is being used
+class AvilaSnackBarContentType {
   /// `SnackbarContentType` constructor
   ///
   /// `message` is `required` parameter
   ///
-  /// `color` is optional, if provided null then `DefaultAvilaSnackbarColors` will be used
-  const AvilaSnackbarContentType(this.message, [this.color]);
+  /// `color` is optional, if provided null then `DefaultAvilaSnackBarColors` will be used
+  const AvilaSnackBarContentType(this.message, [this.color]);
 
   /// message is `required` parameter
   final String message;
 
-  /// color is optional, if provided null then `DefaultAvilaSnackbarColors` will be used
+  /// color is optional, if provided null then `DefaultAvilaSnackBarColors` will be used
   final Color? color;
 
   /// `SnackbarContentType` for `help`
-  static const AvilaSnackbarContentType help =
-      AvilaSnackbarContentType('help', DefaultAvilaSnackbarColors.helpBlue);
+  static const AvilaSnackBarContentType help =
+      AvilaSnackBarContentType('help', DefaultAvilaSnackBarColors.helpBlue);
 
   /// `SnackbarContentType` for `failure`
-  static const AvilaSnackbarContentType failure = AvilaSnackbarContentType(
+  static const AvilaSnackBarContentType failure = AvilaSnackBarContentType(
     'failure',
-    DefaultAvilaSnackbarColors.failureRed,
+    DefaultAvilaSnackBarColors.failureRed,
   );
 
   /// `SnackbarContentType` for `success`
-  static const AvilaSnackbarContentType success = AvilaSnackbarContentType(
+  static const AvilaSnackBarContentType success = AvilaSnackBarContentType(
     'success',
-    DefaultAvilaSnackbarColors.successGreen,
+    DefaultAvilaSnackBarColors.successGreen,
   );
 
   /// `SnackbarContentType` for `warning`
-  static const AvilaSnackbarContentType warning = AvilaSnackbarContentType(
+  static const AvilaSnackBarContentType warning = AvilaSnackBarContentType(
     'warning',
-    DefaultAvilaSnackbarColors.warningYellow,
+    DefaultAvilaSnackBarColors.warningYellow,
   );
 }

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-/// `DefaultAvilaSnackbarColors` in case `color` paramter is null in `AvilaSnackbarContentType`
-class DefaultAvilaSnackbarColors {
+/// `DefaultAvilaSnackBarColors` in case `color` paramter is null in `AvilaSnackBarContentType`
+class DefaultAvilaSnackBarColors {
   /// help
   static const Color helpBlue = Color(0xff3282B8);
 
