@@ -18,21 +18,51 @@ class AvilaSnackbarExamplePage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                const snackBar = AvilaSnackBarContent(
-                  title: 'Epa',
-                  message: 'mano',
-                  contentType: AvilaSnackBarContentType.success,
-                );
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(const SnackBar(
-                      elevation: 0,
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.transparent,
-                      content: snackBar));
+                const AvilaSnackBar(
+                  content: Text('This is a default snackbar'),
+                ).show(context);
               },
-              child: const Text('Show Snackbar'),
+              child: const Text('Show Default Snackbar'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                AvilaSnackBar.success(
+                  context: context,
+                  content: const Text('This is a success snackbar'),
+                ).show(context);
+              },
+              child: const Text('Show Success Snackbar'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                AvilaSnackBar.failure(
+                  context: context,
+                  content: const Text('This is a failure snackbar'),
+                ).show(context);
+              },
+              child: const Text('Show Failure Snackbar'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                AvilaSnackBar.warning(
+                  context: context,
+                  content: const Text('This is a waning snackbar'),
+                ).show(context);
+              },
+              child: const Text('Show Warning Snackbar'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                AvilaSnackBar.info(
+                  context: context,
+                  content: const Text('This is a info snackbar'),
+                ).show(context);
+              },
+              child: const Text('Show Info Snackbar'),
             ),
           ],
         ));
