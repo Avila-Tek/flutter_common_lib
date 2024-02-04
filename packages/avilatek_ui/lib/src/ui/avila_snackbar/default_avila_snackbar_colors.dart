@@ -14,5 +14,5 @@ class DefaultAvilaSnackBarColors {
   static const Color successGreen = Color(0xff2D6A4F);
 
   /// warning
-  static const Color warningYellow = Color(0xffFCA652);
+  static const Color warningYellow = Color.fromARGB(255, 252, 212, 82);
 }

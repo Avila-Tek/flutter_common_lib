@@ -7,36 +7,28 @@ import 'package:flutter/material.dart';
 class AvilaSnackBarContentType {
   /// `SnackbarContentType` constructor
   ///
-  /// `message` is `required` parameter
-  ///
   /// `color` is optional, if provided null then `DefaultAvilaSnackBarColors` will be used
-  const AvilaSnackBarContentType(this.message, [this.color]);
-
-  /// message is `required` parameter
-  final String message;
+  const AvilaSnackBarContentType(this.color);
 
   /// color is optional, if provided null then `DefaultAvilaSnackBarColors` will be used
   final Color? color;
 
-  /// `SnackbarContentType` for `help`
-  static const AvilaSnackBarContentType help =
-      AvilaSnackBarContentType('help', DefaultAvilaSnackBarColors.helpBlue);
+  /// `SnackbarContentType` for `info`
+  static const AvilaSnackBarContentType info =
+      AvilaSnackBarContentType(DefaultAvilaSnackBarColors.helpBlue);
 
   /// `SnackbarContentType` for `failure`
   static const AvilaSnackBarContentType failure = AvilaSnackBarContentType(
-    'failure',
     DefaultAvilaSnackBarColors.failureRed,
   );
 
   /// `SnackbarContentType` for `success`
   static const AvilaSnackBarContentType success = AvilaSnackBarContentType(
-    'success',
     DefaultAvilaSnackBarColors.successGreen,
   );
 
   /// `SnackbarContentType` for `warning`
   static const AvilaSnackBarContentType warning = AvilaSnackBarContentType(
-    'warning',
     DefaultAvilaSnackBarColors.warningYellow,
   );
 }
