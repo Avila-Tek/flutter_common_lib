@@ -3,6 +3,7 @@ import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
+import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -145,6 +146,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Avila Snackbar Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SelectorSheetExamplePage(),
+                  ),
+                );
+              },
+              child: const Text('Selector Sheet Example'),
             ),
           ],
         ),
