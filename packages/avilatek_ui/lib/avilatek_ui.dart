@@ -2,3 +2,5 @@
 library avilatek_ui;
 
 export 'src/avilatek_ui.dart';
+export 'src/ui/title_wrapper.dart/title_wrapper_style.dart';
+export 'src/widgets/title_wrapper.dart';
