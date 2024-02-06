@@ -1,4 +1,5 @@
 import 'package:avilatek_ui/avilatek_ui.dart';
+import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/pending_notifications/pending_notifications_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
@@ -133,6 +134,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Title Wrapper Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AvilaSnackbarExamplePage(),
+                  ),
+                );
+              },
+              child: const Text('Avila Snackbar Example'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
