@@ -2,6 +2,26 @@
 
 import 'package:equatable/equatable.dart';
 
+extension PendingNotificationsStateX on PendingNotificationsState<dynamic> {
+  /// Returns `true` if the state is not initialized and has no data to show.
+  bool get isUnititialized => this is! PendingNotificationsInitialized;
+
+  /// Returns `true` if the state is initialized and has data.
+  bool get isInitialized => this is PendingNotificationsInitialized;
+
+  /// Returns `true` if the state is either [PendingNotificationsInitialFetching] or
+  /// [PendingNotificationsRefetching].
+  bool get isFetching =>
+      // this is PendingNotificationsRefetching ||
+      this is PendingNotificationsInitialFetching;
+
+  /// Returns `true` if the state is [PendingNotificationsInitialFetching].
+  bool get isInitialFetching => this is PendingNotificationsInitialFetching;
+
+  /// Returns `true` if the state is [PendingNotificationsRefetching].
+  bool get isRefetching => this is PendingNotificationsRefetching;
+}
+
 abstract class PendingNotificationsState<T> extends Equatable {
   const PendingNotificationsState();
 
@@ -76,8 +96,8 @@ abstract class PendingNotificationsInitialized<T>
 }
 
 /// State that represents the success fetching the pending notifications.
-class PendingNotificationsFetched<T> extends PendingNotificationsInitialized<T>
-    with PendingNotificationsSuccess<T> {
+class PendingNotificationsFetched<T>
+    extends PendingNotificationsInitialized<T> {
   const PendingNotificationsFetched(super.pendingNotifications);
   PendingNotificationsFetched.clone(super.oldState) : super.clone();
 }

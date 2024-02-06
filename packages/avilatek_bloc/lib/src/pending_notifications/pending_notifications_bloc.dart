@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:async';
+
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_event.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_handler.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_state.dart';
@@ -12,16 +14,20 @@ import 'package:flutter/material.dart';
 /// will be fetched.
 abstract class PendingNotificationsBloc<T>
     extends Bloc<PendingNotificationsEvent, PendingNotificationsState<T>> {
-  PendingNotificationsBloc() : super(PendingNotificationsUninitialized()) {
+  PendingNotificationsBloc({
+    required Duration timeInterval,
+  }) : super(PendingNotificationsUninitialized()) {
+    _handler = PendingNotificationsEventHandler<T>();
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
     );
-
-    // Stream.periodic(timeInterval, (x) => x).listen((_) async {
-    //   // add(FetchPendingNotifications<T>());
-    // });
+    //  await subscription?.cancel();
+    _subscription = Stream.periodic(timeInterval, (x) {
+      add(FetchPendingNotifications<T>());
+    }).listen((event) {});
   }
   late PendingNotificationsEventHandler<T> _handler;
+  StreamSubscription<void>? _subscription;
 
   /// Propagates the [FetchPendingNotifications] event down to the corresponding event
   /// handler.
@@ -29,7 +35,8 @@ abstract class PendingNotificationsBloc<T>
     FetchPendingNotifications<T> event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
-    return _handleStatesOnEvent(
+    return await _handleStatesOnEvent(
+      timeInterval: event.timeInterval,
       isNoOp: state is PendingNotificationsFetching ||
           state is PendingNotificationsError ||
           state is PendingNotificationsSuccess,
@@ -52,14 +59,15 @@ abstract class PendingNotificationsBloc<T>
 
   /// Helper function that can be used by [_mapFetchPendingNotificationsToState] function
   /// for cleaner propagation of the events to the corresponding event handler.
-  Future<void> _handleStatesOnEvent({
+  FutureOr<void> _handleStatesOnEvent({
     required bool isNoOp,
+    required Duration timeInterval,
     Future<void> Function()? onPendingNotificationsUninitialized,
     Future<void> Function()? onPendingNotificationsFetched,
   }) async {
     if (isNoOp) {
       return;
-    } else if (state is PendingNotificationsUninitialized &&
+    } else if ((state is PendingNotificationsUninitialized) &&
         onPendingNotificationsUninitialized != null) {
       return onPendingNotificationsUninitialized();
     } else if (state is PendingNotificationsFetched &&
@@ -82,4 +90,9 @@ abstract class PendingNotificationsBloc<T>
     FetchPendingNotifications<T> event,
   );
 
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
 }

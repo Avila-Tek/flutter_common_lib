@@ -45,6 +45,7 @@ class PendingNotificationsEventHandler<T> {
     FetchPendingNotifications<T> event,
     PendingNotificationsFetched<T> state,
     Emitter<PendingNotificationsState<T>> emit,
+    
     Future<T> Function(
       PendingNotificationsState<T>,
       FetchPendingNotifications<T>,
@@ -59,6 +60,7 @@ class PendingNotificationsEventHandler<T> {
 
       final pendingNotifications = await fetchAndParseData(state, event);
       emit(PendingNotificationsRefetchingSuccess(pendingNotifications));
+      emit(PendingNotificationsFetched(pendingNotifications));
     } catch (e) {
       emit(PendingNotificationsRefetchingError(state, e));
       emit(PendingNotificationsFetched.clone(state));
