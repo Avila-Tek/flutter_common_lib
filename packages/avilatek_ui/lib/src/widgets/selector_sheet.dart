@@ -1,4 +1,5 @@
-import 'package:avilatek_ui/src/ui/avila_theme.dart';
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:avilatek_ui/src/ui/selector_sheet/selector_sheet_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -75,10 +76,19 @@ class SelectorSheet<T> extends StatelessWidget {
   /// [onSelected] callback is provided. Defaults to `true`.
   final bool popOnSelected;
 
+  /// The separator that will be displayed between each item in the list.
+  ///
+  /// If not provided, a [Divider] will be used.
   final Widget? separator;
 
+  /// The [AppBar] of the sheet.
+  ///
+  /// If not provided, a default [AppBar] will be used with the [title].
   final AppBar? appBar;
 
+  /// The style of the sheet.
+  ///
+  /// If not provided, the default [SelectorSheetTheme] will be used.
   final SelectorSheetTheme? style;
 
   /// Shows a [SelectorSheet] as a new fullscreen [MaterialPageRoute], and
@@ -99,8 +109,11 @@ class SelectorSheet<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Get the [SelectorSheetTheme] from the [style] or the [Theme] of the
+    /// context.
     final themeStyle = Theme.of(context).extension<SelectorSheetTheme>();
 
+    /// Get the  `padding` from the [style] or the [Theme] of the context.
     final selectorSheetPadding = padding ??
         style?.selectorSheetThemeData?.padding ??
         themeStyle?.selectorSheetThemeData?.padding ??
@@ -109,19 +122,37 @@ class SelectorSheet<T> extends StatelessWidget {
           horizontal: 16,
         );
 
+    /// Get the `backgroundColor` from the [style] or the [Theme] of the context.
     final selectorSheetBackgroundColor =
         style?.selectorSheetThemeData?.backgroundColor ??
             themeStyle?.selectorSheetThemeData?.backgroundColor ??
             Colors.white;
 
+    /// Get the `itemBackgroundColor` from the [style] or the [Theme] of the context.
     final itemBackgroundColor =
         style?.selectorSheetItemThemeData?.backgroundColor ??
             themeStyle?.selectorSheetItemThemeData?.backgroundColor ??
             Colors.transparent;
 
+    /// Get the `itemClipBehavior` from the [style] or the [Theme] of the context.
     final itemClipBehavior = style?.selectorSheetItemThemeData?.clipBehavior ??
         themeStyle?.selectorSheetItemThemeData?.clipBehavior ??
         Clip.hardEdge;
+
+    /// Get the `itemElevation` from the [style] or the [Theme] of the context.
+    final itemElevation = style?.selectorSheetItemThemeData?.elevation ??
+        themeStyle?.selectorSheetItemThemeData?.elevation ??
+        0;
+
+    /// Get the `itemShape` from the [style] or the [Theme] of the context.
+    final itemShape = style?.selectorSheetItemThemeData?.shape ??
+        themeStyle?.selectorSheetItemThemeData?.shape ??
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
+
+    /// Get the `itemShadowColor` from the [style] or the [Theme] of the context.
+    final itemShadowColor = style?.selectorSheetItemThemeData?.shadowColor ??
+        themeStyle?.selectorSheetItemThemeData?.shadowColor ??
+        Colors.transparent;
 
     return Scaffold(
       backgroundColor: selectorSheetBackgroundColor,
@@ -133,6 +164,9 @@ class SelectorSheet<T> extends StatelessWidget {
           final item = items[i];
 
           return Material(
+            elevation: itemElevation,
+            shape: itemShape,
+            shadowColor: itemShadowColor,
             color: itemBackgroundColor,
             clipBehavior: itemClipBehavior,
             child: InkWell(

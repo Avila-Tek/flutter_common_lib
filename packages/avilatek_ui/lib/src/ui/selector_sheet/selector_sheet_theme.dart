@@ -1,5 +1,7 @@
 // ignore_for_file: omit_local_variable_types, lines_longer_than_80_chars
 
+import 'dart:ui';
+
 import 'package:avilatek_ui/src/widgets/selector_sheet.dart';
 import 'package:flutter/material.dart';
 
@@ -68,6 +70,9 @@ class SelectorSheetItemThemeData
     this.backgroundColor,
     this.textStyle,
     this.clipBehavior,
+    this.elevation,
+    this.shape,
+    this.shadowColor,
   });
 
   /// Defines the default padding of the [SelectorSheetItem] widget.
@@ -81,6 +86,15 @@ class SelectorSheetItemThemeData
 
   /// Defines the default clip behavior of the [SelectorSheetItem] widget.
   final Clip? clipBehavior;
+
+  /// Defines the default elevation of the [SelectorSheetItem] widget.
+  final double? elevation;
+
+  /// Defines the default shape of the [SelectorSheetItem] widget.
+  final ShapeBorder? shape;
+
+  /// Defines the default shadow color of the [SelectorSheetItem] widget.
+  final Color? shadowColor;
 
   /// Linearly interpolate between two [SelectorSheetItemThemeData].
   @override
@@ -97,6 +111,9 @@ class SelectorSheetItemThemeData
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t),
       clipBehavior: t < 0.5 ? clipBehavior : other.clipBehavior,
+      elevation: lerpDouble(elevation, other.elevation, t),
+      shape: ShapeBorder.lerp(shape, other.shape, t),
+      shadowColor: Color.lerp(shadowColor, other.shadowColor, t),
     );
   }
 
@@ -116,12 +133,18 @@ class SelectorSheetItemThemeData
     Color? backgroundColor,
     TextStyle? textStyle,
     Clip? clipBehavior,
+    double? elevation,
+    ShapeBorder? shape,
+    Color? shadowColor,
   }) {
     return SelectorSheetItemThemeData(
       padding: padding ?? this.padding,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       textStyle: textStyle ?? this.textStyle,
       clipBehavior: clipBehavior ?? this.clipBehavior,
+      elevation: elevation ?? this.elevation,
+      shape: shape ?? this.shape,
+      shadowColor: shadowColor ?? this.shadowColor,
     );
   }
 }

@@ -104,21 +104,29 @@ class SelectorSheetExampleBody extends StatelessWidget {
             horizontal: 16,
           ),
           children: [
-            const Text('Click the button below to select a country'),
+            const Text(
+              'Click the buttons below to select a country',
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Divider(),
+            const SizedBox(height: 8),
+            const Text('Default theme selector sheet:'),
             const SizedBox(height: 16),
             ElevatedButton(
                 onPressed: () async {
                   final selectedCountries = await SelectorSheet.show(
                       context,
                       SelectorSheet<Country>(
-                          title: const Text('Select a country'),
-                          items: countriesList,
-                          itemBuilder: (context, item) {
-                            return ListTile(
-                              title: item.title,
-                              onTap: () {},
-                            );
-                          }));
+                        title: const Text('Select a country'),
+                        items: countriesList,
+                        itemBuilder: (context, item) {
+                          return ListTile(
+                            title: item.title,
+                          );
+                        },
+                      ));
 
                   if (selectedCountries != null) {
                     context
@@ -127,11 +135,52 @@ class SelectorSheetExampleBody extends StatelessWidget {
                   }
                 },
                 child: const Text('Select a country')),
+            const SizedBox(height: 24),
+            const Text('Selector sheet with theme applied:'),
+            const SizedBox(height: 16),
+            ElevatedButton(
+                onPressed: () async {
+                  final selectedCountries = await SelectorSheet.show(
+                      context,
+                      SelectorSheet<Country>(
+                        title: const Text('Select a country'),
+                        items: countriesList,
+                        itemBuilder: (context, item) {
+                          return ListTile(
+                            title: item.title,
+                          );
+                        },
+                        style: SelectorSheetTheme(
+                          selectorSheetThemeData: const SelectorSheetThemeData(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 20,
+                              horizontal: 16,
+                            ),
+                          ),
+                          selectorSheetItemThemeData:
+                              SelectorSheetItemThemeData(
+                            backgroundColor: Colors.purple.shade100,
+                          ),
+                        ),
+                        separator: const SizedBox(height: 16),
+                        appBar: AppBar(
+                          title: const Text('Select a country'),
+                          backgroundColor: Colors.green.shade100,
+                          centerTitle: true,
+                        ),
+                      ));
+
+                  if (selectedCountries != null) {
+                    context
+                        .read<SelectCountryCubit>()
+                        .selectCountry(selectedCountries);
+                  }
+                },
+                child: const Text('Select a country')),
+            const SizedBox(height: 30),
             if (state.selectedCountry == Country.empty) ...[
-              const SizedBox(height: 16),
               const Center(child: Text('No country selected'))
             ] else ...[
-              const SizedBox(height: 16),
               Center(
                 child: Text(
                     'Selected country: ${state.selectedCountry.name} - ${state.selectedCountry.code}'),
