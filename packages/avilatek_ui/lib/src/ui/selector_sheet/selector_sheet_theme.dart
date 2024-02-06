@@ -1,131 +1,182 @@
-// ignore_for_file: omit_local_variable_types
+// ignore_for_file: omit_local_variable_types, lines_longer_than_80_chars
 
-import 'package:avilatek_ui/src/ui/avila_theme.dart';
-import 'package:avilatek_ui/src/ui/avila_theme_data.dart';
 import 'package:avilatek_ui/src/widgets/selector_sheet.dart';
 import 'package:flutter/material.dart';
 
-@immutable
-class SelectorSheetThemeData {
+/// The theme data for the [SelectorSheet] widget.
+///
+/// This class is used by [SelectorSheet] to configure the default
+/// appearance of the widget.
+class SelectorSheetTheme extends ThemeExtension<SelectorSheetTheme> {
   /// Creates a [SelectorSheetThemeData].
-  const SelectorSheetThemeData({
-    this.padding,
+  const SelectorSheetTheme({
+    this.selectorSheetItemThemeData,
+    this.selectorSheetThemeData,
   });
 
-  /// Defines the default padding of the [SelectorSheet] widget.
-  final EdgeInsets? padding;
+  /// The default [SelectorSheetItemThemeData] for the [SelectorSheetItem] widget.
+  final SelectorSheetItemThemeData? selectorSheetItemThemeData;
 
-  /// Linearly interpolate between selector sheet button themes.
-  static SelectorSheetThemeData? lerp(
-    SelectorSheetThemeData? a,
-    SelectorSheetThemeData? b,
+  /// The default [SelectorSheetThemeData] for the [SelectorSheet] widget.
+  final SelectorSheetThemeData? selectorSheetThemeData;
+
+  @override
+  ThemeExtension<SelectorSheetTheme> lerp(
+    covariant ThemeExtension<SelectorSheetTheme>? other,
     double t,
   ) {
-    if (identical(a, b)) {
-      return a;
+    if (other is! SelectorSheetTheme) {
+      return this;
     }
-    return SelectorSheetThemeData(
-      padding: EdgeInsets.lerp(a?.padding, b?.padding, t),
-    );
+
+    return const SelectorSheetTheme();
   }
 
+  /// Creates a copy of this theme but with the given fields replaced with the
+  /// new values.
+  ///
+  /// If the new value is null, the value from the original theme will be used.
+  ///
+  /// If the original theme is null, the new value will be used.
+  ///
+  ///  **Returns**
+  ///
+  /// A new [SelectorSheetTheme] with the values updated.
   @override
-  int get hashCode => padding.hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other.runtimeType != runtimeType) {
-      return false;
-    }
-    return other is SelectorSheetThemeData && other.padding == padding;
+  ThemeExtension<SelectorSheetTheme> copyWith({
+    SelectorSheetItemThemeData? selectorSheetItemThemeData,
+    SelectorSheetThemeData? selectorSheetThemeData,
+  }) {
+    return SelectorSheetTheme(
+      selectorSheetItemThemeData:
+          selectorSheetItemThemeData ?? this.selectorSheetItemThemeData,
+      selectorSheetThemeData:
+          selectorSheetThemeData ?? this.selectorSheetThemeData,
+    );
   }
 }
 
-@immutable
-class SelectorSheetItemThemeData {
+/// The theme data for the [SelectorSheetItem] widget.
+///
+/// This class is used by [SelectorSheetItem] to configure the default
+/// appearance of the widget.
+class SelectorSheetItemThemeData
+    extends ThemeExtension<SelectorSheetItemThemeData> {
   /// Creates a [SelectorSheetItemThemeData].
   const SelectorSheetItemThemeData({
     this.padding,
+    this.backgroundColor,
+    this.textStyle,
+    this.clipBehavior,
   });
 
   /// Defines the default padding of the [SelectorSheetItem] widget.
   final EdgeInsets? padding;
 
-  /// Linearly interpolate between selector sheet button themes.
-  static SelectorSheetItemThemeData? lerp(
-    SelectorSheetItemThemeData? a,
-    SelectorSheetItemThemeData? b,
+  /// Defines the default background color of the [SelectorSheetItem] widget.
+  final Color? backgroundColor;
+
+  /// Defines the default text style of the [SelectorSheetItem] widget.
+  final TextStyle? textStyle;
+
+  /// Defines the default clip behavior of the [SelectorSheetItem] widget.
+  final Clip? clipBehavior;
+
+  /// Linearly interpolate between two [SelectorSheetItemThemeData].
+  @override
+  ThemeExtension<SelectorSheetItemThemeData> lerp(
+    covariant ThemeExtension<SelectorSheetItemThemeData>? other,
     double t,
   ) {
-    if (identical(a, b)) {
-      return a;
+    if (other is! SelectorSheetItemThemeData) {
+      return this;
     }
+
     return SelectorSheetItemThemeData(
-      padding: EdgeInsets.lerp(a?.padding, b?.padding, t),
+      padding: EdgeInsets.lerp(padding, other.padding, t),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      textStyle: TextStyle.lerp(textStyle, other.textStyle, t),
+      clipBehavior: t < 0.5 ? clipBehavior : other.clipBehavior,
     );
   }
 
+  /// Creates a copy of this theme but with the given fields replaced with the
+  /// new values.
+  ///
+  /// If the new value is null, the value from the original theme will be used.
+  ///
+  /// If the original theme is null, the new value will be used.
+  ///
+  /// **Returns**
+  ///
+  /// A new [SelectorSheetItemThemeData] with the values updated.
   @override
-  int get hashCode => padding.hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other.runtimeType != runtimeType) {
-      return false;
-    }
-    return other is SelectorSheetItemThemeData && other.padding == padding;
+  ThemeExtension<SelectorSheetItemThemeData> copyWith({
+    EdgeInsets? padding,
+    Color? backgroundColor,
+    TextStyle? textStyle,
+    Clip? clipBehavior,
+  }) {
+    return SelectorSheetItemThemeData(
+      padding: padding ?? this.padding,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      textStyle: textStyle ?? this.textStyle,
+      clipBehavior: clipBehavior ?? this.clipBehavior,
+    );
   }
 }
 
-class SelectorSheetTheme extends InheritedTheme {
+/// The theme data for the [SelectorSheet] widget.
+///
+/// This class is used by [SelectorSheet] to configure the default
+/// appearance of the widget.
+class SelectorSheetThemeData extends ThemeExtension<SelectorSheetThemeData> {
   /// Create a [SelectorSheetTheme].
-  const SelectorSheetTheme({
-    required this.selectorSheetThemeData,
-    required this.selectorSheetItemThemeData,
-    required super.child,
-    super.key,
+  const SelectorSheetThemeData({
+    this.backgroundColor,
+    this.padding,
   });
 
-  /// The configuration of this theme.
-  final SelectorSheetThemeData selectorSheetThemeData;
+  /// The default background color of the [SelectorSheet] widget.
+  final Color? backgroundColor;
 
-  /// The configuration of this theme.
-  final SelectorSheetItemThemeData selectorSheetItemThemeData;
+  /// The default padding of the [SelectorSheet] widget.
+  final EdgeInsets? padding;
 
-  /// The closest instance of this class that encloses the given context.
+  /// Creates a copy of this theme but with the given fields replaced with the
+  /// new values.
   ///
-  /// If there is no enclosing [SelectorSheetTheme] widget, then
-  /// [AvilaThemeData.selectorSheetTheme] is used.
+  /// If the new value is null, the value from the original theme will be used.
   ///
-  /// Typical usage is as follows:
+  /// If the original theme is null, the new value will be used.
   ///
-  /// ```dart
-  /// SelectorSheetThemeData theme = SelectorSheetTheme.of(context);
-  /// ```
-  static SelectorSheetThemeData of(BuildContext context) {
-    final SelectorSheetTheme? theme =
-        context.dependOnInheritedWidgetOfExactType<SelectorSheetTheme>();
-
-    return theme?.selectorSheetThemeData ??
-        AvilaTheme.of(context).selectorSheetTheme;
-  }
-
+  /// **Returns**
+  ///
+  /// A new [SelectorSheetThemeData] with the values updated.
   @override
-  Widget wrap(BuildContext context, Widget child) {
-    return SelectorSheetTheme(
-      selectorSheetThemeData: selectorSheetThemeData,
-      selectorSheetItemThemeData: selectorSheetItemThemeData,
-      child: child,
+  ThemeExtension<SelectorSheetThemeData> copyWith({
+    Color? backgroundColor,
+    EdgeInsets? padding,
+  }) {
+    return SelectorSheetThemeData(
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      padding: padding ?? this.padding,
     );
   }
 
+  /// Linearly interpolate between two [SelectorSheetThemeData].
   @override
-  bool updateShouldNotify(SelectorSheetTheme oldWidget) =>
-      selectorSheetThemeData != oldWidget.selectorSheetThemeData;
+  ThemeExtension<SelectorSheetThemeData> lerp(
+    covariant ThemeExtension<SelectorSheetThemeData>? other,
+    double t,
+  ) {
+    if (other is! SelectorSheetThemeData) {
+      return this;
+    }
+
+    return SelectorSheetThemeData(
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      padding: EdgeInsets.lerp(padding, other.padding, t),
+    );
+  }
 }

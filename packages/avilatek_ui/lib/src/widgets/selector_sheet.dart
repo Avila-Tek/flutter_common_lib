@@ -1,4 +1,5 @@
 import 'package:avilatek_ui/src/ui/avila_theme.dart';
+import 'package:avilatek_ui/src/ui/selector_sheet/selector_sheet_theme.dart';
 import 'package:flutter/material.dart';
 
 /// {@template selector_sheet_item}
@@ -46,10 +47,14 @@ class SelectorSheet<T> extends StatelessWidget {
     this.padding,
     this.onSelected,
     this.popOnSelected = true,
+    this.separator,
+    this.appBar,
+    this.style,
     super.key,
   });
 
-  /// The title of the sheet displayed in the view's [AppBar]
+  /// The title of the sheet displayed in the view's [AppBar] if
+  /// [appBar] is not provided.
   final Widget title;
 
   /// The items that will be displayed in the sheet
@@ -70,6 +75,12 @@ class SelectorSheet<T> extends StatelessWidget {
   /// [onSelected] callback is provided. Defaults to `true`.
   final bool popOnSelected;
 
+  final Widget? separator;
+
+  final AppBar? appBar;
+
+  final SelectorSheetTheme? style;
+
   /// Shows a [SelectorSheet] as a new fullscreen [MaterialPageRoute], and
   /// returns the selected value
   static Future<T?> show<T>(
@@ -88,17 +99,42 @@ class SelectorSheet<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeStyle = Theme.of(context).extension<SelectorSheetTheme>();
+
+    final selectorSheetPadding = padding ??
+        style?.selectorSheetThemeData?.padding ??
+        themeStyle?.selectorSheetThemeData?.padding ??
+        const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 16,
+        );
+
+    final selectorSheetBackgroundColor =
+        style?.selectorSheetThemeData?.backgroundColor ??
+            themeStyle?.selectorSheetThemeData?.backgroundColor ??
+            Colors.white;
+
+    final itemBackgroundColor =
+        style?.selectorSheetItemThemeData?.backgroundColor ??
+            themeStyle?.selectorSheetItemThemeData?.backgroundColor ??
+            Colors.transparent;
+
+    final itemClipBehavior = style?.selectorSheetItemThemeData?.clipBehavior ??
+        themeStyle?.selectorSheetItemThemeData?.clipBehavior ??
+        Clip.hardEdge;
+
     return Scaffold(
-      appBar: AppBar(title: title),
+      backgroundColor: selectorSheetBackgroundColor,
+      appBar: appBar ?? AppBar(title: title),
       body: ListView.separated(
-        padding: padding ?? AvilaTheme.of(context).margins,
+        padding: selectorSheetPadding,
         itemCount: items.length,
         itemBuilder: (_, i) {
           final item = items[i];
 
           return Material(
-            color: Colors.transparent,
-            clipBehavior: Clip.hardEdge,
+            color: itemBackgroundColor,
+            clipBehavior: itemClipBehavior,
             child: InkWell(
               onTap: () {
                 onSelected?.call(item.value);
@@ -110,7 +146,7 @@ class SelectorSheet<T> extends StatelessWidget {
             ),
           );
         },
-        separatorBuilder: (_, __) => const Divider(),
+        separatorBuilder: (_, __) => separator ?? const Divider(),
       ),
     );
   }

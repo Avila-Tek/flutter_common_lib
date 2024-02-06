@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/selector_sheet/bloc/select_country_cubit.dart';
 import 'package:example/pages/selector_sheet/models/country.dart';
@@ -113,14 +111,12 @@ class SelectorSheetExampleBody extends StatelessWidget {
                   final selectedCountries = await SelectorSheet.show(
                       context,
                       SelectorSheet<Country>(
-                          title: const Text('Seleccione un pais'),
+                          title: const Text('Select a country'),
                           items: countriesList,
                           itemBuilder: (context, item) {
                             return ListTile(
                               title: item.title,
-                              onTap: () {
-                                Navigator.of(context).pop(item.value);
-                              },
+                              onTap: () {},
                             );
                           }));
 
