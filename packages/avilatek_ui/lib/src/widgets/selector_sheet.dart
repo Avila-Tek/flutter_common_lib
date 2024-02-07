@@ -1,5 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'dart:developer';
+
 import 'package:avilatek_ui/src/ui/selector_sheet/selector_sheet_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -42,39 +44,76 @@ class SelectorSheetItem<T> {
 class SelectorSheet<T> extends StatelessWidget {
   /// {@macro selector_sheet}
   const SelectorSheet({
-    required this.title,
-    required this.items,
-    required this.itemBuilder,
+    required this.child,
+    this.itemBuilder,
+    this.itemCount,
     this.padding,
     this.onSelected,
-    this.popOnSelected = true,
+    this.popIndexOnSelected = true,
     this.separator,
     this.appBar,
     this.style,
     super.key,
   });
 
-  /// The title of the sheet displayed in the view's [AppBar] if
-  /// [appBar] is not provided.
-  final Widget title;
+  /// A [SelectorSheet] builder that can be used to create a [SelectorSheet].
+  ///
+  /// The [itemBuilder] is a required parameter that will be used to build each
+  /// item in the list.
+  ///
+  /// The [itemCount] is a required parameter that will be used to build the
+  /// list of items.
+  ///
+  ///  **Returns**
+  ///
+  /// A [SelectorSheet] widget that can be used to display a list of items that
+  /// can be selected by the user.
+  factory SelectorSheet.builder({
+    required Widget Function(BuildContext, int) itemBuilder,
+    required int itemCount,
+    void Function()? onSelected,
+    EdgeInsets? padding,
+    SelectorSheetTheme? style,
+    Widget? separator,
+    AppBar? appBar,
+    bool? popIndexOnSelected,
+  }) {
+    return SelectorSheet(
+      itemBuilder: itemBuilder,
+      itemCount: itemCount,
+      child: null,
+      padding: padding,
+      onSelected: onSelected,
+      style: style,
+      separator: separator,
+      appBar: appBar,
+      popIndexOnSelected: popIndexOnSelected ?? true,
+    );
+  }
 
-  /// The items that will be displayed in the sheet
-  final List<SelectorSheetItem<T>> items;
+  /// The list of items that will be displayed in the sheet.
+  final Widget? child;
 
   /// The builder that will be used to build each item in the list.
-  final Widget Function(BuildContext, SelectorSheetItem<T>) itemBuilder;
+  final Widget Function(BuildContext, int)? itemBuilder;
+
+  /// The count of items in the list.
+  final int? itemCount;
 
   /// The padding of the view.
   final EdgeInsets? padding;
 
   /// Optional callback to be called when an item is selected.
-  final void Function(T value)? onSelected;
+  ///
+
+  final void Function()? onSelected;
 
   /// Whether the sheet should be automatically popped when an item is selected.
   ///
-  /// If `true`, the sheet will be popped when an item is selected, even if the
-  /// [onSelected] callback is provided. Defaults to `true`.
-  final bool popOnSelected;
+  /// Defaults to `true`.
+  ///
+  /// If set to `true` will return the index of the selected item.
+  final bool popIndexOnSelected;
 
   /// The separator that will be displayed between each item in the list.
   ///
@@ -83,7 +122,7 @@ class SelectorSheet<T> extends StatelessWidget {
 
   /// The [AppBar] of the sheet.
   ///
-  /// If not provided, a default [AppBar] will be used with the [title].
+  /// If not provided, a default [AppBar] will be used.
   final AppBar? appBar;
 
   /// The style of the sheet.
@@ -92,13 +131,13 @@ class SelectorSheet<T> extends StatelessWidget {
   final SelectorSheetTheme? style;
 
   /// Shows a [SelectorSheet] as a new fullscreen [MaterialPageRoute], and
-  /// returns the selected value
-  static Future<T?> show<T>(
+  /// returns the selected value index when the sheet is popped.
+  static Future<int?> show<T>(
     BuildContext context,
     SelectorSheet<T> child,
   ) async {
     final selection = await Navigator.of(context).push(
-      MaterialPageRoute<T>(
+      MaterialPageRoute<int>(
         builder: (_) => child,
         fullscreenDialog: true,
       ),
@@ -156,32 +195,34 @@ class SelectorSheet<T> extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: selectorSheetBackgroundColor,
-      appBar: appBar ?? AppBar(title: title),
-      body: ListView.separated(
-        padding: selectorSheetPadding,
-        itemCount: items.length,
-        itemBuilder: (_, i) {
-          final item = items[i];
+      appBar: appBar ?? AppBar(),
+      body: child ??
+          ListView.separated(
+            padding: selectorSheetPadding,
+            itemCount: itemCount ?? 0,
+            itemBuilder: (_, i) {
+              // final item = items[i];
 
-          return Material(
-            elevation: itemElevation,
-            shape: itemShape,
-            shadowColor: itemShadowColor,
-            color: itemBackgroundColor,
-            clipBehavior: itemClipBehavior,
-            child: InkWell(
-              onTap: () {
-                onSelected?.call(item.value);
-                if (popOnSelected) {
-                  Navigator.of(context).pop(item.value);
-                }
-              },
-              child: itemBuilder(context, item),
-            ),
-          );
-        },
-        separatorBuilder: (_, __) => separator ?? const Divider(),
-      ),
+              return Material(
+                elevation: itemElevation,
+                shape: itemShape,
+                shadowColor: itemShadowColor,
+                color: itemBackgroundColor,
+                clipBehavior: itemClipBehavior,
+                child: InkWell(
+                  onTap: () {
+                    if (popIndexOnSelected) {
+                      Navigator.of(context).pop(i);
+                    } else {
+                      onSelected?.call();
+                    }
+                  },
+                  child: itemBuilder!(context, i),
+                ),
+              );
+            },
+            separatorBuilder: (_, __) => separator ?? const Divider(),
+          ),
     );
   }
 }

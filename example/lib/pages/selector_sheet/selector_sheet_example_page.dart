@@ -112,42 +112,46 @@ class SelectorSheetExampleBody extends StatelessWidget {
             const SizedBox(height: 8),
             const Divider(),
             const SizedBox(height: 8),
-            const Text('Default theme selector sheet:'),
+            const Text('Default selector sheet:'),
             const SizedBox(height: 16),
             ElevatedButton(
                 onPressed: () async {
-                  final selectedCountries = await SelectorSheet.show(
+                  final selectedCountryIndex = await SelectorSheet.show(
                       context,
                       SelectorSheet<Country>(
-                        title: const Text('Select a country'),
-                        items: countriesList,
-                        itemBuilder: (context, item) {
-                          return ListTile(
-                            title: item.title,
-                          );
-                        },
-                      ));
+                          appBar: AppBar(
+                            title: const Text('Select a country'),
+                          ),
+                          child: ListView.builder(
+                            itemCount: countriesList.length,
+                            itemBuilder: (context, i) {
+                              return ListTile(
+                                title: countriesList[i].title,
+                                onTap: () {
+                                  Navigator.of(context).pop(i);
+                                },
+                              );
+                            },
+                          )));
 
-                  if (selectedCountries != null) {
-                    context
-                        .read<SelectCountryCubit>()
-                        .selectCountry(selectedCountries);
+                  if (selectedCountryIndex != null) {
+                    context.read<SelectCountryCubit>().selectCountry(
+                        countriesList[selectedCountryIndex].value);
                   }
                 },
                 child: const Text('Select a country')),
             const SizedBox(height: 24),
-            const Text('Selector sheet with theme applied:'),
+            const Text('Selector sheet with builder:'),
             const SizedBox(height: 16),
             ElevatedButton(
                 onPressed: () async {
-                  final selectedCountries = await SelectorSheet.show(
+                  final selectedCountryIndex = await SelectorSheet.show(
                       context,
-                      SelectorSheet<Country>(
-                        title: const Text('Select a country'),
-                        items: countriesList,
-                        itemBuilder: (context, item) {
+                      SelectorSheet<Country>.builder(
+                        itemCount: countriesList.length,
+                        itemBuilder: (context, i) {
                           return ListTile(
-                            title: item.title,
+                            title: countriesList[i].title,
                           );
                         },
                         style: SelectorSheetTheme(
@@ -170,10 +174,9 @@ class SelectorSheetExampleBody extends StatelessWidget {
                         ),
                       ));
 
-                  if (selectedCountries != null) {
-                    context
-                        .read<SelectCountryCubit>()
-                        .selectCountry(selectedCountries);
+                  if (selectedCountryIndex != null) {
+                    context.read<SelectCountryCubit>().selectCountry(
+                        countriesList[selectedCountryIndex].value);
                   }
                 },
                 child: const Text('Select a country')),
