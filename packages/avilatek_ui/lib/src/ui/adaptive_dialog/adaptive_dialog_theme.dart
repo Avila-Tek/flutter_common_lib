@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /// [AdaptiveDialogThemeData] defines the theme of an adaptive dialog.
 @immutable
-class AdaptiveDialogThemeData {
+class AdaptiveDialogThemeData extends ThemeExtension<AdaptiveDialogThemeData> {
   /// Creates an [AdaptiveDialogThemeData].
   const AdaptiveDialogThemeData({
     this.backgroundColor,
@@ -26,7 +26,7 @@ class AdaptiveDialogThemeData {
   final TextStyle? actionTextStyle;
 
   /// Linearly interpolate between two AdaptiveDialogThemeData.
-  static AdaptiveDialogThemeData? lerp(
+  static AdaptiveDialogThemeData? lerpThemeData(
     AdaptiveDialogThemeData? a,
     AdaptiveDialogThemeData? b,
     double t,
@@ -48,6 +48,7 @@ class AdaptiveDialogThemeData {
   }
 
   /// Creates a copy of this theme but with the given fields replaced with the new values.
+  @override
   AdaptiveDialogThemeData copyWith({
     Color? backgroundColor,
     TextStyle? titleTextStyle,
@@ -60,6 +61,11 @@ class AdaptiveDialogThemeData {
       contentTextStyle: contentTextStyle ?? this.contentTextStyle,
       actionTextStyle: actionTextStyle ?? this.actionTextStyle,
     );
+  }
+
+  @override
+  ThemeExtension<AdaptiveDialogThemeData> lerp(covariant ThemeExtension<AdaptiveDialogThemeData>? other, double t) {
+    return AdaptiveDialogThemeData.lerpThemeData(this, other as AdaptiveDialogThemeData?, t)!;
   }
 
   @override
