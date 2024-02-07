@@ -71,11 +71,8 @@ final countriesList = <SelectorSheetItem<Country>>[
 
 class SelectorSheetExamplePage extends StatelessWidget {
   const SelectorSheetExamplePage({
-    this.simulateInitialFetchingError = false,
     super.key,
   });
-
-  final bool simulateInitialFetchingError;
 
   @override
   Widget build(BuildContext context) {
