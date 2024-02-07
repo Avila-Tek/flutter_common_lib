@@ -1,7 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:developer';
-
 import 'package:avilatek_ui/src/ui/selector_sheet/selector_sheet_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +46,6 @@ class SelectorSheet<T> extends StatelessWidget {
     this.itemBuilder,
     this.itemCount,
     this.padding,
-    this.onSelected,
     this.popIndexOnSelected = true,
     this.separator,
     this.appBar,
@@ -71,7 +68,6 @@ class SelectorSheet<T> extends StatelessWidget {
   factory SelectorSheet.builder({
     required Widget Function(BuildContext, int) itemBuilder,
     required int itemCount,
-    void Function()? onSelected,
     EdgeInsets? padding,
     SelectorSheetTheme? style,
     Widget? separator,
@@ -83,7 +79,6 @@ class SelectorSheet<T> extends StatelessWidget {
       itemCount: itemCount,
       child: null,
       padding: padding,
-      onSelected: onSelected,
       style: style,
       separator: separator,
       appBar: appBar,
@@ -102,11 +97,6 @@ class SelectorSheet<T> extends StatelessWidget {
 
   /// The padding of the view.
   final EdgeInsets? padding;
-
-  /// Optional callback to be called when an item is selected.
-  ///
-
-  final void Function()? onSelected;
 
   /// Whether the sheet should be automatically popped when an item is selected.
   ///
@@ -213,8 +203,6 @@ class SelectorSheet<T> extends StatelessWidget {
                   onTap: () {
                     if (popIndexOnSelected) {
                       Navigator.of(context).pop(i);
-                    } else {
-                      onSelected?.call();
                     }
                   },
                   child: itemBuilder!(context, i),
