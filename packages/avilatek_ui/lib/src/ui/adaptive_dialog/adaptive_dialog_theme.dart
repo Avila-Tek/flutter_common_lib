@@ -1,12 +1,12 @@
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, hash_and_equals
+// ignore_for_file: lines_longer_than_80_chars, hash_and_equals
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-/// [AdaptiveDialogThemeData] defines the theme of an adaptive dialog.
+/// [AdaptiveAlertDialogThemeData] defines the theme of an adaptive dialog.
 @immutable
-class AdaptiveDialogThemeData extends ThemeExtension<AdaptiveDialogThemeData> {
-  /// Creates an [AdaptiveDialogThemeData].
-  const AdaptiveDialogThemeData({
+class AdaptiveAlertDialogThemeData extends ThemeExtension<AdaptiveAlertDialogThemeData> {
+  /// Creates an [AdaptiveAlertDialogThemeData].
+  const AdaptiveAlertDialogThemeData({
     this.backgroundColor,
     this.titleTextStyle,
     this.contentTextStyle,
@@ -25,37 +25,15 @@ class AdaptiveDialogThemeData extends ThemeExtension<AdaptiveDialogThemeData> {
   /// Defines the text style of the dialog's actions.
   final TextStyle? actionTextStyle;
 
-  /// Linearly interpolate between two AdaptiveDialogThemeData.
-  static AdaptiveDialogThemeData? lerpThemeData(
-    AdaptiveDialogThemeData? a,
-    AdaptiveDialogThemeData? b,
-    double t,
-  ) {
-    if (identical(a, b)) {
-      return a;
-    }
-
-    return AdaptiveDialogThemeData(
-      backgroundColor: Color.lerp(a?.backgroundColor, b?.backgroundColor, t),
-      titleTextStyle: TextStyle.lerp(a?.titleTextStyle, b?.titleTextStyle, t),
-      contentTextStyle: TextStyle.lerp(
-        a?.contentTextStyle,
-        b?.contentTextStyle,
-        t,
-      ),
-      actionTextStyle: TextStyle.lerp(a?.actionTextStyle, b?.actionTextStyle, t),
-    );
-  }
-
   /// Creates a copy of this theme but with the given fields replaced with the new values.
   @override
-  AdaptiveDialogThemeData copyWith({
+  AdaptiveAlertDialogThemeData copyWith({
     Color? backgroundColor,
     TextStyle? titleTextStyle,
     TextStyle? contentTextStyle,
     TextStyle? actionTextStyle,
   }) {
-    return AdaptiveDialogThemeData(
+    return AdaptiveAlertDialogThemeData(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
       contentTextStyle: contentTextStyle ?? this.contentTextStyle,
@@ -64,8 +42,26 @@ class AdaptiveDialogThemeData extends ThemeExtension<AdaptiveDialogThemeData> {
   }
 
   @override
-  ThemeExtension<AdaptiveDialogThemeData> lerp(covariant ThemeExtension<AdaptiveDialogThemeData>? other, double t) {
-    return AdaptiveDialogThemeData.lerpThemeData(this, other as AdaptiveDialogThemeData?, t)!;
+  ThemeExtension<AdaptiveAlertDialogThemeData> lerp(
+    covariant ThemeExtension<AdaptiveAlertDialogThemeData>? other,
+    double t,
+  ) {
+    if (identical(this, other)) {
+      return this;
+    }
+
+    if (other == null) {
+      return this;
+    }
+
+    final otherTheme = other as AdaptiveAlertDialogThemeData;
+
+    return AdaptiveAlertDialogThemeData(
+      backgroundColor: Color.lerp(backgroundColor, otherTheme.backgroundColor, t),
+      titleTextStyle: TextStyle.lerp(titleTextStyle, otherTheme.titleTextStyle, t),
+      contentTextStyle: TextStyle.lerp(contentTextStyle, otherTheme.contentTextStyle, t),
+      actionTextStyle: TextStyle.lerp(actionTextStyle, otherTheme.actionTextStyle, t),
+    );
   }
 
   @override
@@ -80,7 +76,7 @@ class AdaptiveDialogThemeData extends ThemeExtension<AdaptiveDialogThemeData> {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is AdaptiveDialogThemeData &&
+    return other is AdaptiveAlertDialogThemeData &&
         other.backgroundColor == backgroundColor &&
         other.titleTextStyle == titleTextStyle &&
         other.contentTextStyle == contentTextStyle &&
