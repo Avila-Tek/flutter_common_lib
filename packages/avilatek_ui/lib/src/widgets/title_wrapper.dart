@@ -1,4 +1,4 @@
-import 'package:avilatek_ui/src/ui/title_wrapper.dart/title_wrapper_style.dart';
+import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:flutter/material.dart';
 
 /// {@template custom_text_field}

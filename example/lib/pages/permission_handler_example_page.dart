@@ -1,4 +1,4 @@
-import 'dart:developer';
+// ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:avilatek_bloc/avilatek_bloc.dart';

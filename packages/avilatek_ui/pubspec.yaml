@@ -11,9 +11,15 @@ dependencies:
   collection: ^1.18.0
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.9
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
+
+flutter:
+  assets:
+    - assets/
