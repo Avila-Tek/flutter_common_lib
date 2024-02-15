@@ -1,9 +1,11 @@
 import 'package:avilatek_ui/avilatek_ui.dart';
+import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/pending_notifications/pending_notifications_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
+import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -141,6 +143,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                    builder: (context) => const AdaptiveDialogExample(),
+                  ),
+                );
+              },
+              child: const Text('Adaptive dialog'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => const AvilaSnackbarExamplePage(),
                   ),
                 );
@@ -159,6 +172,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Pending Notifications Example'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SelectorSheetExamplePage(),
+                  ),
+                );
+              },
+              child: const Text('Selector Sheet Example'),
             ),
           ],
         ),
