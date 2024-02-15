@@ -1,30 +1,75 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/// {@template adaptive_dialog}
-/// Adaptive alert dialog that shows a CupertinoAlertDialog on iOS and an
-/// AlertDialog on the other platforms.
-/// {@endtemplate}
+/// [AdaptiveDialogActionStyle] defines the style of an adaptive dialog action.
+class AdaptiveDialogActionStyle {
+  const AdaptiveDialogActionStyle({
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+  });
+
+  /// The color of the text for the action.
+  final Color? textColor;
+
+  /// The size of the font for the action.
+  final double? fontSize;
+
+  /// The weight of the font for the action.
+  final FontWeight? fontWeight;
+}
+
+/// [AdaptiveDialogAction] defines an action for an adaptive dialog.
+class AdaptiveDialogAction {
+  const AdaptiveDialogAction({
+    required this.child,
+    this.onPressed,
+    this.isPrimaryAction = false,
+    this.style,
+  });
+
+  /// The widget to display for the action.
+  final Widget child;
+
+  /// The function to call when the action is pressed.
+  final void Function()? onPressed;
+
+  /// Whether this action is the primary action for the dialog.
+  final bool isPrimaryAction;
+
+  /// The style to use for this action.
+  final AdaptiveDialogActionStyle? style;
+}
+
+/// [AdaptiveAlertDialog] is a dialog that adapts to the platform.
 class AdaptiveAlertDialog extends StatelessWidget {
-  /// {@macro adaptive_dialog}
   const AdaptiveAlertDialog({
     required this.actions,
     this.title,
     this.content,
+    this.style,
     super.key,
   });
 
+  /// The actions for the dialog.
   final List<AdaptiveDialogAction> actions;
 
+  /// The title widget for the dialog.
   final Widget? title;
 
+  /// The content widget for the dialog.
   final Widget? content;
+
+  /// The style to use for the dialog.
+  final AdaptiveDialogActionStyle? style;
 
   @override
   Widget build(BuildContext context) {
+    // Use CupertinoAlertDialog for iOS
     if (Platform.isIOS) {
       return CupertinoAlertDialog(
         title: title,
@@ -44,17 +89,23 @@ class AdaptiveAlertDialog extends StatelessWidget {
       );
     }
 
+    // Use AlertDialog for other platforms
     return AlertDialog(
       title: title,
       content: content,
       actions: actions
           .map(
             (action) => TextButton(
-              child: action.child,
               onPressed: () {
                 action.onPressed?.call();
                 Navigator.of(context).pop();
               },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  style?.textColor ?? action.style?.textColor,
+                ),
+              ),
+              child: action.child,
             ),
           )
           .toList(),
@@ -62,28 +113,80 @@ class AdaptiveAlertDialog extends StatelessWidget {
   }
 }
 
-/// {@template adaptive_dialog_action}
-/// Action for the [AdaptiveAlertDialog].
-///
-/// [child] is the action's widget.
-///
-/// [onPressed] is the action's callback.
-/// {@endtemplate}
-class AdaptiveDialogAction {
-  /// {@macro adaptive_dialog_action}
-  const AdaptiveDialogAction({
-    required this.child,
-    this.onPressed,
-    this.isPrimaryAction = false,
+/// [AdaptiveInputDialog] is an input dialog that adapts to the platform.
+class AdaptiveInputDialog extends StatelessWidget {
+  const AdaptiveInputDialog({
+    required this.title,
+    required this.actions,
+    required this.controller,
+    this.placeholder = '',
+    super.key,
+    this.style,
   });
 
-  final Widget child;
+  /// The title widget for the dialog.
+  final Widget title;
 
-  /// Do not call [Navigator.of(context).pop()] in [onPressed]. It will be
-  /// called automatically.
-  final void Function()? onPressed;
+  /// The placeholder text for the input field.
+  final String placeholder;
 
-  /// Whether this action is the default action of the dialog. Only have effect
-  /// on iOS.
-  final bool isPrimaryAction;
+  /// The actions for the dialog.
+  final List<AdaptiveDialogAction> actions;
+
+  /// The controller for the input field.
+  final TextEditingController controller;
+
+  /// The style to use for the dialog.
+  final AdaptiveDialogActionStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    // Use CupertinoAlertDialog for Android
+    if (Platform.isAndroid) {
+      return CupertinoAlertDialog(
+        title: title,
+        content: CupertinoTextField(
+          controller: controller,
+          placeholder: placeholder,
+        ),
+        actions: actions
+            .map(
+              (action) => CupertinoDialogAction(
+                onPressed: () {
+                  action.onPressed?.call();
+                  Navigator.of(context).pop();
+                },
+                isDefaultAction: action.isPrimaryAction,
+                child: action.child,
+              ),
+            )
+            .toList(),
+      );
+    } else {
+      // Use AlertDialog for other platforms
+      return AlertDialog(
+        title: title,
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: placeholder),
+        ),
+        actions: actions
+            .map(
+              (action) => TextButton(
+                onPressed: () {
+                  action.onPressed?.call();
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(
+                    style?.textColor ?? action.style?.textColor,
+                  ),
+                ),
+                child: action.child,
+              ),
+            )
+            .toList(),
+      );
+    }
+  }
 }
