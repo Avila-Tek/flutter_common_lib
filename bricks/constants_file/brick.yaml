@@ -1,0 +1,77 @@
+name: constants_file
+description: A brick used for the constans file used in every project.
+
+# The following defines the brick repository url.
+# Uncomment and update the following line before publishing the brick.
+# repository: https://github.com/my_org/my_repo
+
+# The following defines the version and build number for your brick.
+# A version number is three numbers separated by dots, like 1.2.34
+# followed by an optional build number (separated by a +).
+version: 0.1.0+1
+
+# The following defines the environment for the current brick.
+# It includes the version of mason that the brick requires.
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  app_name:
+    type: string
+    description: Your app's name
+    default: My app
+    prompt: What is your app's name?
+
+  grid_system:
+    type: number
+    description: Your grid system's base value
+    default: 0.0
+    prompt: What's your project's grid system's base value?
+
+  default_radius:
+    type: number
+    description: Your project's default radius
+    default: 0.0
+    prompt: What's the default radius setting for your project?
+
+  primary_color_seed_value:
+    type: string
+    description: The seed value of the primary color for the project
+    default: 2196F3
+    prompt: Please enter the hex value of the primary color used for the project (not includig \#)
+
+  error_color_seed_value:
+    type: string
+    description: The seed value for the error color used on the project
+    default: F04438
+    prompt: Please enter the hex value of the error color used for the project (not includig \#)
+
+  warning_color_seed_value:
+    type: string
+    description: The seed value for the warning color used on the project
+    default: F79009
+    prompt: Please enter the hex value of the warning color used for the project (not includig \#)
+
+  success_color_seed_value:
+    type: string
+    description: The seed value for the success color used on the project
+    default: 12B76A
+    prompt: Please enter the hex value of the success color used for the project (not includig \#)
+
+  font_black:
+    type: string
+    description: The dark color value for fonts.
+    default: "333333"
+    prompt: Please enter the hex value of the black color used for text (not includig \#)
+
+  font_white:
+    type: string
+    description: The light color value for fonts.
+    default: FFFFFF
+    prompt: Please enter the hex value of the white color used for text (not includig \#)
+
+  project_includes_secondary_color:
+    type: boolean
+    description: Whether or not this project includes a secondary color
+    default: false
+    prompt: Does your project include a secondary color?
