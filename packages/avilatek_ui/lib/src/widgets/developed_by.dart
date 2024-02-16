@@ -18,22 +18,31 @@ class DevelopedByLogo {
 
   /// Returns the flat style of the logo.
   Widget flat({Color? color}) {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/flat.svg', color);
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/flat.svg',
+      color,
+    );
   }
 
   /// Returns the primaryGreen style of the logo.
   Widget primaryGreen() {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_Green.svg');
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_Green.svg',
+    );
   }
 
   /// Returns the primaryWhite style of the logo.
   Widget primaryWhite() {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_White.svg');
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_White.svg',
+    );
   }
 
   /// Returns the outlined style of the logo.
   Widget outlined() {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/outlined.svg');
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/outlined.svg',
+    );
   }
 
   /// Builds the logo widget.
