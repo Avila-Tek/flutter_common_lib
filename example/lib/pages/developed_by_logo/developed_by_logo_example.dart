@@ -7,19 +7,29 @@ class DevelopedByLogoExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<Color> colorNotifier = ValueNotifier(Colors.blue);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Developed By Logo Example'),
       ),
       body: PageView(
         children: [
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Flat style'),
-              Spacer(),
-              DevelopedChangeLogoColor(),
-              Spacer(),
+              const Text('Flat style'),
+              const Spacer(),
+              DevelopedChangeLogoColor(
+                colorNotifier: colorNotifier,
+                child: ValueListenableBuilder<Color>(
+                  valueListenable: colorNotifier,
+                  builder: (context, color, child) {
+                    return DevelopedByLogo().flat(color: color);
+                  },
+                ),
+              ),
+              const Spacer(),
             ],
           ),
           Column(
@@ -31,21 +41,35 @@ class DevelopedByLogoExample extends StatelessWidget {
               const Spacer(),
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Primary White (Modified Size)'),
-              const Spacer(),
-              DevelopedByLogo(size: 20).primaryWhite(),
-              const Spacer(),
-            ],
+          ColoredBox(
+            color: const Color(0xFF1d1d1d),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Primary White (Modified Size)',
+                  style: TextStyle(color: Colors.white),
+                ),
+                const Spacer(),
+                DevelopedByLogo(size: 20).primaryWhite(),
+                const Spacer(),
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text('Outlined'),
               const Spacer(),
-              DevelopedByLogo().outlined(),
+                  DevelopedChangeLogoColor(
+                colorNotifier: colorNotifier,
+                child: ValueListenableBuilder<Color>(
+                  valueListenable: colorNotifier,
+                  builder: (context, color, child) {
+                    return DevelopedByLogo().outlined(color: color);
+                  },
+                ),
+              ),
               const Spacer(),
             ],
           ),
@@ -56,23 +80,28 @@ class DevelopedByLogoExample extends StatelessWidget {
 }
 
 class DevelopedChangeLogoColor extends StatefulWidget {
-  const DevelopedChangeLogoColor({super.key});
+  final Widget child;
+  final ValueNotifier<Color> colorNotifier;
+
+  const DevelopedChangeLogoColor({
+    required this.child,
+    required this.colorNotifier,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DevelopedChangeLogoColor> createState() => _DevelopedChangeLogoColorState();
 }
 
 class _DevelopedChangeLogoColorState extends State<DevelopedChangeLogoColor> {
-  Color currentColor = Colors.blue;
-
   void changeColor(Color color) {
-    setState(() => currentColor = color);
+    widget.colorNotifier.value = color;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      DevelopedByLogo().flat(color: currentColor),
+      widget.child,
       const SizedBox(height: 20),
       ElevatedButton(
         onPressed: () {
@@ -86,10 +115,10 @@ class _DevelopedChangeLogoColorState extends State<DevelopedChangeLogoColor> {
                   width: double.maxFinite,
                   child: Column(
                     children: [
-                      Padding(
+                         Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ColorPicker(
-                          color: currentColor,
+                          color: widget.colorNotifier.value,
                           onChanged: (value) {
                             changeColor(value);
                           },
