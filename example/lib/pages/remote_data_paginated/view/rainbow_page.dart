@@ -53,21 +53,28 @@ class _RainbowViewState extends State<RainbowView>
       body: BlocBuilder<RainbowBloc, PagedRemoteDataState<Color>>(
         builder: (context, state) {
           if (state.isUnititialized) {
+            // If uninitialized (fetching first page), we will show a loading
+            // indicator.
+            // You might want to handle errors here, but for the sake of the
+            // example, we will omit that.
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
+          /// From now on, we can assume that the state is initialized (has data available)
+          /// and we can safely cast the state to `PagedRemoteDataInitialized<Color>`.
           final data = (state as PagedRemoteDataInitialized<Color>).data;
 
           return ListView.builder(
             controller: _controller,
+            // Plus 1 to append widgets to the end of the ListView
             itemCount: data.length + 1,
-            itemBuilder: (BuildContext context, int i) {
+            itemBuilder: (_, i) {
               var isLastItem = i == data.length;
+
               if (isLastItem) {
                 if (state.isFetchingNextPage) {
-                  /// Rainbow colored loading indicator
                   return Padding(
                     padding: const EdgeInsets.all(24),
                     child: Center(

@@ -34,6 +34,7 @@ extension PagedRemoteDataStateX on PagedRemoteDataState<dynamic> {
   bool get isFetchingNextPageSuccess =>
       this is PagedRemoteDataNextPageFetchingSuccess;
 
+  /// Returns `true` if the state is [PagedRemoteDataLastPageFetched].
   bool get isLastPageFetched => this is PagedRemoteDataLastPageFetched;
 }
 
