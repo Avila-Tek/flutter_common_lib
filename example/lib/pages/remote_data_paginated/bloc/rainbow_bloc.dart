@@ -29,16 +29,23 @@ class RainbowBloc extends PagedRemoteDataBloc<Color> {
     // if a boolean value returned from the server indicates that the current
     // page is the last one, etc.
 
-    // I this case, we will assume that the last page is reached when the
+    // In this case, we will assume that the last page is reached when the
     // length of the currently fetched page plus the length of the old state's
     // data is greater than or equal to 100.
 
+    /// We must ensure that [oldState] is of type
+    /// [PagedRemoteDataNextPageFetched]. If we are fetching the first page,
+    /// [oldState] will be of type [PagedRemoteDataUninitialized] and we won't
+    /// be able to access the data property to calculate our condition.
     if (oldState is PagedRemoteDataNextPageFetched) {
       if (oldState.data.length + colors.length >= 60) {
+        /// Return true as the second value to indicate that the last page was
+        /// fetched.
         return (colors, true);
       }
     }
 
+    /// Return false as the second value to indicate that there are more pages
     return (colors, false);
   }
 
