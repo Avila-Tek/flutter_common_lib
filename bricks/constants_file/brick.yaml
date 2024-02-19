@@ -25,13 +25,13 @@ vars:
   grid_system:
     type: number
     description: Your grid system's base value
-    default: 0.0
+    default: 8.0
     prompt: What's your project's grid system's base value?
 
   default_radius:
     type: number
     description: Your project's default radius
-    default: 0.0
+    default: 8.0
     prompt: What's the default radius setting for your project?
 
   primary_color_seed_value:

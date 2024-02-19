@@ -9,16 +9,17 @@ Future run(HookContext context) async {
   final projectHasSecondaryColor =
       context.vars['project_includes_secondary_color'];
 
-  String secondaryColor = 'ACBCC1';
   if (projectHasSecondaryColor) {
+    String secondaryColor = 'ACBCC1';
+
     secondaryColor = context.logger.prompt(
         'Please enter the hex value of the secondary color used for the project (not includig #)');
-  }
 
-  context.vars = {
-    ...context.vars,
-    'secondary_color_seed_value': secondaryColor,
-  };
+    context.vars = {
+      ...context.vars,
+      'secondary_color_seed_value': secondaryColor,
+    };
+  }
 }
 
 class PubspecNameException implements Exception {}
