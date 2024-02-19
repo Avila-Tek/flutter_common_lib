@@ -1,8 +1,11 @@
+// ignore_for_file: omit_local_variable_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// [DevelopedByLogo] is a widget that displays the logo of the company
-/// The logo can be displayed in different styles: flat, primaryGreen, primaryWhite, and outlined.
+/// The logo can be displayed in different styles:
+/// [flat, primaryGreen, primaryWhite, and outlined.]
 class DevelopedByLogo {
   ///Constructor
   DevelopedByLogo({
@@ -21,6 +24,7 @@ class DevelopedByLogo {
     return _buildLogo(
       'packages/avilatek_ui/assets/avilatek_ui/developed_by/flat.svg',
       color,
+      color ?? Colors.black,
     );
   }
 
@@ -28,6 +32,8 @@ class DevelopedByLogo {
   Widget primaryGreen() {
     return _buildLogo(
       'packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_Green.svg',
+      null,
+      const Color(0xFF135738),
     );
   }
 
@@ -35,18 +41,27 @@ class DevelopedByLogo {
   Widget primaryWhite() {
     return _buildLogo(
       'packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_White.svg',
+      null,
+      Colors.white,
     );
   }
 
   /// Returns the outlined style of the logo.
-  Widget outlined() {
+  Widget outlined({Color? color}) {
     return _buildLogo(
       'packages/avilatek_ui/assets/avilatek_ui/developed_by/outlined.svg',
+      color,
+      color ?? Colors.black,
     );
   }
 
   /// Builds the logo widget.
-  Widget _buildLogo(String svgAsset, [Color? color]) {
+  /// ask for parameters:
+  /// [svgAsset] the path of the svg asset
+  /// [svgColor] the color of the svg asset
+  /// [textColor] the color of the text
+  Widget _buildLogo(String svgAsset, Color? svgColor, Color textColor) {
+    const double textScaleFactor = 0.5;
     return Row(
       mainAxisAlignment: alignment,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,23 +69,16 @@ class DevelopedByLogo {
         Text(
           'Developed By',
           style: TextStyle(
-            /// Use the logo color if it's not null, otherwise is black
-            color: color ?? Colors.black,
-            fontSize: size,
+            color: textColor,
+            fontSize: size! - textScaleFactor,
           ),
         ),
         const SizedBox(width: 4),
-
-        /// The [svgAsset] argument specifies
-        /// the path to the SVG asset used for the logo.
-        ///
-        /// The [color] argument specifies the color of the logo.
-        /// If it is null, the logo will use its default color.
         SvgPicture.asset(
           svgAsset,
           height: size,
           width: size,
-          color: color,
+          color: svgColor,
         ),
       ],
     );
