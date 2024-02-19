@@ -22,4 +22,5 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/avilatek_ui/developed_by/
     - assets/
