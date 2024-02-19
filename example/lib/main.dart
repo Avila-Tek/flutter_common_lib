@@ -2,9 +2,12 @@ import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/constants_showcase/constants_showcase_page.dart';
+import 'package:example/pages/developed_by_logo/developed_by_logo_example.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
+import 'package:example/pages/pending_notifications/pending_notifications_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
+import 'package:example/pages/remote_data_paginated/view/rainbow_page.dart';
 import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
 import 'package:flutter/material.dart';
 
@@ -155,11 +158,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                    builder: (context) => const DevelopedByLogoExample(),
+                  ),
+                );
+              },
+              child: const Text('Developed By Logo'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => const AvilaSnackbarExamplePage(),
                   ),
                 );
               },
               child: const Text('Avila Snackbar Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const PendingNotificationsExamplePage(),
+                  ),
+                );
+              },
+              child: const Text('Pending Notifications Example'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
@@ -184,6 +212,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Constants Showcase'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RainbowPage(),
+                  ),
+                );
+              },
+              child: const Text('Paged Remote Data Bloc Example'),
             ),
           ],
         ),

@@ -504,7 +504,6 @@ class AvilaSnackBar extends SnackBar {
   /// Defines the behavior of the snackbar when it is visible and the user taps the screen.
   ///
   /// If this property is null, then [SnackBarThemeData.behavior] of the current [SnackBarTheme] is used.
-  @override
   final HitTestBehavior? hitTestBehavior;
 
   /// How this snackbar should behave when a user taps the screen.
