@@ -5,4 +5,6 @@ bricks:
     path: bricks/avilatek_codemagic
   feature_brick:
     path: bricks/feature_brick
+  constants_file:
+    path: bricks/constants_file
   bloc: ^0.3.0

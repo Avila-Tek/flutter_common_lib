@@ -8,6 +8,7 @@ environment:
   flutter: ">=3.10.0"
 
 dependencies:
+  collection: ^1.17.2
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.9
@@ -21,4 +22,5 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/avilatek_ui/developed_by/
     - assets/
