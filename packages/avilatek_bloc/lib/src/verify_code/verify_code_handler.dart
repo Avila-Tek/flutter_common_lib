@@ -2,7 +2,7 @@ import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:bloc/bloc.dart';
 
 /// Handler for [VerifyCodeBloc].
-class VerifyCodeEventHandler<T> {
+class VerifyCodeEventHandler {
   /// Constructor for [VerifyCodeEventHandler].
   const VerifyCodeEventHandler();
 
@@ -20,12 +20,12 @@ class VerifyCodeEventHandler<T> {
   ///
   /// The [VerifyCodeState] is the current state of the [VerifyCodeBloc].
   Future<void> mapVerifyCodePressedToState(
-    VerifyCodePressedEvent<T> event,
-    VerifyCodeState<T> state,
-    Emitter<VerifyCodeState<T>> emit,
+    VerifyCodePressedEvent event,
+    VerifyCodeState state,
+    Emitter<VerifyCodeState> emit,
     Future<bool> Function(
-      VerifyCodeState<T>,
-      VerifyCodePressedEvent<T>,
+      VerifyCodeState,
+      VerifyCodePressedEvent,
     ) verifyCodePressed,
   ) async {
     try {
@@ -39,6 +39,8 @@ class VerifyCodeEventHandler<T> {
 
       if (isCodeVerified) {
         emit(const VerifyCodeSuccess());
+      } else {
+        throw Exception();
       }
     } catch (e) {
       emit(VerifyCodeError(e));

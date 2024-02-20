@@ -3,40 +3,54 @@
 import 'dart:async';
 
 import 'package:avilatek_bloc/src/send_code/send_code_event.dart';
+import 'package:avilatek_bloc/src/send_code/send_code_handler.dart';
 import 'package:avilatek_bloc/src/send_code/send_code_state.dart';
-import 'package:avilatek_bloc/src/verify_code/verify_code_event.dart';
-import 'package:avilatek_bloc/src/verify_code/verify_code_handler.dart';
-import 'package:avilatek_bloc/src/verify_code/verify_code_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-abstract class SendCodeBloc<T> extends Bloc<SendCodeEvent, SendCodeState<T>> {
-  SendCodeBloc() : super(const SendCodeInitialized()) {
-    _handler = SendCodeEventHandler<T>();
-    on<SendCodePressedEvent<T>>(
+abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
+  SendCodeBloc({
+    required int sendCodeDurationInSeconds,
+  })  : _sendCodeDuration = sendCodeDurationInSeconds,
+        super(const SendCodeInitialized()) {
+    _handler = const SendCodeEventHandler();
+
+    on<SendCodePressedEvent>(
       _mapSendCodePressedToState,
     );
+    on<SendCodeTickTimerEvent>((event, emit) {
+      emit(
+        event.durationInSeconds > 0
+            ? SendCodeOnHoldTime(event.durationInSeconds)
+            : const SendCodeInitialized(),
+      );
+    });
   }
+  StreamSubscription<int>? tickerSubscription;
+  final int _sendCodeDuration;
 
   /// Handler for [SendCodeBloc].
-  late SendCodeEventHandler<T> _handler;
+  late SendCodeEventHandler _handler;
 
   /// Propagates the [SendCodePressedEvent] event down to the
   /// corresponding event handler.
   Future<void> _mapSendCodePressedToState(
-    SendCodePressedEvent<T> event,
-    Emitter<SendCodeState<T>> emit,
+    SendCodePressedEvent event,
+    Emitter<SendCodeState> emit,
   ) async {
     return await _handleStatesOnEvent(
       isNoOp: state is SendCodeLoading ||
           state is SendCodeError ||
           state is SendCodeSuccess,
-      onSendCodeInitialized: () => _handler.mapSendCodePressedToState(
-        event,
-        state as SendCodeInitialized<T>,
-        emit,
-        verifyCodePressed,
-      ),
+      onSendCodeInitialized: () {
+        _startOrResetTimer();
+        return _handler.mapSendCodePressedToState(
+          event,
+          state as SendCodeInitialized,
+          emit,
+          sendCodePressed,
+        );
+      },
     );
   }
 
@@ -62,12 +76,22 @@ abstract class SendCodeBloc<T> extends Bloc<SendCodeEvent, SendCodeState<T>> {
     }
   }
 
-  /// Function that should be implemented to verify the code.
-  /// This function should return `true` if the code is verified,
+  /// Function that should be implemented to send the code.
+  /// This function should return `true` if the code is sent,
   /// `false` otherwise.
   @visibleForTesting
-  Future<bool> verifyCodePressed(
-    SendCodeState<T> oldState,
-    SendCodePressedEvent<T> event,
+  Future<bool> sendCodePressed(
+    SendCodeState oldState,
+    SendCodePressedEvent event,
   );
+
+  void _startOrResetTimer() {
+    tickerSubscription?.cancel();
+    tickerSubscription = Stream.periodic(
+      const Duration(seconds: 1),
+      (x) => _sendCodeDuration - x - 1,
+    )
+        .take(_sendCodeDuration)
+        .listen((duration) => add(SendCodeTickTimerEvent(duration)));
+  }
 }

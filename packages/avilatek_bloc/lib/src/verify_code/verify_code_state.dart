@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 
 /// Extension for the [VerifyCodeState] class that provides utility methods to
 /// check the type of the state.
-extension VerifyCodeStateX on VerifyCodeState<dynamic> {
+extension VerifyCodeStateX on VerifyCodeState {
   /// Returns `true` if the state is initialized.
   bool get isInitialized => this is VerifyCodeInitialized;
 
@@ -22,7 +22,7 @@ extension VerifyCodeStateX on VerifyCodeState<dynamic> {
 ///
 /// This class is used to provide a common interface for all the states of the
 /// [VerifyCodeBloc].
-abstract class VerifyCodeState<T> extends Equatable {
+abstract class VerifyCodeState extends Equatable {
   const VerifyCodeState();
 
   @override
@@ -31,17 +31,17 @@ abstract class VerifyCodeState<T> extends Equatable {
 
 /// State that represents the initial state of the [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] is created.
-class VerifyCodeInitialized<T> extends VerifyCodeState<T> {
+class VerifyCodeInitialized extends VerifyCodeState {
   const VerifyCodeInitialized();
 }
 
 /// State that represents the loading state of the [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] is verifying the code.
-class VerifyCodeLoading<T> extends VerifyCodeState<T> {}
+class VerifyCodeLoading extends VerifyCodeState {}
 
 /// State that represents an error in the [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] encounters an error.
-class VerifyCodeError<T> extends VerifyCodeState<T> {
+class VerifyCodeError extends VerifyCodeState {
   const VerifyCodeError(this.error);
 
   final dynamic error;
@@ -54,6 +54,6 @@ class VerifyCodeError<T> extends VerifyCodeState<T> {
 /// [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] successfully
 /// verifies the code.
-class VerifyCodeSuccess<T> extends VerifyCodeState<T> {
+class VerifyCodeSuccess extends VerifyCodeState {
   const VerifyCodeSuccess();
 }

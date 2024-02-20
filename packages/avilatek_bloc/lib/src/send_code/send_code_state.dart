@@ -2,7 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 
-extension SendCodeStateX on SendCodeState<dynamic> {
+extension SendCodeStateX on SendCodeState {
   /// Returns `true` if the state is initialized and has data.
   bool get isInitialized => this is SendCodeInitialized;
 
@@ -17,27 +17,24 @@ extension SendCodeStateX on SendCodeState<dynamic> {
 
   /// Returns `true` if the state is [SendCodeOnHoldTime].
   bool get isOnHoldTime => this is SendCodeOnHoldTime;
-
-  /// Returns the last sent date time if the state is [SendCodeSuccess].
-  DateTime get lastSentAt => (this as SendCodeSuccess).lastSentAt;
 }
 
-abstract class SendCodeState<T> extends Equatable {
+abstract class SendCodeState extends Equatable {
   const SendCodeState();
 
   @override
   List<Object?> get props => [];
 }
 
-class SendCodeInitialized<T> extends SendCodeState<T> {
+class SendCodeInitialized extends SendCodeState {
   const SendCodeInitialized();
 }
 
-class SendCodeLoading<T> extends SendCodeState<T> {
+class SendCodeLoading extends SendCodeState {
   const SendCodeLoading();
 }
 
-class SendCodeError<T> extends SendCodeState<T> {
+class SendCodeError extends SendCodeState {
   const SendCodeError(this.error);
 
   final dynamic error;
@@ -46,18 +43,17 @@ class SendCodeError<T> extends SendCodeState<T> {
   List<Object?> get props => [...super.props, error];
 }
 
-class SendCodeSuccess<T> extends SendCodeState<T> {
-  const SendCodeSuccess(
-    this.lastSentAt,
-  );
-
-  final DateTime lastSentAt;
+class SendCodeSuccess extends SendCodeState {
+  const SendCodeSuccess();
 }
 
-class SendCodeOnHoldTime<T> extends SendCodeState<T> {
+class SendCodeOnHoldTime extends SendCodeState {
   const SendCodeOnHoldTime(
-    this.timeInterval,
+    this.durationInSeconds,
   );
 
-  final Duration timeInterval;
+  final int durationInSeconds;
+
+  @override
+  List<Object?> get props => [durationInSeconds];
 }

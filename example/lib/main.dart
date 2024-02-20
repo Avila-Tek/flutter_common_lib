@@ -6,6 +6,7 @@ import 'package:example/pages/pending_notifications/pending_notifications_exampl
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
 import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
+import 'package:example/pages/verify_password/verify_password_example_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -149,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Adaptive dialog'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -173,6 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Pending Notifications Example'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -183,6 +186,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Selector Sheet Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VerifyPasswordExamplePage(),
+                  ),
+                );
+              },
+              child: const Text('Send and Verify Bloc Example'),
             ),
           ],
         ),

@@ -9,8 +9,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 /// Abstract Bloc implementation used to verify a code.
-/// [T] is the type of the data that will be returned after the code is
-/// verified.
 ///
 /// This bloc is used to verify a code. It is used to handle the state of the
 /// verification process. It is used to handle the state of the verification
@@ -30,23 +28,22 @@ import 'package:flutter/material.dart';
 /// The bloc uses the [VerifyCodeEventHandler] to handle the events.
 ///
 ///
-abstract class VerifyCodeBloc<T>
-    extends Bloc<VerifyCodeEvent, VerifyCodeState<T>> {
+abstract class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
   VerifyCodeBloc() : super(const VerifyCodeInitialized()) {
-    _handler = VerifyCodeEventHandler<T>();
-    on<VerifyCodePressedEvent<T>>(
+    _handler = const VerifyCodeEventHandler();
+    on<VerifyCodePressedEvent>(
       _mapVerifyCodePressedToState,
     );
   }
 
   /// Handler for [VerifyCodeBloc].
-  late VerifyCodeEventHandler<T> _handler;
+  late VerifyCodeEventHandler _handler;
 
   /// Propagates the [VerifyCodePressedEvent] event down to the
   /// corresponding event handler.
   Future<void> _mapVerifyCodePressedToState(
-    VerifyCodePressedEvent<T> event,
-    Emitter<VerifyCodeState<T>> emit,
+    VerifyCodePressedEvent event,
+    Emitter<VerifyCodeState> emit,
   ) async {
     return await _handleStatesOnEvent(
       isNoOp: state is VerifyCodeLoading ||
@@ -54,7 +51,7 @@ abstract class VerifyCodeBloc<T>
           state is VerifyCodeSuccess,
       onVerifyCodeInitialized: () => _handler.mapVerifyCodePressedToState(
         event,
-        state as VerifyCodeInitialized<T>,
+        state as VerifyCodeInitialized,
         emit,
         verifyCodePressed,
       ),
@@ -88,7 +85,7 @@ abstract class VerifyCodeBloc<T>
   /// `false` otherwise.
   @visibleForTesting
   Future<bool> verifyCodePressed(
-    VerifyCodeState<T> oldState,
-    VerifyCodePressedEvent<T> event,
+    VerifyCodeState oldState,
+    VerifyCodePressedEvent event,
   );
 }
