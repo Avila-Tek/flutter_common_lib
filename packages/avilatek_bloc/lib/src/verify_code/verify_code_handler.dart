@@ -21,7 +21,7 @@ class VerifyCodeEventHandler<T> {
   /// The [VerifyCodeState] is the current state of the [VerifyCodeBloc].
   Future<void> mapVerifyCodePressedToState(
     VerifyCodePressedEvent<T> event,
-    VerifyCodeInitialized<T> state,
+    VerifyCodeState<T> state,
     Emitter<VerifyCodeState<T>> emit,
     Future<bool> Function(
       VerifyCodeState<T>,

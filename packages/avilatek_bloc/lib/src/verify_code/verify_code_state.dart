@@ -54,6 +54,6 @@ class VerifyCodeError<T> extends VerifyCodeState<T> {
 /// [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] successfully
 /// verifies the code.
-class VerifyCodeSuccess<T> extends VerifyCodeInitialized<T> {
+class VerifyCodeSuccess<T> extends VerifyCodeState<T> {
   const VerifyCodeSuccess();
 }
