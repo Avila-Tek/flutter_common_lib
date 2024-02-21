@@ -4,9 +4,9 @@ import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/verify_password/bloc/send_password_code_bloc.dart';
 import 'package:example/pages/verify_password/bloc/verify_password_code_bloc.dart';
-import 'package:example/pages/verify_password/cubit/cubit.dart';
 import 'package:example/pages/verify_password/success_verification_example_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyPasswordExamplePage extends StatelessWidget {
@@ -24,9 +24,6 @@ class VerifyPasswordExamplePage extends StatelessWidget {
           BlocProvider(
             create: (context) => VerifyPasswordCodeBloc(),
           ),
-          BlocProvider(
-            create: (context) => VerifyCubit(),
-          )
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -171,7 +168,9 @@ class CodeInput extends StatelessWidget {
           submittedPinTheme: !state.isError ? submittedPinTheme : errorPinTheme,
           length: 6,
           autofocus: true,
-          onChanged: (value) => context.read<VerifyCubit>().setCode(value),
+          onChanged: (value) => context
+              .read<VerifyPasswordCodeBloc>()
+              .add(VerifyCodeInputChangedEvent(value)),
         );
       },
     );
@@ -235,29 +234,24 @@ class VerifyCodeButton extends StatelessWidget {
     return BlocBuilder<VerifyPasswordCodeBloc, VerifyCodeState>(
       builder: (context, state) {
         final loading = state.isLoading;
-        return BlocBuilder<VerifyCubit, VerifyState>(
-          buildWhen: (previous, current) => previous.code != current.code,
-          builder: (__, state2) {
-            final code = state2.code;
-            final enabled = code.length == 6;
-            return SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: enabled && !loading
-                    ? () => context
-                        .read<VerifyPasswordCodeBloc>()
-                        .add(VerifyCodePressedEvent(code))
-                    : null,
-                child: Center(
-                  child: loading
-                      ? const ButtonLoadingIndicator()
-                      : const Text(
-                          'Verify code',
-                        ),
-                ),
-              ),
-            );
-          },
+        final code = state.code;
+        final enabled = code.length == 6;
+        return SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: enabled && !loading
+                ? () => context
+                    .read<VerifyPasswordCodeBloc>()
+                    .add(VerifyCodePressedEvent(code))
+                : null,
+            child: Center(
+              child: loading
+                  ? const ButtonLoadingIndicator()
+                  : const Text(
+                      'Verify code',
+                    ),
+            ),
+          ),
         );
       },
     );

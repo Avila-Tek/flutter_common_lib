@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars
+// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, unnecessary_getters_setters
 
 import 'package:equatable/equatable.dart';
 
@@ -22,8 +22,16 @@ extension SendCodeStateX on SendCodeState {
 abstract class SendCodeState extends Equatable {
   const SendCodeState();
 
+  static String _input = '';
+
+  String get input => _input;
+
+  set input(String newInput) {
+    _input = newInput;
+  }
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [input];
 }
 
 class SendCodeInitialized extends SendCodeState {

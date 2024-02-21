@@ -29,7 +29,7 @@ class VerifyCodeEventHandler {
     ) verifyCodePressed,
   ) async {
     try {
-      emit(VerifyCodeLoading());
+      emit(const VerifyCodeLoading());
 
       if (event.simulateError ?? false) {
         await _simulateError();
@@ -43,7 +43,7 @@ class VerifyCodeEventHandler {
         throw Exception();
       }
     } catch (e) {
-      emit(VerifyCodeError(e));
+      emit(VerifyCodeError(error: e));
       emit(const VerifyCodeInitialized());
     }
   }

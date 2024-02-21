@@ -8,6 +8,27 @@ import 'package:avilatek_bloc/src/send_code/send_code_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+/// Abstract Bloc implementation used to send a code.
+///
+/// This bloc is used to send a code. It is used to handle the state of the
+/// sending process.
+///
+/// The states are:
+/// - [SendCodeInitialized]: The initial state of the bloc.
+/// - [SendCodeLoading]: The state of the bloc when the code is
+/// being sent.
+/// - [SendCodeError]: The state of the bloc when an error occurs during the
+/// sending process.
+/// - [SendCodeSuccess]: The state of the bloc when the code is successfully
+/// sent.
+/// - [SendCodeOnHoldTime]: The state of the bloc when the code is on hold.
+///
+/// The events are:
+/// - [SendCodePressed]: The event that is used to send the code.
+/// - [SendCodeTickTimerEvent]: The event that is used to tick the timer.
+/// - [SendCodeInputChangedEvent]: The event that is used to change the input.
+///
+/// The bloc uses the [SendCodeEventHandler] to handle the events.
 abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
   SendCodeBloc({
     required int sendCodeDurationInSeconds,
@@ -25,8 +46,15 @@ abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
             : const SendCodeInitialized(),
       );
     });
+
+    on<SendCodeInputChangedEvent>(_onSendCodeInputChangedEvent);
   }
-  StreamSubscription<int>? tickerSubscription;
+
+  /// The subscription to the ticker.
+  /// This subscription is used to tick the timer.
+  StreamSubscription<int>? _tickerSubscription;
+
+  /// The duration of the send code process.
   final int _sendCodeDuration;
 
   /// Handler for [SendCodeBloc].
@@ -85,13 +113,37 @@ abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
     SendCodePressedEvent event,
   );
 
+  /// Starts or resets the timer.
+  ///
+  /// If the timer is already running, it will be canceled and started again.
+  ///
+  /// If the timer is not running, it will be started.
+  ///
+  /// The timer will tick every second and will emit a [SendCodeTickTimerEvent]
+  ///
+  /// The timer will tick for the duration of the [_sendCodeDuration] parameter.
   void _startOrResetTimer() {
-    tickerSubscription?.cancel();
-    tickerSubscription = Stream.periodic(
+    _tickerSubscription?.cancel();
+    _tickerSubscription = Stream.periodic(
       const Duration(seconds: 1),
       (x) => _sendCodeDuration - x - 1,
     )
         .take(_sendCodeDuration)
         .listen((duration) => add(SendCodeTickTimerEvent(duration)));
+  }
+
+  /// Closes the ticker subscription.
+  @override
+  Future<void> close() {
+    _tickerSubscription?.cancel();
+    return super.close();
+  }
+
+  /// Handles the [SendCodeInputChangedEvent] event.
+  FutureOr<void> _onSendCodeInputChangedEvent(
+    SendCodeInputChangedEvent event,
+    Emitter<SendCodeState> emit,
+  ) {
+    state.input = event.input;
   }
 }

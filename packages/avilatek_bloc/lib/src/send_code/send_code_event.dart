@@ -44,3 +44,18 @@ class SendCodeTickTimerEvent extends SendCodeEvent {
   @override
   List<Object?> get props => [durationInSeconds];
 }
+
+/// Event that triggers the change of the input.
+/// This event is dispatched when the user changes the input
+/// with the email or phone number where the code will be sent.
+class SendCodeInputChangedEvent extends SendCodeEvent {
+  /// SendCodeInputChangedEvent Constructor
+  const SendCodeInputChangedEvent(this.input);
+
+  /// The input with the user's email or phone number where
+  /// the code will be sent.
+  final String input;
+
+  @override
+  List<Object?> get props => [input];
+}

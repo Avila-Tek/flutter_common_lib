@@ -27,3 +27,16 @@ class VerifyCodePressedEvent extends VerifyCodeEvent {
   @override
   List<Object?> get props => [code];
 }
+
+/// Event that triggers the change of the code input.
+/// This event is dispatched when the user changes the code input.
+class VerifyCodeInputChangedEvent extends VerifyCodeEvent {
+  /// Creates a new instance of the [VerifyCodeInputChangedEvent].
+  const VerifyCodeInputChangedEvent(this.code);
+
+  /// The new code input.
+  final String code;
+
+  @override
+  List<Object?> get props => [code];
+}

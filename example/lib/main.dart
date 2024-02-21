@@ -9,6 +9,7 @@ import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
 import 'package:example/pages/remote_data_paginated/view/rainbow_page.dart';
 import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
+import 'package:example/pages/verify_password/enter_input_sender_example_page.dart';
 import 'package:example/pages/verify_password/verify_password_example_page.dart';
 import 'package:flutter/material.dart';
 
@@ -232,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const VerifyPasswordExamplePage(),
+                    builder: (context) => const EnterInputSenderExamplePage(),
                   ),
                 );
               },

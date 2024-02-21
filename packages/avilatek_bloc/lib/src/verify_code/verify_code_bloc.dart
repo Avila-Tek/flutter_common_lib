@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 ///
 /// The events are:
 /// - [VerifyCodePressed]: The event that is used to verify the code.
+/// - [VerifyCodeInputChangedEvent]: The event that is used to change the input.
 ///
 /// The bloc uses the [VerifyCodeEventHandler] to handle the events.
 ///
@@ -34,6 +35,8 @@ abstract class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
     on<VerifyCodePressedEvent>(
       _mapVerifyCodePressedToState,
     );
+
+    on<VerifyCodeInputChangedEvent>(_onVerifyCodeInputChangedEvent);
   }
 
   /// Handler for [VerifyCodeBloc].
@@ -88,4 +91,11 @@ abstract class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
     VerifyCodeState oldState,
     VerifyCodePressedEvent event,
   );
+
+  FutureOr<void> _onVerifyCodeInputChangedEvent(
+    VerifyCodeInputChangedEvent event,
+    Emitter<VerifyCodeState> emit,
+  ) {
+    emit(state.copyWith(code: event.code));
+  }
 }
