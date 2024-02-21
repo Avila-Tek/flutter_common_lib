@@ -10,7 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyPasswordExamplePage extends StatelessWidget {
-  const VerifyPasswordExamplePage({super.key});
+  const VerifyPasswordExamplePage({required this.sendTo, super.key});
+
+  final String sendTo;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,13 @@ class VerifyPasswordExamplePage extends StatelessWidget {
           BlocProvider(
             create: (context) => SendPasswordCodeBloc(
               sendCodeDurationInSeconds: 60,
+              manuallyStartTimer: true,
             ),
           ),
           BlocProvider(
-            create: (context) => VerifyPasswordCodeBloc(),
+            create: (context) => VerifyPasswordCodeBloc(
+              sendTo: sendTo,
+            ),
           ),
         ],
         child: Scaffold(
@@ -207,11 +212,11 @@ class ResendTimer extends StatelessWidget {
               onPressed: enabled
                   ? () => context
                       .read<SendPasswordCodeBloc>()
-                      .add(const SendCodePressedEvent())
+                      .add(ResendCodePressedEvent(input: state.input))
                   : null,
               child: const Center(
                 child: Text(
-                  'Send code',
+                  'Resend code',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -242,7 +247,7 @@ class VerifyCodeButton extends StatelessWidget {
             onPressed: enabled && !loading
                 ? () => context
                     .read<VerifyPasswordCodeBloc>()
-                    .add(VerifyCodePressedEvent(code))
+                    .add(const VerifyCodePressedEvent())
                 : null,
             child: Center(
               child: loading

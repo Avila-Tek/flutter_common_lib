@@ -23,14 +23,17 @@ extension VerifyCodeStateX on VerifyCodeState {
 /// This class is used to provide a common interface for all the states of the
 /// [VerifyCodeBloc].
 abstract class VerifyCodeState extends Equatable {
-  const VerifyCodeState({this.code = ''});
+  const VerifyCodeState({this.code = '', this.sendTo = ''});
 
   /// The code that is being verified.
   final String code;
 
+  /// The email or phone number where the code was sent.
+  final String sendTo;
+
   /// Returns a new instance of the [VerifyCodeState] with the provided
   /// parameters.
-  VerifyCodeState copyWith({String? code});
+  VerifyCodeState copyWith({String? code, String? sendTo});
 
   /// Returns a list of properties to be used in the comparison of two
   /// [VerifyCodeState] instances.
@@ -41,11 +44,14 @@ abstract class VerifyCodeState extends Equatable {
 /// State that represents the initial state of the [VerifyCodeBloc].
 /// This state is emitted when the [VerifyCodeBloc] is created.
 class VerifyCodeInitialized extends VerifyCodeState {
-  const VerifyCodeInitialized({super.code});
+  const VerifyCodeInitialized({super.code, super.sendTo});
 
   @override
-  VerifyCodeInitialized copyWith({String? code}) {
-    return VerifyCodeInitialized(code: code ?? this.code);
+  VerifyCodeInitialized copyWith({String? code, String? sendTo}) {
+    return VerifyCodeInitialized(
+      code: code ?? this.code,
+      sendTo: sendTo ?? this.sendTo,
+    );
   }
 }
 
@@ -53,11 +59,14 @@ class VerifyCodeInitialized extends VerifyCodeState {
 /// This state is emitted when the [VerifyCodeBloc] is verifying the code.
 
 class VerifyCodeLoading extends VerifyCodeState {
-  const VerifyCodeLoading({super.code});
+  const VerifyCodeLoading({super.code, super.sendTo});
 
   @override
-  VerifyCodeLoading copyWith({String? code}) {
-    return VerifyCodeLoading(code: code ?? this.code);
+  VerifyCodeLoading copyWith({String? code, String? sendTo}) {
+    return VerifyCodeLoading(
+      code: code ?? this.code,
+      sendTo: sendTo ?? this.sendTo,
+    );
   }
 }
 
@@ -67,15 +76,17 @@ class VerifyCodeError extends VerifyCodeState {
   const VerifyCodeError({
     required this.error,
     super.code,
+    super.sendTo,
   });
 
   /// The error that caused the state.
   final dynamic error;
 
   @override
-  VerifyCodeError copyWith({String? code, dynamic error}) {
+  VerifyCodeError copyWith({String? code, String? sendTo, dynamic error}) {
     return VerifyCodeError(
       code: code ?? this.code,
+      sendTo: sendTo ?? this.sendTo,
       error: error ?? this.error,
     );
   }
@@ -86,10 +97,13 @@ class VerifyCodeError extends VerifyCodeState {
 /// This state is emitted when the [VerifyCodeBloc] successfully
 /// verifies the code.
 class VerifyCodeSuccess extends VerifyCodeState {
-  const VerifyCodeSuccess({super.code});
+  const VerifyCodeSuccess({super.code, super.sendTo});
 
   @override
-  VerifyCodeSuccess copyWith({String? code}) {
-    return VerifyCodeSuccess(code: code ?? this.code);
+  VerifyCodeSuccess copyWith({String? code, String? sendTo}) {
+    return VerifyCodeSuccess(
+      code: code ?? this.code,
+      sendTo: sendTo ?? this.sendTo,
+    );
   }
 }

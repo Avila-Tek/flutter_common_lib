@@ -44,6 +44,37 @@ class SendCodeEventHandler {
     }
   }
 
+  /// Propagates the [ResendCodePressedEvent] event down to the
+  /// corresponding event handler.
+  ///
+  /// This function is used to handle the states of the bloc
+  /// when an event is dispatched.
+  Future<void> mapResendCodePressedToState(
+    ResendCodePressedEvent event,
+    SendCodeState state,
+    Emitter<SendCodeState> emit,
+    Future<bool> Function(
+      SendCodeState,
+      ResendCodePressedEvent,
+    ) resendCodePressed,
+  ) async {
+    try {
+      if (event.simulateError ?? false) {
+        await _simulateError();
+      }
+
+      final isCodeSended = await resendCodePressed(state, event);
+
+      if (isCodeSended) {
+        emit(const SendCodeSuccess());
+        emit(SendCodeOnHoldTime(event.timeInterval.inSeconds));
+      }
+    } catch (e) {
+      emit(SendCodeError(e));
+      emit(const SendCodeInitialized());
+    }
+  }
+
   /// Simulates an error.
   Future<void> _simulateError() {
     Future<void>.delayed(const Duration(seconds: 1));

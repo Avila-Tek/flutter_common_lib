@@ -24,20 +24,35 @@ import 'package:flutter/material.dart';
 /// - [SendCodeOnHoldTime]: The state of the bloc when the code is on hold.
 ///
 /// The events are:
-/// - [SendCodePressed]: The event that is used to send the code.
+/// - [SendCodePressedEvent]: The event that is used to send the code.
+/// - [ResendCodePressedEvent]: The event that is used to resend the code.
 /// - [SendCodeTickTimerEvent]: The event that is used to tick the timer.
 /// - [SendCodeInputChangedEvent]: The event that is used to change the input.
 ///
 /// The bloc uses the [SendCodeEventHandler] to handle the events.
+///
+/// **PARAMETERS**
+///
+/// - `sendCodeDurationInSeconds`: The duration of the send code process.
+///
+/// - `manuallyStartTimer`: If `true`, the timer will start automatically.
+/// If `false`, the timer will start when the user presses the send code button.
+/// Is `false` by default.
+///
 abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
   SendCodeBloc({
     required int sendCodeDurationInSeconds,
+    bool manuallyStartTimer = false,
   })  : _sendCodeDuration = sendCodeDurationInSeconds,
         super(const SendCodeInitialized()) {
     _handler = const SendCodeEventHandler();
 
     on<SendCodePressedEvent>(
       _mapSendCodePressedToState,
+    );
+
+    on<ResendCodePressedEvent>(
+      _mapResendCodePressedToState,
     );
     on<SendCodeTickTimerEvent>((event, emit) {
       emit(
@@ -48,6 +63,10 @@ abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
     });
 
     on<SendCodeInputChangedEvent>(_onSendCodeInputChangedEvent);
+
+    if (manuallyStartTimer) {
+      _startOrResetTimer();
+    }
   }
 
   /// The subscription to the ticker.
@@ -82,6 +101,28 @@ abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
     );
   }
 
+  /// Propagates the [ResendCodePressedEvent] event down to the
+  /// corresponding event handler.
+  Future<void> _mapResendCodePressedToState(
+    ResendCodePressedEvent event,
+    Emitter<SendCodeState> emit,
+  ) async {
+    return await _handleStatesOnEvent(
+      isNoOp: state is SendCodeLoading ||
+          state is SendCodeError ||
+          state is SendCodeSuccess,
+      onSendCodeInitialized: () {
+        _startOrResetTimer();
+        return _handler.mapResendCodePressedToState(
+          event,
+          state as SendCodeInitialized,
+          emit,
+          resendCodePressed,
+        );
+      },
+    );
+  }
+
   /// Helper function that can be used by [_mapSendCodePressedToState]
   /// function for cleaner propagation of the events to the
   /// corresponding event handler.
@@ -111,6 +152,15 @@ abstract class SendCodeBloc extends Bloc<SendCodeEvent, SendCodeState> {
   Future<bool> sendCodePressed(
     SendCodeState oldState,
     SendCodePressedEvent event,
+  );
+
+  /// Function that should be implemented to resend the code.
+  /// This function should return `true` if the code is resent,
+  /// `false` otherwise.
+  @visibleForTesting
+  Future<bool> resendCodePressed(
+    SendCodeState oldState,
+    ResendCodePressedEvent event,
   );
 
   /// Starts or resets the timer.

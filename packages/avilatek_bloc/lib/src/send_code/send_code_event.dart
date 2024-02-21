@@ -33,6 +33,31 @@ class SendCodePressedEvent extends SendCodeEvent {
   List<Object?> get props => [simulateError, timeInterval];
 }
 
+/// Event that triggers the resending of the code.
+///
+/// This event is dispatched when the user presses the resend code button.
+class ResendCodePressedEvent extends SendCodeEvent {
+  /// ResendCodePressedEvent Constructor
+  const ResendCodePressedEvent({
+    required this.input,
+    this.simulateError = false,
+    this.timeInterval = const Duration(seconds: 60),
+  });
+
+  /// If true, the [SendCodeBloc] will simulate an error.
+  final bool? simulateError;
+
+  /// The time interval that the [SendCodeBloc] will wait before
+  final Duration timeInterval;
+
+  /// The input with the user's email or phone number where
+  /// the code will be sent.
+  final String input;
+
+  @override
+  List<Object?> get props => [input, simulateError, timeInterval];
+}
+
 /// Event that triggers the tick timer of the [SendCodeBloc].
 class SendCodeTickTimerEvent extends SendCodeEvent {
   /// SendCodeTickTimerEvent Constructor

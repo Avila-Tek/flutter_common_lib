@@ -30,13 +30,18 @@ import 'package:flutter/material.dart';
 ///
 ///
 abstract class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
-  VerifyCodeBloc() : super(const VerifyCodeInitialized()) {
+  VerifyCodeBloc({
+    required String sendTo,
+  }) : super(const VerifyCodeInitialized()) {
     _handler = const VerifyCodeEventHandler();
     on<VerifyCodePressedEvent>(
       _mapVerifyCodePressedToState,
     );
 
     on<VerifyCodeInputChangedEvent>(_onVerifyCodeInputChangedEvent);
+    on<VerifyCodeStartedEvent>(_onVerifyCodeStartedEvent);
+
+    add(VerifyCodeStartedEvent(sendTo));
   }
 
   /// Handler for [VerifyCodeBloc].
@@ -92,10 +97,19 @@ abstract class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
     VerifyCodePressedEvent event,
   );
 
+  /// Function that changed the input of the code.
   FutureOr<void> _onVerifyCodeInputChangedEvent(
     VerifyCodeInputChangedEvent event,
     Emitter<VerifyCodeState> emit,
   ) {
     emit(state.copyWith(code: event.code));
+  }
+
+  /// Function that is called when the verification process is started.
+  FutureOr<void> _onVerifyCodeStartedEvent(
+    VerifyCodeStartedEvent event,
+    Emitter<VerifyCodeState> emit,
+  ) {
+    emit(state.copyWith(sendTo: event.sendTo));
   }
 }

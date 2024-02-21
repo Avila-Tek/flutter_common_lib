@@ -16,16 +16,13 @@ abstract class VerifyCodeEvent extends Equatable {
 /// This event is dispatched when the user presses the verify button.
 class VerifyCodePressedEvent extends VerifyCodeEvent {
   /// Creates a new instance of the [VerifyCodePressedEvent].
-  const VerifyCodePressedEvent(this.code, {this.simulateError = false});
-
-  /// The code that will be verified.
-  final String code;
+  const VerifyCodePressedEvent({this.simulateError = false});
 
   /// If true, the [VerifyCodeBloc] will simulate an error.
   final bool? simulateError;
 
   @override
-  List<Object?> get props => [code];
+  List<Object?> get props => [];
 }
 
 /// Event that triggers the change of the code input.
@@ -39,4 +36,17 @@ class VerifyCodeInputChangedEvent extends VerifyCodeEvent {
 
   @override
   List<Object?> get props => [code];
+}
+
+/// Event that triggers the start of the verification code process.
+/// This event is dispatched when the bloc is initialized.
+class VerifyCodeStartedEvent extends VerifyCodeEvent {
+  /// Creates a new instance of the [VerifyCodeStartedEvent].
+  const VerifyCodeStartedEvent(this.sendTo);
+
+  /// The email or phone number where the code was sent.
+  final String sendTo;
+
+  @override
+  List<Object?> get props => [sendTo];
 }

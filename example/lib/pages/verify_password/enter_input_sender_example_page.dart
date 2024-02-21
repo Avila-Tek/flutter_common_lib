@@ -1,4 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
+
 import 'package:avilatek_bloc/avilatek_bloc.dart';
+import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/verify_password/bloc/send_password_code_bloc.dart';
 import 'package:example/pages/verify_password/verify_password_example_page.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +36,40 @@ class EnterInputSenderExampleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const EnterInputSenderExampleBody();
+    return BlocListener<SendPasswordCodeBloc, SendCodeState>(
+      listener: (context, state) async {
+        if (state.isSuccess) {
+          await AvilaSnackBar(
+            content:
+                const Text('Code is 123456', style: TextStyle(fontSize: 14)),
+            backgroundColor: Colors.green,
+            dismissDirection: DismissDirection.up,
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height - 150,
+                left: 10,
+                right: 10),
+          ).show(context);
+
+          unawaited(Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VerifyPasswordExamplePage(
+                sendTo: state.input,
+              ),
+            ),
+          ));
+        }
+
+        if (state.isError) {
+          AvilaSnackBar.failure(
+            context: context,
+            content: const Text('Error sending code'),
+          ).show(context);
+        }
+      },
+      child: const EnterInputSenderExampleBody(),
+    );
   }
 }
 
@@ -69,14 +107,9 @@ class EnterInputSenderExampleBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VerifyPasswordExamplePage(),
-                  ),
-                );
-              },
+              onPressed: () => context
+                  .read<SendPasswordCodeBloc>()
+                  .add(const SendCodePressedEvent()),
               child: const Text('Send code'),
             ),
           ],

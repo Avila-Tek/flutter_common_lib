@@ -3,9 +3,10 @@ import 'package:avilatek_bloc/avilatek_bloc.dart';
 class SendPasswordCodeBloc extends SendCodeBloc {
   SendPasswordCodeBloc({
     required int sendCodeDurationInSeconds,
-  }) : super(sendCodeDurationInSeconds: sendCodeDurationInSeconds) {
-    add(const SendCodePressedEvent());
-  }
+    bool manuallyStartTimer = false,
+  }) : super(
+            sendCodeDurationInSeconds: sendCodeDurationInSeconds,
+            manuallyStartTimer: manuallyStartTimer);
 
   @override
   Future<bool> sendCodePressed(
@@ -14,6 +15,16 @@ class SendPasswordCodeBloc extends SendCodeBloc {
       return false;
     }
     // Send code logic here
+    return true;
+  }
+
+  @override
+  Future<bool> resendCodePressed(
+      SendCodeState oldState, ResendCodePressedEvent event) async {
+    if (event.simulateError ?? false) {
+      return false;
+    }
+    // Resend code logic here
     return true;
   }
 }
