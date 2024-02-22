@@ -36,10 +36,13 @@ title: UploadFileBloc State Machine
             J & L & M -.-> H;
             end
         end
-        
+        linkStyle 1,0,4,6,9,12,13,15 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 2,3,7,10,11,14 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
 
 
 ## Usage
 
 The `UploadFileBloc` is a generic bloc that requires a `File` type. It is used as follows:
+
+```dart
