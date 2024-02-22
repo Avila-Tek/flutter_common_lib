@@ -22,13 +22,13 @@ title: UploadFileBloc State Machine
             B -- "success" --> E[UploadingFile];
             E -- "success" --> F[UploadSuccess];
             E -- "error" --> G[UploadFailure];
-            A[PickInitial] -- [Event] PickFile --> B[PickingFile];
+            A[PickInitial] -- Event PickFile --> B[PickingFile];
         end
         subgraph Uploaded file state
             subgraph FileUploadedState
             G -.-> A;
             F -.-> H[FileUploaded];
-            H -- [Event] PickFile ---> I[RepickingFile];
+            H -- Event PickFile ---> I[RepickingFile];
             I -- "error" ---> J[RepickingFileFailure];
             I -- "success" --> K[ReuploadingFile];
             K -- "success" ---> L[ReuploadSuccess];
