@@ -26,16 +26,6 @@ class CustomLoadingIndicatorExample extends StatelessWidget {
               subtitle: Text('This is a custom loading indicator without a child'),
               trailing: CustomLoadingIndicator(),
             ),
-            ListTile(
-              title: Text('Custom Loading Indicator without child and modified values'),
-              subtitle: Text('This is a custom loading indicator without a child and modified values'),
-              trailing: CustomLoadingIndicator(
-                style: CustomLoadinIndicatorStyle(
-                  color: Colors.greenAccent,
-                  strokeWidth: 2,
-                ),
-              ),
-            ),
           ],
         ),
       ),

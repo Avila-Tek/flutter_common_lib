@@ -1,7 +1,4 @@
 // ignore_for_file: public_member_api_docs, lines_longer_than_80_chars
-
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// [CustomLoadinIndicatorStyle] defines the style of an adaptive dialog action.
@@ -37,29 +34,6 @@ class CustomLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     ///Best null operator ever
     ///This allows for easy future modification of the return widget. (You're welcome)
-    return child ?? AdaptiveLoaderIndicators(style: style);
-  }
-}
-
-/// A platform-specific (ios/android) loading indicator.
-class AdaptiveLoaderIndicators extends StatelessWidget {
-  const AdaptiveLoaderIndicators({
-    super.key,
-    this.style,
-  });
-
-  /// The style for the loading indicator.
-  final CustomLoadinIndicatorStyle? style;
-
-  @override
-  Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return const CupertinoActivityIndicator();
-    } else {
-      return CircularProgressIndicator(
-        color: style?.color,
-        strokeWidth: style?.strokeWidth ?? 4.0,
-      );
-    }
+    return child ?? const CircularProgressIndicator.adaptive();
   }
 }
