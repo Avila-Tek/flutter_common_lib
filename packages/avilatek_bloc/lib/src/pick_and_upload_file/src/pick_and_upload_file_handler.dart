@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:avilatek_bloc/src/upload_file/src/pick_and_upload_file_bloc.dart';
+import 'package:avilatek_bloc/src/pick_and_upload_file/src/pick_and_upload_file_bloc.dart';
 import 'package:bloc/bloc.dart';
 
 /// {@template upload_file_handler}

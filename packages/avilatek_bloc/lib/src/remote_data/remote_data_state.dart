@@ -55,10 +55,10 @@ class RemoteDataInitialFetching<T> extends RemoteDataState<T>
 /// State that represents the initial fetching of the remote data that failed.
 ///
 /// This state is only emitted from the [RemoteDataInitialFetching] state.
-class RemoteDataInitialFetchingError<T> extends RemoteDataState<T>
+class RemoteDataInitialFetchingFailure<T> extends RemoteDataState<T>
     with RemoteDataError<T> {
   ///
-  const RemoteDataInitialFetchingError(this.error);
+  const RemoteDataInitialFetchingFailure(this.error);
 
   /// The error that caused the fetching to fail.
   final dynamic error;
@@ -73,8 +73,8 @@ class RemoteDataInitialFetchingError<T> extends RemoteDataState<T>
 
 /// {@template remote_data_loaded}
 /// Base class for states with fetched data:
-/// [RemoteDataLoaded], [RemoteDataRefetching], [RemoteDataRefetchingSuccess]
-/// and [RemoteDataRefetchingFailed].
+/// [RemoteDataFetched], [RemoteDataRefetching], [RemoteDataRefetchingSuccess]
+/// and [RemoteDataRefetchingFailure].
 ///
 /// All the subclasses of this class have the [data] property with
 /// information that can be displayed even after failure.
@@ -99,12 +99,12 @@ abstract class RemoteDataInitialized<T> extends RemoteDataState<T> {
 /// {@template remote_data_loaded}
 /// State that represents the successful fetching of the remote data.
 /// {@endtemplate}
-class RemoteDataLoaded<T> extends RemoteDataInitialized<T> {
+class RemoteDataFetched<T> extends RemoteDataInitialized<T> {
   /// {@macro remote_data_loaded}
-  const RemoteDataLoaded(super.data);
+  const RemoteDataFetched(super.data);
 
   /// {@macro remote_data_initialized.clone}
-  RemoteDataLoaded.clone(super.oldState) : super.clone();
+  RemoteDataFetched.clone(super.oldState) : super.clone();
 }
 
 /// {@template remote_data_refetching}
@@ -131,10 +131,10 @@ class RemoteDataRefetchingSuccess<T> extends RemoteDataInitialized<T>
 /// {@template remote_data_refetching_failed}
 /// State that represents the failed refetching of the remote data.
 /// {@endtemplate}
-class RemoteDataRefetchingFailed<T> extends RemoteDataInitialized<T>
+class RemoteDataRefetchingFailure<T> extends RemoteDataInitialized<T>
     with RemoteDataError<T> {
   /// {@macro remote_data_refetching_failed}
-  RemoteDataRefetchingFailed(super.oldState, this.error) : super.clone();
+  RemoteDataRefetchingFailure(super.oldState, this.error) : super.clone();
 
   /// The error that caused the refetching to fail.
   final dynamic error;
