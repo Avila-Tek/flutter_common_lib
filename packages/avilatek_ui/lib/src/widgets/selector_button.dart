@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:avilatek_ui/src/ui/selector_button.dart/selector_button_style.dart';
+import 'package:avilatek_ui/src/ui/selector_button/selector_button_style.dart';
 import 'package:flutter/material.dart';
 
 class SelectorButton extends StatelessWidget {
