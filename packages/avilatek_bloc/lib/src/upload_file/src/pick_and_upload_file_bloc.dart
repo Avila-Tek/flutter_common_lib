@@ -1,36 +1,39 @@
 import 'dart:io';
 
-import 'package:avilatek_bloc/src/upload_file/upload_file_handler.dart';
+import 'package:avilatek_bloc/src/upload_file/src/pick_and_upload_file_handler.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-part 'package:avilatek_bloc/src/upload_file/upload_file_event.dart';
-part 'package:avilatek_bloc/src/upload_file/upload_file_state.dart';
+part 'package:avilatek_bloc/src/upload_file/src/pick_and_upload_file_event.dart';
+part 'package:avilatek_bloc/src/upload_file/src/pick_and_upload_file_state.dart';
 
 /// {@template upload_file_bloc}
 /// A [Bloc] that handles the picking and uploading of files.
 /// {@endtemplate}
-abstract class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
+abstract class PickAndUploadFileBloc
+    extends Bloc<PickAndUploadFileEvent, PickAndUploadFileState> {
   /// {@macro upload_file_bloc}
-  UploadFileBloc() : super(const PickInitial()) {
-    _handler = UploadFileHandler();
+  PickAndUploadFileBloc() : super(const FileUnpicked()) {
+    _handler = PickAndUploadFileHandler();
     on<PickFile>(_mapPickFileToState);
   }
 
-  late UploadFileHandler _handler;
+  late PickAndUploadFileHandler _handler;
 
   Future<void> _mapPickFileToState(
     PickFile event,
-    Emitter<UploadFileState> emit,
+    Emitter<PickAndUploadFileState> emit,
   ) async {
     return _handleStatesOnEvent(
-      isNoOp: state is PickAndUploadFileLoading ||
-          state is PickAndUploadFileSuccess ||
-          state is PickAndUploadFileFailure,
+      isNoOp: state is PickFileLoadingMixin ||
+          state is PickFileFailureMixin ||
+          state is UploadFileLoadingMixin ||
+          state is UploadFileSuccessMixin ||
+          state is UploadFileFailureMixin,
       onPickInitial: () => _handler.mapInitialPickFileToState(
         event,
-        state as PickInitial,
+        state as FileUnpicked,
         emit,
         pickFile,
         uploadFile,
@@ -52,7 +55,7 @@ abstract class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   }) async {
     if (isNoOp) {
       return;
-    } else if (state is PickInitial && onPickInitial != null) {
+    } else if (state is FileUnpicked && onPickInitial != null) {
       return onPickInitial();
     } else if (state is FileUploaded && onFileUploaded != null) {
       return onFileUploaded();
@@ -67,7 +70,7 @@ abstract class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   /// object with the data of the file picked by the user, or `null` if the
   /// user cancelled the picking.
   ///
-  /// When `null` is returned, the state will be set back to [PickInitial]. No
+  /// When `null` is returned, the state will be set back to [FileUnpicked]. No
   /// failure state will be emitted.
   ///
   /// This function will be called when a [PickFile] event is added to the bloc.
@@ -92,10 +95,10 @@ abstract class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   ///
   /// The [oldState] returns the previous state of the bloc. This can be useful,
   /// for example, to access the file that was picked in the previous state; in
-  /// such case, make sure that [oldState] is of type [FileUploadedState].
+  /// such case, make sure that [oldState] is of type [UploadedState].
   @visibleForTesting
   Future<String> uploadFile(
-    UploadFileState oldState,
+    PickAndUploadFileState oldState,
     File file,
   );
 }

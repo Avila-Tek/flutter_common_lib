@@ -16,15 +16,15 @@ title: UploadFileBloc State Machine
 
     graph LR;
         
-        subgraph Not uploaded file state
+        subgraph UnuploadedState
             D -.-> A;
             B -- "error" --> D[PickFailure];
             B -- "success" --> E[UploadingFile];
             E -- "success" --> F[UploadSuccess];
             E -- "error" --> G[UploadFailure];
-            A[PickInitial] -- Event PickFile --> B[PickingFile];
+            A[FileUnpicked] -- Event PickFile --> B[PickingFile];
         end
-        subgraph Uploaded file state
+        subgraph UploadedState
             subgraph FileUploadedState
             G -.-> A;
             F -.-> H[FileUploaded];

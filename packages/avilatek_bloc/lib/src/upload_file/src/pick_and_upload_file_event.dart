@@ -1,12 +1,12 @@
-part of 'upload_file_bloc.dart';
+part of 'pick_and_upload_file_bloc.dart';
 
 /// {@template upload_file_event}
 /// Abstract class that represents the events that can be dispatched to the
-/// [UploadFileBloc].
+/// [PickAndUploadFileBloc].
 /// {@endtemplate}
-abstract class UploadFileEvent extends Equatable {
+abstract class PickAndUploadFileEvent extends Equatable {
   /// {@macro upload_file_event}
-  const UploadFileEvent();
+  const PickAndUploadFileEvent();
 
   @override
   List<Object?> get props => [];
@@ -15,11 +15,11 @@ abstract class UploadFileEvent extends Equatable {
 /// {@template pick_file}
 /// Event that triggers the file picking and uploading.
 /// {@endtemplate}
-class PickFile extends UploadFileEvent {
+class PickFile extends PickAndUploadFileEvent {
   /// {@macro pick_file}
   const PickFile({this.simulateError = false});
 
-  /// If true, the [UploadFileBloc] will simulate an error.
+  /// If true, the [PickAndUploadFileBloc] will simulate an error.
   final bool? simulateError;
 
   @override

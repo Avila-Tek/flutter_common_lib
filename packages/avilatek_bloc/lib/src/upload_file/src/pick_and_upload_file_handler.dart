@@ -1,28 +1,28 @@
 import 'dart:io';
 
-import 'package:avilatek_bloc/src/upload_file/upload_file_bloc.dart';
+import 'package:avilatek_bloc/src/upload_file/src/pick_and_upload_file_bloc.dart';
 import 'package:bloc/bloc.dart';
 
 /// {@template upload_file_handler}
-/// A class that handles the logic for the [UploadFileBloc].
+/// A class that handles the logic for the [PickAndUploadFileBloc].
 /// {@endtemplate}
-class UploadFileHandler {
-  /// Handler for [PickFile] event + [PickInitial] state combination.
+class PickAndUploadFileHandler {
+  /// Handler for [PickFile] event + [FileUnpicked] state combination.
   /// Handles initial uploading when no file has been previously uploaded yet.
   ///
   /// On success it emits: [PickingFile], [UploadingFile], [FileUploaded].
   /// There are two possible failure states: [PickFileFailure] and
   /// [UploadFileFailure]. The first is emitted when the file picking process
   /// fails, and the second when the file uploading process fails. Both temporal
-  /// states are emitted before the state is set back to [PickInitial].
+  /// states are emitted before the state is set back to [FileUnpicked].
   ///
   /// Set [PickFile.simulateError] to ´true´ to simulate an error.
   Future<void> mapInitialPickFileToState(
     PickFile event,
-    PickInitial state,
-    Emitter<UploadFileState> emit,
+    FileUnpicked state,
+    Emitter<PickAndUploadFileState> emit,
     Future<File?> Function(PickFile) pickFile,
-    Future<String> Function(UploadFileState, File) uploadFile,
+    Future<String> Function(PickAndUploadFileState, File) uploadFile,
   ) async {
     File? file;
 
@@ -36,12 +36,12 @@ class UploadFileHandler {
       file = await pickFile(event);
 
       if (file == null) {
-        emit(const PickInitial());
+        emit(const FileUnpicked());
         return;
       }
     } catch (e) {
       emit(PickFileFailure(e));
-      emit(const PickInitial());
+      emit(const FileUnpicked());
       return;
     }
 
@@ -54,7 +54,7 @@ class UploadFileHandler {
       emit(FileUploaded(url));
     } catch (e) {
       emit(UploadFileFailure(e));
-      emit(const PickInitial());
+      emit(const FileUnpicked());
     }
   }
 
@@ -77,9 +77,9 @@ class UploadFileHandler {
   Future<void> mapReuploadFileToState(
     PickFile event,
     FileUploaded state,
-    Emitter<UploadFileState> emit,
+    Emitter<PickAndUploadFileState> emit,
     Future<File?> Function(PickFile) pickFile,
-    Future<String> Function(UploadFileState, File) uploadFile,
+    Future<String> Function(PickAndUploadFileState, File) uploadFile,
   ) async {
     File? file;
 

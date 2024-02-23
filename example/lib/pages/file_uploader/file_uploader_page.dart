@@ -24,16 +24,16 @@ class FileUploaderBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FileUploaderBloc, UploadFileState>(
+    return BlocConsumer<FileUploaderBloc, PickAndUploadFileState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
-        if (state.hasFailedToUploadFile) {
+        if (state.isFailedToUploadFile) {
           AvilaSnackBar.failure(
             context: context,
             content: const Text('Failed to upload file'),
           ).show(context);
         }
-        if (state.hasUploadedFileSuccessfully) {
+        if (state.isUploadedFileSuccessfully) {
           AvilaSnackBar.success(
             context: context,
             content: const Text('File uploaded successfully'),
@@ -49,14 +49,14 @@ class FileUploaderBody extends StatelessWidget {
               width: 250,
               child: Builder(
                 builder: (context) {
-                  if (state.isUploadingFile) {
+                  if (state.isUploadingFirstFile) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (state.hasFileUploaded) {
                     return Stack(
                       children: [
                         Image.network(
-                          (state as FileUploadedState).fileUrl,
+                          (state as UploadedState).fileUrl,
                           loadingBuilder: (context, child, loadingProgress) {
                             return loadingProgress == null
                                 ? child
@@ -71,9 +71,8 @@ class FileUploaderBody extends StatelessWidget {
                           },
                           fit: BoxFit.cover,
                         ),
-                        if (state is RepickingFile)
-                          const _RepickOverlayWidget(),
-                        if (state is ReuploadingFile)
+                        if (state.isRepickingFile) const _RepickOverlayWidget(),
+                        if (state.isReuploadingFile)
                           const _ReuploadOverlayWidget(),
                       ],
                     );
