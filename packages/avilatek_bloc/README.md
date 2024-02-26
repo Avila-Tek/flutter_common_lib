@@ -4,7 +4,9 @@
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
 
-Avila Tek Blocs/Cubits
+
+A collection of useful blocs for Flutter applications, made with 💚 by Avila Tek.
+
 
 ## Installation 💻
 
@@ -23,39 +25,107 @@ Install it:
 flutter packages get
 ```
 
+## RemoteDataBloc
+
+
+This bloc is a generalized state machine for handling remote data. It abstracts the process of fetching data from the internet and provides a simple and consistent interface for handling the various states of the data fetching process.
+
+The `RemoteDataBloc` State Machine is as follows:
+
+```mermaid
+
+---
+title: RemoteDataBloc State Machine
 ---
 
-## Continuous Integration 🤖
+    graph LR;
+        
+        subgraph RemoteDataUninitialized
+            D -.-> A;
+            B -- "error" --> D[RemoteDataInitialFetchingFailure];
+            A[RemoteDataUninitialized] -- FetchData --> B[RemoteDataInitialFetching];
+        end
+        subgraph RemoteDataInitialized
+            B -. "success" ..-> E[RemoteDataFetched];
+            E -- FetchData --> F[RemoteDataRefetching];
+            F -- "error" --> G[RemoteDataRefetchingFailure];
+            F -- "success" --> H[RemoteDataRefetchingSuccess];
+            G & H -.-> E;
+        end
+    linkStyle 0,1,5,7 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 3,6,8 stroke:lightgreen,stroke-width:2px,color:lightgreen;
+```
 
-Avilatek Bloc comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+## PagedRemoteDataBloc
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
 
+This bloc is similar to `RemoteDataBloc`, but it is specialized for handling paged data. It abstracts the process of fetching paged data from the internet and provides a simple and consistent interface for handling the various states of the paginated data fetching process.
+
+The `PagedRemoteDataBloc` State Machine is as follows:
+
+```mermaid
+---
+title: PagedRemoteDataBloc State Machine
 ---
 
-## Running Tests 🧪
-
-For first time users, install the [very_good_cli][very_good_cli_link]:
-
-```sh
-dart pub global activate very_good_cli
+    graph TB;
+        
+        subgraph PagedRemoteDataUninitialized
+            D -.-> A;
+            B -- "error" --> D[PagedRemoteDataFirstPageFetchingFailure];
+            A[PagedRemoteDataUninitialized] -- FetchData --> B[PagedRemoteDataFirstPageFetching];
+        end
+        subgraph PagedRemoteDataInitialized
+            B -. "success" ..-> E[PagedRemoteDataNextPageFetched];
+            E -- FetchData --> F[PagedRemoteDataNextPageFetching];
+            F -- "error" --> G[PagedRemoteDataNextPageFetchingFailure];
+            F -- "success" --> H[PagedRemoteDataNextPageFetchingSuccess];
+            H -..-> I[PagedRemoteDataLastPageFetched];
+            G -...-> E;
+            H -.-> E;
+        end
+        linkStyle 0,1,5,8 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 3,6,7,9 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
 
-To run all unit tests:
 
-```sh
-very_good test --coverage
+## PickAndUploadFileBloc
+
+
+This bloc defines a useful and generalized state machine for picking and uploading files to the internet. It abstracts the process of picking a file from any source and uploading it to a target location. 
+
+The `PickAndUploadFileBloc` State Machine is as follows:
+
+```mermaid
+
+---
+title: PickAndUploadFileBloc State Machine
+---
+
+    graph LR;
+        
+        subgraph UnuploadedState
+            D -.-> A;
+            B -- "error" --> D[PickFailure];
+            B -- "success" --> E[UploadingFile];
+            E -- "success" --> F[UploadSuccess];
+            E -- "error" --> G[UploadFailure];
+            A[FileUnpicked] -- Event PickFile --> B[PickingFile];
+        end
+        subgraph UploadedState
+            G -.-> A;
+            F -.-> H[FileUploaded];
+            H -- Event PickFile ---> I[RepickingFile];
+            I -- "error" ---> J[RepickingFileFailure];
+            I -- "success" --> K[ReuploadingFile];
+            K -- "success" ---> L[ReuploadSuccess];
+            K -- "error" ---> M[ReuploadFailure];
+            J & L & M -.-> H;
+        end
+        linkStyle 1,0,4,6,9,12,13,15 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 2,3,7,10,11,14 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
-
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
-
-# Open Coverage Report
-open coverage/index.html
-```
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [github_actions_link]: https://docs.github.com/en/actions/learn-github-actions

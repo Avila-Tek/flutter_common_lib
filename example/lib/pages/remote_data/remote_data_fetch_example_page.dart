@@ -63,7 +63,7 @@ class _RemoteDataFetchExampleBodyState
             );
         }
 
-        if (state is RemoteDataRefetchingFailed) {
+        if (state is RemoteDataRefetchingFailure) {
           // NOTE: [RemoteDataRefetchingFailed] state does not prevent the app to display the current data.
           ScaffoldMessenger.of(context)
             ..clearSnackBars()

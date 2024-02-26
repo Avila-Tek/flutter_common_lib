@@ -15,7 +15,7 @@ class PagedRemoteDataEventHandler<T> {
   /// On success it emits: [PagedRemoteDataFirstPageFetching], and [PagedRemoteDataNextPageFetched]
   /// or [PagedRemoteDataLastPageFetched].
   /// On failure it emits: [PagedRemoteDataFirstPageFetching],
-  /// [PagedRemoteDataFirstPageFetchingFailed], [PagedRemoteDataUninitialized].
+  /// [PagedRemoteDataFirstPageFetchingFailure], [PagedRemoteDataUninitialized].
   Future<void> mapInitialFetchNextPageToState(
     PagedRemoteDataFetchNextPage event,
     PagedRemoteDataUninitialized<T> state,
@@ -40,7 +40,7 @@ class PagedRemoteDataEventHandler<T> {
         emit(PagedRemoteDataNextPageFetched(data));
       }
     } catch (e) {
-      emit(PagedRemoteDataFirstPageFetchingFailed(e));
+      emit(PagedRemoteDataFirstPageFetchingFailure(e));
       emit(PagedRemoteDataUninitialized());
     }
   }
@@ -52,7 +52,7 @@ class PagedRemoteDataEventHandler<T> {
   /// [PagedRemoteDataNextPageFetchingSuccess], and [PagedRemoteDataNextPageFetched]
   /// or [PagedRemoteDataLastPageFetched].
   /// On failure it emits: [PagedRemoteDataNextPageFetching],
-  /// [PagedRemoteDataNextPageFetchingFailed],
+  /// [PagedRemoteDataNextPageFetchingFailure],
   /// [PagedRemoteDataNextPageFetched].
   Future<void> mapFetchNextPageRemoteDataToState(
     PagedRemoteDataFetchNextPage event,
@@ -81,7 +81,7 @@ class PagedRemoteDataEventHandler<T> {
         emit(PagedRemoteDataNextPageFetched(data));
       }
     } catch (e) {
-      emit(PagedRemoteDataNextPageFetchingFailed(state, e));
+      emit(PagedRemoteDataNextPageFetchingFailure(state, e));
       emit(PagedRemoteDataNextPageFetched.clone(state));
     }
   }

@@ -22,13 +22,13 @@ extension PagedRemoteDataStateX on PagedRemoteDataState<dynamic> {
   /// Returns `true` if the state is [PagedRemoteDataNextPageFetching].
   bool get isFetchingNextPage => this is PagedRemoteDataNextPageFetching;
 
-  /// Returns `true` if the state is [PagedRemoteDataFirstPageFetchingFailed].
+  /// Returns `true` if the state is [PagedRemoteDataFirstPageFetchingFailure].
   bool get isFetchingFirstPageError =>
-      this is PagedRemoteDataFirstPageFetchingFailed;
+      this is PagedRemoteDataFirstPageFetchingFailure;
 
-  /// Returns `true` if the state is [PagedRemoteDataNextPageFetchingFailed].
+  /// Returns `true` if the state is [PagedRemoteDataNextPageFetchingFailure].
   bool get isFetchingNextPageError =>
-      this is PagedRemoteDataNextPageFetchingFailed;
+      this is PagedRemoteDataNextPageFetchingFailure;
 
   /// Returns `true` if the state is [PagedRemoteDataNextPageFetchingSuccess].
   bool get isFetchingNextPageSuccess =>
@@ -73,10 +73,10 @@ class PagedRemoteDataFirstPageFetching<T> extends PagedRemoteDataState<T>
 /// State that represents the fetching of the first page of data failed.
 ///
 /// This state is only emitted from the [PagedRemoteDataFirstPageFetching] state.
-class PagedRemoteDataFirstPageFetchingFailed<T> extends PagedRemoteDataState<T>
+class PagedRemoteDataFirstPageFetchingFailure<T> extends PagedRemoteDataState<T>
     with PagedRemoteDataFailure<T> {
   ///
-  const PagedRemoteDataFirstPageFetchingFailed(this.error);
+  const PagedRemoteDataFirstPageFetchingFailure(this.error);
 
   /// The error that caused the fetching to fail.
   final dynamic error;
@@ -92,7 +92,7 @@ class PagedRemoteDataFirstPageFetchingFailed<T> extends PagedRemoteDataState<T>
 /// {@template remote_data_loaded}
 /// Base class for states with fetched data:
 /// [PagedRemoteDataNextPageFetched], [PagedRemoteDataNextPageFetching], [PagedRemoteDataNextPageFetchingSuccess]
-/// and [PagedRemoteDataNextPageFetchingFailed].
+/// and [PagedRemoteDataNextPageFetchingFailure].
 ///
 /// All the subclasses of this class have the [data] property with
 /// information that can be displayed even after failure.
@@ -161,10 +161,10 @@ class PagedRemoteDataNextPageFetchingSuccess<T>
 /// {@template remote_data_refetching_failed}
 /// Temporal State that represents the failed fetch of the next page of data.
 /// {@endtemplate}
-class PagedRemoteDataNextPageFetchingFailed<T>
+class PagedRemoteDataNextPageFetchingFailure<T>
     extends PagedRemoteDataInitialized<T> with PagedRemoteDataFailure<T> {
   /// {@macro remote_data_refetching_failed}
-  PagedRemoteDataNextPageFetchingFailed(super.oldState, this.error)
+  PagedRemoteDataNextPageFetchingFailure(super.oldState, this.error)
       : super.clone();
 
   /// The error that caused the refetching to fail.
