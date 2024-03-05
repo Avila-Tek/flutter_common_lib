@@ -21,7 +21,11 @@ class DevelopedByLogo {
 
   /// Returns the flat style of the logo.
   Widget flat({Color? color}) {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/flat.svg', color, color ?? Colors.black);
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/flat.svg',
+      color,
+      color ?? Colors.black,
+    );
   }
 
   /// Returns the primaryGreen style of the logo.
@@ -35,12 +39,20 @@ class DevelopedByLogo {
 
   /// Returns the primaryWhite style of the logo.
   Widget primaryWhite() {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_White.svg', null, Colors.white);
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/primary_White.svg',
+      null,
+      Colors.white,
+    );
   }
 
   /// Returns the outlined style of the logo.
   Widget outlined({Color? color}) {
-    return _buildLogo('packages/avilatek_ui/assets/avilatek_ui/developed_by/outlined.svg',color, color ?? Colors.black);
+    return _buildLogo(
+      'packages/avilatek_ui/assets/avilatek_ui/developed_by/outlined.svg',
+      color,
+      color ?? Colors.black,
+    );
   }
 
   /// Builds the logo widget.
@@ -48,27 +60,27 @@ class DevelopedByLogo {
   /// [svgAsset] the path of the svg asset
   /// [svgColor] the color of the svg asset
   /// [textColor] the color of the text
-Widget _buildLogo(String svgAsset, Color? svgColor, Color textColor) {
-  const double textScaleFactor = 0.5; 
-  return Row(
-    mainAxisAlignment: alignment,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        'Developed By',
-        style: TextStyle(
-          color: textColor,
-          fontSize: size! - textScaleFactor,
+  Widget _buildLogo(String svgAsset, Color? svgColor, Color textColor) {
+    const double textScaleFactor = 0.5;
+    return Row(
+      mainAxisAlignment: alignment,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Developed By',
+          style: TextStyle(
+            color: textColor,
+            fontSize: size! - textScaleFactor,
+          ),
         ),
-      ),
-      const SizedBox(width: 4),
-      SvgPicture.asset(
-        svgAsset,
-        height: size,
-        width: size,
-        color: svgColor,
-      ),
-    ],
-  );
-}
+        const SizedBox(width: 4),
+        SvgPicture.asset(
+          svgAsset,
+          height: size,
+          width: size,
+          color: svgColor,
+        ),
+      ],
+    );
+  }
 }

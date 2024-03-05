@@ -1,12 +1,15 @@
 import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
+import 'package:example/pages/constants_showcase/constants_showcase_page.dart';
 import 'package:example/pages/custom_loading_indicator/custom_loading_indicator_example.dart';
 import 'package:example/pages/developed_by_logo/developed_by_logo_example.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
+import 'package:example/pages/file_uploader/file_uploader_page.dart';
 import 'package:example/pages/pending_notifications/pending_notifications_example_page.dart';
 import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
+import 'package:example/pages/remote_data_paginated/view/rainbow_page.dart';
 import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,29 +23,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const avilaCustomTheme = AvilaCustomTheme(
+      titleWrapperStyle: TitleWrapperStyle(),
+      selectorButtonStyle: SelectorButtonStyle(),
+      avilaSnackBarTheme: AvilaSnackBarTheme(),
+    );
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a blue toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          extensions: const {
-            TitleWrapperStyle(),
-          }),
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a blue toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        extensions: avilaCustomTheme.extensions,
+      ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -151,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Adaptive dialog'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -162,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Developed By Logo'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -186,6 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Pending Notifications Example'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -197,6 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Selector Sheet Example'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -207,6 +219,42 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Custom Loading Indicator Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ConstantsShowcasePage(),
+                  ),
+                );
+              },
+              child: const Text('Constants Showcase'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RainbowPage(),
+                  ),
+                );
+              },
+              child: const Text('Paged Remote Data Bloc Example'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FileUploaderPage(),
+                  ),
+                );
+              },
+              child: const Text('Upload File Bloc Example'),
             ),
           ],
         ),

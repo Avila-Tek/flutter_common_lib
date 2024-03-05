@@ -10,9 +10,9 @@ class RemoteDataEventHandler<T> {
   /// Handler for [FetchRemoteData] + [RemoteDataUninitialized] combination.
   /// Handles initial fetch when the remote data is not yet present.
   ///
-  /// On success it emits: [RemoteDataInitialFetching], [RemoteDataLoaded].
+  /// On success it emits: [RemoteDataInitialFetching], [RemoteDataFetched].
   /// On failure it emits: [RemoteDataInitialFetching],
-  /// [RemoteDataInitialFetchingError], [RemoteDataUninitialized].
+  /// [RemoteDataInitialFetchingFailure], [RemoteDataUninitialized].
   Future<void> mapInitialFetchRemoteDataToState(
     FetchRemoteData<T> event,
     RemoteDataUninitialized<T> state,
@@ -29,22 +29,22 @@ class RemoteDataEventHandler<T> {
 
       final data = await fetchAndParseData(state, event);
 
-      emit(RemoteDataLoaded(data));
+      emit(RemoteDataFetched(data));
     } catch (e) {
-      emit(RemoteDataInitialFetchingError(e));
+      emit(RemoteDataInitialFetchingFailure(e));
       emit(RemoteDataUninitialized());
     }
   }
 
-  /// Handler for [FetchRemoteData] + [RemoteDataLoaded] combination.
+  /// Handler for [FetchRemoteData] + [RemoteDataFetched] combination.
   /// Handles refetch of the remote data.
   ///
-  /// On success it emits: [RemoteDataRefetching], [RemoteDataLoaded].
-  /// On failure it emits: [RemoteDataRefetching], [RemoteDataRefetchingFailed],
-  /// [RemoteDataLoaded].
+  /// On success it emits: [RemoteDataRefetching], [RemoteDataFetched].
+  /// On failure it emits: [RemoteDataRefetching], [RemoteDataRefetchingFailure],
+  /// [RemoteDataFetched].
   Future<void> mapRefetchRemoteDataToState(
     FetchRemoteData<T> event,
-    RemoteDataLoaded<T> state,
+    RemoteDataFetched<T> state,
     Emitter<RemoteDataState<T>> emit,
     Future<T> Function(RemoteDataState<T>, FetchRemoteData<T>)
         fetchAndParseData,
@@ -58,10 +58,10 @@ class RemoteDataEventHandler<T> {
 
       final data = await fetchAndParseData(state, event);
       emit(RemoteDataRefetchingSuccess(data));
-      emit(RemoteDataLoaded(data));
+      emit(RemoteDataFetched(data));
     } catch (e) {
-      emit(RemoteDataRefetchingFailed(state, e));
-      emit(RemoteDataLoaded.clone(state));
+      emit(RemoteDataRefetchingFailure(state, e));
+      emit(RemoteDataFetched.clone(state));
     }
   }
 

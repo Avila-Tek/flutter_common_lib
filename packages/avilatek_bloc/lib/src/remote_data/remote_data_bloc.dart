@@ -40,7 +40,7 @@ abstract class RemoteDataBloc<T>
       ),
       onRemoteDataLoaded: () => _handler.mapRefetchRemoteDataToState(
         event,
-        state as RemoteDataLoaded<T>,
+        state as RemoteDataFetched<T>,
         emit,
         fetchAndParseData,
       ),
@@ -59,7 +59,7 @@ abstract class RemoteDataBloc<T>
     } else if (state is RemoteDataUninitialized &&
         onRemoteDataUninitialized != null) {
       return onRemoteDataUninitialized();
-    } else if (state is RemoteDataLoaded && onRemoteDataLoaded != null) {
+    } else if (state is RemoteDataFetched && onRemoteDataLoaded != null) {
       return onRemoteDataLoaded();
     } else {
       throw UnimplementedError(
