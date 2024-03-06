@@ -1,5 +1,5 @@
 name: avilatek_codemagic
-description: A new brick created with the Mason CLI.
+description: Generates the Codemagic configuration files for a Flutter project, configured with Avila Tek credentials.
 
 # The following defines the brick repository url.
 # Uncomment and update the following line before publishing the brick.

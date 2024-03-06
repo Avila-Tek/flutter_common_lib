@@ -1,0 +1,26 @@
+part of 'base_branch.dart';
+
+class {{#pascalCase}}{{branch}}{{/pascalCase}}ShellBranch implements AppBaseShellBranch {
+  {{branch.pascalCase()}}ShellBranch() : navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  StatefulShellBranch get branch => StatefulShellBranch(
+        initialLocation: AppShellBranch.{{branch.camelCase()}}.path,
+        navigatorKey: navigatorKey,
+        routes: routes,
+      );
+
+  @override
+  GlobalKey<NavigatorState> navigatorKey;
+
+  @override
+  List<GoRoute> get routes => [
+        GoRoute(
+          name: AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}.routeName,
+          path: AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}.path,
+          pageBuilder: (_, __) => const NoTransitionPage(child: Index{{#pascalCase}}{{branch}}{{/pascalCase}}Page()),
+        ),
+        
+        // TODO: Declare {{#pascalCase}}{{branch}}{{/pascalCase}}'s sub-routes here
+      ];
+}

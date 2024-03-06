@@ -7,4 +7,10 @@ bricks:
     path: bricks/feature_brick
   constants_file:
     path: bricks/constants_file
+  avilatek_go_router:
+    path: bricks/avilatek_go_router
   bloc: ^0.3.0
+  todos:
+    git:
+      url: https://github.com/felangel/mason.git
+      path: bricks/todos
