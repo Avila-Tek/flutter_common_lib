@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:{{{packageName}}}/src/index.dart';
-import 'package:{{{packageName}}}/src/routes/shell_branches.dart';
+import 'package:{{{packageName}}}/index.dart';
+import 'package:{{{packageName}}}/routes/shell_branches.dart';
 
 /// {@template app_router}
 /// The root router for the app. Call [AppRouter.router] to get the router.
@@ -13,10 +13,9 @@ class AppRouter {
   /// of the router (i.e. out of the bottom navigation bar).
   static final rootNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'root_navigator');
+
   static final rootScaffoldKey =
       GlobalKey<ScaffoldState>(debugLabel: 'root_scaffold');
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
 
   /// The root router for the app. Set [debug] to true to enable debug logging
   /// diagnostics.
@@ -33,7 +32,10 @@ class AppRouter {
             builder: (_, routerState, child) {
               // TODO: Handle routing to the correct page based on the current state.
               // NOTE: Here, you might want to check if the user is authenticated and route to the correct page. By default, we're routing to the index page that handles the bottom navigation bar routing.
-              return IndexNavigationPage();
+              return IndexNavigationPage(
+                routerState: routerState,
+                child: child,
+              );
             },
           ),
 

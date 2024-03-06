@@ -1,11 +1,11 @@
 part of 'base_branch.dart';
 
-class {{#pascalCase}}{{branch}}{{/pascalCase}}ShellBranch implements AppBaseShellBranch {
-  {{branch.pascalCase()}}ShellBranch() : navigatorKey = GlobalKey<NavigatorState>();
+class {{#pascalCase}}{{.}}{{/pascalCase}}ShellBranch implements AppBaseShellBranch {
+  {{#pascalCase}}{{.}}{{/pascalCase}}ShellBranch() : navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   StatefulShellBranch get branch => StatefulShellBranch(
-        initialLocation: AppShellBranch.{{branch.camelCase()}}.path,
+        initialLocation: AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}.path,
         navigatorKey: navigatorKey,
         routes: routes,
       );
@@ -16,11 +16,11 @@ class {{#pascalCase}}{{branch}}{{/pascalCase}}ShellBranch implements AppBaseShel
   @override
   List<GoRoute> get routes => [
         GoRoute(
-          name: AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}.routeName,
-          path: AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}.path,
-          pageBuilder: (_, __) => const NoTransitionPage(child: Index{{#pascalCase}}{{branch}}{{/pascalCase}}Page()),
+          name: AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}.routeName,
+          path: AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}.path,
+          pageBuilder: (_, __) => const NoTransitionPage(child: Index{{#pascalCase}}{{.}}{{/pascalCase}}Page()),
         ),
         
-        // TODO: Declare {{#pascalCase}}{{branch}}{{/pascalCase}}'s sub-routes here
+        // TODO: Declare {{#pascalCase}}{{.}}{{/pascalCase}}'s sub-routes here
       ];
 }

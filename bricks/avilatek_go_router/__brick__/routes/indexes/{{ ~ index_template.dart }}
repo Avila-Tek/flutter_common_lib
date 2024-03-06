@@ -1,0 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:unidos_bigott/src/presentation/home/home.dart';
+
+class Index{{#pascalCase}}{{.}}{{/pascalCase}}Page extends StatelessWidget {
+  const Index{{#pascalCase}}{{.}}{{/pascalCase}}Page({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: return the index page for the {{#camelCase}}{{.}}{{/camelCase}} branch. Avoid declaring the UI here, instead, create a new widget and return it here.
+    return const Container();
+  }
+}

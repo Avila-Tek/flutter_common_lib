@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:{{{fullPath}}}/src/routes/shell_branches.dart';
+import 'package:{{{packageName}}}/routes/shell_branches.dart';
+import 'package:{{{packageName}}}/router.dart';
 
 /// {@template index_page}
 /// The index page of the app. This page is responsible for displaying the
@@ -13,81 +14,35 @@ class IndexNavigationPage extends StatelessWidget {
   const IndexNavigationPage({
     required this.child,
     required this.routerState,
-    required this.scaffoldKey,
+    this.scaffoldKey,
     super.key,
   });
 
   final StatefulNavigationShell child;
   final GoRouterState routerState;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      appBar: GlobalAppbar(
-        titleAppbar: AppShellBranch.values[AppShellBranch.indexFromName(
+      key: AppRouter.rootScaffoldKey,
+      appBar: AppBar(
+        title: Text(AppShellBranch.values[AppShellBranch.indexFromName(
                 routerState.fullPath?.split('/')[1] ?? '')]
-            .title(context),
+            .title(context)),
       ),
-      endDrawer: Drawer(
-        child: DrawerWidget(
-          scaffoldKey: scaffoldKey,
-          items: AppShellBranch.values
-              .asMap()
-              .map((index, e) {
-                return MapEntry(
-                  index,
-                  NavigationDrawerDestination(
-                    label: Text(
-                      e.drawerLabel(context),
-                      style: context.textTheme.labelMedium,
-                    ),
-                    icon: Image.asset(
-                      e.iconAsset(context),
-                      width: 24,
-                    ),
-                  ),
-                );
-              })
-              .values
-              .toList(),
-          selectedIndex: child.currentIndex,
-          onDestinationSelected: (value) {
-            final displayOrder = userBloc.state.user.trader
-                ? AppShellBranch.traderDisplayOrder
-                : AppShellBranch.clientDisplayOrder;
-
-            if (value < displayOrder.length) {
-              final menuItem = displayOrder[value];
-              context.push(menuItem.path);
-              scaffoldKey.currentState?.openEndDrawer(); // Close the drawer
-              Navigator.pop(context); // Close the drawer
-            }
-          },
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: child.currentIndex,
+        items: AppShellBranch.values
+            .map(
+              (e) => BottomNavigationBarItem(
+                label: e.title(context),
+                icon: e.icon(),
+                activeIcon: e.activeIcon(),
+              ),
+            )
+            .toList(),
       ),
-      // endDrawer:
-      // bottomNavigationBar: CustomBottomNavigationBar(
-      //   items: AppShellBranch.values
-      //       .asMap()
-      //       .map((index, e) {
-      //         return MapEntry(
-      //           index,
-      //           CustomButtonNavigationBarItem(
-      //             icon: Image.asset(
-      //               e.iconAsset(),
-      //               width: 24,
-      //             ),
-      //             selected: child.currentIndex == index,
-      //             label: e.title(context),
-      //             onTap: () => onTap(index),
-      //           ),
-      //         );
-      //       })
-      //       .values
-      //       .toList(),
-      // ),
     );
   }
 
