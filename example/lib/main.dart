@@ -3,6 +3,7 @@ import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/constants_showcase/constants_showcase_page.dart';
 import 'package:example/pages/custom_tag/custom_tags_page.dart';
+import 'package:example/pages/custom_loading_indicator/custom_loading_indicator_example.dart';
 import 'package:example/pages/developed_by_logo/developed_by_logo_example.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/file_uploader/file_uploader_page.dart';
@@ -103,9 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).padding.bottom + 20,
-          ),
           child: Column(
             // Column is also a layout widget. It takes a list of children and
             // arranges them vertically. By default, it sizes itself to fit its
@@ -218,6 +216,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 child: const Text('Selector Sheet Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const CustomLoadingIndicatorExample(),
+                    ),
+                  );
+                },
+                child: const Text('Custom Loading Indicator Example'),
               ),
               const SizedBox(height: 16),
               ElevatedButton(

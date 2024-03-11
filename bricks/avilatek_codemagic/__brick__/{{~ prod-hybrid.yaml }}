@@ -11,6 +11,7 @@
       groups:
         - play_store_credentials
         - production
+        - all
 
     cache:
       cache_paths:
@@ -67,6 +68,7 @@
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
 
@@ -84,9 +86,17 @@
         {{/show_beta_groups}}
       google_play:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: alpha
-        in_app_update_priority: 0
+        track: production
+        in_app_update_priority: 1
         changes_not_sent_for_review: false
+      firebase:
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
+        android:
+          app_id: # TODO: Set your app ID
+          groups:
+            {{#beta_groups}}- {{.}}
+            {{/beta_groups}}
+            {{/show_beta_groups}}
       {{#show_email_recipients}}
       email:
         recipients:
