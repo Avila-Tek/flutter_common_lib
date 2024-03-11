@@ -2,6 +2,7 @@ import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/constants_showcase/constants_showcase_page.dart';
+import 'package:example/pages/custom_tag/custom_tags_page.dart';
 import 'package:example/pages/developed_by_logo/developed_by_logo_example.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/file_uploader/file_uploader_page.dart';
@@ -26,6 +27,12 @@ class MyApp extends StatelessWidget {
       titleWrapperStyle: TitleWrapperStyle(),
       selectorButtonStyle: SelectorButtonStyle(),
       avilaSnackBarTheme: AvilaSnackBarTheme(),
+      customTagStyle: CustomTagStyle(
+        padding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
+      ),
     );
 
     return MaterialApp(
@@ -95,155 +102,173 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PermissionHandlerExamplePage(),
-                  ),
-                );
-              },
-              child: const Text('Permission Handler Bloc Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RemoteDataFetchExamplePage(),
-                  ),
-                );
-              },
-              child: const Text('Remote Data Fetch Bloc Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TitleWrapperExample(),
-                  ),
-                );
-              },
-              child: const Text('Title Wrapper Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AdaptiveDialogExample(),
-                  ),
-                );
-              },
-              child: const Text('Adaptive dialog'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DevelopedByLogoExample(),
-                  ),
-                );
-              },
-              child: const Text('Developed By Logo'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AvilaSnackbarExamplePage(),
-                  ),
-                );
-              },
-              child: const Text('Avila Snackbar Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const PendingNotificationsExamplePage(),
-                  ),
-                );
-              },
-              child: const Text('Pending Notifications Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SelectorSheetExamplePage(),
-                  ),
-                );
-              },
-              child: const Text('Selector Sheet Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ConstantsShowcasePage(),
-                  ),
-                );
-              },
-              child: const Text('Constants Showcase'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RainbowPage(),
-                  ),
-                );
-              },
-              child: const Text('Paged Remote Data Bloc Example'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FileUploaderPage(),
-                  ),
-                );
-              },
-              child: const Text('Upload File Bloc Example'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom + 20,
+          ),
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            //
+            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+            // action in the IDE, or press "p" in the console), to see the
+            // wireframe for each widget.
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const PermissionHandlerExamplePage(),
+                    ),
+                  );
+                },
+                child: const Text('Permission Handler Bloc Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RemoteDataFetchExamplePage(),
+                    ),
+                  );
+                },
+                child: const Text('Remote Data Fetch Bloc Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TitleWrapperExample(),
+                    ),
+                  );
+                },
+                child: const Text('Title Wrapper Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdaptiveDialogExample(),
+                    ),
+                  );
+                },
+                child: const Text('Adaptive dialog'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DevelopedByLogoExample(),
+                    ),
+                  );
+                },
+                child: const Text('Developed By Logo'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AvilaSnackbarExamplePage(),
+                    ),
+                  );
+                },
+                child: const Text('Avila Snackbar Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const PendingNotificationsExamplePage(),
+                    ),
+                  );
+                },
+                child: const Text('Pending Notifications Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectorSheetExamplePage(),
+                    ),
+                  );
+                },
+                child: const Text('Selector Sheet Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ConstantsShowcasePage(),
+                    ),
+                  );
+                },
+                child: const Text('Constants Showcase'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RainbowPage(),
+                    ),
+                  );
+                },
+                child: const Text('Paged Remote Data Bloc Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FileUploaderPage(),
+                    ),
+                  );
+                },
+                child: const Text('Upload File Bloc Example'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CustomTagsPage(),
+                    ),
+                  );
+                },
+                child: const Text('Custom Tags Example'),
+              ),
+            ],
+          ),
         ),
       ),
     );
