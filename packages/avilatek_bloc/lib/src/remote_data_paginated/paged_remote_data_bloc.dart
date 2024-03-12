@@ -20,6 +20,11 @@ abstract class PagedRemoteDataBloc<T>
   PagedRemoteDataBloc() : super(PagedRemoteDataUninitialized()) {
     _handler = PagedRemoteDataEventHandler<T>();
     on<PagedRemoteDataFetchNextPage>(_mapFetchNextPageRemoteDataToState);
+
+    on<PagedRemoteDataRestart>((event, emit) {
+      emit(PagedRemoteDataUninitialized<T>());
+      add(const PagedRemoteDataFetchNextPage());
+    });
   }
   late PagedRemoteDataEventHandler<T> _handler;
 
@@ -91,6 +96,22 @@ abstract class PagedRemoteDataBloc<T>
   /// state if successful.
   @visibleForTesting
   Future<(List<T>, bool)> fetchAndParseNextPage(
+    PagedRemoteDataState<T> oldState,
+    PagedRemoteDataFetchNextPage event,
+  );
+
+  /// Fetches and returns the first page of data from the remote source. Use this
+  /// method when you want to restart the view and fetch the first page of data.
+  ///
+  /// This method is called when a [PagedRemoteDataRestart] event is dispatched.
+  ///
+  /// The [oldState] parameter represents the previous state of the paged remote data.
+  /// The [event] parameter represents the event triggering the fetch of the next page.
+  ///
+  /// Returns a [Future] that completes with a tuple containing a list of [T] items and a boolean value.
+  /// The list represents the fetched data for the first page, while the boolean value indicates whether there are more pages to fetch.
+  @visibleForTesting
+  Future<(List<T>, bool)> restart(
     PagedRemoteDataState<T> oldState,
     PagedRemoteDataFetchNextPage event,
   );
