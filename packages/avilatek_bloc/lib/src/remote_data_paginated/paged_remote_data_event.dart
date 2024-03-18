@@ -25,3 +25,16 @@ class PagedRemoteDataFetchNextPage extends PagedRemoteDataEvent {
   @override
   List<Object?> get props => [simulateError];
 }
+
+/// {@template restart_remote_data}
+/// Event that triggers a restart, erasing currently loaded data.
+/// {@endtemplate}
+class PagedRemoteDataRestart extends PagedRemoteDataEvent {
+  /// {@macro restart_remote_data}
+  const PagedRemoteDataRestart({this.simulateError = false});
+
+  /// If true, the [PagedRemoteDataBloc<T>] will simulate an error.
+  final bool? simulateError;
+  @override
+  List<Object?> get props => [simulateError];
+}
