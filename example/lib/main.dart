@@ -2,8 +2,8 @@ import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:example/pages/adaptive_dialog/adaptive_dialog_example.dart';
 import 'package:example/pages/avila_snackbar/avila_snackar_example_page.dart';
 import 'package:example/pages/constants_showcase/constants_showcase_page.dart';
-import 'package:example/pages/custom_tag/custom_tags_page.dart';
 import 'package:example/pages/custom_loading_indicator/custom_loading_indicator_example.dart';
+import 'package:example/pages/custom_tag/custom_tags_page.dart';
 import 'package:example/pages/developed_by_logo/developed_by_logo_example.dart';
 import 'package:example/pages/field_with_title/title_wrapper_example_page.dart';
 import 'package:example/pages/file_uploader/file_uploader_page.dart';
@@ -12,7 +12,28 @@ import 'package:example/pages/permission_handler_example_page.dart';
 import 'package:example/pages/remote_data/remote_data_fetch_example_page.dart';
 import 'package:example/pages/remote_data_paginated/view/rainbow_page.dart';
 import 'package:example/pages/selector_sheet/selector_sheet_example_page.dart';
+import 'package:example/pages/send_data/send_data_page.dart';
 import 'package:flutter/material.dart';
+
+class ExampleMenuItem {
+  const ExampleMenuItem({
+    required this.title,
+    required this.child,
+  });
+
+  final String title;
+  final Widget child;
+}
+
+class ExampleMenuCategory {
+  const ExampleMenuCategory({
+    required this.title,
+    required this.children,
+  });
+
+  final String title;
+  final List<ExampleMenuItem> children;
+}
 
 void main() {
   runApp(const MyApp());
@@ -82,6 +103,75 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final widgetItems = const [
+    ExampleMenuItem(
+      title: 'Title Wrapper Example',
+      child: TitleWrapperExample(),
+    ),
+    ExampleMenuItem(
+      title: 'Adaptive dialog',
+      child: AdaptiveDialogExample(),
+    ),
+    ExampleMenuItem(
+      title: 'Developed By Logo',
+      child: DevelopedByLogoExample(),
+    ),
+    ExampleMenuItem(
+      title: 'Avila Snackbar Example',
+      child: AvilaSnackbarExamplePage(),
+    ),
+    ExampleMenuItem(
+      title: 'Selector Sheet Example',
+      child: SelectorSheetExamplePage(),
+    ),
+    ExampleMenuItem(
+      title: 'Custom Loading Indicator Example',
+      child: CustomLoadingIndicatorExample(),
+    ),
+    ExampleMenuItem(
+      title: 'Custom Tags Example',
+      child: CustomTagsPage(),
+    ),
+  ];
+  final blocItems = const [
+    ExampleMenuItem(
+      title: 'Remote Data Fetch Bloc Example',
+      child: RemoteDataFetchExamplePage(),
+    ),
+    ExampleMenuItem(
+      title: 'Permission Handler Bloc Example',
+      child: PermissionHandlerExamplePage(),
+    ),
+    ExampleMenuItem(
+      title: 'Pending Notifications Bloc Example',
+      child: PendingNotificationsExamplePage(),
+    ),
+    ExampleMenuItem(
+      title: 'Paged Remote Data Bloc Example',
+      child: RainbowPage(),
+    ),
+    ExampleMenuItem(
+      title: 'Upload File Bloc Example',
+      child: FileUploaderPage(),
+    ),
+    ExampleMenuItem(
+      title: 'Send Data Bloc',
+      child: SendDataPage(),
+    ),
+  ];
+  final otherItems = const [
+    ExampleMenuItem(
+      title: 'Constants Showcase',
+      child: ConstantsShowcasePage(),
+    ),
+  ];
+
+  late final categories = [
+    ExampleMenuCategory(title: 'Blocs', children: blocItems),
+    ExampleMenuCategory(title: 'Widgets', children: widgetItems),
+    ExampleMenuCategory(title: 'Others', children: otherItems),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -103,183 +193,39 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: SingleChildScrollView(
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            //
-            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-            // action in the IDE, or press "p" in the console), to see the
-            // wireframe for each widget.
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PermissionHandlerExamplePage(),
-                    ),
-                  );
-                },
-                child: const Text('Permission Handler Bloc Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RemoteDataFetchExamplePage(),
-                    ),
-                  );
-                },
-                child: const Text('Remote Data Fetch Bloc Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TitleWrapperExample(),
-                    ),
-                  );
-                },
-                child: const Text('Title Wrapper Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AdaptiveDialogExample(),
-                    ),
-                  );
-                },
-                child: const Text('Adaptive dialog'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DevelopedByLogoExample(),
-                    ),
-                  );
-                },
-                child: const Text('Developed By Logo'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AvilaSnackbarExamplePage(),
-                    ),
-                  );
-                },
-                child: const Text('Avila Snackbar Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PendingNotificationsExamplePage(),
-                    ),
-                  );
-                },
-                child: const Text('Pending Notifications Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelectorSheetExamplePage(),
-                    ),
-                  );
-                },
-                child: const Text('Selector Sheet Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const CustomLoadingIndicatorExample(),
-                    ),
-                  );
-                },
-                child: const Text('Custom Loading Indicator Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ConstantsShowcasePage(),
-                    ),
-                  );
-                },
-                child: const Text('Constants Showcase'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RainbowPage(),
-                    ),
-                  );
-                },
-                child: const Text('Paged Remote Data Bloc Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FileUploaderPage(),
-                    ),
-                  );
-                },
-                child: const Text('Upload File Bloc Example'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CustomTagsPage(),
-                    ),
-                  );
-                },
-                child: const Text('Custom Tags Example'),
-              ),
-            ],
-          ),
+        child: ListView.separated(
+          itemCount: categories.length,
+          padding: const EdgeInsets.all(24),
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  category.title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 12),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: category.children.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(category.children[index].title),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => category.children[index].child,
+                        ),
+                      );
+                    },
+                  ),
+                  separatorBuilder: (_, __) => const Divider(height: 0),
+                ),
+              ],
+            );
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: 24),
         ),
       ),
     );

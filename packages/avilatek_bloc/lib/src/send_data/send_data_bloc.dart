@@ -12,14 +12,14 @@ abstract class SendDataBloc<T> extends Bloc<SendDataEvent, SendDataState> {
   ///
   SendDataBloc() : super(SendDataReady()) {
     _handler = SendDataEventHandler<T>();
-    on<DataSent<T>>(_mapDataSentToState);
+    on<DataSent>(_mapDataSentToState);
   }
   late SendDataEventHandler<T> _handler;
 
   /// Propagates the [DataSent] event down to the corresponding event
   /// handler.
   Future<void> _mapDataSentToState(
-    DataSent<T> event,
+    DataSent event,
     Emitter<SendDataState> emit,
   ) async {
     return _handleStatesOnEvent(
@@ -54,10 +54,10 @@ abstract class SendDataBloc<T> extends Bloc<SendDataEvent, SendDataState> {
 
   /// Implements the code that calls the data sending function.
   ///
-  /// The sent data must be returned by this function.
+  /// Sent data must be returned by this function.
   @visibleForTesting
   Future<T> sendData(
     SendDataState oldState,
-    DataSent<T> event,
+    DataSent event,
   );
 }

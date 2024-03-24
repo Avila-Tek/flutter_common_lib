@@ -15,7 +15,7 @@ abstract class SendDataEvent extends Equatable {
 /// {@template data_sent}
 /// Event that triggers the fetching of the send data.
 /// {@endtemplate}
-class DataSent<T> extends SendDataEvent {
+class DataSent extends SendDataEvent {
   /// {@macro fetch_send_data}
   const DataSent(this.data, {this.simulateError = false});
 
@@ -23,7 +23,7 @@ class DataSent<T> extends SendDataEvent {
   final bool? simulateError;
 
   /// The data that is to be sent.
-  final T data;
+  final dynamic data;
 
   @override
   List<Object?> get props => [simulateError, data];
