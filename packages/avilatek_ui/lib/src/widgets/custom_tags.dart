@@ -1,181 +1,282 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:suni_wallet_app/src/constants.dart';
+import 'package:avilatek_ui/src/ui/custom_tag/custom_tag_style.dart';
+import 'package:flutter/material.dart';
 
-// /// {@template custom_tag}
-// /// This widget displays a tag. Usually used for status indicators.
-// ///
-// /// This class has custom constructors for the most common colors.
-// ///
-// /// ![](https://i.imgur.com/hIW3akM.png)
-// /// ##### *Example of a [CustomTag.green] widget with a row of [Icon] and [Text] as a child.*
-// ///
-// /// Parameters
-// /// ---
-// /// The [child] parameter is the main content of the tag. It is usually a [Text]
-// /// widget.
-// ///
-// /// The [backgroundColor] parameter is the background color of the tag.
-// ///
-// /// The [foregroundColor] parameter changes the color of the [child] widget.
-// ///
-// /// The [border] parameter is the border of the tag. It defaults to `null`.
-// ///
-// /// The optional [padding] parameter overrides the default padding for [CustomTag].
-// ///
-// /// The [iconColor] parameter changes the color of the [Icon] widget.
-// ///
-// /// {@endtemplate}
-// class CustomTag extends StatelessWidget {
-//   /// {@macro custom_tag}
-//   const CustomTag({
-//     super.key,
-//     required this.child,
-//     required this.backgroundColor,
-//     required this.foregroundColor,
-//     this.border,
-//     this.padding,
-//     this.iconColor,
-//   });
+/// {@template custom_tag}
+/// This widget displays a tag. Usually used for status indicators.
+///
+/// This class has custom constructors for the most common colors.
+///
+/// Parameters
+/// ---
+/// The [child] parameter is the main content of the tag. It is usually a [Text]
+/// widget.
+///
+/// {@endtemplate}
+class CustomTag extends StatelessWidget {
+  /// {@macro custom_tag}
+  const CustomTag({
+    required this.child,
+    required this.style,
+    super.key,
+  });
 
-//   final Widget child;
-//   final BoxBorder? border;
-//   final EdgeInsets? padding;
-//   final Color? iconColor;
-//   final Color backgroundColor;
-//   final Color foregroundColor;
+  /// Custom constructor for a tag with the primary color of the app.
+  /// The [child] parameter is the main content of the tag. It is usually a
+  /// [Text] widget.
+  /// The [context] parameter is used to get the primary color of the app.
+  /// The [style] parameter is used if you want to override the default style
+  /// for this constructor.
+  factory CustomTag.primaryOne(
+    BuildContext context, {
+    required Widget child,
+    CustomTagStyle? style,
+  }) {
+    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
 
-//   factory CustomTag.primaryOne({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.primaryOne.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.primaryOne.shade50,
-//       foregroundColor: Consts.primaryOne.shade500,
-//       iconColor: Consts.primaryOne.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final primaryColor = Theme.of(context).primaryColor;
 
-//   factory CustomTag.primaryTwo({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.primaryTwo.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.primaryTwo.shade50,
-//       foregroundColor: Consts.primaryTwo.shade700,
-//       iconColor: Consts.primaryTwo.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final backgroundColor =
+        style?.backgroundColor ?? primaryColor.withOpacity(0.3);
 
-//   factory CustomTag.grey({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.neutral.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.neutral.shade50,
-//       foregroundColor: Consts.neutral.shade400,
-//       iconColor: Consts.neutral.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final foregroundColor = style?.foregroundColor ?? primaryColor;
 
-//   factory CustomTag.green({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.success.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.success.shade50,
-//       foregroundColor: Consts.success.shade700,
-//       iconColor: Consts.success.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final iconColor = style?.iconColor ?? primaryColor;
 
-//   factory CustomTag.yellow({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.warning.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.warning.shade50,
-//       foregroundColor: Consts.warning.shade700,
-//       iconColor: Consts.warning.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final padding = style?.padding ?? themeStyle?.padding;
 
-//   factory CustomTag.red({
-//     required Widget child,
-//     EdgeInsets? padding,
-//   }) {
-//     return CustomTag(
-//       border: Border.all(
-//         color: Consts.error.shade200,
-//         width: 1,
-//       ),
-//       backgroundColor: Consts.error.shade50,
-//       foregroundColor: Consts.error.shade700,
-//       iconColor: Consts.error.shade500,
-//       padding: padding,
-//       child: child,
-//     );
-//   }
+    final border = style?.border ?? themeStyle?.border;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Theme(
-//       data: Theme.of(context).copyWith(
-//         iconTheme: IconThemeData(
-//           color: iconColor ?? foregroundColor,
-//           size: 15,
-//         ),
-//       ),
-//       child: Container(
-//         padding: padding ??
-//             const EdgeInsets.symmetric(
-//               horizontal: Consts.padding * 1,
-//               vertical: Consts.padding * 0.5,
-//             ),
-//         decoration: BoxDecoration(
-//           color: backgroundColor,
-//           borderRadius: BorderRadius.circular(100),
-//           border: border,
-//         ),
-//         child: DefaultTextStyle(
-//           style: GoogleFonts.quicksand(
-//             color: foregroundColor,
-//             fontSize: 13,
-//             fontWeight: FontWeight.w700,
-//           ),
-//           child: child,
-//         ),
-//       ),
-//     );
-//   }
-// }
+    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+
+    return CustomTag(
+      style: CustomTagStyle(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        padding: padding,
+        border: border,
+        iconColor: iconColor,
+        textStyle: textStyle,
+      ),
+      child: child,
+    );
+  }
+
+  /// Custom constructor for a tag with green color. Use this constructor
+  /// when you want to display a tag with a success color.
+  /// The [child] parameter is the main content of the tag. It is usually a
+  /// [Text] widget.
+  /// The [context] parameter is used to get the default CustomTagStyle.
+  /// The [style] parameter is used if you want to override the default style
+  /// for this constructor.
+  factory CustomTag.green(
+    BuildContext context, {
+    required Widget child,
+    CustomTagStyle? style,
+  }) {
+    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+
+    final green = Colors.green[800];
+
+    final backgroundColor = style?.backgroundColor ?? green?.withOpacity(0.3);
+
+    final foregroundColor = style?.foregroundColor ?? green;
+
+    final iconColor = style?.iconColor ?? green;
+
+    final padding = style?.padding ?? themeStyle?.padding;
+
+    final border = style?.border ?? themeStyle?.border;
+
+    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+
+    return CustomTag(
+      style: CustomTagStyle(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        padding: padding,
+        border: border,
+        iconColor: iconColor,
+        textStyle: textStyle,
+      ),
+      child: child,
+    );
+  }
+
+  /// Custom constructor for a tag with green color. Use this constructor
+  /// when you want to display a tag with a warning color.
+  /// The [child] parameter is the main content of the tag. It is usually a
+  /// [Text] widget.
+  /// The [context] parameter is used to get the default CustomTagStyle.
+  /// The [style] parameter is used if you want to override the default style
+  /// for this constructor.
+  factory CustomTag.yellow(
+    BuildContext context, {
+    required Widget child,
+    CustomTagStyle? style,
+  }) {
+    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+
+    final yellow = Colors.yellow[800];
+
+    final backgroundColor = style?.backgroundColor ?? yellow?.withOpacity(0.3);
+
+    final foregroundColor = style?.foregroundColor ?? yellow;
+
+    final iconColor = style?.iconColor ?? yellow;
+
+    final padding = style?.padding ?? themeStyle?.padding;
+
+    final border = style?.border ?? themeStyle?.border;
+
+    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+
+    return CustomTag(
+      style: CustomTagStyle(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        padding: padding,
+        border: border,
+        iconColor: iconColor,
+        textStyle: textStyle,
+      ),
+      child: child,
+    );
+  }
+
+  /// Custom constructor for a tag with green color. Use this constructor
+  /// when you want to display a tag with a danger color.
+  /// The [child] parameter is the main content of the tag. It is usually a
+  /// [Text] widget.
+  /// The [context] parameter is used to get the default CustomTagStyle.
+  /// The [style] parameter is used if you want to override the default style
+  /// for this constructor.
+  factory CustomTag.red(
+    BuildContext context, {
+    required Widget child,
+    CustomTagStyle? style,
+  }) {
+    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+
+    final red = Colors.red[800];
+
+    final backgroundColor = style?.backgroundColor ?? red?.withOpacity(0.3);
+
+    final foregroundColor = style?.foregroundColor ?? red;
+
+    final iconColor = style?.iconColor ?? red;
+
+    final padding = style?.padding ?? themeStyle?.padding;
+
+    final border = style?.border ?? themeStyle?.border;
+
+    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+
+    return CustomTag(
+      style: CustomTagStyle(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        padding: padding,
+        border: border,
+        iconColor: iconColor,
+        textStyle: textStyle,
+      ),
+      child: child,
+    );
+  }
+
+  /// Custom constructor for a tag with the grey color. Use this constructor
+  /// when you want to display a tag with a neutral color.
+  /// The [child] parameter is the main content of the tag. It is usually a
+  /// [Text] widget.
+  /// The [context] parameter is used to get the default CustomTagStyle.
+  /// The [style] parameter is used if you want to override the default style
+  /// for this constructor.
+  factory CustomTag.grey(
+    BuildContext context, {
+    required Widget child,
+    CustomTagStyle? style,
+  }) {
+    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+
+    final grey = Colors.grey.shade800;
+
+    final backgroundColor = style?.backgroundColor ?? grey.withOpacity(0.3);
+
+    final foregroundColor = style?.foregroundColor ?? grey;
+
+    final iconColor = style?.iconColor ?? grey;
+
+    final padding = style?.padding ?? themeStyle?.padding;
+
+    final border = style?.border ?? themeStyle?.border;
+
+    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+
+    return CustomTag(
+      style: CustomTagStyle(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        padding: padding,
+        border: border,
+        iconColor: iconColor,
+        textStyle: textStyle,
+      ),
+      child: child,
+    );
+  }
+
+  ///
+  final Widget child;
+
+  ///
+  final CustomTagStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final defaultStyle = Theme.of(context).extension<CustomTagStyle>();
+
+    final defaultTheme = Theme.of(context);
+
+    final textStyle = style?.textStyle ??
+        defaultStyle?.textStyle ??
+        defaultTheme.textTheme.labelMedium;
+
+    final backgroundColor =
+        style?.backgroundColor ?? defaultStyle?.backgroundColor;
+
+    final foregroundColor =
+        style?.foregroundColor ?? defaultStyle?.foregroundColor;
+
+    final iconColor =
+        style?.iconColor ?? defaultStyle?.iconColor ?? foregroundColor;
+
+    final iconSize = style?.iconSize ?? defaultStyle?.iconSize ?? 15.0;
+
+    final padding = style?.padding ?? defaultStyle?.padding;
+
+    final border = style?.border ?? defaultStyle?.border;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        iconTheme: IconThemeData(
+          color: iconColor ?? foregroundColor,
+          size: iconSize,
+        ),
+      ),
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(100),
+          border: border,
+        ),
+        child: DefaultTextStyle(
+          style: textStyle!.copyWith(
+            color: foregroundColor,
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}

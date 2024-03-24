@@ -11,6 +11,7 @@ class AvilaCustomTheme {
     this.titleWrapperStyle,
     this.selectorButtonStyle,
     this.avilaSnackBarTheme,
+    this.customTagStyle,
   });
 
   /// `titleWrapperStyle` is being used to handle the theme of
@@ -25,11 +26,16 @@ class AvilaCustomTheme {
   /// [AvilaSnackBar] widget
   final AvilaSnackBarTheme? avilaSnackBarTheme;
 
+  /// `customTagStyle` is being used to handle the theme of
+  /// [CustomTag] widget
+  final CustomTagStyle? customTagStyle;
+
   /// `extensions` is used to get all AvilaTek theme extensions, to then
   /// define in the `MaterialApp` theme
   Iterable<ThemeExtension<dynamic>> get extensions => {
         titleWrapperStyle ?? const TitleWrapperStyle(),
         selectorButtonStyle ?? const SelectorButtonStyle(),
         avilaSnackBarTheme ?? const AvilaSnackBarTheme(),
+        customTagStyle ?? const CustomTagStyle(),
       };
 }
