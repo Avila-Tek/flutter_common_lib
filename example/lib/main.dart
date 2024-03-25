@@ -28,12 +28,7 @@ class MyApp extends StatelessWidget {
       titleWrapperStyle: TitleWrapperStyle(),
       selectorButtonStyle: SelectorButtonStyle(),
       avilaSnackBarTheme: AvilaSnackBarTheme(),
-      customTagStyle: CustomTagStyle(
-        padding: EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
-        ),
-      ),
+      customTagTheme: CustomTagTheme(),
     );
 
     return MaterialApp(

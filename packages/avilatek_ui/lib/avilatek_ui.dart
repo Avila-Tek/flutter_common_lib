@@ -5,6 +5,7 @@ export 'src/avilatek_ui.dart';
 export 'src/ui/avila_custom_theme.dart';
 export 'src/ui/avila_snackbar/avila_snackbar_theme.dart';
 export 'src/ui/custom_tag/custom_tag_style.dart';
+export 'src/ui/custom_tag/custom_tag_theme.dart';
 export 'src/ui/selector_button/selector_button_style.dart';
 export 'src/ui/selector_sheet/selector_sheet_theme.dart';
 export 'src/ui/title_wrapper/title_wrapper_style.dart';
