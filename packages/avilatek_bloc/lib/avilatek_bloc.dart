@@ -7,3 +7,4 @@ export 'src/permission_handler/permission_handler_listener.dart';
 export 'src/pick_and_upload_file/pick_and_upload_file_bloc.dart';
 export 'src/remote_data/remote_data_bloc.dart';
 export 'src/remote_data_paginated/paged_remote_data_bloc.dart';
+export 'src/send_data/send_data_bloc.dart';
