@@ -94,7 +94,7 @@ class _RemoteDataFetchExampleBodyState
                       onPressed: () {
                         context
                             .read<PokemonBloc>()
-                            .add(const FetchRemoteData<Pokemon>());
+                            .add(const FetchRemoteData());
                       },
                       child: const Text('Retry'),
                     ),
@@ -191,7 +191,7 @@ class _RemoteDataFetchExampleBodyState
                       : () {
                           // NOTE: The event simulates an error using the [simulateError] property of [FetchRemoteData<T>] event.
                           context.read<PokemonBloc>().add(
-                                const FetchRemoteData<Pokemon>(
+                                const FetchRemoteData(
                                   simulateError: true,
                                 ),
                               );

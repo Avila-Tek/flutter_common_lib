@@ -9,7 +9,7 @@ class PokemonBloc extends RemoteDataBloc<Pokemon> {
     int initialPokemonId = 1,
     bool simulateInitialFetchingError = false,
   }) : _id = initialPokemonId {
-    add(FetchRemoteData<Pokemon>(simulateError: simulateInitialFetchingError));
+    add(FetchRemoteData(simulateError: simulateInitialFetchingError));
   }
 
   int get id => _id;
@@ -18,20 +18,20 @@ class PokemonBloc extends RemoteDataBloc<Pokemon> {
   void getPokemonOfId(String id) {
     _id = int.tryParse(id) ?? 1;
 
-    add(const FetchRemoteData<Pokemon>());
+    add(const FetchRemoteData());
   }
 
   void getNextPokemon() {
     _id += 1;
 
-    add(const FetchRemoteData<Pokemon>());
+    add(const FetchRemoteData());
   }
 
   void getPreviousPokemon() {
     if (_id > 1) {
       _id -= 1;
 
-      add(const FetchRemoteData<Pokemon>());
+      add(const FetchRemoteData());
     }
   }
 

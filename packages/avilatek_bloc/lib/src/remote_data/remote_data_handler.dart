@@ -14,11 +14,10 @@ class RemoteDataEventHandler<T> {
   /// On failure it emits: [RemoteDataInitialFetching],
   /// [RemoteDataInitialFetchingFailure], [RemoteDataUninitialized].
   Future<void> mapInitialFetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     RemoteDataUninitialized<T> state,
     Emitter<RemoteDataState<T>> emit,
-    Future<T> Function(RemoteDataState<T>, FetchRemoteData<T>)
-        fetchAndParseData,
+    Future<T> Function(RemoteDataState<T>, FetchRemoteData) fetchAndParseData,
   ) async {
     try {
       emit(RemoteDataInitialFetching());
@@ -43,11 +42,10 @@ class RemoteDataEventHandler<T> {
   /// On failure it emits: [RemoteDataRefetching], [RemoteDataRefetchingFailure],
   /// [RemoteDataFetched].
   Future<void> mapRefetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     RemoteDataFetched<T> state,
     Emitter<RemoteDataState<T>> emit,
-    Future<T> Function(RemoteDataState<T>, FetchRemoteData<T>)
-        fetchAndParseData,
+    Future<T> Function(RemoteDataState<T>, FetchRemoteData) fetchAndParseData,
   ) async {
     try {
       emit(RemoteDataRefetching(state));

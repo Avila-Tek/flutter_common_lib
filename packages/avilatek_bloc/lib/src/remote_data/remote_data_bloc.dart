@@ -17,14 +17,14 @@ abstract class RemoteDataBloc<T>
   ///
   RemoteDataBloc() : super(RemoteDataUninitialized()) {
     _handler = RemoteDataEventHandler<T>();
-    on<FetchRemoteData<T>>(_mapFetchRemoteDataToState);
+    on<FetchRemoteData>(_mapFetchRemoteDataToState);
   }
   late RemoteDataEventHandler<T> _handler;
 
   /// Propagates the [FetchRemoteData] event down to the corresponding event
   /// handler.
   Future<void> _mapFetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     Emitter<RemoteDataState<T>> emit,
   ) async {
     return _handleStatesOnEvent(
@@ -75,6 +75,6 @@ abstract class RemoteDataBloc<T>
   @visibleForTesting
   Future<T> fetchAndParseData(
     RemoteDataState<T> oldState,
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
   );
 }
