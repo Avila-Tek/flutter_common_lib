@@ -22,8 +22,8 @@ abstract class RemoteDataBloc<T>
   RemoteDataBloc({T? initialData})
       : super(
           initialData != null
-              ? RemoteDataUninitialized()
-              : RemoteDataFetched<T>(initialData as T),
+              ? RemoteDataFetched<T>(initialData)
+              : RemoteDataUninitialized(),
         ) {
     _handler = RemoteDataEventHandler<T>();
     on<FetchRemoteData>(_mapFetchRemoteDataToState);
