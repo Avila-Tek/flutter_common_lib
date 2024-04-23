@@ -14,8 +14,17 @@ export 'package:avilatek_bloc/src/remote_data/remote_data_state.dart';
 /// [RemoteDataInitialized.data] property.
 abstract class RemoteDataBloc<T>
     extends Bloc<RemoteDataEvent, RemoteDataState<T>> {
+  /// Constructor for the RemoteDataBloc.
   ///
-  RemoteDataBloc() : super(RemoteDataUninitialized()) {
+  /// The [initialData] parameter is optional and can be used to provide an
+  /// initial value for the bloc, so it starts in the [RemoteDataFetched] state
+  /// instead of the [RemoteDataUninitialized] state.
+  RemoteDataBloc({T? initialData})
+      : super(
+          initialData != null
+              ? RemoteDataUninitialized()
+              : RemoteDataFetched<T>(initialData as T),
+        ) {
     _handler = RemoteDataEventHandler<T>();
     on<FetchRemoteData>(_mapFetchRemoteDataToState);
   }
