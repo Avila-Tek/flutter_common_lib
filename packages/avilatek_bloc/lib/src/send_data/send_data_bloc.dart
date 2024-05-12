@@ -12,14 +12,14 @@ abstract class SendDataBloc<T> extends Bloc<SendDataEvent, SendDataState> {
   ///
   SendDataBloc() : super(SendDataReady()) {
     _handler = SendDataEventHandler<T>();
-    on<DataSent>(_mapDataSentToState);
+    on<DataSent<T>>(_mapDataSentToState);
   }
   late SendDataEventHandler<T> _handler;
 
   /// Propagates the [DataSent] event down to the corresponding event
   /// handler.
   Future<void> _mapDataSentToState(
-    DataSent event,
+    DataSent<T> event,
     Emitter<SendDataState> emit,
   ) async {
     return _handleStatesOnEvent(
@@ -46,9 +46,11 @@ abstract class SendDataBloc<T> extends Bloc<SendDataEvent, SendDataState> {
     } else if (state is SendDataReady && onDataSent != null) {
       return onDataSent();
     } else {
+      // coverage:ignore-start
       throw UnimplementedError(
         'No handler implemented for combination: ${state.runtimeType}.',
       );
+      // coverage:ignore-end
     }
   }
 
@@ -58,6 +60,6 @@ abstract class SendDataBloc<T> extends Bloc<SendDataEvent, SendDataState> {
   @visibleForTesting
   Future<T> sendData(
     SendDataState oldState,
-    DataSent event,
+    DataSent<T> event,
   );
 }

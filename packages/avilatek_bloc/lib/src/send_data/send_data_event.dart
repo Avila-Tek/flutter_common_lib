@@ -7,15 +7,12 @@ import 'package:equatable/equatable.dart';
 abstract class SendDataEvent extends Equatable {
   /// {@macro send_data_event}
   const SendDataEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 /// {@template data_sent}
 /// Event that triggers the fetching of the send data.
 /// {@endtemplate}
-class DataSent extends SendDataEvent {
+class DataSent<T> extends SendDataEvent {
   /// {@macro fetch_send_data}
   const DataSent(this.data, {this.simulateError = false});
 
@@ -23,7 +20,7 @@ class DataSent extends SendDataEvent {
   final bool? simulateError;
 
   /// The data that is to be sent.
-  final dynamic data;
+  final T data;
 
   @override
   List<Object?> get props => [simulateError, data];

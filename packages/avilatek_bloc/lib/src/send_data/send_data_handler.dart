@@ -14,10 +14,10 @@ class SendDataEventHandler<T> {
   /// On failure it emits: [SendDataLoading],
   /// [SendDataFailure], [SendDataReady].
   Future<void> mapDataSentToState(
-    DataSent event,
+    DataSent<T> event,
     SendDataReady state,
     Emitter<SendDataState> emit,
-    Future<T> Function(SendDataState, DataSent) sendData,
+    Future<T> Function(SendDataState, DataSent<T>) sendData,
   ) async {
     try {
       emit(SendDataLoading());
@@ -28,10 +28,10 @@ class SendDataEventHandler<T> {
 
       await sendData(state, event);
 
-      emit(SendDataSuccess(event.data));
+      emit(SendDataSuccess<T>(event.data));
       emit(SendDataReady());
     } catch (e) {
-      emit(SendDataFailure(event.data, e));
+      emit(SendDataFailure<T>(event.data, e));
       emit(SendDataReady());
     }
   }

@@ -39,7 +39,8 @@ class RemoteDataEventHandler<T> {
   /// Handles refetch of the remote data.
   ///
   /// On success it emits: [RemoteDataRefetching], [RemoteDataFetched].
-  /// On failure it emits: [RemoteDataRefetching], [RemoteDataRefetchingFailure],
+  /// On failure it emits: [RemoteDataRefetching],
+  /// [RemoteDataRefetchingFailure],
   /// [RemoteDataFetched].
   Future<void> mapRefetchRemoteDataToState(
     FetchRemoteData event,
@@ -65,6 +66,6 @@ class RemoteDataEventHandler<T> {
 
   Future<void> _simulateError() {
     Future<void>.delayed(const Duration(seconds: 1));
-    throw Exception('Simulated error');
+    throw Exception();
   }
 }

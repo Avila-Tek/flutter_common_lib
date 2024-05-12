@@ -23,8 +23,10 @@ abstract class SendDataState extends Equatable {
   ///
   const SendDataState();
 
+  // coverage:ignore-start
   @override
   List<Object?> get props => [];
+  // coverage:ignore-end
 }
 
 /// Initial state of the [SendDataBloc<T>].

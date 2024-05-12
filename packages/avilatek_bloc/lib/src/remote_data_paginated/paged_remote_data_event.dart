@@ -8,8 +8,10 @@ abstract class PagedRemoteDataEvent extends Equatable {
   /// {@macro remote_data_event}
   const PagedRemoteDataEvent();
 
+  // coverage:ignore-start
   @override
   List<Object?> get props => [];
+  // coverage:ignore-end
 }
 
 /// {@template fetch_remote_data}

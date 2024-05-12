@@ -71,9 +71,11 @@ abstract class RemoteDataBloc<T>
     } else if (state is RemoteDataFetched && onRemoteDataLoaded != null) {
       return onRemoteDataLoaded();
     } else {
+      // coverage:ignore-start
       throw UnimplementedError(
         'No handler implemented for combination: ${state.runtimeType}.',
       );
+      // coverage:ignore-end
     }
   }
 

@@ -71,9 +71,11 @@ abstract class PagedRemoteDataBloc<T>
         onNextPageFetched != null) {
       return onNextPageFetched();
     } else {
+      // coverage:ignore-start
       throw UnimplementedError(
         'No handler implemented for combination: ${state.runtimeType}.',
       );
+      // coverage:ignore-end
     }
   }
 
