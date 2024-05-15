@@ -74,7 +74,7 @@ class PendingNotificationsEventHandler<T> {
   /// Handler for [CancelPendingNotifications] + [PendingNotificationsRefetchingCancel]
   /// combination. Handles the cancelation of the refetching of the pending notifications.
   void mapCancelPendingNotificationsToState(
-    CancelPendingNotifications<T> event,
+    CancelPendingNotifications event,
     PendingNotificationsRefetchingCancel<T> state,
     Emitter<PendingNotificationsState<T>> emit,
   ) {

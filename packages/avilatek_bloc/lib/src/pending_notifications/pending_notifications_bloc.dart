@@ -21,7 +21,7 @@ abstract class PendingNotificationsBloc<T>
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
     );
-    on<CancelPendingNotifications<T>>(
+    on<CancelPendingNotifications>(
       _mapCancelPendingNotificationsToState,
     );
     //  await subscription?.cancel();
@@ -84,7 +84,7 @@ abstract class PendingNotificationsBloc<T>
   }
 
   Future<void> _mapCancelPendingNotificationsToState(
-    CancelPendingNotifications<T> event,
+    CancelPendingNotifications event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
     return close();

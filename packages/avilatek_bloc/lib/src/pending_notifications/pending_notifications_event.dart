@@ -57,7 +57,7 @@ class RefetchPendingNotifications<T> extends PendingNotificationsEvent {
 }
 
 /// Event that cancels the fetching of the pending notifications.
-class CancelPendingNotifications<T> extends PendingNotificationsEvent {
+class CancelPendingNotifications extends PendingNotificationsEvent {
   const CancelPendingNotifications();
 
   @override
