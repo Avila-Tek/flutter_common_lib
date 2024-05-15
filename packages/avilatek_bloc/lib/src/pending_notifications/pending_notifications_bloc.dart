@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_event.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_handler.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_state.dart';
@@ -20,6 +21,9 @@ abstract class PendingNotificationsBloc<T>
     _handler = PendingNotificationsEventHandler<T>();
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
+    );
+    on<CancelPendingNotifications>(
+      _mapCancelPendingNotificationsToState,
     );
     //  await subscription?.cancel();
     _subscription = Stream.periodic(timeInterval, (x) {
@@ -78,6 +82,14 @@ abstract class PendingNotificationsBloc<T>
         'No handler implemented for combination: ${state.runtimeType}.',
       );
     }
+  }
+
+  Future<void> _mapCancelPendingNotificationsToState(
+    CancelPendingNotifications event,
+    Emitter<PendingNotificationsState<T>> emit,
+  ) async {
+    await _subscription?.cancel();
+    emit(PendingNotificationsUninitialized());
   }
 
   /// Function which retrieves the blocs data from the backend,
