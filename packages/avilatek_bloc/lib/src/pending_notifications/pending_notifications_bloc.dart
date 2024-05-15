@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_event.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_handler.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_state.dart';
@@ -87,7 +88,8 @@ abstract class PendingNotificationsBloc<T>
     CancelPendingNotifications event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
-    return _subscription?.cancel();
+    await _subscription?.cancel();
+    emit(PendingNotificationsUninitialized());
   }
 
   /// Function which retrieves the blocs data from the backend,
