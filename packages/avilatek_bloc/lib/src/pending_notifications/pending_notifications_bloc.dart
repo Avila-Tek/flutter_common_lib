@@ -16,18 +16,30 @@ abstract class PendingNotificationsBloc<T>
     extends Bloc<PendingNotificationsEvent, PendingNotificationsState<T>> {
   PendingNotificationsBloc({
     required Duration timeInterval,
+    required this.isAuthenticated,
   }) : super(PendingNotificationsUninitialized()) {
     _handler = PendingNotificationsEventHandler<T>();
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
     );
-    //  await subscription?.cancel();
-    _subscription = Stream.periodic(timeInterval, (x) {
-      add(FetchPendingNotifications<T>());
-    }).listen((event) {});
+    on<CancelPendingNotifications<T>>(
+      (event, emit) => _subscription?.cancel(),
+    );
+    _subscription = _createSubscription(timeInterval);
   }
+
+  StreamSubscription<void>? _createSubscription(Duration timeInterval) {
+    if (isAuthenticated) {
+      return Stream.periodic(timeInterval, (x) {
+        add(FetchPendingNotifications<T>());
+      }).listen((event) {});
+    }
+    return null;
+  }
+
+  final bool isAuthenticated;
+  late StreamSubscription<void>? _subscription;
   late PendingNotificationsEventHandler<T> _handler;
-  StreamSubscription<void>? _subscription;
 
   /// Propagates the [FetchPendingNotifications] event down to the corresponding event
   /// handler.

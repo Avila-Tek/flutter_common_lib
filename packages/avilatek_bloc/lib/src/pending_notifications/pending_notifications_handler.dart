@@ -45,7 +45,6 @@ class PendingNotificationsEventHandler<T> {
     FetchPendingNotifications<T> event,
     PendingNotificationsFetched<T> state,
     Emitter<PendingNotificationsState<T>> emit,
-    
     Future<T> Function(
       PendingNotificationsState<T>,
       FetchPendingNotifications<T>,
@@ -70,5 +69,15 @@ class PendingNotificationsEventHandler<T> {
   Future<void> _simulateError() {
     Future<void>.delayed(const Duration(seconds: 1));
     throw Exception('Simulated error');
+  }
+
+  /// Handler for [CancelPendingNotifications] + [PendingNotificationsRefetchingCancel]
+  /// combination. Handles the cancelation of the refetching of the pending notifications.
+  void mapCancelPendingNotificationsToState(
+    CancelPendingNotifications<T> event,
+    PendingNotificationsRefetchingCancel<T> state,
+    Emitter<PendingNotificationsState<T>> emit,
+  ) {
+    emit(PendingNotificationsRefetchingCancel());
   }
 }
