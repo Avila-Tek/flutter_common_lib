@@ -87,7 +87,7 @@ abstract class PendingNotificationsBloc<T>
     CancelPendingNotifications event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
-    return close();
+    return _subscription?.cancel();
   }
 
   /// Function which retrieves the blocs data from the backend,
