@@ -63,3 +63,4 @@ class CancelPendingNotifications extends PendingNotificationsEvent {
   @override
   List<Object?> get props => [];
 }
+
