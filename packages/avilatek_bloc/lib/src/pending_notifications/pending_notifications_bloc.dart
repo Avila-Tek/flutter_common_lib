@@ -39,9 +39,6 @@ abstract class PendingNotificationsBloc<T>
     FetchPendingNotifications<T> event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
-    // Cancel the existing subscription if it exists
-    await _subscription?.cancel();
-
     // Start a new periodic subscription
     _subscription = Stream.periodic(event.timeInterval, (x) {
       add(FetchPendingNotifications<T>());
