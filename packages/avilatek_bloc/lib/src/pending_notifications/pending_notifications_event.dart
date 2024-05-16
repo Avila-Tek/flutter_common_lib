@@ -63,3 +63,11 @@ class CancelPendingNotifications extends PendingNotificationsEvent {
   @override
   List<Object?> get props => [];
 }
+
+/// Event that restarts the fetching of notifications.
+class RestartPendingNotifications extends PendingNotificationsEvent {
+  const RestartPendingNotifications();
+
+  @override
+  List<Object?> get props => [];
+}
