@@ -17,7 +17,8 @@ abstract class PendingNotificationsBloc<T>
     extends Bloc<PendingNotificationsEvent, PendingNotificationsState<T>> {
   PendingNotificationsBloc({
     required Duration timeInterval,
-  }) : super(PendingNotificationsUninitialized()) {
+  })  : _timeInterval = timeInterval,
+        super(PendingNotificationsUninitialized()) {
     _handler = PendingNotificationsEventHandler<T>();
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
@@ -25,11 +26,17 @@ abstract class PendingNotificationsBloc<T>
     on<CancelPendingNotifications>(
       _mapCancelPendingNotificationsToState,
     );
+    on<RestartPendingNotifications>(
+      _mapRestartPendingNotificationsToState,
+    );
     //  await subscription?.cancel();
-    add(FetchPendingNotifications<T>());
+    _subscription = Stream.periodic(timeInterval, (x) {
+      add(FetchPendingNotifications<T>());
+    }).listen((event) {});
   }
   late PendingNotificationsEventHandler<T> _handler;
   StreamSubscription<void>? _subscription;
+  final Duration _timeInterval;
 
   /// Propagates the [FetchPendingNotifications] event down to the corresponding event
   /// handler.
@@ -37,28 +44,26 @@ abstract class PendingNotificationsBloc<T>
     FetchPendingNotifications<T> event,
     Emitter<PendingNotificationsState<T>> emit,
   ) async {
-    _subscription = Stream.periodic(event.timeInterval, (x) async {
-      return await _handleStatesOnEvent(
-        timeInterval: event.timeInterval,
-        isNoOp: state is PendingNotificationsFetching ||
-            state is PendingNotificationsError ||
-            state is PendingNotificationsSuccess,
-        onPendingNotificationsUninitialized: () =>
-            _handler.mapInitialFetchPendingNotificationsToState(
-          event,
-          state as PendingNotificationsUninitialized<T>,
-          emit,
-          fetchAndParseData,
-        ),
-        onPendingNotificationsFetched: () =>
-            _handler.mapRefetchPendingNotificationsToState(
-          event,
-          state as PendingNotificationsFetched<T>,
-          emit,
-          fetchAndParseData,
-        ),
-      );
-    }).listen((event) {});
+    return await _handleStatesOnEvent(
+      timeInterval: event.timeInterval,
+      isNoOp: state is PendingNotificationsFetching ||
+          state is PendingNotificationsError ||
+          state is PendingNotificationsSuccess,
+      onPendingNotificationsUninitialized: () =>
+          _handler.mapInitialFetchPendingNotificationsToState(
+        event,
+        state as PendingNotificationsUninitialized<T>,
+        emit,
+        fetchAndParseData,
+      ),
+      onPendingNotificationsFetched: () =>
+          _handler.mapRefetchPendingNotificationsToState(
+        event,
+        state as PendingNotificationsFetched<T>,
+        emit,
+        fetchAndParseData,
+      ),
+    );
   }
 
   /// Helper function that can be used by [_mapFetchPendingNotificationsToState] function
@@ -90,6 +95,15 @@ abstract class PendingNotificationsBloc<T>
   ) async {
     await _subscription?.cancel();
     emit(PendingNotificationsUninitialized());
+  }
+
+  Future<void> _mapRestartPendingNotificationsToState(
+    RestartPendingNotifications event,
+    Emitter<PendingNotificationsState<T>> emit,
+  ) async {
+    _subscription = Stream.periodic(_timeInterval, (x) {
+      add(FetchPendingNotifications<T>());
+    }).listen((event) {});
   }
 
   /// Function which retrieves the blocs data from the backend,
