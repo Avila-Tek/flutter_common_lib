@@ -26,9 +26,9 @@ abstract class PendingNotificationsBloc<T>
       _mapCancelPendingNotificationsToState,
     );
     //  await subscription?.cancel();
-    _subscription = Stream.periodic(timeInterval, (x) {
-      add(FetchPendingNotifications<T>());
-    }).listen((event) {});
+    // _subscription = Stream.periodic(timeInterval, (x) {
+    //   add(FetchPendingNotifications<T>());
+    // }).listen((event) {});
   }
   late PendingNotificationsEventHandler<T> _handler;
   StreamSubscription<void>? _subscription;
