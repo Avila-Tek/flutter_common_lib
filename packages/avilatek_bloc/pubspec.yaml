@@ -1,6 +1,6 @@
 name: avilatek_bloc
 description: Avila Tek Blocs/Cubits
-version: 0.1.2
+version: 0.1.4
 publish_to: none
 
 environment:

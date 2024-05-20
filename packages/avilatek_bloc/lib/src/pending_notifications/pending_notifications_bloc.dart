@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_event.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_handler.dart';
 import 'package:avilatek_bloc/src/pending_notifications/pending_notifications_state.dart';
@@ -16,10 +17,17 @@ abstract class PendingNotificationsBloc<T>
     extends Bloc<PendingNotificationsEvent, PendingNotificationsState<T>> {
   PendingNotificationsBloc({
     required Duration timeInterval,
-  }) : super(PendingNotificationsUninitialized()) {
+  })  : _timeInterval = timeInterval,
+        super(PendingNotificationsUninitialized()) {
     _handler = PendingNotificationsEventHandler<T>();
     on<FetchPendingNotifications<T>>(
       _mapFetchPendingNotificationsToState,
+    );
+    on<CancelPendingNotifications>(
+      _mapCancelPendingNotificationsToState,
+    );
+    on<RestartPendingNotifications>(
+      _mapRestartPendingNotificationsToState,
     );
     //  await subscription?.cancel();
     _subscription = Stream.periodic(timeInterval, (x) {
@@ -28,6 +36,7 @@ abstract class PendingNotificationsBloc<T>
   }
   late PendingNotificationsEventHandler<T> _handler;
   StreamSubscription<void>? _subscription;
+  final Duration _timeInterval;
 
   /// Propagates the [FetchPendingNotifications] event down to the corresponding event
   /// handler.
@@ -78,6 +87,23 @@ abstract class PendingNotificationsBloc<T>
         'No handler implemented for combination: ${state.runtimeType}.',
       );
     }
+  }
+
+  Future<void> _mapCancelPendingNotificationsToState(
+    CancelPendingNotifications event,
+    Emitter<PendingNotificationsState<T>> emit,
+  ) async {
+    await _subscription?.cancel();
+    emit(PendingNotificationsUninitialized());
+  }
+
+  Future<void> _mapRestartPendingNotificationsToState(
+    RestartPendingNotifications event,
+    Emitter<PendingNotificationsState<T>> emit,
+  ) async {
+    _subscription = Stream.periodic(_timeInterval, (x) {
+      add(FetchPendingNotifications<T>());
+    }).listen((event) {});
   }
 
   /// Function which retrieves the blocs data from the backend,
