@@ -1,13 +1,10 @@
-  production-ios-android:
-    name: "[PROD🚀] iOS & Android deploy"
+  production-android:
+    name: "[PROD🚀] Android only"
     max_build_duration: 60
     environment:
       flutter: {{flutter_version}}
       android_signing:
         - avilatek_upload_ks
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: {{bundle_identifier}}
       groups:
         - play_store_credentials
         - firebase_credentials
@@ -18,13 +15,12 @@
       cache_paths:
         - $HOME/.gradle/caches
         - $FLUTTER_ROOT/.pub-cache
-        - $HOME/Library/Caches/CocoaPods
 
     triggering:
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:prod|production)-all'
+        - pattern: 'v*.*.*\+*-(?:prod|production)-android'
           include: true
       cancel_previous_builds: false
 
@@ -38,19 +34,6 @@
       - name: Get Flutter packages
         script: |
           flutter packages pub get
-
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
-      - name: Install pods
-        script: |
-          find . -name "Podfile" -execdir pod install \;
-      - name: Flutter build ipa # NOTE: Update target path and flavor if the project does not follow conventional structure.
-        script: |
-          flutter build ipa --release \
-            --flavor production \
-            --target {{{production_main_path}}} \
-            --export-options-plist=/Users/builder/export_options.plist
             
       - name: Set up local.properties
         script: |
@@ -78,19 +61,7 @@
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
 
-    integrations:
-      app_store_connect: Avila Tek CA
-
     publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
-        {{#show_beta_groups}}
-        beta_groups:
-          {{#beta_groups_testflight}}- {{.}}
-          {{/beta_groups_testflight}}
-        {{/show_beta_groups}}
-      
       google_play:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: production
