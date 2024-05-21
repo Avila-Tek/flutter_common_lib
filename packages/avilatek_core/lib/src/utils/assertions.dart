@@ -3,7 +3,7 @@ class CommonAssertions {
   /// Run a series of assertions to check if the API URL is valid.
   ///
   /// Should be used when instancing a new GraphQL API object.
-  static void assertApiGql(String apiUrl) {
+  static void assertGraphQLApi(String apiUrl) {
     assert(
       apiUrl.startsWith(RegExp('^https?://')),
       'apiUrl format error: URL must start with "http://" or "https://" protocol',

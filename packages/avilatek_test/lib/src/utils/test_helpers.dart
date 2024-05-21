@@ -10,11 +10,11 @@ class TestHelpers {
   ///
   /// Usage:
   /// ```
-  /// TestHelpers.checkApiUrlForGraphQLService(
+  /// TestHelpers.checkGraphQLApiUrl(
   ///   (apiUrl) => UserApiGql(apiUrl: apiUrl),
   /// );
   /// ```
-  static void checkApiUrlForGraphQLService<T>(
+  static void checkGraphQLApiUrl<T>(
     T Function(String apiUrl) builder,
   ) {
     // Url does not define the protocol
@@ -54,10 +54,10 @@ class TestHelpers {
   ///
   /// Usage:
   /// ```
-  /// TestHelpers.checkApiUrlForRestService(
+  /// TestHelpers.checkRestApiUrl(
   ///  (apiUrl) => UserApiRest(apiUrl: apiUrl),
   /// );
-  static void checkApiUrlForRestService<T>(
+  static void checkRestApiUrl<T>(
     T Function(String apiUrl) builder,
   ) {
     // Url does not define the protocol
