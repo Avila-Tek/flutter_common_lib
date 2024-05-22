@@ -24,7 +24,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:stg|staging)-all'
+        - pattern: 'v*.*.*\+*-stg-all'
+          include: true
+        - pattern: 'v*.*.*\+*-staging-all'
           include: true
       cancel_previous_builds: false
 

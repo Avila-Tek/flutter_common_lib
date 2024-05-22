@@ -20,7 +20,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:dev|development)-android'
+        - pattern: 'v*.*.*\+*-dev-android'
+          include: true
+        - pattern: 'v*.*.*\+*-development-android'
           include: true
       cancel_previous_builds: false
 

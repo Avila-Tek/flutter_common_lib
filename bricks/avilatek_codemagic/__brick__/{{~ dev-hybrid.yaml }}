@@ -24,7 +24,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:dev|development)-all'
+        - pattern: 'v*.*.*\+*-dev-all'
+          include: true
+        - pattern: 'v*.*.*\+*-development-all'
           include: true
       cancel_previous_builds: false
 

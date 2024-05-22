@@ -20,7 +20,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:dev|development)-ios'
+        - pattern: 'v*.*.*\+*-dev-ios'
+          include: true
+        - pattern: 'v*.*.*\+*-development-ios'
           include: true
       cancel_previous_builds: false
 

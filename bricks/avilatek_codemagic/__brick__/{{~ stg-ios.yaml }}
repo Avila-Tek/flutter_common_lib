@@ -20,7 +20,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:stg|staging)-ios'
+        - pattern: 'v*.*.*\+*-stg-ios'
+          include: true
+        - pattern: 'v*.*.*\+*-staging-ios'
           include: true
       cancel_previous_builds: false
 

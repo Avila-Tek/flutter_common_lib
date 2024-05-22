@@ -24,7 +24,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:prod|production)-all'
+        - pattern: 'v*.*.*\+*-prod-all'
+          include: true
+        - pattern: 'v*.*.*\+*-production-all'
           include: true
       cancel_previous_builds: false
 

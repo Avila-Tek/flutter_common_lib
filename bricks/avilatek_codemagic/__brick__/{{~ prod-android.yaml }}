@@ -20,7 +20,9 @@
       events:
         - tag
       tag_patterns:
-        - pattern: 'v*.*.*\+*-(?:prod|production)-android'
+        - pattern: 'v*.*.*\+*-prod-android'
+          include: true
+        - pattern: 'v*.*.*\+*-production-android'
           include: true
       cancel_previous_builds: false
 
