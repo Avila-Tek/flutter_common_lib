@@ -1,4 +1,5 @@
 import 'package:avilatek_ui/src/ui/custom_tag/custom_tag_style.dart';
+import 'package:avilatek_ui/src/ui/custom_tag/custom_tag_theme.dart';
 import 'package:flutter/material.dart';
 
 /// {@template custom_tag}
@@ -24,29 +25,27 @@ class CustomTag extends StatelessWidget {
   /// The [child] parameter is the main content of the tag. It is usually a
   /// [Text] widget.
   /// The [context] parameter is used to get the primary color of the app.
-  /// The [style] parameter is used if you want to override the default style
-  /// for this constructor.
-  factory CustomTag.primaryOne(
+  factory CustomTag.primary(
     BuildContext context, {
     required Widget child,
-    CustomTagStyle? style,
   }) {
-    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+    final primaryTagTheme =
+        Theme.of(context).extension<CustomTagTheme>()?.primaryStyle;
 
     final primaryColor = Theme.of(context).primaryColor;
 
     final backgroundColor =
-        style?.backgroundColor ?? primaryColor.withOpacity(0.3);
+        primaryTagTheme?.backgroundColor ?? primaryColor.withOpacity(0.1);
 
-    final foregroundColor = style?.foregroundColor ?? primaryColor;
+    final foregroundColor = primaryTagTheme?.foregroundColor ?? primaryColor;
 
-    final iconColor = style?.iconColor ?? primaryColor;
+    final iconColor = primaryTagTheme?.iconColor ?? primaryColor;
 
-    final padding = style?.padding ?? themeStyle?.padding;
+    final padding = primaryTagTheme?.padding;
 
-    final border = style?.border ?? themeStyle?.border;
+    final border = primaryTagTheme?.border;
 
-    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+    final textStyle = primaryTagTheme?.textStyle;
 
     return CustomTag(
       style: CustomTagStyle(
@@ -65,29 +64,30 @@ class CustomTag extends StatelessWidget {
   /// when you want to display a tag with a success color.
   /// The [child] parameter is the main content of the tag. It is usually a
   /// [Text] widget.
-  /// The [context] parameter is used to get the default CustomTagStyle.
-  /// The [style] parameter is used if you want to override the default style
-  /// for this constructor.
+  /// The [context] parameter is used to get the green CustomTagStyle.
   factory CustomTag.green(
     BuildContext context, {
     required Widget child,
-    CustomTagStyle? style,
   }) {
-    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+    final themeGreenTagStyle =
+        Theme.of(context).extension<CustomTagTheme>()?.greenStyle;
 
-    final green = Colors.green[800];
+    const defaultGreenColor = Colors.green;
 
-    final backgroundColor = style?.backgroundColor ?? green?.withOpacity(0.3);
+    final backgroundColor =
+        themeGreenTagStyle?.backgroundColor ?? defaultGreenColor.shade100;
 
-    final foregroundColor = style?.foregroundColor ?? green;
+    final foregroundColor =
+        themeGreenTagStyle?.foregroundColor ?? defaultGreenColor.shade800;
 
-    final iconColor = style?.iconColor ?? green;
+    final iconColor =
+        themeGreenTagStyle?.iconColor ?? defaultGreenColor.shade800;
 
-    final padding = style?.padding ?? themeStyle?.padding;
+    final padding = themeGreenTagStyle?.padding;
 
-    final border = style?.border ?? themeStyle?.border;
+    final border = themeGreenTagStyle?.border;
 
-    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+    final textStyle = themeGreenTagStyle?.textStyle;
 
     return CustomTag(
       style: CustomTagStyle(
@@ -106,29 +106,30 @@ class CustomTag extends StatelessWidget {
   /// when you want to display a tag with a warning color.
   /// The [child] parameter is the main content of the tag. It is usually a
   /// [Text] widget.
-  /// The [context] parameter is used to get the default CustomTagStyle.
-  /// The [style] parameter is used if you want to override the default style
-  /// for this constructor.
+  /// The [context] parameter is used to get the yellow CustomTagStyle.
   factory CustomTag.yellow(
     BuildContext context, {
     required Widget child,
-    CustomTagStyle? style,
   }) {
-    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+    final themeYellowTagStyle =
+        Theme.of(context).extension<CustomTagTheme>()?.yellowStyle;
 
-    final yellow = Colors.yellow[800];
+    const defaultYellowColor = Colors.yellow;
 
-    final backgroundColor = style?.backgroundColor ?? yellow?.withOpacity(0.3);
+    final backgroundColor =
+        themeYellowTagStyle?.backgroundColor ?? defaultYellowColor.shade100;
 
-    final foregroundColor = style?.foregroundColor ?? yellow;
+    final foregroundColor =
+        themeYellowTagStyle?.foregroundColor ?? defaultYellowColor.shade800;
 
-    final iconColor = style?.iconColor ?? yellow;
+    final iconColor =
+        themeYellowTagStyle?.iconColor ?? defaultYellowColor.shade800;
 
-    final padding = style?.padding ?? themeStyle?.padding;
+    final padding = themeYellowTagStyle?.padding;
 
-    final border = style?.border ?? themeStyle?.border;
+    final border = themeYellowTagStyle?.border;
 
-    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+    final textStyle = themeYellowTagStyle?.textStyle;
 
     return CustomTag(
       style: CustomTagStyle(
@@ -147,29 +148,29 @@ class CustomTag extends StatelessWidget {
   /// when you want to display a tag with a danger color.
   /// The [child] parameter is the main content of the tag. It is usually a
   /// [Text] widget.
-  /// The [context] parameter is used to get the default CustomTagStyle.
-  /// The [style] parameter is used if you want to override the default style
-  /// for this constructor.
+  /// The [context] parameter is used to get the red CustomTagStyle.
   factory CustomTag.red(
     BuildContext context, {
     required Widget child,
-    CustomTagStyle? style,
   }) {
-    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+    final themeRedTagStyle =
+        Theme.of(context).extension<CustomTagTheme>()?.redStyle;
 
-    final red = Colors.red[800];
+    const defaultRedColor = Colors.red;
 
-    final backgroundColor = style?.backgroundColor ?? red?.withOpacity(0.3);
+    final backgroundColor =
+        themeRedTagStyle?.backgroundColor ?? defaultRedColor.shade100;
 
-    final foregroundColor = style?.foregroundColor ?? red;
+    final foregroundColor =
+        themeRedTagStyle?.foregroundColor ?? defaultRedColor.shade800;
 
-    final iconColor = style?.iconColor ?? red;
+    final iconColor = themeRedTagStyle?.iconColor ?? defaultRedColor.shade800;
 
-    final padding = style?.padding ?? themeStyle?.padding;
+    final padding = themeRedTagStyle?.padding;
 
-    final border = style?.border ?? themeStyle?.border;
+    final border = themeRedTagStyle?.border;
 
-    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+    final textStyle = themeRedTagStyle?.textStyle;
 
     return CustomTag(
       style: CustomTagStyle(
@@ -188,29 +189,29 @@ class CustomTag extends StatelessWidget {
   /// when you want to display a tag with a neutral color.
   /// The [child] parameter is the main content of the tag. It is usually a
   /// [Text] widget.
-  /// The [context] parameter is used to get the default CustomTagStyle.
-  /// The [style] parameter is used if you want to override the default style
-  /// for this constructor.
+  /// The [context] parameter is used to get the neutral CustomTagStyle.
   factory CustomTag.grey(
     BuildContext context, {
     required Widget child,
-    CustomTagStyle? style,
   }) {
-    final themeStyle = Theme.of(context).extension<CustomTagStyle>();
+    final themeRedTagStyle =
+        Theme.of(context).extension<CustomTagTheme>()?.neutralStyle;
 
-    final grey = Colors.grey.shade800;
+    const defaultGreyColor = Colors.grey;
 
-    final backgroundColor = style?.backgroundColor ?? grey.withOpacity(0.3);
+    final backgroundColor =
+        themeRedTagStyle?.backgroundColor ?? defaultGreyColor.shade300;
 
-    final foregroundColor = style?.foregroundColor ?? grey;
+    final foregroundColor =
+        themeRedTagStyle?.foregroundColor ?? defaultGreyColor.shade800;
 
-    final iconColor = style?.iconColor ?? grey;
+    final iconColor = themeRedTagStyle?.iconColor ?? defaultGreyColor.shade800;
 
-    final padding = style?.padding ?? themeStyle?.padding;
+    final padding = themeRedTagStyle?.padding;
 
-    final border = style?.border ?? themeStyle?.border;
+    final border = themeRedTagStyle?.border;
 
-    final textStyle = style?.textStyle ?? themeStyle?.textStyle;
+    final textStyle = themeRedTagStyle?.textStyle;
 
     return CustomTag(
       style: CustomTagStyle(
@@ -225,36 +226,42 @@ class CustomTag extends StatelessWidget {
     );
   }
 
-  ///
+  /// The main content of the tag. It is usually a [Text] widget.
   final Widget child;
 
-  ///
+  /// The style of the tag.
   final CustomTagStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).extension<CustomTagStyle>();
+    final defaultTagTheme =
+        Theme.of(context).extension<CustomTagTheme>()?.defaultStyle;
 
     final defaultTheme = Theme.of(context);
 
     final textStyle = style?.textStyle ??
-        defaultStyle?.textStyle ??
+        defaultTagTheme?.textStyle ??
         defaultTheme.textTheme.labelMedium;
 
     final backgroundColor =
-        style?.backgroundColor ?? defaultStyle?.backgroundColor;
+        style?.backgroundColor ?? defaultTagTheme?.backgroundColor;
 
     final foregroundColor =
-        style?.foregroundColor ?? defaultStyle?.foregroundColor;
+        style?.foregroundColor ?? defaultTagTheme?.foregroundColor;
 
     final iconColor =
-        style?.iconColor ?? defaultStyle?.iconColor ?? foregroundColor;
+        style?.iconColor ?? defaultTagTheme?.iconColor ?? foregroundColor;
 
-    final iconSize = style?.iconSize ?? defaultStyle?.iconSize ?? 15.0;
+    final iconSize = style?.iconSize ?? defaultTagTheme?.iconSize ?? 15.0;
 
-    final padding = style?.padding ?? defaultStyle?.padding;
+    final padding = style?.padding ??
+        defaultTagTheme?.padding ??
+        const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        );
 
-    final border = style?.border ?? defaultStyle?.border;
+    final border = style?.border ?? defaultTagTheme?.border;
 
     return Theme(
       data: Theme.of(context).copyWith(
