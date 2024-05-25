@@ -68,3 +68,9 @@ vars:
     type: list
     description: Build status email recipients.
     prompt: What are the email recipients? (These emails will receive notifications about Codemagic builds)
+
+  upload_debug_symbols:
+    type: boolean
+    description: Whether to upload debug symbols to Firebase Crashlytics.
+    default: true
+    prompt: Do you want to upload debug symbols (dSYMs) to Firebase Crashlytics? (Only applied in production)
