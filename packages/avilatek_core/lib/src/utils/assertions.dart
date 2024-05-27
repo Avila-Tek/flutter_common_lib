@@ -17,5 +17,9 @@ class CommonAssertions {
       apiUrl.startsWith(RegExp('^https?://')),
       'apiUrl format error: URL must start with "http://" or "https://" protocol',
     );
+    assert(
+      !apiUrl.endsWith('/'),
+      'apiUrl format error: URL cannot end with slash "/"',
+    );
   }
 }

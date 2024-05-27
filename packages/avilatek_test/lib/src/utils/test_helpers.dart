@@ -9,7 +9,7 @@ class TestHelpers {
   /// with the apiUrl parameter.
   ///
   /// Usage:
-  /// ```
+  /// ```dart
   /// TestHelpers.checkGraphQLApiUrl(
   ///   (apiUrl) => UserApiGql(apiUrl: apiUrl),
   /// );
@@ -53,10 +53,11 @@ class TestHelpers {
   /// with the apiUrl parameter.
   ///
   /// Usage:
-  /// ```
+  /// ```dart
   /// TestHelpers.checkRestApiUrl(
   ///  (apiUrl) => UserApiRest(apiUrl: apiUrl),
   /// );
+  /// ```
   static void checkRestApiUrl<T>(
     T Function(String apiUrl) builder,
   ) {
@@ -64,17 +65,22 @@ class TestHelpers {
     expect(
       () => builder('localhost:3000'),
       throwsAssertionError,
+      reason:
+          'Missing protocol assertion: Url must start with either http:// or https://',
     );
     // Url ends with '/'
     expect(
       () => builder('http://localhost:3000/'),
       throwsAssertionError,
+      reason: 'Missing assertion: Url must not end with a slash "/"',
     );
 
     // Bad Url protocol format "http::/"
     expect(
       () => builder('http::/localhost:3000'),
       throwsAssertionError,
+      reason:
+          'Missing assertion: Url must start with either http:// or https://',
     );
 
     expect(
