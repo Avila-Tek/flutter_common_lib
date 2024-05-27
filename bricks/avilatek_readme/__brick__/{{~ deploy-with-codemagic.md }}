@@ -1,0 +1,19 @@
+### Deploying to Test Flight and Firebase App Distribution
+
+1. Checkout to the desired branch.
+2. Bump the build number in `pubspec.yaml`.
+   1. (Optional) Bump the version name in `pubspec.yaml` if you are releasing a new version to the App Store or Play Store.
+3. Commit and push the changes.
+4. Depending on which workflow you want to trigger, create a new tag **with** `git tag <tag_name>` using one of the following patterns:
+   - `vX.Y.Z+N-stg` or `vX.Y.Z+N-staging` to release `staging` flavor to Test Flight and Firebase App Distribution.
+   - `vX.Y.Z+N-prod` or `vX.Y.Z+N-production` to release `staging` flavor to Test Flight and Firebase App Distribution.
+   - If you want to release to only one platform (Firebase AD or Test Flight), append the desired platform to the tag name. For example, `vX.Y.Z+N-prod-ios` or `vX.Y.Z+N-staging-android`.
+5. Push the tag with `git push --tags`.
+
+#### Example
+``` sh
+$ git tag v1.0.0+1-stg # Will deploy staging flavor to Test Flight and Firebase App Distribution
+$ git push --tags
+```
+
+> **Note:** If you want to receive a notification when the workflow finishes, add your email to the `publishing/email/recipients` list in the `codemagic.yaml` file on the desired workflows.

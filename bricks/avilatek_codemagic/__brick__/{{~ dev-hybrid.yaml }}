@@ -1,4 +1,4 @@
-  development-ios-android-workflow:
+  development-ios-android:
     name: "[DEV] iOS & Android deploy"
     max_build_duration: 60
     environment:
@@ -10,6 +10,7 @@
         bundle_identifier: {{bundle_identifier}}.dev
       groups:
         - play_store_credentials
+        - firebase_credentials
         - development
         - all
 
@@ -23,6 +24,8 @@
       events:
         - tag
       tag_patterns:
+        - pattern: 'v*.*.*\+*-dev-all'
+          include: true
         - pattern: 'v*.*.*\+*-development-all'
           include: true
       cancel_previous_builds: false
@@ -34,12 +37,13 @@
           DEV_API_URL=$DEV_API_URL
           MY_SECRET_KEY=$MY_SECRET_KEY_EXAMPLE
           EOF
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
       - name: Get Flutter packages
         script: |
           flutter packages pub get
+          
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
@@ -49,6 +53,7 @@
             --flavor development \
             --target {{{development_main_path}}} \
             --export-options-plist=/Users/builder/export_options.plist
+
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
@@ -60,9 +65,9 @@
           keyAlias=$CM_KEY_ALIAS
           storeFile=$CM_KEYSTORE_PATH
           EOF
-      - name: Build AAB with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
+      - name: Build APK with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
         script: |
-          flutter build appbundle --release --flavor development --target {{{development_main_path}}}
+          flutter build apk --release --flavor development --target {{{development_main_path}}}
 
     artifacts:
       - build/ios/ipa/*.ipa
@@ -81,17 +86,20 @@
         submit_to_testflight: true
         {{#show_beta_groups}}
         beta_groups:
-          {{#beta_groups}}- {{.}}
-          {{/beta_groups}}
+          {{#beta_groups_testflight}}- {{.}}
+          {{/beta_groups_testflight}}
         {{/show_beta_groups}}
       firebase:
-        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT_CREDENTIALS # NOTE: Remember to add this value to the project's secrets.
         android:
-          app_id: # TODO: Set your app ID
+          app_id: $DEV_FIREBASE_APPLICATION_ID # NOTE: Remember to add this value to the project's secrets.
+          artifact_type: apk
+          {{#show_verifier_groups}}
           groups:
-            {{#beta_groups}}- {{.}}
-            {{/beta_groups}}
-            {{/show_beta_groups}}
+            {{#verifier_groups_firebase}}- {{.}}
+            {{/verifier_groups_firebase}}
+          {{/show_verifier_groups}}
+
       {{#show_email_recipients}}
       email:
         recipients:

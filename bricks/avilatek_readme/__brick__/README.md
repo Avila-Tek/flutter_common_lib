@@ -172,6 +172,8 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 }
 ```
 
+{{#uses_codemagic}}{{> deploy-with-codemagic.md }}{{/uses_codemagic}}
+
 {{> footer.md }}
 
 ---

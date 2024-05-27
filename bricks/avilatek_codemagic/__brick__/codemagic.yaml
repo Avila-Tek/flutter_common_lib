@@ -1,4 +1,10 @@
 workflows:
 {{#show_development}}{{> dev-hybrid.yaml }}{{/show_development}}
+{{#show_development}}{{> dev-ios.yaml }}{{/show_development}}
+{{#show_development}}{{> dev-android.yaml }}{{/show_development}}
 {{#show_staging}}{{> stg-hybrid.yaml }}{{/show_staging}}
+{{#show_staging}}{{> stg-ios.yaml }}{{/show_staging}}
+{{#show_staging}}{{> stg-android.yaml }}{{/show_staging}}
 {{#show_production}}{{> prod-hybrid.yaml }}{{/show_production}}
+{{#show_production}}{{> prod-ios.yaml }}{{/show_production}}
+{{#show_production}}{{> prod-android.yaml }}{{/show_production}}
