@@ -11,6 +11,8 @@ dependencies:
     path: ../../packages/avilatek_bloc
   avilatek_core:
     path: ../../packages/avilatek_core
+  avilatek_test:
+    path: ../../packages/avilatek_test
   avilatek_ui:
     path: ../../packages/avilatek_ui
   bloc: ^8.1.2

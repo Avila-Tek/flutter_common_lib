@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:avilatek_core/avilatek_core.dart';
 import 'package:code_standards/core/core.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/endpoints.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api.dart';
@@ -12,7 +13,9 @@ class PokemonApiRest implements IPokemonApi {
     required String baseUrl,
     http.Client? client,
   })  : _client = client ?? http.Client(),
-        _baseUrl = baseUrl;
+        _baseUrl = baseUrl {
+    CommonAssertions.assertUrlIsHttpOrHttps(_baseUrl);
+  }
 
   final http.Client _client;
   final String _baseUrl;

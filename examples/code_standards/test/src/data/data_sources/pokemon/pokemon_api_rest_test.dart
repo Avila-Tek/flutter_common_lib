@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:avilatek_test/avilatek_test.dart';
 import 'package:code_standards/core/core.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api_rest.dart';
@@ -37,8 +38,12 @@ void main() {
     () => expect(PokemonApiRest(baseUrl: baseUrl), isA<IPokemonApi>()),
   );
 
+  test('should check baseUrl is valid', () {
+    TestHelpers.checkRestApiUrl((apiUrl) => PokemonApiRest(baseUrl: apiUrl));
+  });
+
   group('PokemonApiRest.getPokemons()', () {
-    test('should call [PokemonApiRest.getPokemons]', () async {
+    test('should return [Right<Failure, List<PokemonModel>>]', () async {
       when(() => client.get(any()))
           .thenAnswer((_) async => http.Response(tPokemonsResponse, 200));
 
@@ -64,39 +69,66 @@ void main() {
         },
       );
     });
+    test('should return [Left<Failure, List<PokemonModel>>]', () async {
+      when(() => client.get(any()))
+          .thenAnswer((_) async => http.Response('', 404));
 
-    group('PokemonApiRest.getPokemon()', () {
-      test('should return [Right<Failure, PokemonModel>]', () async {
-        when(() => client.get(any()))
-            .thenAnswer((_) async => http.Response(tPokemonResponse, 200));
+      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
 
-        final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
+      final response = await pokemonApiRest.getPokemons();
 
-        final response = await pokemonApiRest.getPokemon(31);
+      verify(() => client.get(any<Uri>())).called(1);
+      verifyNoMoreInteractions(client);
 
-        verify(
-          () => client.get(
-            any<Uri>(
-              that: predicate((uri) => uri.toString().endsWith('pokemon/31')),
-            ),
-          ),
-        ).called(1);
-        verifyNoMoreInteractions(client);
+      expect(
+        response,
+        isA<Left<Failure, List<Pokemon>>>(),
+      );
 
-        expect(response, isA<Right<Failure, PokemonModel>>());
-
-        response.fold(
-          (l) => fail(
-            'PokemonApiRest.getPokemons() call failed when it should have succeeded',
-          ),
-          (r) => expect(r.name, 'Pikachu'),
-        );
-      });
+      response.fold(
+        (l) {
+          expect(l.message, 'Failed to get Pokemons');
+          expect(l.statusCode, 404);
+        },
+        (r) {
+          fail(
+            'PokemonApiRest.getPokemons() was expected to return a [Left] response but it returned a [Right] response',
+          );
+        },
+      );
     });
+  });
 
+  group('PokemonApiRest.getPokemon()', () {
+    test('should return [Right<Failure, PokemonModel>]', () async {
+      when(() => client.get(any()))
+          .thenAnswer((_) async => http.Response(tPokemonResponse, 200));
+
+      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
+
+      final response = await pokemonApiRest.getPokemon(31);
+
+      verify(
+        () => client.get(
+          any<Uri>(
+            that: predicate((uri) => uri.toString().endsWith('pokemon/31')),
+          ),
+        ),
+      ).called(1);
+      verifyNoMoreInteractions(client);
+
+      expect(response, isA<Right<Failure, PokemonModel>>());
+
+      response.fold(
+        (l) => fail(
+          'PokemonApiRest.getPokemons() call failed when it should have succeeded',
+        ),
+        (r) => expect(r.name, 'Pikachu'),
+      );
+    });
     test('should return [Left<Failure, PokemonModel>]', () async {
       when(() => client.get(any()))
-          .thenAnswer((_) async => http.Response(tPokemonResponse, 404));
+          .thenAnswer((_) async => http.Response('', 404));
 
       final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
 
@@ -119,7 +151,7 @@ void main() {
           expect(l.statusCode, 404);
         },
         (r) => fail(
-          'PokemonApiRest.getPokemon() call failed when it should have succeeded',
+          'PokemonApiRest.getPokemon() was expected to return a [Left] response but it returned a [Right] response',
         ),
       );
     });
