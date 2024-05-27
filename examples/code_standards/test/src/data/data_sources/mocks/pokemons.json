@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Pikachu",
+    "order": 1,
+    "height": 17,
+    "weight": 50,
+    "sprite": ["https://pokeapi.co/media/sprites/pokemon/1.png"]
+  },
+  {
+    "id": 2,
+    "name": "Charmander",
+    "order": 2,
+    "height": 17,
+    "weight": 50,
+    "sprite": ["https://pokeapi.co/media/sprites/pokemon/2.png"]
+  },
+  {
+    "id": 3,
+    "name": "Squirtle",
+    "order": 3,
+    "height": 17,
+    "weight": 50,
+    "sprite": ["https://pokeapi.co/media/sprites/pokemon/3.png"]
+  },
+  {
+    "id": 4,
+    "name": "Bulbasaur",
+    "order": 4,
+    "height": 17,
+    "weight": 50,
+    "sprite": ["https://pokeapi.co/media/sprites/pokemon/4.png"]
+  },
+  {
+    "id": 5,
+    "name": "Charmeleon",
+    "order": 5,
+    "height": 17,
+    "weight": 50,
+    "sprite": ["https://pokeapi.co/media/sprites/pokemon/5.png"]
+  }
+]
