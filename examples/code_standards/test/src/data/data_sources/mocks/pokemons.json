@@ -1,42 +1,25 @@
-[
-  {
-    "id": 1,
-    "name": "Pikachu",
-    "order": 1,
-    "height": 17,
-    "weight": 50,
-    "sprite": ["https://pokeapi.co/media/sprites/pokemon/1.png"]
-  },
-  {
-    "id": 2,
-    "name": "Charmander",
-    "order": 2,
-    "height": 17,
-    "weight": 50,
-    "sprite": ["https://pokeapi.co/media/sprites/pokemon/2.png"]
-  },
-  {
-    "id": 3,
-    "name": "Squirtle",
-    "order": 3,
-    "height": 17,
-    "weight": 50,
-    "sprite": ["https://pokeapi.co/media/sprites/pokemon/3.png"]
-  },
-  {
-    "id": 4,
-    "name": "Bulbasaur",
-    "order": 4,
-    "height": 17,
-    "weight": 50,
-    "sprite": ["https://pokeapi.co/media/sprites/pokemon/4.png"]
-  },
-  {
-    "id": 5,
-    "name": "Charmeleon",
-    "order": 5,
-    "height": 17,
-    "weight": 50,
-    "sprite": ["https://pokeapi.co/media/sprites/pokemon/5.png"]
-  }
-]
+{
+  "results": [
+    {
+      "name": "Pikachu",
+      "url": "https://pokeapi.co/api/v2/pokemon/1/"
+    },
+
+    {
+      "name": "Charmander",
+      "url": "https://pokeapi.co/api/v2/pokemon/2/"
+    },
+    {
+      "name": "Squirtle",
+      "url": "https://pokeapi.co/api/v2/pokemon/3/"
+    },
+    {
+      "name": "Bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/4/"
+    },
+    {
+      "name": "Charmeleon",
+      "url": "https://pokeapi.co/api/v2/pokemon/5/"
+    }
+  ]
+}

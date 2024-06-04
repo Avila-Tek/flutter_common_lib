@@ -1,17 +1,16 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:io';
-
 import 'package:avilatek_test/avilatek_test.dart';
 import 'package:code_standards/core/core.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api_rest.dart';
 import 'package:code_standards/src/data/models/models.dart';
 import 'package:code_standards/src/domain/entities/entities.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
+
+import '../mocks/mock_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
@@ -19,140 +18,137 @@ class FakeUri extends Fake implements Uri {}
 
 void main() {
   late http.Client client;
-  late String baseUrl;
-  late String tPokemonsResponse;
-  late String tPokemonResponse;
+  late PokemonApiRest api;
+
+  late String tPokemonsJson;
+  late String tPokemonJson;
+
+  const baseUrl = 'https://mock.api';
 
   setUpAll(() {
-    baseUrl = 'https://pokeapi.co/api/v2';
+    tPokemonsJson = readMock('pokemons.json');
+    tPokemonJson = readMock('pokemon.json');
+  });
+
+  setUp(() {
     client = MockHttpClient();
-    tPokemonsResponse = File('test/src/data/data_sources/mocks/pokemons.json')
-        .readAsStringSync();
-    tPokemonResponse = File('test/src/data/data_sources/mocks/pokemon.json')
-        .readAsStringSync();
+    api = PokemonApiRest(baseUrl: baseUrl, client: client);
 
     registerFallbackValue(FakeUri());
   });
+
   test(
     'should be subclass of IPokemonApi',
     () => expect(PokemonApiRest(baseUrl: baseUrl), isA<IPokemonApi>()),
   );
 
-  test('should check baseUrl is valid', () {
+  test('should check that[baseUrl] is valid', () {
     TestHelpers.checkRestApiUrl((apiUrl) => PokemonApiRest(baseUrl: apiUrl));
   });
 
+  /// We use this list of codes to test each function with 2xx responses easily.
+  final mock200Codes = <int>[200, 201, 250, 299];
+
   group('PokemonApiRest.getPokemons()', () {
-    test('should return [Right<Failure, List<PokemonModel>>]', () async {
-      when(() => client.get(any()))
-          .thenAnswer((_) async => http.Response(tPokemonsResponse, 200));
+    test('should include [limit] and [offset] parameters in the query string',
+        () async {
+      for (final code in mock200Codes) {
+        when(() => client.get(any()))
+            .thenAnswer((_) async => http.Response(tPokemonsJson, code));
 
-      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
+        await api.getPokemons(const PokemonApiPageParams(limit: 2, offset: 10));
 
-      final response = await pokemonApiRest.getPokemons();
-
-      verify(() => client.get(any<Uri>())).called(1);
-      verifyNoMoreInteractions(client);
-
-      expect(
-        response,
-        isA<Right<Failure, List<Pokemon>>>(),
-      );
-
-      response.fold(
-        (l) => fail(
-          'PokemonApiRest.getPokemons() call failed when it should have succeeded',
-        ),
-        (r) {
-          expect(r.length, 5);
-          expect(r[2].name, 'Squirtle');
-        },
-      );
+        verify(
+          () => client.get(
+            any<Uri>(
+              that: equals(Uri.parse('$baseUrl/pokemon?limit=2&offset=10')),
+            ),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(client);
+      }
     });
-    test('should return [Left<Failure, List<PokemonModel>>]', () async {
+
+    test('should return a [List<PokemonPreview>] when response code is 2xx',
+        () async {
+      for (final code in mock200Codes) {
+        when(() => client.get(any()))
+            .thenAnswer((_) async => http.Response(tPokemonsJson, code));
+
+        final response = await api
+            .getPokemons(const PokemonApiPageParams(limit: 2, offset: 10));
+
+        verify(() => client.get(any<Uri>())).called(1);
+        verifyNoMoreInteractions(client);
+
+        expect(response, isA<List<PokemonPreview>>());
+
+        expect(response.length, 5);
+      }
+    });
+
+    test('should throw a [ServerException] when status code is not 2xx',
+        () async {
       when(() => client.get(any()))
-          .thenAnswer((_) async => http.Response('', 404));
+          .thenAnswer((_) async => http.Response('Error', 404));
 
-      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
-
-      final response = await pokemonApiRest.getPokemons();
+      expect(
+        () async =>
+            api.getPokemons(const PokemonApiPageParams(limit: 2, offset: 10)),
+        throwsA(const ServerException(message: 'Error', statusCode: 404)),
+      );
 
       verify(() => client.get(any<Uri>())).called(1);
       verifyNoMoreInteractions(client);
+    });
+
+    test('should throw an [UnknownException] on unexpected errors', () async {
+      final tException = Exception('Unexpected error');
+      when(() => client.get(any())).thenThrow(tException);
 
       expect(
-        response,
-        isA<Left<Failure, List<Pokemon>>>(),
-      );
-
-      response.fold(
-        (l) {
-          expect(l.message, 'Failed to get Pokemons');
-          expect(l.statusCode, 404);
-        },
-        (r) {
-          fail(
-            'PokemonApiRest.getPokemons() was expected to return a [Left] response but it returned a [Right] response',
-          );
-        },
+        () async =>
+            api.getPokemons(const PokemonApiPageParams(limit: 2, offset: 10)),
+        throwsA(UnknownException(error: tException)),
       );
     });
   });
 
   group('PokemonApiRest.getPokemon()', () {
-    test('should return [Right<Failure, PokemonModel>]', () async {
-      when(() => client.get(any()))
-          .thenAnswer((_) async => http.Response(tPokemonResponse, 200));
+    test('should return [PokemonModel] when response code is 2xx', () async {
+      for (final code in mock200Codes) {
+        when(() => client.get(any()))
+            .thenAnswer((_) async => http.Response(tPokemonJson, code));
 
-      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
+        final response = await api.getPokemon(31);
 
-      final response = await pokemonApiRest.getPokemon(31);
+        verify(() => client.get(Uri.parse('$baseUrl/pokemon/31'))).called(1);
+        verifyNoMoreInteractions(client);
 
-      verify(
-        () => client.get(
-          any<Uri>(
-            that: predicate((uri) => uri.toString().endsWith('pokemon/31')),
-          ),
-        ),
-      ).called(1);
-      verifyNoMoreInteractions(client);
-
-      expect(response, isA<Right<Failure, PokemonModel>>());
-
-      response.fold(
-        (l) => fail(
-          'PokemonApiRest.getPokemons() call failed when it should have succeeded',
-        ),
-        (r) => expect(r.name, 'Pikachu'),
-      );
+        expect(response, isA<PokemonModel>());
+        expect(response, PokemonModel.fromJson(tPokemonJson));
+      }
     });
-    test('should return [Left<Failure, PokemonModel>]', () async {
+    test('should throw an [ServerException] when status code is not 2xx',
+        () async {
       when(() => client.get(any()))
-          .thenAnswer((_) async => http.Response('', 404));
+          .thenAnswer((_) async => http.Response('Error', 404));
 
-      final pokemonApiRest = PokemonApiRest(baseUrl: baseUrl, client: client);
+      expect(
+        () async => api.getPokemon(7),
+        throwsA(const ServerException(message: 'Error', statusCode: 404)),
+      );
 
-      final response = await pokemonApiRest.getPokemon(7);
-
-      verify(
-        () => client.get(
-          any<Uri>(
-            that: predicate((uri) => uri.toString().endsWith('pokemon/7')),
-          ),
-        ),
-      ).called(1);
+      verify(() => client.get(Uri.parse('$baseUrl/pokemon/7'))).called(1);
       verifyNoMoreInteractions(client);
+    });
+    test('should throw an [UnknownException] on unexpected errors', () async {
+      final tException = Exception('Unexpected error');
+      when(() => client.get(any())).thenThrow(tException);
 
-      expect(response, isA<Left<Failure, PokemonModel>>());
-
-      response.fold(
-        (l) {
-          expect(l.message, 'Failed to get Pokemon #7');
-          expect(l.statusCode, 404);
-        },
-        (r) => fail(
-          'PokemonApiRest.getPokemon() was expected to return a [Left] response but it returned a [Right] response',
-        ),
+      expect(
+        () async => api.getPokemon(1),
+        throwsA(UnknownException(error: tException)),
       );
     });
   });

@@ -58,7 +58,8 @@ class _CustomThemeValuesDarkMode {
   static ListTileThemeData listTileThemeData(BuildContext context) =>
       const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(
-          vertical: AppDimensions.padding,
+          vertical: Consts.padding,
+          horizontal: Consts.margin,
         ),
       );
 
@@ -81,8 +82,7 @@ class _CustomThemeValuesDarkMode {
         shadowColor: Colors.black26,
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(AppDimensions.defaultRadius * 1.5),
+          borderRadius: BorderRadius.circular(Consts.defaultRadius * 1.5),
           side: const BorderSide(color: AppColors.dividerColorDarkMode),
         ),
       );
@@ -115,8 +115,8 @@ class _CustomThemeValuesDarkMode {
           ElevatedButton.styleFrom(
             elevation: 0,
             padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.padding * 1.75,
-              horizontal: AppDimensions.padding * 3,
+              vertical: Consts.padding * 1.75,
+              horizontal: Consts.padding * 3,
             ),
             disabledBackgroundColor: AppColors.primaryColorDarkMode.shade100,
             backgroundColor: AppColors.primaryColorDarkMode.shade400,
@@ -129,8 +129,8 @@ class _CustomThemeValuesDarkMode {
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.padding * 1.5,
-            horizontal: AppDimensions.padding * 3,
+            vertical: Consts.padding * 1.5,
+            horizontal: Consts.padding * 3,
           ),
           foregroundColor: AppColors.primaryColorDarkMode,
           side: const BorderSide(
@@ -158,7 +158,7 @@ class _CustomThemeValuesDarkMode {
 
           return OutlineInputBorder(
             borderRadius: const BorderRadius.all(
-              Radius.circular(AppDimensions.defaultRadius),
+              Radius.circular(Consts.defaultRadius),
             ),
             borderSide: BorderSide(color: foregroundColor, width: 1.5),
           );
@@ -166,7 +166,7 @@ class _CustomThemeValuesDarkMode {
       ),
       contentPadding: const EdgeInsets.symmetric(
         vertical: 12,
-        horizontal: AppDimensions.padding * 3,
+        horizontal: Consts.padding * 3,
       ),
       hintStyle: MaterialStateTextStyle.resolveWith((states) {
         if (states.contains(MaterialState.disabled)) {

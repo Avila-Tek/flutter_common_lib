@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:code_standards/core/constants.dart';
 import 'package:code_standards/src/presentation/home/bloc/bloc.dart';
 import 'package:code_standards/src/presentation/home/widgets/home_body.dart';
+import 'package:flutter/material.dart';
 
 /// {@template home_page}
 /// A description for HomePage
@@ -11,11 +12,10 @@ class HomePage extends StatelessWidget {
 
   /// The path name of HomePage. Use for navigation.
   static const path = '/$routeName';
-  
+
   /// The route name of HomePage. Use to navigate
   /// with named routes.
   static const routeName = 'home';
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +23,20 @@ class HomePage extends StatelessWidget {
       create: (context) => HomeBloc(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          key: const Key('home_appbar'),
+          title: Text(context.l10n.homePageTitle),
         ),
         body: const HomeView(),
       ),
     );
-  }    
+  }
 }
 
 // NOTE: Declare all BlocListeners of Home here to handle navigation, showing dialogs, etc.
 /// {@template home_view}
 /// Displays the Body of HomeView
 /// {@endtemplate}
-/// 
+///
 class HomeView extends StatelessWidget {
   /// {@macro home_view}
   const HomeView({super.key});

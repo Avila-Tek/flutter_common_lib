@@ -2,8 +2,7 @@
 
 import 'package:code_standards/core/interfaces/use_case.dart';
 import 'package:code_standards/core/typedefs/response.dart';
-import 'package:code_standards/src/domain/entities/paged_params.dart';
-import 'package:code_standards/src/domain/entities/pokemon.dart';
+import 'package:code_standards/src/domain/entities/entities.dart';
 import 'package:code_standards/src/domain/repositories/repositories.dart';
 
 class GetPokemonsUseCase extends UseCaseWithParams<List<Pokemon>, PageParams> {

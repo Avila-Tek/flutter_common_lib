@@ -14,7 +14,7 @@ class PokemonTypeModel extends PokemonType {
     final name = map['name'] as String?;
 
     return PokemonTypeModel(
-      id: id ?? 1,
+      id: id ?? 0,
       name: name ?? 'Unknown',
     );
   }

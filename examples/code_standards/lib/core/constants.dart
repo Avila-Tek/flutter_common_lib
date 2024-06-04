@@ -2,6 +2,10 @@ import 'package:code_standards/core/typedefs/typedefs.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+export 'package:code_standards/l10n/l10n.dart';
+
+export 'extensions/extensions.dart';
+
 /// Here, you would define any constants that are used throughout your app.
 /// Common examples include app name, margins, paddings, colors, fonts, common
 /// URLs, and more. Do not include any sensitive information here, like API
@@ -19,9 +23,7 @@ class Consts {
 
   /// Page limit size for pagination.
   static const pageLimit = 25;
-}
 
-class AppDimensions {
   /// Grid system's base value. The project uses an 8 point grid system.
   ///
   /// This means that the minimum size must be 8.0 and any other sizes must

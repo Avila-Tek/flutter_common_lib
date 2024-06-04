@@ -16,6 +16,7 @@ dependencies:
   avilatek_ui:
     path: ../../packages/avilatek_ui
   bloc: ^8.1.2
+  cached_network_image: ^3.3.1
   dartz: ^0.10.1
   equatable: ^2.0.5
   flutter:

@@ -110,10 +110,10 @@ title: PagedRemoteDataBloc State Machine
             F -- "error" --> G[PagedRemoteDataNextPageFetchingFailure];
             F -- "success" --> H[PagedRemoteDataNextPageFetchingSuccess];
             H -..-> I[PagedRemoteDataLastPageFetched];
-            G -...-> E;
+            G -- FetchData --> F;
             H -.-> E;
         end
-        linkStyle 0,1,5,8 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 0,1,5 stroke:#f05,stroke-width:2px,color:crimson;
         linkStyle 3,6,7,9 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
 

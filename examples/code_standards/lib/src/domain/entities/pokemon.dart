@@ -1,4 +1,3 @@
-import 'package:code_standards/src/domain/entities/pokemon_type.dart';
 import 'package:equatable/equatable.dart';
 
 class Pokemon extends Equatable {
@@ -9,8 +8,19 @@ class Pokemon extends Equatable {
     required this.weight,
     required this.order,
     required this.sprite,
-    required this.types,
+    // required this.types,
   });
+
+  Pokemon.empty()
+      : this(
+          name: '',
+          id: 0,
+          height: 0,
+          weight: 0,
+          order: 0,
+          sprite: '',
+          // types: [],
+        );
 
   final String name;
   final int id;
@@ -18,8 +28,15 @@ class Pokemon extends Equatable {
   final int weight;
   final int order;
   final String sprite;
-  final List<PokemonType> types;
+  // final List<PokemonType> types;
 
   @override
-  List<Object?> get props => [name, id, height, weight, order, sprite, types];
+  List<Object?> get props => [
+        name,
+        id,
+        height,
+        weight,
+        order,
+        sprite,
+      ];
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:code_standards/core/typedefs/typedefs.dart';
-import 'package:code_standards/src/data/models/pokemon_type.dart';
 import 'package:code_standards/src/domain/entities/entities.dart';
 
 class PokemonModel extends Pokemon {
@@ -12,7 +11,7 @@ class PokemonModel extends Pokemon {
     required super.weight,
     required super.order,
     required super.sprite,
-    required super.types,
+    // required super.types,
   });
 
   factory PokemonModel.fromMap(Map<String, dynamic> map) {
@@ -21,8 +20,10 @@ class PokemonModel extends Pokemon {
     final height = map['height'] as int?;
     final weight = map['weight'] as int?;
     final order = map['order'] as int?;
-    final sprites = (map['sprites'] as List<String>? ?? []).nonNulls;
-    final types = (map['types'] as List<DataMap>? ?? []).nonNulls;
+
+    // ignore: avoid_dynamic_calls
+    final sprite = map['sprites']?['front_default'] as String?;
+    // final types = (map['types'] as List? ?? []).nonNulls;
 
     return PokemonModel(
       id: id ?? 1,
@@ -30,8 +31,8 @@ class PokemonModel extends Pokemon {
       height: height ?? 1,
       weight: weight ?? 1,
       order: order ?? 1,
-      sprite: sprites.firstOrNull ?? '',
-      types: types.map(PokemonTypeModel.fromMap).toList(),
+      sprite: sprite ?? '',
+      // types: types.map((e) => PokemonTypeModel.fromMap(e as DataMap)).toList(),
     );
   }
 
@@ -44,7 +45,20 @@ class PokemonModel extends Pokemon {
         'height': height,
         'weight': weight,
         'order': order,
-        'sprites': [sprite],
-        'types': types.map((e) => (e as PokemonTypeModel).toJson()).toList(),
+        'sprites': {
+          'front_default': sprite,
+        },
+        // 'types': types.map((e) => (e as PokemonTypeModel).toJson()).toList(),
       };
+
+  // ignore: prefer_constructors_over_static_methods
+  static PokemonModel empty() => const PokemonModel(
+        id: 0,
+        name: '',
+        height: 0,
+        weight: 0,
+        order: 0,
+        sprite: '',
+        // types: [],
+      );
 }

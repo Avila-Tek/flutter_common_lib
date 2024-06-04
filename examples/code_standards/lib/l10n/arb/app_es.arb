@@ -1,7 +1,8 @@
 {
-    "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
-    }
+  "@@locale": "es",
+  "homePageTitle": "Inicio",
+  "pokedexListTileTitle": "Pokédex",
+  "pokeFinderListTileTitle": "Poké-Localizador",
+  "pokeRandomListTileTitle": "Poké-Aleatorio",
+  "pokedexPageTitle": "Pokédex"
 }
