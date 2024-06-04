@@ -66,6 +66,8 @@ class _PokedexListViewState extends State<PokedexListView> {
       return const PokedexLoadingListTile();
     }
 
-    return const SizedBox();
+    return const SizedBox(
+      key: ValueKey('pokedex_list_view_empty_space'),
+    );
   }
 }

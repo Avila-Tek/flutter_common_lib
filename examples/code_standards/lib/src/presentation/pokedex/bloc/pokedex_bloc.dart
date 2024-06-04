@@ -24,12 +24,9 @@ class PokedexBloc extends PagedRemoteDataBloc<Pokemon> {
     PagedRemoteDataFetchNextPage event,
   ) async {
     var page = 0;
+
     if (oldState is PagedRemoteDataInitialized<Pokemon>) {
       page = (oldState as PagedRemoteDataInitialized).data.length ~/ _pageSize;
-    }
-
-    if (page == 3) {
-      throw Exception('Page limit reached');
     }
 
     final response = await _getPokemons(

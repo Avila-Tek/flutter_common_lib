@@ -13,7 +13,7 @@ void main() {
     setUp(
       () {
         tPokemons = <Pokemon>[
-          for (var i = 0; i < 5; i++) Pokemon.empty(),
+          for (var i = 0; i < 3; i++) Pokemon.empty(),
         ];
       },
     );
@@ -40,8 +40,7 @@ void main() {
           child: PokedexListView(state: tState, onRetry: () {}),
         );
 
-        expect(find.byType(ListTile), findsNWidgets(tPokemons.length));
-        expect(find.byType(SizedBox), findsOneWidget);
+        expect(find.byType(PokemonListTile), findsNWidgets(tPokemons.length));
       },
     );
     testWidgets(
@@ -59,7 +58,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        expect(find.byType(ListTile), findsNWidgets(tPokemons.length));
+        expect(find.byType(PokemonListTile), findsNWidgets(tPokemons.length));
         expect(find.byType(PokedexErrorListTile), findsOneWidget);
       },
     );
@@ -75,12 +74,12 @@ void main() {
           child: PokedexListView(state: tState, onRetry: () {}),
         );
 
-        expect(find.byType(ListTile), findsNWidgets(tPokemons.length));
+        expect(find.byType(PokemonListTile), findsNWidgets(tPokemons.length));
         expect(find.byType(PokedexLoadingListTile), findsOneWidget);
       },
     );
     testWidgets(
-      'renders each ListTile and a SizedBox for '
+      'renders each ListTile and a empty space for '
       'PagedRemoteDataLastPageFetched',
       (tester) async {
         final tState = PagedRemoteDataLastPageFetched<Pokemon>(tPokemons);
@@ -90,7 +89,10 @@ void main() {
         );
 
         expect(find.byType(ListTile), findsNWidgets(tPokemons.length));
-        expect(find.byType(SizedBox), findsOneWidget);
+        expect(
+          find.byKey(const ValueKey('pokedex_list_view_empty_space')),
+          findsOneWidget,
+        );
       },
     );
   });
