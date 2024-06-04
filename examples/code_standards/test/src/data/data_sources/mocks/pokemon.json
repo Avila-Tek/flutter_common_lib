@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "Pikachu",
+  "order": 5,
+  "height": 17,
+  "weight": 50,
+  "sprites": {
+    "front_default": "https://pokeapi.co/media/sprites/pokemon/1.png"
+  }
+}
