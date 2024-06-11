@@ -23,16 +23,14 @@ class PokemonModel extends Pokemon {
 
     // ignore: avoid_dynamic_calls
     final sprite = map['sprites']?['front_default'] as String?;
-    // final types = (map['types'] as List? ?? []).nonNulls;
 
     return PokemonModel(
-      id: id ?? 1,
+      id: id ?? 0,
       name: name ?? 'Unknown',
-      height: height ?? 1,
-      weight: weight ?? 1,
-      order: order ?? 1,
+      height: height ?? 0,
+      weight: weight ?? 0,
+      order: order ?? 0,
       sprite: sprite ?? '',
-      // types: types.map((e) => PokemonTypeModel.fromMap(e as DataMap)).toList(),
     );
   }
 

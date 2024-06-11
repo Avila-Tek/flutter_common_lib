@@ -1,21 +1,24 @@
 import 'dart:io';
 
 import 'package:code_standards/core/core.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group(
     '[ServerFailure]',
     () {
-      const tFailure = ServerFailure(message: '', statusCode: 0);
-
       test(
         'should be a subclass of [Failure]',
-        () async => expect(tFailure, isA<Failure>()),
+        () async => expect(
+          const ServerFailure(message: '', statusCode: 0),
+          isA<Failure>(),
+        ),
       );
       test(
         'should return [message] and [statusCode] properties',
         () async {
+          const tFailure = ServerFailure(message: '', statusCode: 0);
+
           expect(tFailure.message, '');
           expect(tFailure.statusCode, 0);
         },
@@ -29,14 +32,14 @@ void main() {
               statusCode: 0,
             ),
           ),
-          equals(tFailure),
+          equals(const ServerFailure(message: '', statusCode: 0)),
         ),
       );
       test(
         'should equal [ServerFailure] with the same [message] and [statusCode] '
         'properties',
         () async => expect(
-          tFailure,
+          const ServerFailure(message: '', statusCode: 0),
           equals(const ServerFailure(message: '', statusCode: 0)),
         ),
       );
@@ -44,12 +47,12 @@ void main() {
         'should not be equal with different properties',
         () async {
           expect(
-            tFailure,
-            isNot(equals(const ServerFailure(message: '', statusCode: 100))),
+            const ServerFailure(message: '', statusCode: 0),
+            isNot(equals(const ServerFailure(message: '', statusCode: 1))),
           );
 
           expect(
-            tFailure,
+            const ServerFailure(message: '', statusCode: 0),
             isNot(equals(const ServerFailure(message: 'Error', statusCode: 0))),
           );
         },

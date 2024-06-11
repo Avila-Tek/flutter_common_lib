@@ -24,8 +24,9 @@ class PokemonPreviewModel extends PokemonPreview {
   factory PokemonPreviewModel.fromJson(String source) =>
       PokemonPreviewModel.fromMap(json.decode(source) as DataMap);
 
-  int get id =>
-      int.tryParse(url.substring(0, url.length - 1).split('/').last) ?? 0;
+  int get id => url.isEmpty
+      ? 0
+      : int.tryParse(url.substring(0, url.length - 1).split('/').last) ?? 0;
 
   DataMap toJson() => <String, dynamic>{
         'name': name,

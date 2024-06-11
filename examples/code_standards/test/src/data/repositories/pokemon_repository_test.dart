@@ -1,10 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:convert';
-
 import 'package:code_standards/core/errors/exceptions.dart';
 import 'package:code_standards/core/errors/failure.dart';
-import 'package:code_standards/core/typedefs/data_map.dart';
 import 'package:code_standards/src/data/data_sources/pokemon/pokemon_api.dart';
 import 'package:code_standards/src/data/models/models.dart';
 import 'package:code_standards/src/data/repositories/pokemon_repository.dart';
@@ -14,57 +11,47 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../data_sources/mocks/mock_reader.dart';
-
 class PokemonApiMock extends Mock implements IPokemonApi {}
 
 void main() {
   late IPokemonApi pokemonApi;
   late PokemonRepository repository;
-  late ServerException tException;
-  late List<PokemonPreviewModel> tPokemons;
 
   setUp(() {
     pokemonApi = PokemonApiMock();
     repository = PokemonRepository(pokemonApi: pokemonApi);
-    tException =
-        const ServerException(message: 'Server error', statusCode: 500);
-
-    tPokemons =
-        // ignore: avoid_dynamic_calls
-        (jsonDecode(readMock('pokemons.json'))['results'] as List<dynamic>)
-            .map((e) => PokemonPreviewModel.fromMap(e as DataMap))
-            .toList();
 
     registerFallbackValue(const PokemonApiPageParams.empty());
   });
 
   group('getPokemon()', () {
     test(
-      'should call [IPokemonApi.getPokemon] with the correct id and return [Pokemon]',
+      'should call [IPokemonApi.getPokemon] with the given id and return '
+      'a [Pokemon]',
       () async {
         when(() => pokemonApi.getPokemon(any()))
             .thenAnswer((_) async => PokemonModel.empty());
 
-        final response = await repository.getPokemonById(1);
+        final response = await repository.getPokemonById(0);
 
         expect(
           response,
           equals(Right<Failure, PokemonModel>(PokemonModel.empty())),
         );
-
-        verify(() => pokemonApi.getPokemon(1)).called(1);
+        verify(() => pokemonApi.getPokemon(0)).called(1);
         verifyNoMoreInteractions(pokemonApi);
       },
     );
     test(
-      'should return [Left(ServerFailure())] when the api throws a ServerException',
+      'should return [Left(ServerFailure())] when the api throws a '
+      '[ServerException]',
       () async {
+        const tException = ServerException(message: '', statusCode: 0);
         when(() => pokemonApi.getPokemon(any())).thenThrow(tException);
 
-        final response = await repository.getPokemonById(1);
+        final response = await repository.getPokemonById(0);
 
-        verify(() => pokemonApi.getPokemon(1)).called(1);
+        verify(() => pokemonApi.getPokemon(0)).called(1);
         verifyNoMoreInteractions(pokemonApi);
 
         expect(
@@ -81,19 +68,22 @@ void main() {
 
   group('getPokemons()', () {
     test(
-      'should call [IPokemonApi.getPokemons], and then [IPokemonApi.getPokemon] '
-      'for each element in the response, and then return a [List<Pokemon>]',
+      'should return a [List<Pokemon>] on success',
       () async {
-        final tResult = tPokemons.map((e) => PokemonModel.empty()).toList();
+        // Arrange
+        final tResult = [const PokemonPreviewModel.empty()];
 
         when(() => pokemonApi.getPokemons(any()))
-            .thenAnswer((_) async => tPokemons);
+            .thenAnswer((_) async => tResult);
         when(() => pokemonApi.getPokemon(any()))
             .thenAnswer((_) async => PokemonModel.empty());
 
-        const pageParams = PageParams(page: 1, perPage: 10);
+        const pageParams = PageParams(page: 0, perPage: 0);
+
+        // Act
         final response = await repository.getPokemons(pageParams);
 
+        // Assert
         expect(response, isA<Right<Failure, List<Pokemon>>>());
 
         /// NOTE: Because lists are not easily equatable in Dart, we need to use
@@ -103,24 +93,41 @@ void main() {
         /// need to use the [fold] method.
         ///
         /// We are not expecting a [Left] response here, so if that happens
-        /// we will fail the test.
+        /// we will force test failure.
         response.fold(
           (l) => fail(
             'PokemonApiRest.getPokemons() call failed when it should have succeeded',
           ),
           (r) {
             expect(
-              listEquals(r, tResult),
+              listEquals(r, [PokemonModel.empty()]),
               isTrue,
               reason: 'Response list does not match the expected list',
             );
           },
         );
-
+      },
+    );
+    test(
+      'should call [IPokemonApi.getPokemons] once, and [IPokemonApi.getPokemon] '
+      'for each element in the response',
+      () async {
+        // Arrange
+        const tResult = [
+          PokemonPreviewModel.empty(),
+          PokemonPreviewModel.empty(),
+          PokemonPreviewModel.empty(),
+        ];
+        when(() => pokemonApi.getPokemons(any()))
+            .thenAnswer((_) async => tResult);
+        when(() => pokemonApi.getPokemon(any()))
+            .thenAnswer((_) async => PokemonModel.empty());
+        // Act
+        await repository.getPokemons(const PageParams.empty());
+        // Assert
         verify(() => pokemonApi.getPokemons(any())).called(1);
         // pokemonApi.getPokemon must be called for each element in the list
-        verify(() => pokemonApi.getPokemon(any())).called(tPokemons.length);
-
+        verify(() => pokemonApi.getPokemon(any())).called(tResult.length);
         verifyNoMoreInteractions(pokemonApi);
       },
     );
@@ -128,9 +135,11 @@ void main() {
     test(
       'should return [Left(ServerFailure())] when the api throws a ServerException',
       () async {
+        const tException = ServerException(message: '', statusCode: 0);
+
         when(() => pokemonApi.getPokemons(any())).thenThrow(tException);
 
-        const pageParams = PageParams(page: 1, perPage: 10);
+        const pageParams = PageParams(page: 0, perPage: 0);
         final response = await repository.getPokemons(pageParams);
 
         verify(() => pokemonApi.getPokemons(any())).called(1);
@@ -152,7 +161,7 @@ void main() {
     test(
       'should call [IPokemonApi.getRandomPokemon] the random generated id',
       () async {
-        const tSeed = 1923662128266128;
+        const tSeed = 0;
         final expectedId = repository.randomId(tSeed);
 
         when(() => pokemonApi.getPokemon(any()))

@@ -8,38 +8,45 @@ import 'package:flutter_test/flutter_test.dart';
 import '../data_sources/mocks/mock_reader.dart';
 
 void main() {
-  late String tJson;
-  late PokemonModel tModel;
-
-  setUpAll(() {
-    tJson = readMock('pokemon.json');
-    tModel = const PokemonModel(
-      id: 1,
-      name: 'Pikachu',
-      order: 5,
-      height: 17,
-      weight: 50,
-      sprite: 'https://pokeapi.co/media/sprites/pokemon/1.png',
-    );
-  });
-
   test(
     'should be a subclass of [Pokemon] entity',
-    () => expect(tModel, isA<Pokemon>()),
+    () => expect(PokemonModel.empty(), isA<Pokemon>()),
   );
 
   group('PokemonModel.fromMap()', () {
     test(
-      'should return a [PokemonModel] instance with the correct values',
+      'should create a [PokemonModel] instance with the given values',
       () {
+        // Arrange
+        final tJson = readMock('pokemon.json');
+        // Act
+        final tModel = PokemonModel.fromMap(jsonDecode(tJson) as DataMap);
+        // Assert
         expect(
-          PokemonModel.fromMap(jsonDecode(tJson) as DataMap),
-          equals(tModel),
+          tModel,
+          equals(
+            const PokemonModel(
+              id: 1,
+              name: 'name',
+              order: 1,
+              height: 1,
+              weight: 1,
+              sprite: 'sprite',
+            ),
+          ),
         );
+
+        /// NOTE that we are using "non-minimal values" on this test.
+        ///
+        /// This is
+        /// because we want to make sure that the values assigned to the
+        /// resulting object come from the passed json instead of the fallback
+        /// values defined inside the method, which are 0's and empty strings.
       },
     );
     test(
-      'should handle null or missing values',
+      'should return [PokemonModel] with default values on null or missing '
+      'fields',
       () {
         expect(
           () => PokemonModel.fromMap(const {}),
@@ -50,18 +57,36 @@ void main() {
   });
 
   group('PokemonModel.fromJson()', () {
-    test('should parse [PokemonModel] from json string', () {
+    test('should parse json string and return a [PokemonModel]', () {
+      // Arrange
+      final tJson = readMock('pokemon.json');
+      // Act
+      final tModel = PokemonModel.fromJson(tJson);
+      // Assert
       expect(
-        PokemonModel.fromJson(tJson),
-        equals(tModel),
+        tModel,
+        equals(
+          const PokemonModel(
+            id: 1,
+            name: 'name',
+            order: 1,
+            height: 1,
+            weight: 1,
+            sprite: 'sprite',
+          ),
+        ),
       );
     });
   });
 
   group('PokemonModel.toJson()', () {
-    test('should return a [DataMap] instance', () {
+    test('should convert a [PokemonModel] object to a [DataMap]', () {
+      // Arrange
+      final tJson = readMock('pokemon.json');
+      final tModel = PokemonModel.fromMap(jsonDecode(tJson) as DataMap);
+      // Act
       final tMap = tModel.toJson();
-
+      // Assert
       expect(tMap, isA<DataMap>());
       expect(tMap, equals(jsonDecode(tJson)));
     });

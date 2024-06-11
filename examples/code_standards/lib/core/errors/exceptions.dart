@@ -23,8 +23,7 @@ class ServerException extends PokemonDataException {
 class UnknownException extends PokemonDataException {
   const UnknownException({Object? error})
       : super(
-          message:
-              error != null ? 'Unknown exception: $error' : 'Unknown exception',
+          message: error != null ? '$error' : 'Unknown exception',
           statusCode: 0,
         );
 }
