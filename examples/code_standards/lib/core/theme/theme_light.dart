@@ -168,15 +168,15 @@ class _CustomThemeValuesLightMode {
         vertical: 12,
         horizontal: Consts.padding * 3,
       ),
-      hintStyle: MaterialStateTextStyle.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return TextStyle(color: inputBorderColor);
-        }
-        return Consts.textStyle(
-          color: AppColors.font1LightMode,
-          fontWeight: FontWeight.w500,
-        );
-      }),
+      // hintStyle: MaterialStateTextStyle.resolveWith((states) {
+      //   if (states.contains(MaterialState.disabled)) {
+      //     return TextStyle(color: inputBorderColor);
+      //   }
+      //   return Consts.textStyle(
+      //     color: AppColors.font1LightMode,
+      //     fontWeight: FontWeight.w500,
+      //   );
+      // }),
       prefixIconColor: MaterialStateColor.resolveWith(
         (states) {
           if (states.contains(MaterialState.disabled)) {

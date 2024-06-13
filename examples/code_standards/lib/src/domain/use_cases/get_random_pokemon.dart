@@ -5,8 +5,9 @@ import 'package:code_standards/core/typedefs/response.dart';
 import 'package:code_standards/src/domain/entities/pokemon.dart';
 import 'package:code_standards/src/domain/repositories/repositories.dart';
 
-class GetPokemonUseCase extends UseCaseWithoutParams<Pokemon> {
-  GetPokemonUseCase(IPokemonRepository repository) : _repository = repository;
+class GetRandomPokemonUseCase extends UseCaseWithoutParams<Pokemon> {
+  GetRandomPokemonUseCase(IPokemonRepository repository)
+      : _repository = repository;
 
   final IPokemonRepository _repository;
 

@@ -4,5 +4,7 @@
   "pokedexListTileTitle": "Pokédex",
   "pokeFinderListTileTitle": "Poké-Finder",
   "pokeRandomListTileTitle": "Poké-Random",
-  "pokedexPageTitle": "Pokédex"
+  "pokedexPageTitle": "Pokédex",
+  "pokedexFinderInputHint": "Search by Pokémon ID",
+  "pokedexFinderSnackbarFailureMessage": "Could not load Pokémon. Please, try again."
 }

@@ -39,4 +39,7 @@ class Pokemon extends Equatable {
         order,
         sprite,
       ];
+
+  @override
+  String toString() => "Pokemon('name': $name, 'id': $id)";
 }
