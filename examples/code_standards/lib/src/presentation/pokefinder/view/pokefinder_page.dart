@@ -1,3 +1,4 @@
+import 'package:code_standards/core/widgets/custom_app_bar.dart';
 import 'package:code_standards/src/domain/use_cases/get_pokemon.dart';
 import 'package:code_standards/src/presentation/pokefinder/bloc/bloc.dart';
 import 'package:code_standards/src/presentation/pokefinder/widgets/pokefinder_body.dart';
@@ -27,7 +28,7 @@ class PokefinderPage extends StatelessWidget {
         getPokemon: GetPokemonUseCase(context.read()),
       ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar(
           title: const Text('Pokefinder'),
         ),
         body: const PokefinderView(),

@@ -20,6 +20,7 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.themeLightMode(context),
         darkTheme: AppTheme.themeDarkMode(context),
         localizationsDelegates: AppLocalizations.localizationsDelegates,

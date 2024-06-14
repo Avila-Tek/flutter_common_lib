@@ -1,6 +1,7 @@
 import 'package:avilatek_bloc/avilatek_bloc.dart';
 import 'package:avilatek_ui/avilatek_ui.dart';
 import 'package:code_standards/core/constants.dart';
+import 'package:code_standards/core/widgets/custom_app_bar.dart';
 import 'package:code_standards/src/domain/entities/entities.dart';
 import 'package:code_standards/src/domain/use_cases/get_pokemons.dart';
 import 'package:code_standards/src/presentation/pokedex/bloc/bloc.dart';
@@ -29,7 +30,7 @@ class PokedexPage extends StatelessWidget {
         getPokemons: GetPokemonsUseCase(context.read()),
       ),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar(
           title: Text(context.l10n.pokedexPageTitle),
         ),
         body: const PokedexView(),

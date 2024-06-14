@@ -69,10 +69,10 @@ class _CustomThemeValuesLightMode {
         titleTextStyle: Consts.textStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
-          color: AppColors.primaryColorLightMode,
+          color: Colors.white,
         ),
         centerTitle: true,
-        foregroundColor: AppColors.primaryColorLightMode,
+        foregroundColor: Colors.white,
         shadowColor: Colors.black26,
       );
 

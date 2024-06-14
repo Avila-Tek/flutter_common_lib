@@ -1,4 +1,4 @@
-import 'package:code_standards/core/constants.dart';
+import 'package:code_standards/core/widgets/widgets.dart';
 import 'package:code_standards/src/presentation/home/bloc/bloc.dart';
 import 'package:code_standards/src/presentation/home/widgets/home_body.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +22,9 @@ class HomePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeBloc(),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar(
           key: const Key('home_appbar'),
-          title: Text(context.l10n.homePageTitle),
+          title: const Text('Pokemon'),
         ),
         body: const HomeView(),
       ),
