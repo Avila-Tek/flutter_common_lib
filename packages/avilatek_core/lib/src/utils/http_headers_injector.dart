@@ -2,6 +2,9 @@ import 'package:avilatek_core/src/interfaces/device_storage_api.dart';
 
 /// Enum with the most common HTTP headers.
 enum HttpHeaderType {
+  /// `App-Version` header.
+  appVersion('App-Version'),
+
   /// `Content-Type` header.
   contentType('Content-Type'),
 
