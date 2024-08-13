@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:{{packageName}}/routes/branches/base_branch.dart';
 
+{{#branches}}import 'package:{{packageName}}/routes/branches/{{branch}}_branch.dart';
+{{/branches}}
 /// Defines all the branches for the app, including navigator keys for each
 /// branch.
 ///
@@ -20,12 +22,12 @@ class AppStatefulShellBranches {
   static List<StatefulShellBranch> get branches => AppShellBranch.values.map(_branch).toList();
 
   static StatefulShellBranch _branch(AppShellBranch page) {
-    {{#branches}}final {{#camelCase}}{{.}}{{/camelCase}} = {{#pascalCase}}{{.}}{{/pascalCase}}ShellBranch();
+    {{#branches}}final {{#camelCase}}{{branch}}{{/camelCase}} = {{#pascalCase}}{{branch}}{{/pascalCase}}ShellBranch();
     {{/branches}}
 
     switch (page) {
-      {{#branches}}case AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}:
-        return {{#camelCase}}{{.}}{{/camelCase}}.branch;
+      {{#branches}}case AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}:
+        return {{#camelCase}}{{branch}}{{/camelCase}}.branch;
         {{/branches}}
     }
   }
@@ -40,7 +42,7 @@ class AppStatefulShellBranches {
 /// displayed in the bottom navigation bar.
 /// {@endtemplate}
 enum AppShellBranch {
-  {{#branches}}{{#camelCase}}{{.}}{{/camelCase}}('{{#camelCase}}{{.}}{{/camelCase}}'),
+  {{#branches}}{{#camelCase}}{{branch}}{{/camelCase}}('{{#camelCase}}{{branch}}{{/camelCase}}'),
   {{/branches}};
   /// {@macro app_branches}
   const AppShellBranch(this.routeName);
@@ -60,8 +62,8 @@ enum AppShellBranch {
   String title(BuildContext context) {
     // TODO: Localize titles.
     switch (this) {
-      {{#branches}}case AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}:
-        return '{{#titleCase}}{{.}}{{/titleCase}}';
+      {{#branches}}case AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}:
+        return '{{#titleCase}}{{branch}}{{/titleCase}}';
         {{/branches}}
     }
   }
@@ -69,7 +71,7 @@ enum AppShellBranch {
   /// Returns the icon for this branch.
   Widget icon() {
     switch (this) {
-      {{#branches}}case AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}:
+      {{#branches}}case AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}:
         // TODO: Update with your custom icons
         return const Icon(Icons.check_box_outline_blank, color: Colors.grey);
       {{/branches}}
@@ -79,7 +81,7 @@ enum AppShellBranch {
   /// branch is active or selected.
   Widget activeIcon() {
     switch (this) {
-      {{#branches}}case AppShellBranch.{{#camelCase}}{{.}}{{/camelCase}}:
+      {{#branches}}case AppShellBranch.{{#camelCase}}{{branch}}{{/camelCase}}:
         // TODO: Update with your custom icons
         return const Icon(Icons.check_box_outline_blank, color: Colors.blue);
         {{/branches}}

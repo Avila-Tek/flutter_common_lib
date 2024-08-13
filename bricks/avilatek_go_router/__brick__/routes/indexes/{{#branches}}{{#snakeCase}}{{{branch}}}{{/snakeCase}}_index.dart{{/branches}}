@@ -1,0 +1,13 @@
+import 'package:flutter/material.dart';
+
+class Index{{#pascalCase}}{{branches.branch}}{{/pascalCase}} extends StatelessWidget {
+  const Index{{#pascalCase}}{{branches.branch}}{{/pascalCase}}({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    /// TODO: return the index page for the {{#camelCase}}{{branches.branch}}{{/camelCase}} branch. 
+    /// Avoid declaring the UI here, instead, create a new widget in presentation 
+    /// reference it here.
+    return const SizedBox();
+  }
+}

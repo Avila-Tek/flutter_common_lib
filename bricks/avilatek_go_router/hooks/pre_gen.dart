@@ -12,7 +12,10 @@ Future run(HookContext context) async {
       .map((e) => e.trim())
       .toList()
     ..sort((a, b) => a.compareTo(b));
-  context.vars['branches'] = branches;
+
+  context.vars['branches'] = branches
+      .map<Map<String, String>>((e) => {'branch': e.toString()})
+      .toList();
 
   final directory = Directory.current.path;
   List<String> folders;

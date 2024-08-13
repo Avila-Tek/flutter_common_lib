@@ -1,2 +1,2 @@
-{{#branches}}export 'index_{{.}}.dart';
+{{#branches}}export '{{branch}}_index.dart';
 {{/branches}}
