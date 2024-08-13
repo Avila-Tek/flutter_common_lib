@@ -14,11 +14,10 @@ class RemoteDataEventHandler<T> {
   /// On failure it emits: [RemoteDataInitialFetching],
   /// [RemoteDataInitialFetchingFailure], [RemoteDataUninitialized].
   Future<void> mapInitialFetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     RemoteDataUninitialized<T> state,
     Emitter<RemoteDataState<T>> emit,
-    Future<T> Function(RemoteDataState<T>, FetchRemoteData<T>)
-        fetchAndParseData,
+    Future<T> Function(RemoteDataState<T>, FetchRemoteData) fetchAndParseData,
   ) async {
     try {
       emit(RemoteDataInitialFetching());
@@ -40,14 +39,14 @@ class RemoteDataEventHandler<T> {
   /// Handles refetch of the remote data.
   ///
   /// On success it emits: [RemoteDataRefetching], [RemoteDataFetched].
-  /// On failure it emits: [RemoteDataRefetching], [RemoteDataRefetchingFailure],
+  /// On failure it emits: [RemoteDataRefetching],
+  /// [RemoteDataRefetchingFailure],
   /// [RemoteDataFetched].
   Future<void> mapRefetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     RemoteDataFetched<T> state,
     Emitter<RemoteDataState<T>> emit,
-    Future<T> Function(RemoteDataState<T>, FetchRemoteData<T>)
-        fetchAndParseData,
+    Future<T> Function(RemoteDataState<T>, FetchRemoteData) fetchAndParseData,
   ) async {
     try {
       emit(RemoteDataRefetching(state));
@@ -67,6 +66,6 @@ class RemoteDataEventHandler<T> {
 
   Future<void> _simulateError() {
     Future<void>.delayed(const Duration(seconds: 1));
-    throw Exception('Simulated error');
+    throw Exception();
   }
 }

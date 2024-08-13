@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "name": "Pikachu",
+      "url": "https://pokeapi.co/api/v2/pokemon/1/"
+    },
+
+    {
+      "name": "Charmander",
+      "url": "https://pokeapi.co/api/v2/pokemon/2/"
+    },
+    {
+      "name": "Squirtle",
+      "url": "https://pokeapi.co/api/v2/pokemon/3/"
+    },
+    {
+      "name": "Bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/4/"
+    },
+    {
+      "name": "Charmeleon",
+      "url": "https://pokeapi.co/api/v2/pokemon/5/"
+    }
+  ]
+}

@@ -52,8 +52,7 @@ class PagedRemoteDataEventHandler<T> {
   /// [PagedRemoteDataNextPageFetchingSuccess], and [PagedRemoteDataNextPageFetched]
   /// or [PagedRemoteDataLastPageFetched].
   /// On failure it emits: [PagedRemoteDataNextPageFetching],
-  /// [PagedRemoteDataNextPageFetchingFailure],
-  /// [PagedRemoteDataNextPageFetched].
+  /// [PagedRemoteDataNextPageFetchingFailure].
   Future<void> mapFetchNextPageRemoteDataToState(
     PagedRemoteDataFetchNextPage event,
     PagedRemoteDataNextPageFetched<T> state,
@@ -82,7 +81,6 @@ class PagedRemoteDataEventHandler<T> {
       }
     } catch (e) {
       emit(PagedRemoteDataNextPageFetchingFailure(state, e));
-      emit(PagedRemoteDataNextPageFetched.clone(state));
     }
   }
 

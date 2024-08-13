@@ -1,0 +1,10 @@
+{
+  "@@locale": "es",
+  "homePageTitle": "Inicio",
+  "pokedexListTileTitle": "Pokédex",
+  "pokeFinderListTileTitle": "Poké-Localizador",
+  "pokeRandomListTileTitle": "Poké-Aleatorio",
+  "pokedexPageTitle": "Pokédex",
+  "pokedexFinderInputHint": "Buscar por ID del Pokémon",
+  "pokedexFinderSnackbarFailureMessage": "No se pudo cargar el Pokémon. Inténtalo de nuevo."
+}

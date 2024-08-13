@@ -1,0 +1,78 @@
+  development-ios:
+    name: "[DEV] iOS only"
+    max_build_duration: 60
+    environment:
+      flutter: {{flutter_version}}
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: {{bundle_identifier}}.dev
+      groups:
+        - firebase_credentials
+        - development
+        - all
+
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: 'v*.*.*\+*-dev-ios'
+          include: true
+        - pattern: 'v*.*.*\+*-development-ios'
+          include: true
+      cancel_previous_builds: false
+
+    scripts:
+      - name: Set up .env file # TODO: !Declare all .env variables in the script. DO NOT WRITE DOWN ENV VARIABLES DIRECTLY ON THIS FILE. USE CODEMAGIC SECRETS!
+        script: |
+          cat >> ".env" <<EOF
+          DEV_API_URL=$DEV_API_URL
+          MY_SECRET_KEY=$MY_SECRET_KEY_EXAMPLE
+          EOF
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+          
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa # NOTE: Update target path and flavor if the project does not follow conventional structure.
+        script: |
+          flutter build ipa --release \
+            --flavor development \
+            --target {{{development_main_path}}} \
+            --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+
+    integrations:
+      app_store_connect: Avila Tek CA
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        {{#show_beta_groups}}
+        beta_groups:
+          {{#beta_groups_testflight}}- {{.}}
+          {{/beta_groups_testflight}}
+        {{/show_beta_groups}}
+      
+      {{#show_email_recipients}}
+      email:
+        recipients:
+          {{#email_recipients}}- {{.}}
+          {{/email_recipients}}
+      {{/show_email_recipients}}

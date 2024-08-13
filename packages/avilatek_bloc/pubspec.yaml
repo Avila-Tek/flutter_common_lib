@@ -1,6 +1,6 @@
 name: avilatek_bloc
 description: Avila Tek Blocs/Cubits
-version: 0.1.0+1
+version: 0.2.0
 publish_to: none
 
 environment:
@@ -17,7 +17,7 @@ dependencies:
   permission_handler: ^11.0.1
 
 dev_dependencies:
-  bloc_test: ^9.1.5
+  bloc_test: ^9.1.7
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0

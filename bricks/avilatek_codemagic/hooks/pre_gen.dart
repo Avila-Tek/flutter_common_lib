@@ -5,7 +5,8 @@ import 'package:mason/mason.dart';
 void run(HookContext context) async {
   final groups = context.vars['groups'] as List? ?? [];
   final emailRecipients = context.vars['email_recipients'] as List? ?? [];
-  final betaGroups = context.vars['beta_groups'] as List? ?? [];
+  final betaGroups = context.vars['beta_groups_testflight'] as List? ?? [];
+  final verifierGroups = context.vars['verifier_groups_firebase'] as List? ?? [];
 
   /// If groups is empty, we don't want to show the 'groups' attribute
   /// in the codemagic.yaml file, to avoid errors.
@@ -13,10 +14,16 @@ void run(HookContext context) async {
     context.vars['show_groups'] = true;
   }
 
-  /// If betaGroups is empty, we don't want to show the 'beta_groups' attribute
+  /// If betaGroups is empty, we don't want to show the 'appstore_connect/beta_groups' attribute
   /// in the codemagic.yaml file, to avoid errors.
   if (betaGroups.isNotEmpty) {
     context.vars['show_beta_groups'] = true;
+  }
+
+  /// If verifierGroups is empty, we don't want to show the 'firebase/android/groups' attribute
+  /// in the codemagic.yaml file, to avoid errors.
+  if (verifierGroups.isNotEmpty) {
+    context.vars['show_verifier_groups'] = true;
   }
 
   /// If emailRecipients is empty, we don't want to show the 'email' attribute

@@ -8,8 +8,10 @@ abstract class PagedRemoteDataEvent extends Equatable {
   /// {@macro remote_data_event}
   const PagedRemoteDataEvent();
 
+  // coverage:ignore-start
   @override
   List<Object?> get props => [];
+  // coverage:ignore-end
 }
 
 /// {@template fetch_remote_data}
@@ -22,6 +24,19 @@ class PagedRemoteDataFetchNextPage extends PagedRemoteDataEvent {
   /// If true, the [PagedRemoteDataBloc<T>] will simulate an error.
   final bool? simulateError;
 
+  @override
+  List<Object?> get props => [simulateError];
+}
+
+/// {@template restart_remote_data}
+/// Event that triggers a restart, erasing currently loaded data.
+/// {@endtemplate}
+class PagedRemoteDataRestart extends PagedRemoteDataEvent {
+  /// {@macro restart_remote_data}
+  const PagedRemoteDataRestart({this.simulateError = false});
+
+  /// If true, the [PagedRemoteDataBloc<T>] will simulate an error.
+  final bool? simulateError;
   @override
   List<Object?> get props => [simulateError];
 }

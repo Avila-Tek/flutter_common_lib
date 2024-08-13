@@ -28,7 +28,12 @@ flutter packages get
 ## RemoteDataBloc
 
 
-This bloc is a generalized state machine for handling remote data. It abstracts the process of fetching data from the internet and provides a simple and consistent interface for handling the various states of the data fetching process.
+This bloc is a generalized state machine for handling data fetching. It abstracts the process of fetching data from the internet and provides a simple and consistent interface for handling the various states of the data fetching process.
+
+It is useful for handling the process of fetching data from the internet, such as fetching a single item, a list of items, a file, etc. One of the advantages of this bloc, apart from its simplicity, is that it makes it possible to keep data in the UI while refetching, or to show the last fetched data in case of an error in a simple way.
+
+
+Note: If you need to paginate the data, you may use the [`PagedRemoteDataBloc`](#PagedRemoteDataBloc) instead.
 
 The `RemoteDataBloc` State Machine is as follows:
 
@@ -55,7 +60,31 @@ title: RemoteDataBloc State Machine
     linkStyle 0,1,5,7 stroke:#f05,stroke-width:2px,color:crimson;
         linkStyle 3,6,8 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
+## SendDataBloc
 
+This bloc is a generalized state machine to send data. It abstracts the process of sending payloads to a remote server and provides a simple and consistent interface for handling the various states of this process.
+
+This bloc is useful for handling the process of sending data to a remote server, such as sending a form, sending a message, or sending a file. It does not care about storing any reference to the data being sent, it only cares about the process of sending the data. If you need to store the data before, during or after being sent, you may combine this with anouther bloc that stores it.
+
+
+The `SendDataBloc` State Machine is as follows:
+
+```mermaid
+
+---
+title: SendDataBloc State Machine
+---
+
+    graph LR;
+        A[SendDataReady] -- DataSent --> B[SendDataLoading];
+        D -.-> A;
+        B -- "error" --> D[SendDataFailure];
+        B -- "success" --> E[SendDataSuccess];
+        E -.-> A
+    linkStyle 1,2 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 3,4 stroke:lightgreen,stroke-width:2px,color:lightgreen;
+```
+<a id="PagedRemoteDataBloc"></a>
 ## PagedRemoteDataBloc
 
 
@@ -81,10 +110,10 @@ title: PagedRemoteDataBloc State Machine
             F -- "error" --> G[PagedRemoteDataNextPageFetchingFailure];
             F -- "success" --> H[PagedRemoteDataNextPageFetchingSuccess];
             H -..-> I[PagedRemoteDataLastPageFetched];
-            G -...-> E;
+            G -- FetchData --> F;
             H -.-> E;
         end
-        linkStyle 0,1,5,8 stroke:#f05,stroke-width:2px,color:crimson;
+        linkStyle 0,1,5 stroke:#f05,stroke-width:2px,color:crimson;
         linkStyle 3,6,7,9 stroke:lightgreen,stroke-width:2px,color:lightgreen;
 ```
 

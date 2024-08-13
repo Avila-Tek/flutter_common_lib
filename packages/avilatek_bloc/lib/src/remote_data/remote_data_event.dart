@@ -7,15 +7,12 @@ import 'package:equatable/equatable.dart';
 abstract class RemoteDataEvent extends Equatable {
   /// {@macro remote_data_event}
   const RemoteDataEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 /// {@template fetch_remote_data}
 /// Event that triggers the fetching of the remote data.
 /// {@endtemplate}
-class FetchRemoteData<T> extends RemoteDataEvent {
+class FetchRemoteData extends RemoteDataEvent {
   /// {@macro fetch_remote_data}
   const FetchRemoteData({this.simulateError = false});
 

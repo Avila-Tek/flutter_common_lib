@@ -43,8 +43,10 @@ abstract class PagedRemoteDataState<T> extends Equatable {
   ///
   const PagedRemoteDataState();
 
+  // coverage:ignore-start
   @override
   List<Object?> get props => [];
+  // coverage:ignore-end
 }
 
 /// Mixin for every [PagedRemoteDataState] that represents network activity.

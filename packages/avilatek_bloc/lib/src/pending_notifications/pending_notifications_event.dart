@@ -55,3 +55,19 @@ class RefetchPendingNotifications<T> extends PendingNotificationsEvent {
   @override
   int get hashCode => Object.hash(simulateError, timeInterval);
 }
+
+/// Event that cancels the fetching of the pending notifications.
+class CancelPendingNotifications extends PendingNotificationsEvent {
+  const CancelPendingNotifications();
+
+  @override
+  List<Object?> get props => [];
+}
+
+/// Event that restarts the fetching of notifications.
+class RestartPendingNotifications extends PendingNotificationsEvent {
+  const RestartPendingNotifications();
+
+  @override
+  List<Object?> get props => [];
+}

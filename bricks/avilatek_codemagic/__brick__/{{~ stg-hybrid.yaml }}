@@ -1,4 +1,4 @@
-  staging-ios-android-workflow:
+  staging-ios-android:
     name: "[STG] iOS & Android deploy"
     max_build_duration: 60
     environment:
@@ -10,7 +10,9 @@
         bundle_identifier: {{bundle_identifier}}.stg
       groups:
         - play_store_credentials
+        - firebase_credentials
         - staging
+        - all
 
     cache:
       cache_paths:
@@ -22,6 +24,8 @@
       events:
         - tag
       tag_patterns:
+        - pattern: 'v*.*.*\+*-stg-all'
+          include: true
         - pattern: 'v*.*.*\+*-staging-all'
           include: true
       cancel_previous_builds: false
@@ -33,12 +37,13 @@
           STG_API_URL=$STG_API_URL
           MY_SECRET_KEY=$MY_SECRET_KEY_EXAMPLE
           EOF
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
       - name: Get Flutter packages
         script: |
           flutter packages pub get
+
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
@@ -48,6 +53,7 @@
             --flavor staging \
             --target {{{staging_main_path}}} \
             --export-options-plist=/Users/builder/export_options.plist
+            
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
@@ -59,16 +65,18 @@
           keyAlias=$CM_KEY_ALIAS
           storeFile=$CM_KEYSTORE_PATH
           EOF
-      - name: Build AAB with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
+      - name: Build APK with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
         script: |
-          flutter build appbundle --release --flavor staging --target {{{staging_main_path}}}
+          flutter build apk --release --flavor staging --target {{{staging_main_path}}}
 
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
 
     integrations:
       app_store_connect: Avila Tek CA
@@ -79,14 +87,20 @@
         submit_to_testflight: true
         {{#show_beta_groups}}
         beta_groups:
-          {{#beta_groups}}- {{.}}
-          {{/beta_groups}}
+          {{#beta_groups_testflight}}- {{.}}
+          {{/beta_groups_testflight}}
         {{/show_beta_groups}}
-      google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: alpha
-        in_app_update_priority: 0
-        changes_not_sent_for_review: false
+      firebase:
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT_CREDENTIALS # NOTE: Remember to add this value to the project's secrets.
+        android:
+          app_id: $STG_FIREBASE_APPLICATION_ID # NOTE: Remember to add this value to the project's secrets.
+          artifact_type: apk
+          {{#show_verifier_groups}}
+          groups:
+            {{#verifier_groups_firebase}}- {{.}}
+            {{/verifier_groups_firebase}}
+          {{/show_verifier_groups}}
+
       {{#show_email_recipients}}
       email:
         recipients:

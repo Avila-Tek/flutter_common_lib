@@ -1,0 +1,44 @@
+name: code_standards
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dependencies:
+  avilatek_bloc:
+    path: ../../packages/avilatek_bloc
+  avilatek_core:
+    path: ../../packages/avilatek_core
+  avilatek_test:
+    path: ../../packages/avilatek_test
+  avilatek_ui:
+    path: ../../packages/avilatek_ui
+  bloc: ^8.1.2
+  bloc_concurrency: ^0.2.5
+  cached_network_image: ^3.3.1
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^14.1.3
+  google_fonts: 6.1.0
+  http: ^1.2.1
+  intl: ^0.18.0
+
+dev_dependencies:
+  bloc_test: ^9.1.4
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.0
+  very_good_analysis: ^5.1.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/icons/

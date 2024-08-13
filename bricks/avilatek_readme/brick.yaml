@@ -8,7 +8,7 @@ description: Generates a standard README file under the standards of Avila Tek F
 # The following defines the version and build number for your brick.
 # A version number is three numbers separated by dots, like 1.2.34
 # followed by an optional build number (separated by a +).
-version: 0.1.0+2
+version: 0.2.0+3
 
 # The following defines the environment for the current brick.
 # It includes the version of mason that the brick requires.
@@ -41,27 +41,23 @@ vars:
   uses_fvm:
     type: boolean
     description: Whether the project uses FVM or not. This will add a section to the README file pointing it out and explaining how to install FVM.
-    default: false
+    default: true
     prompt: Does the project use FVM?
+
+  uses_go_router:
+    type: boolean
+    description: Whether the project uses Go Router or not. This will add a section to the README file pointing it out and explaining how to use it.
+    default: true
+    prompt: Does the project use Go Router?
+
+  uses_codemagic:
+    type: boolean
+    description: Does this project use Codemagic for CI/CD?.
+    default: true
+    prompt: Does this project use Codemagic?
 
   uses_melos:
     type: boolean
     description: Whether the project uses Melos or not. This will add a section to the README file pointing it out and explaining how to install Melos.
     default: false
     prompt: Does the project use Melos?
-
-  uses_go_router:
-    type: boolean
-    description: Whether the project uses Go Router or not. This will add a section to the README file pointing it out and explaining how to use it.
-    default: false
-    prompt: Does the project use Go Router?
-
-  ci:
-    type: enum
-    description: The CI service used by the project. This will add a section to the README file pointing it out and explaining how to configure or use the CI service.
-    default: none
-    values:
-      - none
-      - github
-      - codemagic
-    prompt: Which CI service does the project use?

@@ -196,7 +196,7 @@ class FileUploaded extends UploadedState {
   /// {@macro file_uploaded}
   const FileUploaded(super.fileUrl);
 
-  /// {@template remote_data_initialized.clone}
+  /// {@macro remote_data_initialized.clone}
   FileUploaded.clone(super.oldState) : super.clone();
 }
 
@@ -244,7 +244,7 @@ class ReuploadFileSuccess extends UploadedState with UploadFileSuccessMixin {
   /// {@macro reuploading_file_success}
   const ReuploadFileSuccess(super.fileUrl);
 
-  /// {@template remote_data_initialized.clone}
+  /// {@macro remote_data_initialized.clone}
   ReuploadFileSuccess.clone(super.oldState) : super.clone();
 }
 

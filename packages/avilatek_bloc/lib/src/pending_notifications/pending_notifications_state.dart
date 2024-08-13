@@ -130,3 +130,7 @@ class PendingNotificationsRefetchingSuccess<T>
 
   PendingNotificationsRefetchingSuccess.clone(super.oldState) : super.clone();
 }
+
+/// State that representes the cancelation of the refetching due to a not authenticated status.
+class PendingNotificationsRefetchingCancel<T>
+    extends PendingNotificationsUninitialized<T> {}

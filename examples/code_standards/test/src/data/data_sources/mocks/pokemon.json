@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "name",
+  "order": 1,
+  "height": 1,
+  "weight": 1,
+  "sprites": {
+    "front_default": "sprite"
+  }
+}

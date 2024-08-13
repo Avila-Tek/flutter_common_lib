@@ -8,7 +8,7 @@ description: Generates the Codemagic configuration files for a Flutter project, 
 # The following defines the version and build number for your brick.
 # A version number is three numbers separated by dots, like 1.2.34
 # followed by an optional build number (separated by a +).
-version: 0.1.2
+version: 0.2.0
 
 # The following defines the environment for the current brick.
 # It includes the version of mason that the brick requires.
@@ -54,12 +54,23 @@ vars:
     default: lib
     prompt: What is the path to the main files of your project?
 
-  beta_groups:
+  beta_groups_testflight:
     type: list
     description: Beta groups of TestFlight in App Store Connect.
     prompt: What are the beta groups of TestFlight in App Store Connect?
+
+  verifier_groups_firebase:
+    type: list
+    description: Verifier groups of Firebase App Distribution.
+    prompt: What are the verifier groups for Firebase App Distribution? Make sure that the groups are in "param case" format (e.g. beta-testers).
 
   email_recipients:
     type: list
     description: Build status email recipients.
     prompt: What are the email recipients? (These emails will receive notifications about Codemagic builds)
+
+  upload_debug_symbols:
+    type: boolean
+    description: Whether to upload debug symbols to Firebase Crashlytics.
+    default: true
+    prompt: Do you want to upload debug symbols (dSYMs) to Firebase Crashlytics? (Only applied in production)

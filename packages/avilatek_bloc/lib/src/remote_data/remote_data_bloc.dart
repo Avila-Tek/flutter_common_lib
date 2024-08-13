@@ -14,17 +14,26 @@ export 'package:avilatek_bloc/src/remote_data/remote_data_state.dart';
 /// [RemoteDataInitialized.data] property.
 abstract class RemoteDataBloc<T>
     extends Bloc<RemoteDataEvent, RemoteDataState<T>> {
+  /// Constructor for the RemoteDataBloc.
   ///
-  RemoteDataBloc() : super(RemoteDataUninitialized()) {
+  /// The [initialData] parameter is optional and can be used to provide an
+  /// initial value for the bloc, so it starts in the [RemoteDataFetched] state
+  /// instead of the [RemoteDataUninitialized] state.
+  RemoteDataBloc({T? initialData})
+      : super(
+          initialData != null
+              ? RemoteDataFetched<T>(initialData)
+              : RemoteDataUninitialized(),
+        ) {
     _handler = RemoteDataEventHandler<T>();
-    on<FetchRemoteData<T>>(_mapFetchRemoteDataToState);
+    on<FetchRemoteData>(_mapFetchRemoteDataToState);
   }
   late RemoteDataEventHandler<T> _handler;
 
   /// Propagates the [FetchRemoteData] event down to the corresponding event
   /// handler.
   Future<void> _mapFetchRemoteDataToState(
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
     Emitter<RemoteDataState<T>> emit,
   ) async {
     return _handleStatesOnEvent(
@@ -62,9 +71,11 @@ abstract class RemoteDataBloc<T>
     } else if (state is RemoteDataFetched && onRemoteDataLoaded != null) {
       return onRemoteDataLoaded();
     } else {
+      // coverage:ignore-start
       throw UnimplementedError(
         'No handler implemented for combination: ${state.runtimeType}.',
       );
+      // coverage:ignore-end
     }
   }
 
@@ -75,6 +86,6 @@ abstract class RemoteDataBloc<T>
   @visibleForTesting
   Future<T> fetchAndParseData(
     RemoteDataState<T> oldState,
-    FetchRemoteData<T> event,
+    FetchRemoteData event,
   );
 }

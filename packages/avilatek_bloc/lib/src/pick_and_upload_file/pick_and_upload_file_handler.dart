@@ -16,7 +16,7 @@ class PickAndUploadFileHandler {
   /// fails, and the second when the file uploading process fails. Both temporal
   /// states are emitted before the state is set back to [FileUnpicked].
   ///
-  /// Set [PickFile.simulateError] to ´true´ to simulate an error.
+  /// Set [PickFile.simulatePickingFileError] to ´true´ to simulate an error.
   Future<void> mapInitialPickFileToState(
     PickFile event,
     FileUnpicked state,
@@ -26,12 +26,12 @@ class PickAndUploadFileHandler {
   ) async {
     File? file;
 
-    if (event.simulateError ?? false) {
-      await _simulateError();
-    }
-
     try {
       emit(const PickingFile());
+
+      if (event.simulatePickingFileError ?? false) {
+        await _simulateError();
+      }
 
       file = await pickFile(event);
 
@@ -48,6 +48,10 @@ class PickAndUploadFileHandler {
     // NOTE: Should first file upload be moved to its own handler function?
     try {
       emit(UploadingFile(file));
+
+      if (event.simulateUploadingFileError ?? false) {
+        await _simulateError();
+      }
 
       final url = await uploadFile(state, file);
 
@@ -73,7 +77,7 @@ class PickAndUploadFileHandler {
   /// Both temporal states are emitted before the state is set back to
   /// [FileUploaded].
   ///
-  /// Set [PickFile.simulateError] to ´true´ to simulate an error.
+  /// Set [PickFile.simulatePickingFileError] to ´true´ to simulate an error.
   Future<void> mapReuploadFileToState(
     PickFile event,
     FileUploaded state,
@@ -83,12 +87,12 @@ class PickAndUploadFileHandler {
   ) async {
     File? file;
 
-    if (event.simulateError ?? false) {
-      await _simulateError();
-    }
-
     try {
       emit(RepickingFile(state));
+
+      if (event.simulatePickingFileError ?? false) {
+        await _simulateError();
+      }
 
       file = await pickFile(event);
 
@@ -104,6 +108,11 @@ class PickAndUploadFileHandler {
 
     try {
       emit(ReuploadingFile(state, file));
+
+      if (event.simulateUploadingFileError ?? false) {
+        await _simulateError();
+      }
+
       final url = await uploadFile(state, file);
       emit(ReuploadFileSuccess(url));
       emit(FileUploaded(url));

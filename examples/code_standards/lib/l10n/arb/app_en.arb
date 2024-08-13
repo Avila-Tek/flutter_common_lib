@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "homePageTitle": "Home",
+  "pokedexListTileTitle": "Pokédex",
+  "pokeFinderListTileTitle": "Poké-Finder",
+  "pokeRandomListTileTitle": "Poké-Random",
+  "pokedexPageTitle": "Pokédex",
+  "pokedexFinderInputHint": "Search by Pokémon ID",
+  "pokedexFinderSnackbarFailureMessage": "Could not load Pokémon. Please, try again."
+}
