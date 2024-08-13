@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:{{packageName}}/routes/branches/base_branch.dart';
+import 'branches/base_branch.dart';
 
-{{#branches}}import 'package:{{packageName}}/routes/branches/{{branch}}_branch.dart';
+{{#branches}}import 'branches/{{branch}}_branch.dart';
 {{/branches}}
 /// Defines all the branches for the app, including navigator keys for each
 /// branch.

@@ -1,9 +1,9 @@
-import 'package:avilatek_bloc/routes/shell_branches.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:{{packageName}}/routes/indexes/{{#snakeCase}}{{branches.branch}}{{/snakeCase}}_index.dart';
-import 'package:{{packageName}}/routes/branches/base_branch.dart';
+import '../indexes/{{#snakeCase}}{{branches.branch}}{{/snakeCase}}_index.dart';
+import '../branches/base_branch.dart';
+import '../shell_branches.dart';
 
 class {{#pascalCase}}{{branches.branch}}{{/pascalCase}}ShellBranch implements AppBaseShellBranch {
   {{#pascalCase}}{{branches.branch}}{{/pascalCase}}ShellBranch() : navigatorKey = GlobalKey<NavigatorState>();

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:{{{packageName}}}/routes/shell_branches.dart';
-import 'package:{{{packageName}}}/router.dart';
+import 'routes/shell_branches.dart';
+import 'router.dart';
 
 /// {@template index_page}
 /// The index page of the app. This page is responsible for displaying the
