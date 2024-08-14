@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../indexes/{{#snakeCase}}{{branches.branch}}{{/snakeCase}}_index.dart';
+import '../branches/base_branch.dart';
+import '../shell_branches.dart';
+
+class {{#pascalCase}}{{branches.branch}}{{/pascalCase}}ShellBranch implements AppBaseShellBranch {
+  {{#pascalCase}}{{branches.branch}}{{/pascalCase}}ShellBranch() : navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  StatefulShellBranch get branch => StatefulShellBranch(
+        initialLocation: AppShellBranch.{{#camelCase}}{{branches.branch}}{{/camelCase}}.path,
+        navigatorKey: navigatorKey,
+        routes: routes,
+      );
+
+  @override
+  GlobalKey<NavigatorState> navigatorKey;
+
+  @override
+  List<RouteBase> get routes => <RouteBase>[
+        GoRoute(
+          name: AppShellBranch.{{#camelCase}}{{branches.branch}}{{/camelCase}}.routeName,
+          path: AppShellBranch.{{#camelCase}}{{branches.branch}}{{/camelCase}}.path,
+          pageBuilder: (_, __) =>
+              const NoTransitionPage(child: Index{{#pascalCase}}{{branches.branch}}{{/pascalCase}}()),
+        ),
+      ];
+
+  @override
+  List<RouteBase> rootRoutes(GlobalKey<NavigatorState> rootNavigatorKey) {
+    // TODO: implement getRootRoutes
+    throw UnimplementedError();
+  }
+}
