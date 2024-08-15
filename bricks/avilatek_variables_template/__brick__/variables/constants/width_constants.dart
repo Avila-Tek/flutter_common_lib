@@ -1,7 +1,11 @@
+/// This Consts file was generated using Mason. You can customize it to fit your needs.
+/// Feel free to add any constants that you think will be useful for your project.
 class WidthConstants {
-  static const _gridSystem = {
-    {grid_system}
-  };
+  /// Grid system's base value. The project uses an {{{grid_system}}} point grid system.
+  ///
+  /// This means that the minimum size must be {{{grid_system}}} and any other sizes must
+  /// be multiples of this value.
+  static const _gridSystem = {{grid_system}};
 
   static final spacing = _Spacing({
     0: _gridSystem * 0,

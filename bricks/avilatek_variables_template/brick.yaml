@@ -26,8 +26,20 @@ environment:
 #  * a list of values (enums only)
 #  * an optional separator (list only)
 vars:
-  name:
+  grid_system:
+    type: number
+    description: Your grid system's base value
+    default: 4.0
+    prompt: What's your project's grid system's base value?
+  
+  font_family:
     type: string
-    description: Your name
-    default: Dash
-    prompt: What is your name?
+    description: The font family used in the project
+    default: Poppins
+    prompt: What's the font family used in the project?
+
+  project_includes_secondary_color:
+    type: boolean
+    description: Whether or not this project includes a secondary color
+    default: false
+    prompt: Does your project include a secondary color?
