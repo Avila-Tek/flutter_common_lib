@@ -1,40 +1,43 @@
 import 'package:flutter/material.dart';
 
+/// This contants class was generated with Mason. You can use it to define your
+/// color palette for your app. Please remember to fill the values with your
+/// desired hexcode colors.
 class ColorConstants {
   static const MaterialColor brandColor =
       MaterialColor(_brandColorPrimaryValue, <int, Color>{
-    50: Color(0xFF),
-    100: Color(0xFF),
-    200: Color(0xFF),
-    300: Color(0xFF),
-    400: Color(0xFF),
+    50: Color(0xFF), // TODO: Fill this with shade 50 of the primary color
+    100: Color(0xFF), // TODO: Fill this with shade 100 of the primary color
+    200: Color(0xFF), // TODO: Fill this with shade 200 of the primary color
+    300: Color(0xFF), // TODO: Fill this with shade 300 of the primary color
+    400: Color(0xFF), // TODO: Fill this with shade 400 of the primary color
     500: Color(_brandColorPrimaryValue),
-    600: Color(0xFF),
-    700: Color(0xFF),
-    800: Color(0xFF),
-    900: Color(0xFF),
+    600: Color(0xFF), // TODO: Fill this with shade 600 of the primary color
+    700: Color(0xFF), // TODO: Fill this with shade 700 of the primary color
+    800: Color(0xFF), // TODO: Fill this with shade 800 of the primary color
+    900: Color(0xFF), // TODO: Fill this with shade 900 of the primary color
   });
 
-  // Fill this value with the primary color value
-  static const int _brandColorPrimaryValue = ;
+  // TODO: Fill this value with the primary color value
+  static const int _brandColorPrimaryValue = 0xFF;
   {{#project_includes_secondary_color}}
   
   static const MaterialColor secondaryColor =
       MaterialColor(_secondaryColorValue, <int, Color>{
-    50: Color(0xFF),
-    100: Color(0xFF),
-    200: Color(0xFF),
-    300: Color(0xFF),
-    400: Color(0xFF),
+    50: Color(0xFF), // TODO: Fill this with shade 50 of the secondary color
+    100: Color(0xFF), // TODO: Fill this with shade 100 of the secondary color
+    200: Color(0xFF), // TODO: Fill this with shade 200 of the secondary color
+    300: Color(0xFF), // TODO: Fill this with shade 300 of the secondary color
+    400: Color(0xFF), // TODO: Fill this with shade 400 of the secondary color
     500: Color(_secondaryColorValue),
-    600: Color(0xFF),
-    700: Color(0xFF),
-    800: Color(0xFF),
-    900: Color(0xFF),
+    600: Color(0xFF), // TODO: Fill this with shade 600 of the secondary color
+    700: Color(0xFF), // TODO: Fill this with shade 700 of the secondary color
+    800: Color(0xFF), // TODO: Fill this with shade 800 of the secondary color
+    900: Color(0xFF), // TODO: Fill this with shade 900 of the secondary color
   });
 
-  // Fill this value with the secondary color value
-  static const int _secondaryColorValue = ;
+  // TODO: Fill this value with the secondary color value
+  static const int _secondaryColorValue = 0xFF;
   {{/project_includes_secondary_color}}
 
   static const MaterialColor grayLight =

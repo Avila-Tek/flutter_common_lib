@@ -46,7 +46,9 @@ class TextValues {
   /// Font family for all text inside the app.
   // Replace this with your desired font family.
 
-  static const String fontFamily = {{font_family}};
+  // TODO: Add google_fonts package to your pubspec.yaml file
+  static const String fontFamilyName = '{{font_family}}';
+  
   static TextTheme fontFamily(BuildContext context) =>
       GoogleFonts.{{font_family.lowerCase()}}TextTheme(Theme.of(context).textTheme);
 

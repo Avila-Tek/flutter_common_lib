@@ -847,6 +847,77 @@ class ColorValues {
     altLight: ColorConstants.brandColor.shade900,
     altDark: ColorConstants.grayDark.shade100,
   );
+  {{#project_includes_secondary_color}}
+
+  static final _utilitySecondary50 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade50,
+    dark: ColorConstants.secondaryColorValue.shade900,
+  );
+
+  static final _utilitySecondary100 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade100,
+    dark: ColorConstants.secondaryColorValue.shade900,
+    altLight: ColorConstants.secondaryColorValue.shade100,
+    altDark: ColorConstants.grayDark.shade800,
+  );
+
+  static final _utilitySecondary200 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade200,
+    dark: ColorConstants.secondaryColorValue.shade800,
+    altLight: ColorConstants.secondaryColorValue.shade200,
+    altDark: ColorConstants.grayDark.shade700,
+  );
+
+  static final _utilitySecondary300 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade300,
+    dark: ColorConstants.secondaryColorValue.shade700,
+    altLight: ColorConstants.secondaryColorValue.shade300,
+    altDark: ColorConstants.grayDark.shade700,
+  );
+
+  static final _utilitySecondary400 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade400,
+    dark: ColorConstants.secondaryColorValue.shade600,
+    altLight: ColorConstants.secondaryColorValue.shade400,
+    altDark: ColorConstants.grayDark.shade600,
+  );
+
+  static final _utilitySecondary500 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue,
+    dark: ColorConstants.secondaryColorValue,
+    altLight: ColorConstants.secondaryColorValue,
+    altDark: ColorConstants.grayDark,
+  );
+
+  static final _utilitySecondary600 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade600,
+    dark: ColorConstants.secondaryColorValue.shade400,
+    altLight: ColorConstants.secondaryColorValue.shade600,
+    altDark: ColorConstants.grayDark.shade400,
+  );
+
+  static final _utilitySecondary700 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade700,
+    dark: ColorConstants.secondaryColorValue.shade300,
+    altLight: ColorConstants.secondaryColorValue.shade700,
+    altDark: ColorConstants.grayDark.shade300,
+  );
+
+  static final _utilitySecondary800 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade800,
+    dark: ColorConstants.secondaryColorValue.shade200,
+    altLight: ColorConstants.secondaryColorValue.shade800,
+    altDark: ColorConstants.grayDark.shade200,
+  );
+
+  static final _utilitySecondary900 = _ColorScheme(
+    light: ColorConstants.secondaryColorValue.shade900,
+    dark: ColorConstants.secondaryColorValue.shade100,
+    altLight: ColorConstants.secondaryColorValue.shade900,
+    altDark: ColorConstants.grayDark.shade100,
+  );
+
+  {{/project_includes_secondary_color}}
 
   static final _utilityError50 = _ColorScheme(
     light: ColorConstants.error.shade50,

@@ -24,6 +24,9 @@ class AppTheme {
   }
 }
 
+/// This class contains custom theme values for the app. These values are merely
+/// suggestions and can be customized to fit your app's design. Feel free to
+/// update them, always following the guidelines stablished in Figma
 class _CustomThemeValues {
   static TextTheme textTheme(BuildContext context) =>
       TextValues.fontFamily(context).copyWith(
