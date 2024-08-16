@@ -44,13 +44,13 @@ class ColorConstants {
       MaterialColor(_grayLightPrimaryValue, <int, Color>{
     50: Color(0xFFF9FAFB),
     100: Color(0xFFF2F4F7),
-    200: Color(0xFFEAECF0),
+    200: Color(0xFFE4E7EC),
     300: Color(0xFFD0D5DD),
     400: Color(0xFF98A2B3),
     500: Color(_grayLightPrimaryValue),
     600: Color(0xFF475467),
     700: Color(0xFF344054),
-    800: Color(0xFF1D2939),
+    800: Color(0xFF182230),
     900: Color(0xFF101828),
   });
 
@@ -58,62 +58,62 @@ class ColorConstants {
 
   static const MaterialColor grayDark =
       MaterialColor(_grayDarkPrimaryValue, <int, Color>{
-    50: Color(0xFFF9FAFB),
-    100: Color(0xFFF2F4F7),
-    200: Color(0xFFEAECF0),
-    300: Color(0xFFD0D5DD),
+    50: Color(0xFFF5F5F6),
+    100: Color(0xFFF0F1F1),
+    200: Color(0xFFECECED),
+    300: Color(0xFFCECFD2),
     400: Color(0xFF94969C),
     500: Color(_grayDarkPrimaryValue),
-    600: Color(0xFF62646B),
-    700: Color(0xFF344054),
-    800: Color(0xFF1D2939),
-    900: Color(0xFF101828),
+    600: Color(0xFF61646C),
+    700: Color(0xFF333741),
+    800: Color(0xFF1F242F),
+    900: Color(0xFF161B26),
   });
 
-  static const int _grayDarkPrimaryValue = 0xFF85888D;
+  static const int _grayDarkPrimaryValue = 0xFF85888E;
 
   static const MaterialColor success =
       MaterialColor(_successPrimaryValue, <int, Color>{
-    50: Color(0xFFE3F6ED),
-    100: Color(0xFFB8E9D2),
-    200: Color(0xFF89DBB5),
-    300: Color(0xFF59CD97),
-    400: Color(0xFF36C280),
+    50: Color(0xFFECFDF3),
+    100: Color(0xFFDCFAE6),
+    200: Color(0xFFABEFC6),
+    300: Color(0xFF75E0A7),
+    400: Color(0xFF47CD89),
     500: Color(_successPrimaryValue),
-    600: Color(0xFF10B062),
-    700: Color(0xFF0DA757),
-    800: Color(0xFF0A9F4D),
-    900: Color(0xFF05903C),
+    600: Color(0xFF079455),
+    700: Color(0xFF067647),
+    800: Color(0xFF085D3A),
+    900: Color(0xFF074D31),
   });
-  static const int _successPrimaryValue = 0xFF12B76A;
+  static const int _successPrimaryValue = 0xFF17B26A;
 
   static const MaterialColor warning =
       MaterialColor(_warningPrimaryValue, <int, Color>{
-    50: Color(0xFFFEF2E1),
-    100: Color(0xFFFDDEB5),
-    200: Color(0xFFFBC884),
-    300: Color(0xFFF9B153),
-    400: Color(0xFFF8A12E),
+    50: Color(0xFFFFFAEB), 
+    100: Color(0xFFFEF0C7),
+    200: Color(0xFFFEDF89),
+    300: Color(0xFFFEC84B),
+    400: Color(0xFFFDB022),
     500: Color(_warningPrimaryValue),
-    600: Color(0xFFF68808),
-    700: Color(0xFFF57D06),
-    800: Color(0xFFF37305),
-    900: Color(0xFFF16102),
+    600: Color(0xFFDC6803),
+    700: Color(0xFFB54708),
+    800: Color(0xFF93370D),
+    900: Color(0xFF7A2E0E),
   });
   static const int _warningPrimaryValue = 0xFFF79009;
 
   static const MaterialColor error =
       MaterialColor(_errorPrimaryValue, <int, Color>{
-    50: Color(0xFFFDE9E7),
-    100: Color(0xFFFBC7C3),
-    200: Color(0xFFF8A29C),
-    300: Color(0xFFF57C74),
-    400: Color(0xFFF26056),
+    50: Color(0xFFFEF3F2),
+    100: Color(0xFFFEE4E2),
+    200: Color(0xFFFECDCA),
+    300: Color(0xFFFDA29B),
+    400: Color(0xFFF97066),
     500: Color(_errorPrimaryValue),
-    600: Color(0xFFEE3E32),
-    700: Color(0xFFEC352B),
-    800: Color(0xFFE92D24),
-    900: Color(0xFFE51F17),
+    600: Color(0xFFD92D20),
+    700: Color(0xFFB42318),
+    800: Color(0xFF912018),
+    900: Color(0xFF7A271A),
   });
   static const int _errorPrimaryValue = 0xFFF04438;
 }
