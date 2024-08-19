@@ -24,9 +24,6 @@ class AppTheme {
   }
 }
 
-/// This class contains custom theme values for the app. These values are merely
-/// suggestions and can be customized to fit your app's design. Feel free to
-/// update them, always following the guidelines stablished in Figma
 class _CustomThemeValues {
   static TextTheme textTheme(BuildContext context) =>
       TextValues.fontFamily(context).copyWith(
@@ -90,11 +87,12 @@ class _CustomThemeValues {
               horizontal: WidthValues.spacingXl,
             ),
             disabledBackgroundColor: ColorValues.bgDisabled(context),
-            backgroundColor: ColorValues.bgBrandSolid(context),
-            foregroundColor: ColorValues.fgWhite(context),
+            disabledForegroundColor: ColorValues.fgDisabled(context),
+            backgroundColor: ColorValues.buttonPrimaryBg(context),
+            foregroundColor: ColorValues.buttonPrimaryFg(context),
             textStyle: const TextStyle(
               fontWeight: TextValues.semibold,
-              fontSize: TextValues.textSm,
+              fontSize: TextValues.textMd,
             ),
           ),
         ),
@@ -107,9 +105,9 @@ class _CustomThemeValues {
             vertical: WidthValues.spacingMd,
             horizontal: WidthValues.spacingXl,
           ),
-          foregroundColor: ColorValues.fgBrandPrimaryAlt(context),
+          foregroundColor: ColorValues.buttonSecondaryFg(context),
           side: BorderSide(
-            color: ColorValues.borderBrandAlt(context),
+            color: ColorValues.buttonSecondaryBorder(context),
             width: 1.5,
           ),
           shape: RoundedRectangleBorder(
@@ -117,7 +115,7 @@ class _CustomThemeValues {
           ),
           textStyle: const TextStyle(
             fontWeight: TextValues.semibold,
-            fontSize: TextValues.textSm,
+            fontSize: TextValues.textMd,
           ),
         ),
       );
@@ -150,7 +148,6 @@ class _CustomThemeValues {
   static CardTheme cardTheme(BuildContext context) => CardTheme(
         elevation: 0,
         margin: EdgeInsets.symmetric(vertical: WidthValues.padding),
-        shadowColor: Colors.black26,
         color: ColorValues.bgPrimary(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(WidthValues.radiusMd),
