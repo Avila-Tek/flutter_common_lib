@@ -9,6 +9,8 @@ bricks:
     path: bricks/constants_file
   avilatek_go_router:
     path: bricks/avilatek_go_router
+  avilatek_variables_template:
+    path: bricks/avilatek_variables_template
   bloc: ^0.3.0
   todos:
     git:
