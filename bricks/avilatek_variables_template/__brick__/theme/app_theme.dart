@@ -71,20 +71,15 @@ class _CustomThemeValues {
 
   static ElevatedButtonThemeData elevatedButtonTheme(BuildContext context) =>
       ElevatedButtonThemeData(
-        style: ButtonStyle(
-          shape: WidgetStateProperty.resolveWith(
-            (states) {
-              return RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(WidthValues.radiusMd),
-              );
-            },
-          ),
-        ).merge(
+        style: const ButtonStyle().merge(
           ElevatedButton.styleFrom(
             elevation: 0,
             padding: EdgeInsets.symmetric(
               vertical: WidthValues.spacing2Md,
               horizontal: WidthValues.spacingXl,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(WidthValues.radiusMd),
             ),
             disabledBackgroundColor: ColorValues.bgDisabled(context),
             disabledForegroundColor: ColorValues.fgDisabled(context),
