@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+part of 'package:{{full_path}}/variables/values/color_values.dart';
 
 /// This contants class was generated with Mason. You can use it to define your
 /// color palette for your app. Please remember to fill the values with your
 /// desired hexcode colors.
-class ColorConstants {
+class _ColorConstants {
   static const MaterialColor brandColor =
       MaterialColor(_brandColorPrimaryValue, <int, Color>{
     50: Color(0xFF), // TODO: Fill this with shade 50 of the primary color
