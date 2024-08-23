@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:{{full_path}}/variables/constants/color_constants.dart';
+part 'package:{{full_path}}/variables/constants/color_constants.dart';
+
 
 class ColorValues {
   // -------------------------------------------------------
@@ -12,68 +13,68 @@ class ColorValues {
   // -------------------------------------------------------
 
   static final _textPrimary = _ColorScheme(
-    light: ColorConstants.grayLight.shade900,
-    dark: ColorConstants.grayLight.shade50,
+    light: _ColorConstants.grayLight.shade900,
+    dark: _ColorConstants.grayLight.shade50,
     onBrandLight: Colors.white,
-    onBrandDark: ColorConstants.grayLight[50],
+    onBrandDark: _ColorConstants.grayLight[50],
   );
 
   static final _textSecondary = _ColorScheme(
-    light: ColorConstants.grayLight.shade700,
-    dark: ColorConstants.grayLight.shade300,
-    onBrandLight: ColorConstants.brandColor.shade200,
-    onBrandDark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.grayLight.shade700,
+    dark: _ColorConstants.grayLight.shade300,
+    onBrandLight: _ColorConstants.brandColor.shade200,
+    onBrandDark: _ColorConstants.grayDark.shade300,
   );
 
   static final _textTertiary = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade400,
-    onBrandLight: ColorConstants.brandColor.shade200,
-    onBrandDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade400,
+    onBrandLight: _ColorConstants.brandColor.shade200,
+    onBrandDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _textQuaternary = _ColorScheme(
-    light: ColorConstants.grayLight,
-    dark: ColorConstants.grayDark.shade400,
-    onBrandLight: ColorConstants.brandColor.shade300,
-    onBrandDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight,
+    dark: _ColorConstants.grayDark.shade400,
+    onBrandLight: _ColorConstants.brandColor.shade300,
+    onBrandDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _textDisabled = _ColorScheme(
-    light: ColorConstants.grayLight.shade400,
-    dark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight.shade400,
+    dark: _ColorConstants.grayDark.shade400,
   );
 
   static final _textBrandPrimary = _ColorScheme(
-    light: ColorConstants.brandColor.shade900,
-    dark: ColorConstants.grayDark.shade50,
+    light: _ColorConstants.brandColor.shade900,
+    dark: _ColorConstants.grayDark.shade50,
   );
 
   static final _textBrandSecondary = _ColorScheme(
-    light: ColorConstants.brandColor.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.brandColor.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _textBrandTertiary = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.grayDark.shade400,
-    altLight: ColorConstants.brandColor.shade600,
-    altDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.grayDark.shade400,
+    altLight: _ColorConstants.brandColor.shade600,
+    altDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _textErrorPrimary = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error.shade400,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error.shade400,
   );
 
   static final _textWarningPrimary = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning.shade400,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning.shade400,
   );
 
   static final _textSuccessPrimary = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success.shade400,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success.shade400,
   );
 
   static final _textWhite = _ColorScheme(
@@ -167,69 +168,69 @@ class ColorValues {
   // ---------------------------------------------------------
 
   static final _borderPrimary = _ColorScheme(
-    light: ColorConstants.grayLight.shade300,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade300,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _borderSecondary = _ColorScheme(
-    light: ColorConstants.grayLight.shade200,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade200,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _borderTertiary = _ColorScheme(
-    light: ColorConstants.grayLight.shade100,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade100,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _borderDisabled = _ColorScheme(
-    light: ColorConstants.grayLight.shade300,
-    dark: ColorConstants.grayDark.shade700,
-    subtleLight: ColorConstants.grayLight.shade200,
-    subtleDark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade300,
+    dark: _ColorConstants.grayDark.shade700,
+    subtleLight: _ColorConstants.grayLight.shade200,
+    subtleDark: _ColorConstants.grayDark.shade800,
   );
 
   static final _borderBrand = _ColorScheme(
-    light: ColorConstants.brandColor.shade300,
-    dark: ColorConstants.brandColor.shade400,
-    altLight: ColorConstants.brandColor.shade300,
-    altDark: ColorConstants.grayDark.shade100,
+    light: _ColorConstants.brandColor.shade300,
+    dark: _ColorConstants.brandColor.shade400,
+    altLight: _ColorConstants.brandColor.shade300,
+    altDark: _ColorConstants.grayDark.shade100,
   );
 
   static final _borderBrandSolid = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.brandColor,
-    altLight: ColorConstants.brandColor.shade600,
-    altDark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor,
+    altLight: _ColorConstants.brandColor.shade600,
+    altDark: _ColorConstants.grayDark.shade700,
   );
 
   static final _borderError = _ColorScheme(
-    light: ColorConstants.error.shade300,
-    dark: ColorConstants.error.shade400,
+    light: _ColorConstants.error.shade300,
+    dark: _ColorConstants.error.shade400,
   );
 
   static final _borderErrorSolid = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error,
   );
 
   static final _borderWarning = _ColorScheme(
-    light: ColorConstants.warning.shade300,
-    dark: ColorConstants.warning.shade400,
+    light: _ColorConstants.warning.shade300,
+    dark: _ColorConstants.warning.shade400,
   );
 
   static final _borderWarningSolid = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning,
   );
 
   static final _borderSuccess = _ColorScheme(
-    light: ColorConstants.success.shade300,
-    dark: ColorConstants.success.shade400,
+    light: _ColorConstants.success.shade300,
+    dark: _ColorConstants.success.shade400,
   );
 
   static final _borderSuccessSolid = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success,
   );
 
   /// High contrast borders. These are used for components such as input fields,
@@ -316,82 +317,82 @@ class ColorValues {
   // -------------------------------------------------------------
 
   static final _fgPrimary = _ColorScheme(
-    light: ColorConstants.grayLight.shade900,
+    light: _ColorConstants.grayLight.shade900,
     dark: Colors.white,
   );
 
   static final _fgSecondary = _ColorScheme(
-    light: ColorConstants.grayLight.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.grayLight.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _fgTertiary = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade400,
   );
 
   static final _fgQuaternary = _ColorScheme(
-    light: ColorConstants.grayLight,
-    dark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight,
+    dark: _ColorConstants.grayDark.shade400,
   );
 
   static final _fgQuinary = _ColorScheme(
-    light: ColorConstants.grayLight.shade400,
-    dark: ColorConstants.grayDark,
+    light: _ColorConstants.grayLight.shade400,
+    dark: _ColorConstants.grayDark,
   );
 
   static final _fgSenary = _ColorScheme(
-    light: ColorConstants.grayLight.shade300,
-    dark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.grayLight.shade300,
+    dark: _ColorConstants.grayDark.shade600,
   );
 
   static final _fgDisabled = _ColorScheme(
-    light: ColorConstants.grayLight.shade400,
-    dark: ColorConstants.grayDark,
-    subtleLight: ColorConstants.grayLight.shade300,
-    subtleDark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.grayLight.shade400,
+    dark: _ColorConstants.grayDark,
+    subtleLight: _ColorConstants.grayLight.shade300,
+    subtleDark: _ColorConstants.grayDark.shade600,
   );
 
   static final _fgBrandPrimary = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.brandColor,
-    altLight: ColorConstants.brandColor.shade600,
-    altDark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor,
+    altLight: _ColorConstants.brandColor.shade600,
+    altDark: _ColorConstants.grayDark.shade300,
   );
 
   static final _fgBrandSecondary = _ColorScheme(
-    light: ColorConstants.brandColor,
-    dark: ColorConstants.brandColor,
+    light: _ColorConstants.brandColor,
+    dark: _ColorConstants.brandColor,
   );
 
   static final _fgErrorPrimary = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error,
   );
 
   static final _fgErrorSecondary = _ColorScheme(
-    light: ColorConstants.error,
-    dark: ColorConstants.error.shade400,
+    light: _ColorConstants.error,
+    dark: _ColorConstants.error.shade400,
   );
 
   static final _fgWarningPrimary = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning,
   );
 
   static final _fgWarningSecondary = _ColorScheme(
-    light: ColorConstants.warning,
-    dark: ColorConstants.warning.shade400,
+    light: _ColorConstants.warning,
+    dark: _ColorConstants.warning.shade400,
   );
 
   static final _fgSuccessPrimary = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success,
   );
 
   static final _fgSuccessSecondary = _ColorScheme(
-    light: ColorConstants.success,
-    dark: ColorConstants.success.shade400,
+    light: _ColorConstants.success,
+    dark: _ColorConstants.success.shade400,
   );
 
   static final _fgWhite = _ColorScheme(
@@ -490,118 +491,118 @@ class ColorValues {
 
   static final _bgPrimary = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.grayDark.shade900,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   static final _bgPrimarySolid = _ColorScheme(
-    light: ColorConstants.grayLight.shade900,
-    dark: ColorConstants.grayDark.shade900,
+    light: _ColorConstants.grayLight.shade900,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   static final _bgSecondary = _ColorScheme(
-    light: ColorConstants.grayLight.shade50,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade50,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _bgSecondarySolid = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade600,
   );
 
   static final _bgTertiary = _ColorScheme(
-    light: ColorConstants.grayLight.shade100,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade100,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _bgQuaternary = _ColorScheme(
-    light: ColorConstants.grayLight.shade200,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade200,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _bgActive = _ColorScheme(
-    light: ColorConstants.grayLight.shade50,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade50,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _bgDisabled = _ColorScheme(
-    light: ColorConstants.grayLight.shade100,
-    dark: ColorConstants.grayDark.shade800,
-    subtleLight: ColorConstants.grayLight.shade50,
-    subtleDark: ColorConstants.grayDark.shade900,
+    light: _ColorConstants.grayLight.shade100,
+    dark: _ColorConstants.grayDark.shade800,
+    subtleLight: _ColorConstants.grayLight.shade50,
+    subtleDark: _ColorConstants.grayDark.shade900,
   );
 
   static final _bgOverlay = _ColorScheme(
-    light: ColorConstants.grayLight.shade900,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade900,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _bgBrandPrimary = _ColorScheme(
-    light: ColorConstants.brandColor.shade50,
-    dark: ColorConstants.brandColor,
-    altLight: ColorConstants.brandColor.shade50,
-    altDark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.brandColor.shade50,
+    dark: _ColorConstants.brandColor,
+    altLight: _ColorConstants.brandColor.shade50,
+    altDark: _ColorConstants.grayDark.shade800,
   );
 
   static final _bgBrandSecondary = _ColorScheme(
-    light: ColorConstants.brandColor.shade100,
-    dark: ColorConstants.brandColor.shade600,
+    light: _ColorConstants.brandColor.shade100,
+    dark: _ColorConstants.brandColor.shade600,
   );
 
   static final _bgBrandSolid = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.brandColor.shade600,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor.shade600,
   );
 
   static final _bgBrandSection = _ColorScheme(
-    light: ColorConstants.brandColor.shade800,
-    dark: ColorConstants.grayDark.shade800,
-    subtleLight: ColorConstants.brandColor.shade700,
-    subtleDark: ColorConstants.grayDark.shade900,
+    light: _ColorConstants.brandColor.shade800,
+    dark: _ColorConstants.grayDark.shade800,
+    subtleLight: _ColorConstants.brandColor.shade700,
+    subtleDark: _ColorConstants.grayDark.shade900,
   );
 
   static final _bgErrorPrimary = _ColorScheme(
-    light: ColorConstants.error.shade50,
-    dark: ColorConstants.error,
+    light: _ColorConstants.error.shade50,
+    dark: _ColorConstants.error,
   );
 
   static final _bgErrorSecondary = _ColorScheme(
-    light: ColorConstants.error.shade100,
-    dark: ColorConstants.error.shade600,
+    light: _ColorConstants.error.shade100,
+    dark: _ColorConstants.error.shade600,
   );
 
   static final _bgErrorSolid = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error.shade600,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error.shade600,
   );
 
   static final _bgWarningPrimary = _ColorScheme(
-    light: ColorConstants.warning.shade50,
-    dark: ColorConstants.warning,
+    light: _ColorConstants.warning.shade50,
+    dark: _ColorConstants.warning,
   );
 
   static final _bgWarningSecondary = _ColorScheme(
-    light: ColorConstants.warning.shade100,
-    dark: ColorConstants.warning.shade600,
+    light: _ColorConstants.warning.shade100,
+    dark: _ColorConstants.warning.shade600,
   );
 
   static final _bgWarningSolid = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning.shade600,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning.shade600,
   );
 
   static final _bgSuccessPrimary = _ColorScheme(
-    light: ColorConstants.success.shade50,
-    dark: ColorConstants.success,
+    light: _ColorConstants.success.shade50,
+    dark: _ColorConstants.success,
   );
 
   static final _bgSuccessSecondary = _ColorScheme(
-    light: ColorConstants.success.shade100,
-    dark: ColorConstants.success.shade600,
+    light: _ColorConstants.success.shade100,
+    dark: _ColorConstants.success.shade600,
   );
 
   static final _bgSuccessSolid = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success.shade600,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success.shade600,
   );
 
   /// The primary background color (white) used across all layouts and
@@ -731,342 +732,342 @@ class ColorValues {
   // ----------------------------------------------------------
 
   static final _utilityGray50 = _ColorScheme(
-    light: ColorConstants.grayLight.shade50,
-    dark: ColorConstants.grayDark.shade900,
+    light: _ColorConstants.grayLight.shade50,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   static final _utilityGray100 = _ColorScheme(
-    light: ColorConstants.grayLight.shade100,
-    dark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.grayLight.shade100,
+    dark: _ColorConstants.grayDark.shade800,
   );
 
   static final _utilityGray200 = _ColorScheme(
-    light: ColorConstants.grayLight.shade200,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade200,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilityGray300 = _ColorScheme(
-    light: ColorConstants.grayLight.shade300,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade300,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilityGray400 = _ColorScheme(
-    light: ColorConstants.grayLight.shade400,
-    dark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.grayLight.shade400,
+    dark: _ColorConstants.grayDark.shade600,
   );
 
   static final _utilityGray500 = _ColorScheme(
-    light: ColorConstants.grayLight,
-    dark: ColorConstants.grayDark,
+    light: _ColorConstants.grayLight,
+    dark: _ColorConstants.grayDark,
   );
 
   static final _utilityGray600 = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade400,
   );
 
   static final _utilityGray700 = _ColorScheme(
-    light: ColorConstants.grayLight.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.grayLight.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _utilityGray800 = _ColorScheme(
-    light: ColorConstants.grayLight.shade800,
-    dark: ColorConstants.grayDark.shade200,
+    light: _ColorConstants.grayLight.shade800,
+    dark: _ColorConstants.grayDark.shade200,
   );
 
   static final _utilityGray900 = _ColorScheme(
-    light: ColorConstants.grayLight.shade900,
-    dark: ColorConstants.grayDark.shade100,
+    light: _ColorConstants.grayLight.shade900,
+    dark: _ColorConstants.grayDark.shade100,
   );
 
   static final _utilityBrand50 = _ColorScheme(
-    light: ColorConstants.brandColor.shade50,
-    dark: ColorConstants.brandColor.shade900,
+    light: _ColorConstants.brandColor.shade50,
+    dark: _ColorConstants.brandColor.shade900,
   );
 
   static final _utilityBrand100 = _ColorScheme(
-    light: ColorConstants.brandColor.shade100,
-    dark: ColorConstants.brandColor.shade900,
-    altLight: ColorConstants.brandColor.shade100,
-    altDark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.brandColor.shade100,
+    dark: _ColorConstants.brandColor.shade900,
+    altLight: _ColorConstants.brandColor.shade100,
+    altDark: _ColorConstants.grayDark.shade800,
   );
 
   static final _utilityBrand200 = _ColorScheme(
-    light: ColorConstants.brandColor.shade200,
-    dark: ColorConstants.brandColor.shade800,
-    altLight: ColorConstants.brandColor.shade200,
-    altDark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.brandColor.shade200,
+    dark: _ColorConstants.brandColor.shade800,
+    altLight: _ColorConstants.brandColor.shade200,
+    altDark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilityBrand300 = _ColorScheme(
-    light: ColorConstants.brandColor.shade300,
-    dark: ColorConstants.brandColor.shade700,
-    altLight: ColorConstants.brandColor.shade300,
-    altDark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.brandColor.shade300,
+    dark: _ColorConstants.brandColor.shade700,
+    altLight: _ColorConstants.brandColor.shade300,
+    altDark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilityBrand400 = _ColorScheme(
-    light: ColorConstants.brandColor.shade400,
-    dark: ColorConstants.brandColor.shade600,
-    altLight: ColorConstants.brandColor.shade400,
-    altDark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.brandColor.shade400,
+    dark: _ColorConstants.brandColor.shade600,
+    altLight: _ColorConstants.brandColor.shade400,
+    altDark: _ColorConstants.grayDark.shade600,
   );
 
   static final _utilityBrand500 = _ColorScheme(
-    light: ColorConstants.brandColor,
-    dark: ColorConstants.brandColor,
-    altLight: ColorConstants.brandColor,
-    altDark: ColorConstants.grayDark,
+    light: _ColorConstants.brandColor,
+    dark: _ColorConstants.brandColor,
+    altLight: _ColorConstants.brandColor,
+    altDark: _ColorConstants.grayDark,
   );
 
   static final _utilityBrand600 = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.brandColor.shade400,
-    altLight: ColorConstants.brandColor.shade600,
-    altDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor.shade400,
+    altLight: _ColorConstants.brandColor.shade600,
+    altDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _utilityBrand700 = _ColorScheme(
-    light: ColorConstants.brandColor.shade700,
-    dark: ColorConstants.brandColor.shade300,
-    altLight: ColorConstants.brandColor.shade700,
-    altDark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.brandColor.shade700,
+    dark: _ColorConstants.brandColor.shade300,
+    altLight: _ColorConstants.brandColor.shade700,
+    altDark: _ColorConstants.grayDark.shade300,
   );
 
   static final _utilityBrand800 = _ColorScheme(
-    light: ColorConstants.brandColor.shade800,
-    dark: ColorConstants.brandColor.shade200,
-    altLight: ColorConstants.brandColor.shade800,
-    altDark: ColorConstants.grayDark.shade200,
+    light: _ColorConstants.brandColor.shade800,
+    dark: _ColorConstants.brandColor.shade200,
+    altLight: _ColorConstants.brandColor.shade800,
+    altDark: _ColorConstants.grayDark.shade200,
   );
 
   static final _utilityBrand900 = _ColorScheme(
-    light: ColorConstants.brandColor.shade900,
-    dark: ColorConstants.brandColor.shade100,
-    altLight: ColorConstants.brandColor.shade900,
-    altDark: ColorConstants.grayDark.shade100,
+    light: _ColorConstants.brandColor.shade900,
+    dark: _ColorConstants.brandColor.shade100,
+    altLight: _ColorConstants.brandColor.shade900,
+    altDark: _ColorConstants.grayDark.shade100,
   );
   {{#project_includes_secondary_color}}
 
   static final _utilitySecondary50 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade50,
-    dark: ColorConstants.secondaryColorValue.shade900,
+    light: _ColorConstants.secondaryColorValue.shade50,
+    dark: _ColorConstants.secondaryColorValue.shade900,
   );
 
   static final _utilitySecondary100 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade100,
-    dark: ColorConstants.secondaryColorValue.shade900,
-    altLight: ColorConstants.secondaryColorValue.shade100,
-    altDark: ColorConstants.grayDark.shade800,
+    light: _ColorConstants.secondaryColorValue.shade100,
+    dark: _ColorConstants.secondaryColorValue.shade900,
+    altLight: _ColorConstants.secondaryColorValue.shade100,
+    altDark: _ColorConstants.grayDark.shade800,
   );
 
   static final _utilitySecondary200 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade200,
-    dark: ColorConstants.secondaryColorValue.shade800,
-    altLight: ColorConstants.secondaryColorValue.shade200,
-    altDark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.secondaryColorValue.shade200,
+    dark: _ColorConstants.secondaryColorValue.shade800,
+    altLight: _ColorConstants.secondaryColorValue.shade200,
+    altDark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilitySecondary300 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade300,
-    dark: ColorConstants.secondaryColorValue.shade700,
-    altLight: ColorConstants.secondaryColorValue.shade300,
-    altDark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.secondaryColorValue.shade300,
+    dark: _ColorConstants.secondaryColorValue.shade700,
+    altLight: _ColorConstants.secondaryColorValue.shade300,
+    altDark: _ColorConstants.grayDark.shade700,
   );
 
   static final _utilitySecondary400 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade400,
-    dark: ColorConstants.secondaryColorValue.shade600,
-    altLight: ColorConstants.secondaryColorValue.shade400,
-    altDark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.secondaryColorValue.shade400,
+    dark: _ColorConstants.secondaryColorValue.shade600,
+    altLight: _ColorConstants.secondaryColorValue.shade400,
+    altDark: _ColorConstants.grayDark.shade600,
   );
 
   static final _utilitySecondary500 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue,
-    dark: ColorConstants.secondaryColorValue,
-    altLight: ColorConstants.secondaryColorValue,
-    altDark: ColorConstants.grayDark,
+    light: _ColorConstants.secondaryColorValue,
+    dark: _ColorConstants.secondaryColorValue,
+    altLight: _ColorConstants.secondaryColorValue,
+    altDark: _ColorConstants.grayDark,
   );
 
   static final _utilitySecondary600 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade600,
-    dark: ColorConstants.secondaryColorValue.shade400,
-    altLight: ColorConstants.secondaryColorValue.shade600,
-    altDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.secondaryColorValue.shade600,
+    dark: _ColorConstants.secondaryColorValue.shade400,
+    altLight: _ColorConstants.secondaryColorValue.shade600,
+    altDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _utilitySecondary700 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade700,
-    dark: ColorConstants.secondaryColorValue.shade300,
-    altLight: ColorConstants.secondaryColorValue.shade700,
-    altDark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.secondaryColorValue.shade700,
+    dark: _ColorConstants.secondaryColorValue.shade300,
+    altLight: _ColorConstants.secondaryColorValue.shade700,
+    altDark: _ColorConstants.grayDark.shade300,
   );
 
   static final _utilitySecondary800 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade800,
-    dark: ColorConstants.secondaryColorValue.shade200,
-    altLight: ColorConstants.secondaryColorValue.shade800,
-    altDark: ColorConstants.grayDark.shade200,
+    light: _ColorConstants.secondaryColorValue.shade800,
+    dark: _ColorConstants.secondaryColorValue.shade200,
+    altLight: _ColorConstants.secondaryColorValue.shade800,
+    altDark: _ColorConstants.grayDark.shade200,
   );
 
   static final _utilitySecondary900 = _ColorScheme(
-    light: ColorConstants.secondaryColorValue.shade900,
-    dark: ColorConstants.secondaryColorValue.shade100,
-    altLight: ColorConstants.secondaryColorValue.shade900,
-    altDark: ColorConstants.grayDark.shade100,
+    light: _ColorConstants.secondaryColorValue.shade900,
+    dark: _ColorConstants.secondaryColorValue.shade100,
+    altLight: _ColorConstants.secondaryColorValue.shade900,
+    altDark: _ColorConstants.grayDark.shade100,
   );
 
   {{/project_includes_secondary_color}}
 
   static final _utilityError50 = _ColorScheme(
-    light: ColorConstants.error.shade50,
-    dark: ColorConstants.error.shade900,
+    light: _ColorConstants.error.shade50,
+    dark: _ColorConstants.error.shade900,
   );
 
   static final _utilityError100 = _ColorScheme(
-    light: ColorConstants.error.shade100,
-    dark: ColorConstants.error.shade900,
+    light: _ColorConstants.error.shade100,
+    dark: _ColorConstants.error.shade900,
   );
 
   static final _utilityError200 = _ColorScheme(
-    light: ColorConstants.error.shade200,
-    dark: ColorConstants.error.shade800,
+    light: _ColorConstants.error.shade200,
+    dark: _ColorConstants.error.shade800,
   );
 
   static final _utilityError300 = _ColorScheme(
-    light: ColorConstants.error.shade300,
-    dark: ColorConstants.error.shade700,
+    light: _ColorConstants.error.shade300,
+    dark: _ColorConstants.error.shade700,
   );
 
   static final _utilityError400 = _ColorScheme(
-    light: ColorConstants.error.shade400,
-    dark: ColorConstants.error.shade600,
+    light: _ColorConstants.error.shade400,
+    dark: _ColorConstants.error.shade600,
   );
 
   static final _utilityError500 = _ColorScheme(
-    light: ColorConstants.error,
-    dark: ColorConstants.error,
+    light: _ColorConstants.error,
+    dark: _ColorConstants.error,
   );
 
   static final _utilityError600 = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error.shade400,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error.shade400,
   );
 
   static final _utilityError700 = _ColorScheme(
-    light: ColorConstants.error.shade700,
-    dark: ColorConstants.error.shade300,
+    light: _ColorConstants.error.shade700,
+    dark: _ColorConstants.error.shade300,
   );
 
   static final _utilityError800 = _ColorScheme(
-    light: ColorConstants.error.shade800,
-    dark: ColorConstants.error.shade200,
+    light: _ColorConstants.error.shade800,
+    dark: _ColorConstants.error.shade200,
   );
 
   static final _utilityError900 = _ColorScheme(
-    light: ColorConstants.error.shade900,
-    dark: ColorConstants.error.shade100,
+    light: _ColorConstants.error.shade900,
+    dark: _ColorConstants.error.shade100,
   );
 
   static final _utilityWarning50 = _ColorScheme(
-    light: ColorConstants.warning.shade50,
-    dark: ColorConstants.warning.shade900,
+    light: _ColorConstants.warning.shade50,
+    dark: _ColorConstants.warning.shade900,
   );
 
   static final _utilityWarning100 = _ColorScheme(
-    light: ColorConstants.warning.shade100,
-    dark: ColorConstants.warning.shade900,
+    light: _ColorConstants.warning.shade100,
+    dark: _ColorConstants.warning.shade900,
   );
 
   static final _utilityWarning200 = _ColorScheme(
-    light: ColorConstants.warning.shade200,
-    dark: ColorConstants.warning.shade800,
+    light: _ColorConstants.warning.shade200,
+    dark: _ColorConstants.warning.shade800,
   );
 
   static final _utilityWarning300 = _ColorScheme(
-    light: ColorConstants.warning.shade300,
-    dark: ColorConstants.warning.shade700,
+    light: _ColorConstants.warning.shade300,
+    dark: _ColorConstants.warning.shade700,
   );
 
   static final _utilityWarning400 = _ColorScheme(
-    light: ColorConstants.warning.shade400,
-    dark: ColorConstants.warning.shade600,
+    light: _ColorConstants.warning.shade400,
+    dark: _ColorConstants.warning.shade600,
   );
 
   static final _utilityWarning500 = _ColorScheme(
-    light: ColorConstants.warning,
-    dark: ColorConstants.warning,
+    light: _ColorConstants.warning,
+    dark: _ColorConstants.warning,
   );
 
   static final _utilityWarning600 = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning.shade400,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning.shade400,
   );
 
   static final _utilityWarning700 = _ColorScheme(
-    light: ColorConstants.warning.shade700,
-    dark: ColorConstants.warning.shade300,
+    light: _ColorConstants.warning.shade700,
+    dark: _ColorConstants.warning.shade300,
   );
 
   static final _utilityWarning800 = _ColorScheme(
-    light: ColorConstants.warning.shade800,
-    dark: ColorConstants.warning.shade200,
+    light: _ColorConstants.warning.shade800,
+    dark: _ColorConstants.warning.shade200,
   );
 
   static final _utilityWarning900 = _ColorScheme(
-    light: ColorConstants.warning.shade900,
-    dark: ColorConstants.warning.shade100,
+    light: _ColorConstants.warning.shade900,
+    dark: _ColorConstants.warning.shade100,
   );
 
   static final _utilitySuccess50 = _ColorScheme(
-    light: ColorConstants.success.shade50,
-    dark: ColorConstants.success.shade900,
+    light: _ColorConstants.success.shade50,
+    dark: _ColorConstants.success.shade900,
   );
 
   static final _utilitySuccess100 = _ColorScheme(
-    light: ColorConstants.success.shade100,
-    dark: ColorConstants.success.shade900,
+    light: _ColorConstants.success.shade100,
+    dark: _ColorConstants.success.shade900,
   );
 
   static final _utilitySuccess200 = _ColorScheme(
-    light: ColorConstants.success.shade200,
-    dark: ColorConstants.success.shade800,
+    light: _ColorConstants.success.shade200,
+    dark: _ColorConstants.success.shade800,
   );
 
   static final _utilitySuccess300 = _ColorScheme(
-    light: ColorConstants.success.shade300,
-    dark: ColorConstants.success.shade700,
+    light: _ColorConstants.success.shade300,
+    dark: _ColorConstants.success.shade700,
   );
 
   static final _utilitySuccess400 = _ColorScheme(
-    light: ColorConstants.success.shade400,
-    dark: ColorConstants.success.shade600,
+    light: _ColorConstants.success.shade400,
+    dark: _ColorConstants.success.shade600,
   );
 
   static final _utilitySuccess500 = _ColorScheme(
-    light: ColorConstants.success,
-    dark: ColorConstants.success,
+    light: _ColorConstants.success,
+    dark: _ColorConstants.success,
   );
 
   static final _utilitySuccess600 = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success.shade400,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success.shade400,
   );
 
   static final _utilitySuccess700 = _ColorScheme(
-    light: ColorConstants.success.shade700,
-    dark: ColorConstants.success.shade300,
+    light: _ColorConstants.success.shade700,
+    dark: _ColorConstants.success.shade300,
   );
 
   static final _utilitySuccess800 = _ColorScheme(
-    light: ColorConstants.success.shade800,
-    dark: ColorConstants.success.shade200,
+    light: _ColorConstants.success.shade800,
+    dark: _ColorConstants.success.shade200,
   );
 
   static final _utilitySuccess900 = _ColorScheme(
-    light: ColorConstants.success.shade900,
-    dark: ColorConstants.success.shade100,
+    light: _ColorConstants.success.shade900,
+    dark: _ColorConstants.success.shade100,
   );
 
   static Color utilityGray50(BuildContext context) =>
@@ -1246,8 +1247,8 @@ class ColorValues {
   // ---------------------------------------------------------
 
   static final _buttonPrimaryBg = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.brandColor.shade600,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor.shade600,
   );
 
   static final _buttonPrimaryFg = _ColorScheme(
@@ -1257,42 +1258,42 @@ class ColorValues {
 
   static final _buttonSecondaryBg = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.grayDark.shade900,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   static final _buttonSecondaryFg = _ColorScheme(
-    light: ColorConstants.grayLight.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.grayLight.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _buttonSecondaryBorder = _ColorScheme(
-    light: ColorConstants.grayLight.shade300,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade300,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _buttonSecondaryColorFg = _ColorScheme(
-    light: ColorConstants.brandColor.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.brandColor.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _buttonSecondaryColorBg = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.grayDark.shade900,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   static final _buttonSecondaryColorBorder = _ColorScheme(
-    light: ColorConstants.brandColor.shade300,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.brandColor.shade300,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   static final _buttonTertiaryFg = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade400,
   );
 
   static final _buttonTertiaryColorFg = _ColorScheme(
-    light: ColorConstants.brandColor.shade700,
-    dark: ColorConstants.grayDark.shade300,
+    light: _ColorConstants.brandColor.shade700,
+    dark: _ColorConstants.grayDark.shade300,
   );
 
   static final _buttonPrimaryErrorFg = _ColorScheme(
@@ -1301,28 +1302,28 @@ class ColorValues {
   );
 
   static final _buttonPrimaryErrorBg = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error.shade600,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error.shade600,
   );
 
   static final _buttonSecondaryErrorFg = _ColorScheme(
-    light: ColorConstants.error.shade700,
-    dark: ColorConstants.error.shade200,
+    light: _ColorConstants.error.shade700,
+    dark: _ColorConstants.error.shade200,
   );
 
   static final _buttonSecondaryErrorBg = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.error.shade900,
+    dark: _ColorConstants.error.shade900,
   );
 
   static final _buttonSecondaryErrorBorder = _ColorScheme(
-    light: ColorConstants.error.shade300,
-    dark: ColorConstants.error.shade800,
+    light: _ColorConstants.error.shade300,
+    dark: _ColorConstants.error.shade800,
   );
 
   static final _buttonTertiaryErrorFg = _ColorScheme(
-    light: ColorConstants.error.shade700,
-    dark: ColorConstants.error.shade300,
+    light: _ColorConstants.error.shade700,
+    dark: _ColorConstants.error.shade300,
   );
 
   /// Primary button background color.
@@ -1396,65 +1397,65 @@ class ColorValues {
   // -------------------------------------------------------
 
   static final _featuredIconFgBrand = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.grayDark.shade400,
-    onBrandLight: ColorConstants.brandColor.shade200,
-    onBrandDark: ColorConstants.grayDark.shade400,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.grayDark.shade400,
+    onBrandLight: _ColorConstants.brandColor.shade200,
+    onBrandDark: _ColorConstants.grayDark.shade400,
   );
 
   static final _featuredIconLightFgBrand = _ColorScheme(
-    light: ColorConstants.brandColor.shade600,
-    dark: ColorConstants.grayDark.shade200,
+    light: _ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.grayDark.shade200,
   );
 
   static final _featuredIconLightFgGray = _ColorScheme(
-    light: ColorConstants.grayLight.shade500,
-    dark: ColorConstants.grayDark.shade200,
+    light: _ColorConstants.grayLight.shade500,
+    dark: _ColorConstants.grayDark.shade200,
   );
 
   static final _featuredIconLightFgError = _ColorScheme(
-    light: ColorConstants.error.shade600,
-    dark: ColorConstants.error.shade200,
+    light: _ColorConstants.error.shade600,
+    dark: _ColorConstants.error.shade200,
   );
 
   static final _featuredIconLightFgWarning = _ColorScheme(
-    light: ColorConstants.warning.shade600,
-    dark: ColorConstants.warning.shade200,
+    light: _ColorConstants.warning.shade600,
+    dark: _ColorConstants.warning.shade200,
   );
 
   static final _featuredIconLightFgSuccess = _ColorScheme(
-    light: ColorConstants.success.shade600,
-    dark: ColorConstants.success.shade200,
+    light: _ColorConstants.success.shade600,
+    dark: _ColorConstants.success.shade200,
   );
 
   static final _featuredIconDarkFgBrand = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.brandColor.shade200,
+    dark: _ColorConstants.brandColor.shade200,
   );
 
   static final _featuredIconDarkFgGray = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.grayDark.shade200,
+    dark: _ColorConstants.grayDark.shade200,
   );
 
   static final _featuredIconDarkFgError = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.error.shade200,
+    dark: _ColorConstants.error.shade200,
   );
 
   static final _featuredIconDarkFgWarning = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.warning.shade200,
+    dark: _ColorConstants.warning.shade200,
   );
 
   static final _featuredIconDarkFgSuccess = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.success.shade200,
+    dark: _ColorConstants.success.shade200,
   );
 
   static final _featuredIconModernBorder = _ColorScheme(
-    light: ColorConstants.grayLight.shade200,
-    dark: ColorConstants.grayDark.shade700,
+    light: _ColorConstants.grayLight.shade200,
+    dark: _ColorConstants.grayDark.shade700,
   );
 
   /// Primary brand color foreground for featured icons.
@@ -1513,12 +1514,12 @@ class ColorValues {
 
   static final _sliderHandleBg = _ColorScheme(
     light: Colors.white,
-    dark: ColorConstants.brandColor.shade600,
+    dark: _ColorConstants.brandColor.shade600,
   );
 
   static final _sliderHandleBorder = _ColorScheme(
-    light: ColorConstants.grayLight.shade600,
-    dark: ColorConstants.grayDark.shade900,
+    light: _ColorConstants.grayLight.shade600,
+    dark: _ColorConstants.grayDark.shade900,
   );
 
   /// Slider handle background color.
@@ -1536,8 +1537,8 @@ class ColorValues {
   // ---------------------------------------------------------
 
   static final _toggleButtonFgDisabled = _ColorScheme(
-    light: ColorConstants.grayLight.shade500,
-    dark: ColorConstants.grayDark.shade600,
+    light: _ColorConstants.grayLight.shade500,
+    dark: _ColorConstants.grayDark.shade600,
   );
 
   /// Toggle button foreground color when disabled.
