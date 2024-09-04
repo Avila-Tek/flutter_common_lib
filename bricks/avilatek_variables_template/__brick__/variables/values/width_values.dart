@@ -1,4 +1,4 @@
-part 'package:{{full_path}}/variables/constants/width_constants.dart';
+part 'package:{{{full_path}}}/variables/constants/width_constants.dart';
 
 class WidthValues {
   // ---------------------------------------------------

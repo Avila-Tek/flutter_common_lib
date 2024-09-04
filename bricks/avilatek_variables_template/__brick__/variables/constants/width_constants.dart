@@ -1,4 +1,4 @@
-part of 'package:{{full_path}}/variables/values/width_values.dart';
+part of 'package:{{{full_path}}}/variables/values/width_values.dart';
 
 /// This Consts file was generated using Mason. You can customize it to fit your needs.
 /// Feel free to add any constants that you think will be useful for your project.
