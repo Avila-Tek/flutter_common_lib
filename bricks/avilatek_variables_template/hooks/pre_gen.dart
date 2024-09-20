@@ -29,7 +29,8 @@ Future run(HookContext context) async {
 
     context.vars = {
       ...context.vars,
-      'full_path': ('$packageName/$variablesPath').replaceAll('//', '/'),
+      'full_path':
+          (buildPath(packageName, variablesPath)).replaceAll('//', '/'),
     };
   } on RangeError catch (_) {
     logger.alert(
@@ -69,3 +70,11 @@ Future run(HookContext context) async {
 }
 
 class PubspecNameException implements Exception {}
+
+String buildPath(String packageName, String variablesPath) {
+  if (variablesPath.isEmpty) {
+    return packageName;
+  } else {
+    return '$packageName/$variablesPath';
+  }
+}
