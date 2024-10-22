@@ -1,0 +1,46 @@
+part of '{{feature_name.snakeCase()}}_bloc.dart';
+
+enum {{feature_name.pascalCase()}}Step {
+
+  {{#children}}{{#camelCase}}{{name}}{{/camelCase}}('{{#camelCase}}{{name}}{{/camelCase}}'){{^isLast}},{{/isLast}}{{#isLast}};{{/isLast}}
+  {{/children}}
+
+  const {{feature_name.pascalCase()}}Step(this.value);
+
+  final String value;
+
+  final Map<String, {{feature_name.pascalCase()}}Step> _byValue = const {};
+
+  {{feature_name.pascalCase()}}Step getByValue(String value) {
+    if (_byValue.isEmpty) {
+      for (final status in {{feature_name.pascalCase()}}Step.values) {
+        _byValue[status.value] = status;
+      }
+    }
+
+    return _byValue[value] ?? {{feature_name.pascalCase()}}Step.{{#children}}{{#isFirst}}{{name.camelCase()}}{{/isFirst}}{{/children}};
+  }
+}
+
+extension {{feature_name.pascalCase()}}StepX on {{feature_name.pascalCase()}}Step {
+  {{#childrenNames}}bool get is{{#pascalCase}}{{.}}{{/pascalCase}} => this == {{feature_name.pascalCase()}}Step.{{#camelCase}}{{.}}{{/camelCase}};
+  {{/childrenNames}}
+
+  {{feature_name.pascalCase()}}Step? get nextStep {
+    {{#childrenNames}}if (is{{#pascalCase}}{{.}}{{/pascalCase}}) return {{feature_name.pascalCase()}}Step.{{#camelCase}}{{.}}{{/camelCase}};
+    {{/childrenNames}}
+    return null;
+  }
+
+  {{feature_name.pascalCase()}}Step? get previousStep {
+    // TODO: Implement previousStep
+    return null;
+  }
+
+  int? get page {
+    {{#children}}if (is{{#pascalCase}}{{name}}{{/pascalCase}}) return {{index}}; 
+    {{/children}}
+
+    return null;
+  }
+}

@@ -11,6 +11,8 @@ bricks:
     path: bricks/avilatek_go_router
   avilatek_variables_template:
     path: bricks/avilatek_variables_template
+  feature_brick_plus:
+    path: bricks/feature_brick_plus
   bloc: ^0.3.0
   todos:
     git:
