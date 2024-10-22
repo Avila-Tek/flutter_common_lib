@@ -18,50 +18,47 @@ Future run(HookContext context) async {
   String firstChild = '';
   String lastChild = '';
   List<Map<String, dynamic>> children = [];
+
   if (isStepper || isTabbed) {
-    while (true) {
-      late bool isAmountCorrect;
+    bool isAmountCorrect = false;
+    while (!isAmountCorrect) {
+      final amount = context.logger.prompt(
+        '? How many ${(isStepper) ? 'steps' : 'tabs'} do you want your feature to have?',
+        defaultValue: '2',
+      );
 
-      try {
-        final amount = context.logger.prompt(
-          '? How many ${(isStepper) ? 'steps' : 'tabs'} do you want your feature to have?',
-          defaultValue: 2,
-        );
+      childrenAmount = int.tryParse(amount) ?? 0;
 
-        childrenAmount = int.tryParse(amount) ?? 0;
-
-        childrenNames = context.logger.promptAny(
-          '? What are the names of these ${(isStepper) ? 'steps' : 'tabs'}? Please use comas (,) to separate them: ',
-          separator: ',',
-        );
-
-        if (childrenNames.length != childrenAmount) {
-          isAmountCorrect = false;
-          throw InvalidChildrenException();
-        } else {
-          isAmountCorrect = true;
-          firstChild = childrenNames.first;
-          lastChild = childrenNames.last;
-          children = childrenNames
-              .map((child) => {
-                    'name': child,
-                    'isFirst': child == firstChild,
-                    'isLast': child == lastChild,
-                    'index': childrenNames.indexOf(child),
-                  })
-              .toList();
-        }
-      } on InvalidChildrenException {
+      if (childrenAmount <= 0) {
         logger.warn(
-          'The amount of ${(isStepper) ? 'steps' : 'tabs'} does not match the amount of names',
-        );
+            'Please enter a valid positive integer for the number of ${(isStepper) ? 'steps' : 'tabs'}.');
+        continue;
+      }
+
+      childrenNames = context.logger.promptAny(
+        '? What are the names of these ${(isStepper) ? 'steps' : 'tabs'}? Please use commas (,) to separate them: ',
+        separator: ',',
+      );
+
+      if (childrenNames.length != childrenAmount) {
         logger.warn(
-          'Please make sure to input as many names as the amount of children and separate each one with comas (,)',
-        );
+            'The amount of ${(isStepper) ? 'steps' : 'tabs'} does not match the number of names provided.');
+        logger.warn(
+            'Please make sure to input as many names as the amount of children and separate each one with commas (,).');
+        continue;
       }
-      if (isAmountCorrect) {
-        break;
-      }
+
+      firstChild = childrenNames.first;
+      lastChild = childrenNames.last;
+      children = childrenNames
+          .map((child) => {
+                'name': child,
+                'isFirst': child == firstChild,
+                'isLast': child == lastChild,
+                'index': childrenNames.indexOf(child),
+              })
+          .toList();
+      isAmountCorrect = true;
     }
   }
 
@@ -135,7 +132,7 @@ Future run(HookContext context) async {
   } on PubspecNameException catch (_) {
     logger.alert(
       red.wrap(
-        'Could not read package name in pubspec.yaml}',
+        'Could not read package name in pubspec.yaml',
       ),
     );
     logger.alert(

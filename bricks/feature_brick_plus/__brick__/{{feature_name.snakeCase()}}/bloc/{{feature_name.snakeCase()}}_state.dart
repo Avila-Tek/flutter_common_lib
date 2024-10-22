@@ -1,6 +1,6 @@
 part of '{{feature_name.snakeCase()}}_bloc.dart';
 
-{{#isConventional}}enum {{feature_name.pascalCase()}}Status { 
+enum {{feature_name.pascalCase()}}Status { 
   initial, 
   loading, 
   success, 
@@ -12,6 +12,7 @@ part of '{{feature_name.snakeCase()}}_bloc.dart';
   bool get isFailure => this == {{feature_name.pascalCase()}}Status.failure;
  }
 
+{{#isConventional}}
 /// {@template {{feature_name.snakeCase()}}_state}
 /// {{feature_name.pascalCase()}}State description
 /// {@endtemplate}
@@ -36,18 +37,6 @@ class {{feature_name.pascalCase()}}State extends Equatable {
     );
   }
 }{{/isConventional}}{{#isTabbed}}
-enum {{feature_name.pascalCase()}}Status { 
-  initial, 
-  loading, 
-  success, 
-  failure;
-
-  bool get isInitial => this == {{feature_name.pascalCase()}}Status.initial;
-  bool get isLoading => this == {{feature_name.pascalCase()}}Status.loading;
-  bool get isSuccess => this == {{feature_name.pascalCase()}}Status.success;
-  bool get isFailure => this == {{feature_name.pascalCase()}}Status.failure;
- }
-
 /// {@template {{feature_name.snakeCase()}}_state}
 /// {{feature_name.pascalCase()}}State description
 /// {@endtemplate}
@@ -72,17 +61,6 @@ class {{feature_name.pascalCase()}}State extends Equatable {
     );
   }
 }{{/isTabbed}}{{#isStepper}}
-enum {{feature_name.pascalCase()}}Status { 
-  initial, 
-  loading, 
-  success, 
-  failure;
-
-  bool get isInitial => this == {{feature_name.pascalCase()}}Status.initial;
-  bool get isLoading => this == {{feature_name.pascalCase()}}Status.loading;
-  bool get isSuccess => this == {{feature_name.pascalCase()}}Status.success;
-  bool get isFailure => this == {{feature_name.pascalCase()}}Status.failure;
- }
 
 /// {@template {{feature_name.snakeCase()}}_state}
 /// {{feature_name.pascalCase()}}State description

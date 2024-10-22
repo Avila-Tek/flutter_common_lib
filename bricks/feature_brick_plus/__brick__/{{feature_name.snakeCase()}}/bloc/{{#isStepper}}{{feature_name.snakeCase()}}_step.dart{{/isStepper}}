@@ -9,9 +9,9 @@ enum {{feature_name.pascalCase()}}Step {
 
   final String value;
 
-  final Map<String, {{feature_name.pascalCase()}}Step> _byValue = const {};
+  static Map<String, {{feature_name.pascalCase()}}Step> _byValue = {};
 
-  {{feature_name.pascalCase()}}Step getByValue(String value) {
+  static {{feature_name.pascalCase()}}Step getByValue(String value) {
     if (_byValue.isEmpty) {
       for (final status in {{feature_name.pascalCase()}}Step.values) {
         _byValue[status.value] = status;

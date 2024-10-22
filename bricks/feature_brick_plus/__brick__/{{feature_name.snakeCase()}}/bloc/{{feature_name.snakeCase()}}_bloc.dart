@@ -13,10 +13,10 @@ class {{feature_name.pascalCase()}}Bloc extends Bloc<{{feature_name.pascalCase()
       _on{{feature_name.pascalCase()}}PreviousStep,
     );{{/isStepper}}
   }
-  {{#isStepper}}FutureOr<void> _on{{feature_name.pascalCase()}}NextStep(
+  {{#isStepper}}void _on{{feature_name.pascalCase()}}NextStep(
     {{feature_name.pascalCase()}}NextStep event,
     Emitter<{{feature_name.pascalCase()}}State> emit,
-  ) async {
+  ) {
     final nextIndex = state.currentPageIndex + 1;
     final nextStep = event.nextStep ?? state.step.nextStep;
 
@@ -28,10 +28,10 @@ class {{feature_name.pascalCase()}}Bloc extends Bloc<{{feature_name.pascalCase()
       );
   }
 
-  FutureOr<void> _on{{feature_name.pascalCase()}}PreviousStep(
+  void _on{{feature_name.pascalCase()}}PreviousStep(
     {{feature_name.pascalCase()}}PreviousStep event,
     Emitter<{{feature_name.pascalCase()}}State> emit,
-  ) async {
+  ) {
     if (state.currentPageIndex == 0) return;
     final previousIndex = state.currentPageIndex - 1;
     final previousStep = state.step.previousStep;

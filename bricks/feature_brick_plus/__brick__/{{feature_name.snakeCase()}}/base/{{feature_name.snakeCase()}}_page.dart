@@ -140,7 +140,7 @@ class _{{feature_name.pascalCase()}}View extends StatelessWidget {
   }
 }{{/isTabbed}}{{#isStepper}}
 class {{feature_name.pascalCase()}}Page extends StatelessWidget {
-  /// {@macro travel_subscription_page}
+  /// {@macro {{feature_name.pascalCase()}}_view}
   const {{feature_name.pascalCase()}}Page({
     super.key,
   });
@@ -164,11 +164,11 @@ class {{feature_name.pascalCase()}}Page extends StatelessWidget {
   }
 }
 
-/// {@template travel_subscription_view}
+/// {@template {{feature_name.snakeCase()}}_view}
 /// Displays the Body of {{feature_name.pascalCase()}}View
 /// {@endtemplate}
 class {{feature_name.pascalCase()}}View extends StatelessWidget {
-  /// {@macro travel_subscription_view}
+  /// {@macro {{feature_name.snakeCase()}}_view}
   const {{feature_name.pascalCase()}}View({super.key});
 
   @override

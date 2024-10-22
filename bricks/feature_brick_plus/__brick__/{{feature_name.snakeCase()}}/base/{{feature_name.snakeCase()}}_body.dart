@@ -32,7 +32,7 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
       builder: (context, state) {
         return TabBarView(
           controller: _tabController,
-          children: const [
+          children: [
             {{#childrenNames}}_{{..pascalCase()}}Page(),
             {{/childrenNames}}
           ],

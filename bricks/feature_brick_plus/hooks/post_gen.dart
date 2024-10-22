@@ -10,7 +10,7 @@ Future<void> run(HookContext context) async {
     createCompoundFolders(context, isTab: isTabbed);
   }
 
-  final includeTests = context.vars['include_tests'] as bool;
+  final includeTests = context.vars['include_tests'] as bool? ?? false;
   if (!includeTests) {
     return;
   }
