@@ -13,6 +13,7 @@ export 'src/widgets/avila_snackbar.dart';
 export 'src/widgets/custom_loading_indicator.dart';
 export 'src/widgets/custom_tags.dart';
 export 'src/widgets/developed_by.dart';
+export 'src/widgets/keyboard_closer_wrapper.dart';
 export 'src/widgets/selector_button.dart';
 export 'src/widgets/selector_sheet.dart';
 export 'src/widgets/title_wrapper.dart';
