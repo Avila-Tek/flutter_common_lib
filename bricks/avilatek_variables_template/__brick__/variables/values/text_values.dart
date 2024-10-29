@@ -47,10 +47,31 @@ class TextValues {
   // Replace this with your desired font family.
 
   // TODO: Add google_fonts package to your pubspec.yaml file
-  static const String fontFamilyName = '{{font_family}}';
-  
   static TextTheme fontFamily(BuildContext context) =>
-      GoogleFonts.{{font_family.lowerCase()}}TextTheme(Theme.of(context).textTheme);
+      GoogleFonts.{{font_family.camelCase()}}TextTheme(Theme.of(context).textTheme);
+
+  static TextStyle Function({
+    Paint? background,
+    Color? backgroundColor,
+    Color? color,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double? decorationThickness,
+    List<FontFeature>? fontFeatures,
+    double? fontSize,
+    FontStyle? fontStyle,
+    FontWeight? fontWeight,
+    Paint? foreground,
+    double? height,
+    double? letterSpacing,
+    Locale? locale,
+    List<Shadow>? shadows,
+    TextBaseline? textBaseline,
+    TextStyle? textStyle,
+    double? wordSpacing,
+  }) get fontFamilyStyle => GoogleFonts.{{font_family.camelCase()}};
+
 
   // -------------------------------------------------
   // <---------------- Font weight ------------------>

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:{{full_path}}/variables/values/color_values.dart';
-import 'package:{{full_path}}/variables/values/text_values.dart';
-import 'package:{{full_path}}/variables/values/width_values.dart';
+import 'package:{{{full_path}}}/variables/values/color_values.dart';
+import 'package:{{{full_path}}}/variables/values/text_values.dart';
+import 'package:{{{full_path}}}/variables/values/width_values.dart';
 
 class AppTheme {
   static ThemeData theme(BuildContext context) {
