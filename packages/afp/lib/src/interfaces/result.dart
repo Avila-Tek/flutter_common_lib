@@ -1,4 +1,4 @@
-import 'package:afp/src/base_error.dart';
+import 'package:afp/src/interfaces/base_error.dart';
 
 /// An abstract class representing the result of an operation.
 ///
