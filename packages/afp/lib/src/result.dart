@@ -1,4 +1,5 @@
-import 'package:quoota/core/errors/base_error.dart';
+import 'package:afp/src/base_error.dart';
+
 /// An abstract class representing the result of an operation.
 ///
 /// This generic class takes two types: [T] for the success data type
@@ -10,8 +11,10 @@ abstract class Result<T, E extends BaseError> {
     this.data,
     this.error,
   });
+
   /// The data returned in case of success.
   final T? data;
+
   /// The error returned in case of failure.
   final E? error;
 }
