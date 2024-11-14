@@ -43,21 +43,16 @@ abstract class Result<T, E extends BaseError> {
   /// }
   /// ```
   ///
-  void Function(
-    void Function(Success<T, E> data),
-    void Function(Failure<T, E> error),
-  ) resolve() {
-    return (
-      void Function(Success<T, E> data) onSuccess,
-      void Function(Failure<T, E> error) onFailure,
-    ) {
-      if (this is Success) {
-        onSuccess(this as Success<T, E>);
-      }
-      if (this is Failure) {
-        onFailure(this as Failure<T, E>);
-      }
-    };
+  void resolve(
+    void Function(T data) onSuccess,
+    void Function(E error) onError,
+  ) {
+    if (this is Success) {
+      onSuccess(this.data as T);
+    }
+    if (this is Failure) {
+      onError(this.error!);
+    }
   }
 }
 
