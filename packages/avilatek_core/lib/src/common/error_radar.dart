@@ -26,7 +26,7 @@ abstract class ErrorRadarDelegate {
   void recordFlutterFatalError(FlutterErrorDetails details);
 
   /// Records a fatal error caught by the PlatformDispatcher.
-  void recordPlatformDispatcherError(Object object, StackTrace stack);
+  bool recordPlatformDispatcherError(Object object, StackTrace stack);
 }
 
 /// {@template multi_error_radar_repository}
@@ -35,7 +35,7 @@ abstract class ErrorRadarDelegate {
 /// (e.g. Sentry and Crashlytics) and you want to use the same API for
 /// capturing exceptions.
 /// {@endtemplate}
-final class MultiErrorRadar {
+final class MultiErrorRadar extends ErrorRadarDelegate {
   /// {@macro multi_error_radar_repository}
   const MultiErrorRadar({
     required List<ErrorRadarDelegate> radars,
@@ -44,10 +44,12 @@ final class MultiErrorRadar {
   final List<ErrorRadarDelegate> _radars;
 
   /// Returns `true` if all radars are enabled.
+  @override
   bool get isCollectionEnabled => _radars.every((e) => e.isCollectionEnabled);
 
   /// Captures exception and sends it to registered error collection
   /// services.
+  @override
   void captureException(Object exception, StackTrace stackTrace) {
     for (final radar in _radars) {
       if (!radar.isCollectionEnabled) continue;
@@ -56,6 +58,7 @@ final class MultiErrorRadar {
   }
 
   /// Enables or disables the error collection for all registered services.
+  @override
   void setCollectionEnabled({required bool enabled}) {
     for (final radar in _radars) {
       radar.setCollectionEnabled(enabled: enabled);
@@ -64,6 +67,7 @@ final class MultiErrorRadar {
 
   /// Records a fatal error caught by the Flutter framework. For
   /// PlatformDispatcher errors, see [recordPlatformDispatcherError].
+  @override
   void recordFlutterFatalError(FlutterErrorDetails details) {
     for (final radar in _radars) {
       if (!radar.isCollectionEnabled) continue;
@@ -72,6 +76,7 @@ final class MultiErrorRadar {
   }
 
   /// Records a fatal error caught by the PlatformDispatcher.
+  @override
   bool recordPlatformDispatcherError(Object object, StackTrace stack) {
     for (final radar in _radars) {
       if (!radar.isCollectionEnabled) continue;
