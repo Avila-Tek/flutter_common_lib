@@ -1,5 +1,5 @@
 /// Packs handy assertions.
-class CommonAssertions {
+abstract class CommonAssertions {
   /// Run a series of assertions to check if the API URL is valid.
   ///
   /// Should be used when instancing a new GraphQL API object.
