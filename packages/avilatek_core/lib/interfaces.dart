@@ -2,4 +2,4 @@
 /// for other πackages of avilatek_core.
 library interfaces;
 
-export 'device_storage.dart';
+export 'src/interfaces/device_storage.dart';

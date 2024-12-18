@@ -1,5 +1,5 @@
-import 'package:avilatek_core/http/headers_injector.dart';
-import 'package:avilatek_core/interfaces/device_storage.dart';
+import 'package:avilatek_core/src/http/headers_injector.dart';
+import 'package:avilatek_core/src/interfaces/device_storage.dart';
 
 /// {@template http_headers_injector}
 /// This class simplifies the process of injecting headers into HTTP requests
@@ -21,7 +21,7 @@ final class PersistentHeadersInjector extends HeadersInjector {
   ///
   /// {@macro http_headers_injector}
   PersistentHeadersInjector({
-    required IDeviceStorage storage,
+    required DeviceStorage storage,
     Map<String, String> defaultHeaders = const {
       'accept': 'application/json',
       'content-type': 'application/json',
@@ -29,7 +29,7 @@ final class PersistentHeadersInjector extends HeadersInjector {
   })  : _storage = storage,
         _defaultHeaders = defaultHeaders;
 
-  final IDeviceStorage _storage;
+  final DeviceStorage _storage;
   final Map<String, String> _defaultHeaders;
 
   String _preProcessHeaderKey(String value) {

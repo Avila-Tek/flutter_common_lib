@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:avilatek_core/http/headers_injector.dart';
+import 'package:avilatek_core/src/http/headers_injector.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart';
 
