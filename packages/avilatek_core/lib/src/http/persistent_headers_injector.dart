@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:avilatek_core/src/http/headers_injector.dart';
 import 'package:avilatek_core/src/interfaces/device_storage.dart';
+import 'package:flutter/foundation.dart';
 
 /// {@template http_headers_injector}
 /// This class simplifies the process of injecting headers into HTTP requests
@@ -29,6 +32,12 @@ final class PersistentHeadersInjector extends HeadersInjector {
   })  : _storage = storage,
         _defaultHeaders = defaultHeaders;
 
+  @visibleForTesting
+
+  /// The key used to store the headers in the device storage. Public for
+  /// testing only..
+  static const String storeKey = '__http_headers__';
+
   final DeviceStorage _storage;
   final Map<String, String> _defaultHeaders;
 
@@ -37,28 +46,46 @@ final class PersistentHeadersInjector extends HeadersInjector {
   }
 
   @override
+  Future<Map<String, String>> getAll() async {
+    final headersStr = await _storage.getValue(storeKey);
+
+    if (headersStr == null || headersStr.isEmpty) {
+      return {};
+    }
+
+    return Map<String, String>.from(jsonDecode(headersStr) as Map);
+  }
+
+  @override
   Future<String?> get(String key) async {
-    return _storage.getValue(_preProcessHeaderKey(key));
+    final headers = await getAll();
+    return headers[_preProcessHeaderKey(key)];
   }
 
   @override
   Future<void> set(String key, String value) async {
-    return _storage.setValue(key: _preProcessHeaderKey(key), value: value);
+    final headers = await getAll();
+    headers[_preProcessHeaderKey(key)] = value;
+    return _storage.setValue(key: storeKey, value: jsonEncode(headers));
   }
 
   @override
   Future<void> delete(String key) async {
-    return _storage.deleteValue(_preProcessHeaderKey(key));
+    final headers = await getAll();
+    headers.remove(_preProcessHeaderKey(key));
+    return _storage.setValue(key: storeKey, value: jsonEncode(headers));
   }
 
   @override
   Future<Map<String, String>> headers({Map<String, String>? extra}) async {
-    final currentHeaders = await headers();
+    final currentHeaders = await getAll();
+    final extraNormalized =
+        extra?.map((key, value) => MapEntry(_preProcessHeaderKey(key), value));
 
     return {
       ..._defaultHeaders,
       ...currentHeaders,
-      ...?extra,
+      ...?extraNormalized,
     };
   }
 }

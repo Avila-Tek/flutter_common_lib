@@ -5,6 +5,9 @@ abstract class HeadersInjector {
   /// {@macro http_headers_injector}
   const HeadersInjector();
 
+  /// Retrieves all header values.
+  Future<Map<String, String>> getAll();
+
   /// Retrieves the header value.
   ///
   /// Example:
