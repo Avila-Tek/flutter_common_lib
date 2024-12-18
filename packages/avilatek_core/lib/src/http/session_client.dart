@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:avilatek_core/common.dart';
 import 'package:avilatek_core/src/http/headers_injector.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart';
@@ -13,10 +14,11 @@ final class SessionHttpClient extends http.BaseClient {
   /// {@macro custom_http_client}
   SessionHttpClient({
     required HeadersInjector headersInjector,
-    // required IErrorRadarDelegate errorRadar,
+    ErrorRadarDelegate? errorRadar,
     http.Client? inner,
   })  : _inner = inner ?? http.Client(),
-        _headersInjector = headersInjector;
+        _headersInjector = headersInjector,
+        _errorRadar = errorRadar;
 
   /// Creates a [SessionHttpClient] with retry on 401 status code. Useful when
   /// working with OAuth2.0 and refresh tokens.
@@ -24,25 +26,39 @@ final class SessionHttpClient extends http.BaseClient {
     required HeadersInjector headersInjector,
     required FutureOr<void> Function(http.BaseRequest, http.BaseResponse?, int)?
         onRetry,
-
-    // required IErrorRadarDelegate errorRadar,
+    FutureOr<bool> Function(http.BaseResponse) when = _defaultWhen,
+    http.Client? inner,
+    ErrorRadarDelegate? errorRadar,
   }) {
+    const retries = 1;
+
+    final retryClient = errorRadar != null
+        ? RetryClient(
+            inner ?? http.Client(),
+            retries: retries,
+            when: when,
+            whenError: (e, s) {
+              errorRadar.captureException(e, s);
+              return true;
+            },
+            onRetry: onRetry,
+          )
+        : RetryClient(
+            inner ?? http.Client(),
+            retries: retries,
+            when: when,
+            onRetry: onRetry,
+          );
+
     return SessionHttpClient(
       headersInjector: headersInjector,
-      // errorRadar: errorRadar,
-      inner: RetryClient(
-        http.Client(),
-        retries: 1,
-        when: (response) {
-          return response.statusCode == 401; // Retry on unauthorized
-        },
-        onRetry: onRetry,
-      ),
+      inner: retryClient,
     );
   }
 
   final HeadersInjector _headersInjector;
   final http.Client _inner;
+  final ErrorRadarDelegate? _errorRadar;
 
   @override
   Future<http.Response> get(
@@ -119,6 +135,13 @@ final class SessionHttpClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
-    return _inner.send(request);
+    try {
+      return _inner.send(request);
+    } catch (e, s) {
+      _errorRadar?.captureException(e, s);
+      rethrow;
+    }
   }
 }
+
+bool _defaultWhen(http.BaseResponse response) => response.statusCode == 401;
