@@ -8,10 +8,10 @@ Future run(HookContext context) async {
 
   final featureType = context.vars['feature_type'].toString().toLowerCase();
 
-  final isConventional = featureType == 'conventional';
+  final isDefault = featureType == 'default';
   final isStepper = featureType == 'stepper';
   final isTabbed = featureType == 'tabbed';
-  final isBottomModal = featureType == 'bottom_modal';
+  // final isBottomModal = featureType == 'bottom_modal';
 
   int childrenAmount = 0;
   List<String> childrenNames = [];
@@ -77,8 +77,14 @@ Future run(HookContext context) async {
     }
     final libIndex = folders.indexWhere((folder) => folder == 'lib');
     final featurePath = folders.sublist(libIndex + 1, folders.length).join('/');
+
     final pubSpecFile =
         File('${folders.sublist(0, libIndex).join('/')}/pubspec.yaml');
+
+    if (!pubSpecFile.existsSync()) {
+      throw FileSystemException('pubspec.yaml file not found');
+    }
+
     final content = await pubSpecFile.readAsString();
     final yamlMap = loadYaml(content);
     final packageName = yamlMap['name'];
@@ -92,10 +98,10 @@ Future run(HookContext context) async {
       'fullPath':
           ('$packageName/$featurePath/${(context.vars['feature_name'] as String).snakeCase}')
               .replaceAll('//', '/'),
-      'isConventional': isConventional,
+      'isDefault': isDefault,
       'isStepper': isStepper,
       'isTabbed': isTabbed,
-      'isBottomModal': isBottomModal,
+      // 'isBottomModal': isBottomModal,
       'childrenAmount': childrenAmount,
       'childrenNames': childrenNames,
       'firstChild': firstChild,

@@ -3,20 +3,20 @@ part of 'package:{{{fullPath}}}/base/{{feature_name.snakeCase()}}_page.dart';
 /// {@template {{feature_name.snakeCase()}}_body}
 /// Body of the {{feature_name.pascalCase()}}Page.
 /// {@endtemplate}
-{{#isConventional}}class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
+{{#isDefault}}class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
   /// {@macro {{feature_name.snakeCase()}}_body}
   const _{{feature_name.pascalCase()}}Body({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<{{feature_name.pascalCase()}}Bloc, {{feature_name.pascalCase()}}State>(
+    return BlocBuilder<_{{feature_name.pascalCase()}}Bloc, _{{feature_name.pascalCase()}}State>(
       builder: (context, state) {
         return Center(child: Text('{{feature_name.pascalCase()}}Page'));
       },
     );
   }
   
-}{{/isConventional}}{{#isTabbed}}
+}{{/isDefault}}{{#isTabbed}}
 class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
   /// {@macro {{feature_name.pascalCase()}}_body}
   const _{{feature_name.pascalCase()}}Body({
@@ -28,7 +28,7 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<{{feature_name.pascalCase()}}Bloc, {{feature_name.pascalCase()}}State>(
+    return BlocBuilder<_{{feature_name.pascalCase()}}Bloc, _{{feature_name.pascalCase()}}State>(
       builder: (context, state) {
         return TabBarView(
           controller: _tabController,
@@ -49,11 +49,11 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
 
   final scrollController = ScrollController(keepScrollOffset: false);
 
-  int get totalSteps => {{feature_name.pascalCase()}}Step.values.length - 1;
+  int get totalSteps => _{{feature_name.pascalCase()}}Step.values.length - 1;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<{{feature_name.pascalCase()}}Bloc, {{feature_name.pascalCase()}}State>(
+    return BlocBuilder<_{{feature_name.pascalCase()}}Bloc, _{{feature_name.pascalCase()}}State>(
         builder: (context, state) {
           return NestedScrollView(
             controller: scrollController,

@@ -11,14 +11,13 @@ vars:
     prompt: What is the feature name?
   feature_type:
     type: enum
-    default: conventional
+    default: default
     description: The feature type or general structure
     prompt: What kind of feature are you building? 
     values:
-      - conventional
+      - default
       - stepper
       - tabbed
-      - bottom_modal
   # state_management:
   #   type: enum
   #   default: bloc

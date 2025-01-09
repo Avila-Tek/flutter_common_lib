@@ -1,21 +1,15 @@
-import 'dart:async';
+part of 'package:{{{fullPath}}}/base/{{feature_name.snakeCase()}}_page.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-part '{{feature_name.snakeCase()}}_event.dart';
-part '{{feature_name.snakeCase()}}_state.dart';
-{{#isStepper}}part '{{feature_name.snakeCase()}}_step.dart';{{/isStepper}}
-
-class {{feature_name.pascalCase()}}Bloc extends Bloc<{{feature_name.pascalCase()}}Event, {{feature_name.pascalCase()}}State> {
-  {{feature_name.pascalCase()}}Bloc() : super(const {{feature_name.pascalCase()}}State()) {
-  {{#isStepper}} on<{{feature_name.pascalCase()}}NextStep>(_on{{feature_name.pascalCase()}}NextStep);
-    on<{{feature_name.pascalCase()}}PreviousStep>(
+class _{{feature_name.pascalCase()}}Bloc extends Bloc<_{{feature_name.pascalCase()}}Event, _{{feature_name.pascalCase()}}State> {
+  _{{feature_name.pascalCase()}}Bloc() : super(const _{{feature_name.pascalCase()}}State()) {
+  {{#isStepper}} on<_{{feature_name.pascalCase()}}NextStep>(_on{{feature_name.pascalCase()}}NextStep);
+    on<_{{feature_name.pascalCase()}}PreviousStep>(
       _on{{feature_name.pascalCase()}}PreviousStep,
     );{{/isStepper}}
   }
   {{#isStepper}}void _on{{feature_name.pascalCase()}}NextStep(
-    {{feature_name.pascalCase()}}NextStep event,
-    Emitter<{{feature_name.pascalCase()}}State> emit,
+    _{{feature_name.pascalCase()}}NextStep event,
+    Emitter<_{{feature_name.pascalCase()}}State> emit,
   ) {
     final nextIndex = state.currentPageIndex + 1;
     final nextStep = event.nextStep ?? state.step.nextStep;
@@ -29,8 +23,8 @@ class {{feature_name.pascalCase()}}Bloc extends Bloc<{{feature_name.pascalCase()
   }
 
   void _on{{feature_name.pascalCase()}}PreviousStep(
-    {{feature_name.pascalCase()}}PreviousStep event,
-    Emitter<{{feature_name.pascalCase()}}State> emit,
+    _{{feature_name.pascalCase()}}PreviousStep event,
+    Emitter<_{{feature_name.pascalCase()}}State> emit,
   ) {
     if (state.currentPageIndex == 0) return;
     final previousIndex = state.currentPageIndex - 1;

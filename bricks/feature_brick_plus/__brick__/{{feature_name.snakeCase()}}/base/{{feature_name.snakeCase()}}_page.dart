@@ -1,7 +1,11 @@
-{{#isTabbed}}import 'package:equatable/equatable.dart';{{/isTabbed}}{{#isStepper}}import 'package:equatable/equatable.dart';{{/isStepper}}
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:{{{fullPath}}}/bloc/bloc.dart';
-
+import 'dart:async';
+import 'package:flutter_bloc/flutter_bloc.dart';
+part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_bloc.dart';
+part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_event.dart';
+part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_state.dart';
+{{#isStepper}}part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_step.dart';{{/isStepper}}
 part 'package:{{{fullPath}}}/base/{{feature_name.snakeCase()}}_body.dart';
 {{#isTabbed}}//TODO: remember to add the part/part of in any additional widget you add to any of your tabs.
 {{#childrenNames}}part 'package:{{{fullPath}}}/tabs/{{#snakeCase}}{{.}}{{/snakeCase}}/base/{{#snakeCase}}{{.}}{{/snakeCase}}_page.dart';
@@ -18,10 +22,11 @@ part 'package:{{{fullPath}}}/steps/{{#snakeCase}}{{.}}{{/snakeCase}}/bloc/{{#sna
 part 'package:{{{fullPath}}}/steps/{{#snakeCase}}{{.}}{{/snakeCase}}/bloc/{{#snakeCase}}{{.}}{{/snakeCase}}_state.dart';
 {{/childrenNames}}{{/isStepper}}
 
+
 /// {@template {{feature_name.snakeCase()}}_page}
 /// A description for {{feature_name.pascalCase()}}Page
 /// {@endtemplate}
-{{#isConventional}}class {{feature_name.pascalCase()}}Page extends StatelessWidget {
+{{#isDefault}}class {{feature_name.pascalCase()}}Page extends StatelessWidget {
   /// {@macro {{feature_name.snakeCase()}}_page}
   const {{feature_name.pascalCase()}}Page({super.key});
 
@@ -35,7 +40,7 @@ part 'package:{{{fullPath}}}/steps/{{#snakeCase}}{{.}}{{/snakeCase}}/bloc/{{#sna
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => {{feature_name.pascalCase()}}Bloc(),
+      create: (context) => _{{feature_name.pascalCase()}}Bloc(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('{{feature_name.pascalCase()}}'),
@@ -59,7 +64,7 @@ class _{{feature_name.pascalCase()}}View extends StatelessWidget {
   Widget build(BuildContext context) {
     return const _{{feature_name.pascalCase()}}Body();
   }
-}{{/isConventional}}{{#isTabbed}}
+}{{/isDefault}}{{#isTabbed}}
 class {{feature_name.pascalCase()}}Page extends StatefulWidget {
   /// {@macro {{feature_name.pascalCase()}}_page}
   const {{feature_name.pascalCase()}}Page({super.key});
@@ -100,7 +105,7 @@ class _{{feature_name.pascalCase()}}PageState extends State<{{feature_name.pasca
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => {{feature_name.pascalCase()}}Bloc(),
+      create: (context) => _{{feature_name.pascalCase()}}Bloc(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('{{feature_name}}'),
@@ -153,7 +158,7 @@ class {{feature_name.pascalCase()}}Page extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return BlocProvider(
-          create: (context) => {{feature_name.pascalCase()}}Bloc(),
+          create: (context) => _{{feature_name.pascalCase()}}Bloc(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('{{feature_name.pascalCase()}}'),
