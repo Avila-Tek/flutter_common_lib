@@ -34,7 +34,7 @@
       - name: Set up .env file # TODO: !Declare all .env variables in the script. DO NOT WRITE DOWN ENV VARIABLES DIRECTLY ON THIS FILE. USE CODEMAGIC SECRETS!
         script: |
           cat >> ".env" <<EOF
-          STG_API_URL=$STG_API_URL
+          PROD_API_URL=$PROD_API_URL
           MY_SECRET_KEY=$MY_SECRET_KEY_EXAMPLE
           EOF
       - name: Get Flutter packages
