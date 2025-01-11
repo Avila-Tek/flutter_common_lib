@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'routes/shell_branches.dart';
+import 'shell_branches.dart';
 import 'router.dart';
 
 /// {@template index_page}

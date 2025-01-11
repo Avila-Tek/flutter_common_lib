@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'index.dart';
-import 'routes/shell_branches.dart';
+import 'shell_branches.dart';
 
 /// {@template app_router}
 /// The root router for the app. Call [AppRouter.router] to get the router.
