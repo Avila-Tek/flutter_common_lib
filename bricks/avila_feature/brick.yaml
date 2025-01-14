@@ -1,7 +1,7 @@
-name: feature_brick
-description: A brick to create a feature using best practices and your state management of choice!
+name: avila_feature
+description: A brick to create a feature following Avila Tek V1 standards.
 version: 0.6.2
-repository: https://github.com/LukeMoody01/mason_bricks/tree/master/bricks/feature_brick
+repository: https://github.com/Avila-Tek/flutter_common_lib/tree/master/bricks/feature_brick
 
 vars:
   feature_name:
