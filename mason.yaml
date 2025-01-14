@@ -2,9 +2,9 @@ bricks:
   avilatek_readme:
     path: bricks/avilatek_readme
   avilatek_codemagic:
-    path: bricks/avilatek_codemagic
+    path: bricks/avila_codemagic
   feature_brick:
-    path: bricks/feature_brick
+    path: bricks/avila_feature
   constants_file:
     path: bricks/constants_file
   avilatek_go_router:

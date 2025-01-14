@@ -1,4 +1,4 @@
-name: avilatek_codemagic
+name: avila_codemagic
 description: Generates the Codemagic configuration files for a Flutter project, configured with Avila Tek credentials.
 
 # The following defines the brick repository url.
