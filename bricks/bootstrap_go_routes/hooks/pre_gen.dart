@@ -26,6 +26,7 @@ Future run(HookContext context) async {
       folders = directory.split('/').toList();
     }
     final libIndex = folders.indexWhere((folder) => folder == 'lib');
+    // ignore: unused_local_variable
     final featurePath = folders.sublist(libIndex + 1, folders.length).join('/');
     final pubSpecFile =
         File('${folders.sublist(0, libIndex).join('/')}/pubspec.yaml');

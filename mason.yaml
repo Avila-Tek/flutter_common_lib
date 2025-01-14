@@ -7,8 +7,8 @@ bricks:
     path: bricks/avila_feature
   constants_file:
     path: bricks/constants_file
-  avilatek_go_router:
-    path: bricks/avilatek_go_router
+  bootstrap_go_routes:
+    path: bricks/bootstrap_go_routes
   avilatek_variables_template:
     path: bricks/avilatek_variables_template
   bloc: ^0.3.0
