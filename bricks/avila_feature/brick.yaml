@@ -1,6 +1,6 @@
 name: avila_feature
 description: A brick to create a feature following Avila Tek V1 standards.
-version: 0.6.2
+version: 0.1.0
 repository: https://github.com/Avila-Tek/flutter_common_lib/tree/master/bricks/feature_brick
 
 vars:
