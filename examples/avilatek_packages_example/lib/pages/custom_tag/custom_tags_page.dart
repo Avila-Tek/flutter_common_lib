@@ -16,7 +16,7 @@ class CustomTagsPage extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              CustomTag.primaryOne(
+              CustomTag.primary(
                 context,
                 child: const Text('Primary color tag'),
               ),
@@ -39,6 +39,14 @@ class CustomTagsPage extends StatelessWidget {
               CustomTag.grey(
                 context,
                 child: const Text('Neutral tag'),
+              ),
+              const SizedBox(height: 16),
+              const CustomTag(
+                style: CustomTagStyle(
+                  backgroundColor: Colors.indigo,
+                  foregroundColor: Colors.white,
+                ),
+                child: Text('Custom tag'),
               ),
             ],
           ),
