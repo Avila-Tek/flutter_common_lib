@@ -1,0 +1,27 @@
+name: avila_feature
+description: A brick to create a feature following Avila Tek V1 standards.
+version: 0.1.0
+repository: https://github.com/Avila-Tek/flutter_common_lib/tree/master/bricks/feature_brick
+
+vars:
+  feature_name:
+    type: string
+    default: login
+    description: The feature name
+    prompt: What is the feature name?
+  state_management:
+    type: enum
+    default: bloc
+    description: The features state management
+    prompt: What is the features state management?
+    values:
+      - bloc
+      - cubit
+      - provider
+      - riverpod
+      - none
+  include_tests:
+    type: boolean
+    default: false
+    description: Whether to include tests
+    prompt: Would you like to include tests for this feature?

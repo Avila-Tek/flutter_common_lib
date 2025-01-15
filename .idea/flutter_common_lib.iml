@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_codemagic/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_codemagic/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_codemagic/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_go_router/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_go_router/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_go_router/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_variables_template/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_variables_template/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/avilatek_variables_template/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/constants_file/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/constants_file/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/constants_file/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/feature_brick/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/feature_brick/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/feature_brick/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/avilatek_packages_example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/avilatek_packages_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/avilatek_packages_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/code_standards/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/code_standards/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/code_standards/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_bloc/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_bloc/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_bloc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_core/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_core/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_test/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_test/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_test/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/avilatek_ui/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

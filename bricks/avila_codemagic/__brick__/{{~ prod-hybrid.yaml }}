@@ -1,0 +1,135 @@
+  production-ios-android:
+    name: "[PROD🚀] iOS & Android deploy"
+    max_build_duration: 60
+    environment:
+      flutter: {{flutter_version}}
+      android_signing:
+        - avilatek_upload_ks
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: {{bundle_identifier}}
+      groups:
+        - play_store_credentials
+        - firebase_credentials
+        - production
+        - all
+
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: 'v*.*.*\+*-prod-all'
+          include: true
+        - pattern: 'v*.*.*\+*-production-all'
+          include: true
+      cancel_previous_builds: false
+
+    scripts:
+      - name: Set up .env file # TODO: !Declare all .env variables in the script. DO NOT WRITE DOWN ENV VARIABLES DIRECTLY ON THIS FILE. USE CODEMAGIC SECRETS!
+        script: |
+          cat >> ".env" <<EOF
+          PROD_API_URL=$PROD_API_URL
+          MY_SECRET_KEY=$MY_SECRET_KEY_EXAMPLE
+          EOF
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa # NOTE: Update target path and flavor if the project does not follow conventional structure.
+        script: |
+          flutter build ipa --release \
+            --flavor production \
+            --target {{{production_main_path}}} \
+            --export-options-plist=/Users/builder/export_options.plist
+            
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Set up key.properties
+        script: |
+          cat >> "$CM_BUILD_DIR/android/key.properties" <<EOF
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyPassword=$CM_KEY_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          storeFile=$CM_KEYSTORE_PATH
+          EOF
+      - name: Build APK with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
+        script: |
+          flutter build apk --release --flavor production --target {{{production_main_path}}}
+      - name: Build AAB with Flutter # NOTE: Update target path and flavor if the project does not follow conventional structure.
+        script: |
+          flutter build appbundle --release --flavor production --target {{{production_main_path}}}
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+
+    integrations:
+      app_store_connect: Avila Tek CA
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        {{#show_beta_groups}}
+        beta_groups:
+          {{#beta_groups_testflight}}- {{.}}
+          {{/beta_groups_testflight}}
+        {{/show_beta_groups}}
+      
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: production
+        changes_not_sent_for_review: false
+
+      firebase:
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT_CREDENTIALS # NOTE: Remember to add this value to the project's secrets.
+        android:
+          app_id: $PROD_FIREBASE_APPLICATION_ID # NOTE: Remember to add this value to the project's secrets.
+          artifact_type: apk
+          {{#show_verifier_groups}}
+          groups:
+            {{#verifier_groups_firebase}}- {{.}}
+            {{/verifier_groups_firebase}}
+          {{/show_verifier_groups}}
+
+      {{#upload_debug_symbols}}
+      scripts:
+      - name: Upload debug symbols to Firebase Crashlytics
+        script: | 
+          echo "Find build artifacts"
+          dsymPath=$(find $CM_BUILD_DIR/build/ios/archive/Runner.xcarchive -name "*.dSYM" | head -1)
+          if [[ -z ${dsymPath} ]]
+          then
+            echo "No debug symbols were found, skip publishing to Firebase Crashlytics"
+          else
+            echo "Publishing debug symbols from $dsymPath to Firebase Crashlytics"
+            ls -d -- ios/Pods/*
+            $CM_BUILD_DIR/ios/Pods/FirebaseCrashlytics/upload-symbols \
+              -gsp ios/Runner/GoogleService-Info.plist -p ios $dsymPath
+          fi
+      {{/upload_debug_symbols}}
+
+      {{#show_email_recipients}}
+      email:
+        recipients:
+          {{#email_recipients}}- {{.}}
+          {{/email_recipients}}
+      {{/show_email_recipients}}
