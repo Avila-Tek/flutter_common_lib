@@ -5,13 +5,13 @@ part of 'package:{{{fullPath}}}/base/{{feature_name.snakeCase()}}_page.dart';
 /// {@endtemplate}
 {{#isDefault}}class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
   /// {@macro {{feature_name.snakeCase()}}_body}
-  const _{{feature_name.pascalCase()}}Body({super.key});
+  const _{{feature_name.pascalCase()}}Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<_{{feature_name.pascalCase()}}Bloc, _{{feature_name.pascalCase()}}State>(
       builder: (context, state) {
-        return Center(child: Text('{{feature_name.pascalCase()}}Page'));
+        return const Center(child: Text('{{feature_name.pascalCase()}}Page'));
       },
     );
   }
@@ -21,8 +21,9 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
   /// {@macro {{feature_name.pascalCase()}}_body}
   const _{{feature_name.pascalCase()}}Body({
     required TabController tabController,
-    super.key,
-  }) : _tabController = tabController;
+    Key? key,
+  })  : _tabController = tabController,
+        super(key: key)
 
   final TabController _tabController;
 
@@ -32,7 +33,7 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
       builder: (context, state) {
         return TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             {{#childrenNames}}_{{..pascalCase()}}Page(),
             {{/childrenNames}}
           ],
@@ -43,7 +44,7 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
 }{{/isTabbed}}{{#isStepper}}
 class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
   /// {@macro {{feature_name.snakeCase()}}_body}
-  _{{feature_name.pascalCase()}}Body({super.key});
+  _{{feature_name.pascalCase()}}Body({Key? key}) : super(key: key);
 
   final controller = PageController();
 
@@ -65,7 +66,7 @@ class _{{feature_name.pascalCase()}}Body extends StatelessWidget {
             body: PageView(
               controller: controller,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: const [
                 {{#childrenNames}}_{{#pascalCase}}{{.}}{{/pascalCase}}Page(),
                 {{/childrenNames}}
               ],

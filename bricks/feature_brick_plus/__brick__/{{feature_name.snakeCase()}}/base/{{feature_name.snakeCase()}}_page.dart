@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_bloc.dart';
 part 'package:{{{fullPath}}}/bloc/{{feature_name.snakeCase()}}_event.dart';

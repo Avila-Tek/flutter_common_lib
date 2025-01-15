@@ -10,7 +10,7 @@ enum _{{feature_name.pascalCase()}}Status {
   bool get isLoading => this == _{{feature_name.pascalCase()}}Status.loading;
   bool get isSuccess => this == _{{feature_name.pascalCase()}}Status.success;
   bool get isFailure => this == _{{feature_name.pascalCase()}}Status.failure;
- }
+}
 
 {{#isDefault}}
 /// {@template {{feature_name.snakeCase()}}_state}

@@ -5,7 +5,6 @@ abstract class _{{feature_name.pascalCase()}}Event extends Equatable {
 
   @override
   List<Object?> get props => [];
-
 }
 
 class _Custom{{feature_name.pascalCase()}}Event extends _{{feature_name.pascalCase()}}Event {
