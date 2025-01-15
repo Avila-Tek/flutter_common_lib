@@ -1,4 +1,4 @@
-# Feature Brick
+# Feature Brick Plus
 
 > **Disclaimer:** This is a custom brick forked from [mason_bricks](https://github.com/LukeMoody01/mason_bricks/tree/master) and modified to our needs. This README is a copy of the original.
 
