@@ -1,16 +1,18 @@
 bricks:
   avilatek_readme:
-    path: bricks/avilatek_readme
-  avilatek_codemagic:
+    path: bricks/avila_readme
+  avila_codemagic:
     path: bricks/avila_codemagic
-  feature_brick:
+  avila_feature:
     path: bricks/avila_feature
   constants_file:
     path: bricks/constants_file
   bootstrap_go_routes:
     path: bricks/bootstrap_go_routes
-  avilatek_variables_template:
-    path: bricks/avilatek_variables_template
+  avila_themes:
+    path: bricks/avila_themes
+  feature_brick_plus:
+    path: bricks/feature_brick_plus
   bloc: ^0.3.0
   todos:
     git:
