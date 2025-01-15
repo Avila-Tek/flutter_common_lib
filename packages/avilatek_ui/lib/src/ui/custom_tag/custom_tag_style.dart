@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_constructors_over_static_methods
+
 import 'dart:ui';
 
 import 'package:avilatek_ui/src/widgets/custom_tags.dart';
 import 'package:flutter/material.dart';
 
-/// The theme data for the [CustomTag] widget.
-class CustomTagStyle extends ThemeExtension<CustomTagStyle> {
+/// CustomTagStyle for the [CustomTag] widget.
+class CustomTagStyle {
   /// Creates a [CustomTagStyle].
   const CustomTagStyle({
     this.backgroundColor,
@@ -38,8 +40,8 @@ class CustomTagStyle extends ThemeExtension<CustomTagStyle> {
   /// The [textStyle] parameter changes the TextStyle of the widget.
   final TextStyle? textStyle;
 
-  @override
-  ThemeExtension<CustomTagStyle> copyWith({
+  /// Creates a copy of this [CustomTagStyle] but with the given fields
+  CustomTagStyle copyWith({
     Color? backgroundColor,
     Color? foregroundColor,
     TextStyle? textStyle,
@@ -59,23 +61,24 @@ class CustomTagStyle extends ThemeExtension<CustomTagStyle> {
     );
   }
 
-  @override
-  ThemeExtension<CustomTagStyle> lerp(
-    covariant ThemeExtension<CustomTagStyle>? other,
+  /// Linearly interpolate between two [CustomTagStyle].
+  static CustomTagStyle lerp(
+    CustomTagStyle? a,
+    CustomTagStyle? b,
     double t,
   ) {
-    if (other is! CustomTagStyle) {
-      return this;
+    if (identical(a, b) && a != null) {
+      return a;
     }
 
     return CustomTagStyle(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
-      foregroundColor: Color.lerp(foregroundColor, other.foregroundColor, t),
-      border: BoxBorder.lerp(border, other.border, t),
-      padding: EdgeInsets.lerp(padding, other.padding, t),
-      iconColor: Color.lerp(iconColor, other.iconColor, t),
-      iconSize: lerpDouble(iconSize, other.iconSize, t),
-      textStyle: TextStyle.lerp(textStyle, other.textStyle, t),
+      backgroundColor: Color.lerp(a?.backgroundColor, b?.backgroundColor, t),
+      foregroundColor: Color.lerp(a?.foregroundColor, b?.foregroundColor, t),
+      border: BoxBorder.lerp(a?.border, b?.border, t),
+      padding: EdgeInsets.lerp(a?.padding, b?.padding, t),
+      iconColor: Color.lerp(a?.iconColor, b?.iconColor, t),
+      iconSize: lerpDouble(a?.iconSize, b?.iconSize, t),
+      textStyle: TextStyle.lerp(a?.textStyle, b?.textStyle, t),
     );
   }
 }
