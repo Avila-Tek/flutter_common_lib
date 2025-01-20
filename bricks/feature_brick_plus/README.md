@@ -88,21 +88,6 @@ See [feature_brick_tests](https://github.com/LukeMoody01/mason_bricks/tree/maste
 └── ...
 ```
 
-```
---feature_name login --state_management provider
-├── login
-│   ├── provider
-│   │   ├── login_provider.dart
-│   │   ├── provider.dart
-│   ├── view
-│   │   └── login_page.dart
-│   ├── widgets
-│   │   ├── login_body.dart
-│   │   └── widgets.dart
-│   └── login.dart
-└── ...
-```
-
 ### Tabbed
 
 ```
