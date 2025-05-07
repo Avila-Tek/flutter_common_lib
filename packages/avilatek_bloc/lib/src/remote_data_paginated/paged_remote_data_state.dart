@@ -175,3 +175,7 @@ class PagedRemoteDataNextPageFetchingFailure<T>
   @override
   List<Object?> get props => [...super.props, error];
 }
+
+/// This state is emitted when the next page is being fetched again after a
+/// failure.
+class PagedRemoteDataRetryNextPageFetching<T> extends PagedRemoteDataState<T> {}
