@@ -65,7 +65,7 @@ abstract class PagedRemoteDataBloc<T>
       ),
       onNextPageFetched: () => _handler.mapFetchNextPageRemoteDataToState(
         event,
-        state as PagedRemoteDataNextPageFetched<T>,
+        state as PagedRemoteDataInitialized<T>,
         emit,
         fetchAndParseNextPage,
       ),

@@ -63,6 +63,8 @@ class PagedRemoteDataEventHandler<T> {
     ) fetchAndParseNextPage,
   ) async {
     try {
+      if (state is PagedRemoteDataLastPageFetched) return;
+
       emit(PagedRemoteDataNextPageFetching(state));
 
       if (event.simulateError ?? false) {
