@@ -98,7 +98,7 @@ void main() {
       '''should restart the bloc and emit PagedRemoteDataFirstPageFetching when PagedRemoteDataRestart is added''',
       build: () => bloc,
       seed: () => const PagedRemoteDataLastPageFetched<int>([1, 2, 3]),
-      act: (bloc) => bloc.add(const PagedRemoteDataRestart()),
+      act: (bloc) => bloc.add(const PagedRemoteDataRestarted()),
       expect: () => <dynamic>[
         PagedRemoteDataUninitialized<int>(),
         PagedRemoteDataFirstPageFetching<int>(),

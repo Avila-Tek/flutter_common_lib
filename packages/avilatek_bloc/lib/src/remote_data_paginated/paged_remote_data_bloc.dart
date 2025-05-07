@@ -22,8 +22,12 @@ abstract class PagedRemoteDataBloc<T>
     _handler = PagedRemoteDataEventHandler<T>();
     on<PagedRemoteDataFetchNextPage>(_mapFetchNextPageRemoteDataToState);
 
-    on<PagedRemoteDataRestart>((event, emit) {
+    on<PagedRemoteDataRestarted>((event, emit) {
       emit(PagedRemoteDataUninitialized<T>());
+      add(const PagedRemoteDataFetchNextPage());
+    });
+
+    on<PagedRemoteDataRetryFetchNextPage>((event, emit) {
       add(const PagedRemoteDataFetchNextPage());
     });
   }
