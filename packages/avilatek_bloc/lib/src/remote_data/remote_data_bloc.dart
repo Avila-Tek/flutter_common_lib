@@ -11,7 +11,8 @@ export 'package:avilatek_bloc/src/remote_data/remote_data_state.dart';
 /// Blocs.
 ///
 /// Any Object/Primitive Data can be accessed via the
-/// [RemoteDataInitialized.data] property.
+/// [RemoteDataInitialized.data] property or via the
+/// [getDataFromState] method.
 abstract class RemoteDataBloc<T>
     extends Bloc<RemoteDataEvent, RemoteDataState<T>> {
   /// Constructor for the RemoteDataBloc.
@@ -29,6 +30,18 @@ abstract class RemoteDataBloc<T>
     on<FetchRemoteData>(_mapFetchRemoteDataToState);
   }
   late RemoteDataEventHandler<T> _handler;
+
+  /// Function that retrieves the data from the current state.
+  /// It returns a [T] if the state is
+  /// [RemoteDataInitialized], otherwise it returns null.
+  /// This method is useful for accessing the data from the current state
+  /// without having to check the state type.
+  T? getDataFromState(RemoteDataState<T> state) {
+    if (state is RemoteDataInitialized<T>) {
+      return state.data;
+    }
+    return null;
+  }
 
   /// Propagates the [FetchRemoteData] event down to the corresponding event
   /// handler.
@@ -88,4 +101,10 @@ abstract class RemoteDataBloc<T>
     RemoteDataState<T> oldState,
     FetchRemoteData event,
   );
+
+  /// Retrieves the data. You should override this method to provide the data
+  /// to the bloc, using the [getDataFromState] method with an empty [T] object,
+  /// if this method returns null.
+  @visibleForTesting
+  late T data;
 }
