@@ -105,6 +105,5 @@ abstract class RemoteDataBloc<T>
   /// Retrieves the data. You should override this method to provide the data
   /// to the bloc, using the [getDataFromState] method with an empty [T] object,
   /// if this method returns null.
-  @visibleForTesting
-  late T data;
+  T get data;
 }

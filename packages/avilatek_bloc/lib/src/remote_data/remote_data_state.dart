@@ -21,7 +21,9 @@ extension RemoteDataStateX on RemoteDataState<dynamic> {
 
   /// Returns `true` if the state is [RemoteDataInitialFetchingFailure] or
   /// [RemoteDataRefetchingFailure]
-  bool get isFailure => this is RemoteDataError;
+  bool get isFailure =>
+      this is RemoteDataInitialFetchingFailure ||
+      this is RemoteDataRefetchingFailure;
 }
 
 /// Base class for all states of the [RemoteDataBloc<T>].

@@ -47,4 +47,8 @@ class PokemonBloc extends RemoteDataBloc<Pokemon> {
     final pokemon = Pokemon.fromJson(response.body);
     return pokemon;
   }
+
+  @override
+  // TODO: implement data
+  Pokemon get data => throw UnimplementedError();
 }
