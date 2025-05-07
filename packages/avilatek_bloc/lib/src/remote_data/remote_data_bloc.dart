@@ -28,6 +28,10 @@ abstract class RemoteDataBloc<T>
         ) {
     _handler = RemoteDataEventHandler<T>();
     on<FetchRemoteData>(_mapFetchRemoteDataToState);
+    on<RemoteDataRestarted>((event, emit) {
+      emit(RemoteDataUninitialized<T>());
+      add(const FetchRemoteData());
+    });
   }
   late RemoteDataEventHandler<T> _handler;
 

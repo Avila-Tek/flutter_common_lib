@@ -63,7 +63,7 @@ void main() {
   test(
     'should return correct RemoteDataFetched boolean getter values',
     () async {
-      const state = RemoteDataFetched('');
+      const state = FetchRemoteData('');
       expect(state.isUnititialized, isFalse);
       expect(state.isFetching, isFalse);
       expect(state.isInitialFetching, isFalse);
