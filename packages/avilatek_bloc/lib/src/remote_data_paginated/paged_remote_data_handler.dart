@@ -41,7 +41,6 @@ class PagedRemoteDataEventHandler<T> {
       }
     } catch (e) {
       emit(PagedRemoteDataFirstPageFetchingFailure(e));
-      emit(PagedRemoteDataUninitialized());
     }
   }
 

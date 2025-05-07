@@ -14,6 +14,7 @@ export 'package:avilatek_bloc/src/remote_data_paginated/paged_remote_data_state.
 ///
 /// Any Object/Primitive Data can be accessed via the
 /// [PagedRemoteDataInitialized.data] property.
+/// Or via the [getDataFromState] method.
 abstract class PagedRemoteDataBloc<T>
     extends Bloc<PagedRemoteDataEvent, PagedRemoteDataState<T>> {
   ///
@@ -27,6 +28,18 @@ abstract class PagedRemoteDataBloc<T>
     });
   }
   late PagedRemoteDataEventHandler<T> _handler;
+
+  /// This method is used to access the data from the current state.
+  /// It returns a [List<T>] if the state is [PagedRemoteDataInitialized],
+  /// otherwise it returns null.
+  /// This method is useful for accessing the data from the current state
+  /// without having to check the state type.
+  List<T>? getDataFromState(PagedRemoteDataState<T> state) {
+    if (state is PagedRemoteDataInitialized<T>) {
+      return state.data;
+    }
+    return null;
+  }
 
   /// Propagates the [PagedRemoteDataFetchNextPage] event down to the corresponding event
   /// handler.
