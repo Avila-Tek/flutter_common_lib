@@ -32,7 +32,6 @@ class SendDataEventHandler<T> {
       emit(SendDataReady());
     } catch (e) {
       emit(SendDataFailure<T>(event.data, e));
-      emit(SendDataReady());
     }
   }
 
