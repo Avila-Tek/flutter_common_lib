@@ -28,7 +28,6 @@ abstract class PagedRemoteDataBloc<T>
     });
 
     on<PagedRemoteDataRetryFetchNextPage>((event, emit) {
-      emit(PagedRemoteDataRetryNextPageFetching());
       add(const PagedRemoteDataFetchNextPage());
     });
   }
@@ -86,7 +85,7 @@ abstract class PagedRemoteDataBloc<T>
         onPagedRemoteDataUninitialized != null) {
       return onPagedRemoteDataUninitialized();
     } else if ((state is PagedRemoteDataNextPageFetched ||
-            state is PagedRemoteDataRetryNextPageFetching) &&
+            state is PagedRemoteDataNextPageFetchingFailure) &&
         onNextPageFetched != null) {
       return onNextPageFetched();
     } else {
