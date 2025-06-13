@@ -92,6 +92,8 @@ abstract class PagedRemoteDataBloc<T>
             state is PagedRemoteDataNextPageFetchingFailure) &&
         onNextPageFetched != null) {
       return onNextPageFetched();
+    } else if (state is PagedRemoteDataUpdated) {
+      return;
     } else {
       // coverage:ignore-start
       throw UnimplementedError(
