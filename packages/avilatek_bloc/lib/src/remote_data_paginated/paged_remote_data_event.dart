@@ -54,3 +54,17 @@ class PagedRemoteDataRetryFetchNextPage extends PagedRemoteDataEvent {
   @override
   List<Object?> get props => [simulateError];
 }
+
+/// {@template paged_remote_data_locally_updated}
+/// Event that triggers a local update of the data.
+/// {@endtemplate}
+class PagedRemoteDataUpdated<T> extends PagedRemoteDataEvent {
+  /// {@macro paged_remote_data_locally_updated}
+  const PagedRemoteDataUpdated(this.newList);
+
+  /// The new list of data to be set in the state.
+  final List<T> newList;
+
+  @override
+  List<Object?> get props => [newList];
+}

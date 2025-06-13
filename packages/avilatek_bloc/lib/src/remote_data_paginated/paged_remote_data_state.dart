@@ -187,3 +187,13 @@ class PagedRemoteDataRetryNextPageFetching<T>
   /// {@macro remote_data_initialized.clone}
   PagedRemoteDataRetryNextPageFetching.clone(super.oldState) : super.clone();
 }
+
+/// This state is emitted when the data is updated, but the page remains the
+/// same.
+class PagedRemoteDataUpdated<T> extends PagedRemoteDataInitialized<T> {
+  /// {@macro remote_data_loaded}
+  const PagedRemoteDataUpdated(super.data);
+
+  /// {@macro remote_data_initialized.clone}
+  PagedRemoteDataUpdated.clone(super.oldState) : super.clone();
+}
