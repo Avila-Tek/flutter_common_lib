@@ -58,9 +58,9 @@ class PagedRemoteDataRetryFetchNextPage extends PagedRemoteDataEvent {
 /// {@template paged_remote_data_locally_updated}
 /// Event that triggers a local update of the data.
 /// {@endtemplate}
-class PagedRemoteDataUpdated<T> extends PagedRemoteDataEvent {
+class PagedRemoteDataLocallyUpdated<T> extends PagedRemoteDataEvent {
   /// {@macro paged_remote_data_locally_updated}
-  const PagedRemoteDataUpdated(this.newList);
+  const PagedRemoteDataLocallyUpdated(this.newList);
 
   /// The new list of data to be set in the state.
   final List<T> newList;
