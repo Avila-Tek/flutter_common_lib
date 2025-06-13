@@ -31,11 +31,9 @@ abstract class PagedRemoteDataBloc<T>
       add(const PagedRemoteDataFetchNextPage());
     });
 
-    on<PagedRemoteDataLocallyUpdated<T>>(
-      (PagedRemoteDataLocallyUpdated<T> event, emit) {
-        emit(PagedRemoteDataNextPageFetched<T>(event.newList));
-      },
-    );
+    on<PagedRemoteDataLocallyUpdated<T>>((event, emit) {
+      emit(PagedRemoteDataUpdated<T>(event.newList));
+    });
   }
   late PagedRemoteDataEventHandler<T> _handler;
 
