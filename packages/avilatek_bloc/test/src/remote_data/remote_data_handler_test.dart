@@ -10,7 +10,7 @@ class EmitterMock extends Mock implements Emitter<RemoteDataState<dynamic>> {}
 
 class RemoteDataStateFake extends Fake implements RemoteDataState {}
 
-class RemoteDataFetchedFake extends Fake implements RemoteDataFetched {
+class RemoteDataFetchedFake extends Fake implements FetchRemoteData {
   @override
   dynamic data = Object();
 }
@@ -70,7 +70,7 @@ void main() async {
                 ),
               ),
           () => emit(
-                any<RemoteDataStateFake>(that: isA<RemoteDataFetched>()),
+                any<RemoteDataStateFake>(that: isA<FetchRemoteData>()),
               ),
         ]);
         verifyNoMoreInteractions(emit);
@@ -120,7 +120,7 @@ void main() async {
                 ),
               ),
           () => emit(
-                any<RemoteDataStateFake>(that: isA<RemoteDataFetched>()),
+                any<RemoteDataStateFake>(that: isA<FetchRemoteData>()),
               ),
         ]);
         verifyNoMoreInteractions(emit);
@@ -138,7 +138,7 @@ void main() async {
 
         verifyInOrder([
           () => emit(RemoteDataInitialFetching()),
-          () => emit(const RemoteDataFetched(1)),
+          () => emit(const FetchRemoteData(1)),
         ]);
 
         verifyNoMoreInteractions(emit);
@@ -158,7 +158,7 @@ void main() async {
         verifyInOrder([
           () => emit(RemoteDataRefetching(initState)),
           () => emit(const RemoteDataRefetchingSuccess(1)),
-          () => emit(const RemoteDataFetched(1)),
+          () => emit(const FetchRemoteData(1)),
         ]);
 
         verifyNoMoreInteractions(emit);

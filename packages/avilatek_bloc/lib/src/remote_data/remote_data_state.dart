@@ -3,7 +3,9 @@ import 'package:equatable/equatable.dart';
 ///
 extension RemoteDataStateX on RemoteDataState<dynamic> {
   /// Returns `true` if the state is not initialized and has no data to show.
-  bool get isUnititialized => this is! RemoteDataInitialized;
+  bool get isUnititialized =>
+      this is! RemoteDataInitialized &&
+      this is! RemoteDataInitialFetchingFailure;
 
   /// Returns `true` if the state is initialized and has data.
   bool get isInitialized => this is RemoteDataInitialized;

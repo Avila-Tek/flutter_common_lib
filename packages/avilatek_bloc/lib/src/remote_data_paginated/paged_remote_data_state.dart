@@ -164,7 +164,7 @@ class PagedRemoteDataNextPageFetchingSuccess<T>
 /// Temporal State that represents the failed fetch of the next page of data.
 /// {@endtemplate}
 class PagedRemoteDataNextPageFetchingFailure<T>
-    extends PagedRemoteDataInitialized<T> with PagedRemoteDataFailure<T> {
+    extends PagedRemoteDataInitialized<T> {
   /// {@macro remote_data_refetching_failed}
   PagedRemoteDataNextPageFetchingFailure(super.oldState, this.error)
       : super.clone();
@@ -174,4 +174,26 @@ class PagedRemoteDataNextPageFetchingFailure<T>
 
   @override
   List<Object?> get props => [...super.props, error];
+}
+
+/// This state is emitted when the next page is being fetched again after a
+/// failure.
+
+class PagedRemoteDataRetryNextPageFetching<T>
+    extends PagedRemoteDataInitialized<T> {
+  /// {@macro remote_data_loaded}
+  const PagedRemoteDataRetryNextPageFetching(super.data);
+
+  /// {@macro remote_data_initialized.clone}
+  PagedRemoteDataRetryNextPageFetching.clone(super.oldState) : super.clone();
+}
+
+/// This state is emitted when the data is updated, but the page remains the
+/// same.
+class PagedRemoteDataUpdated<T> extends PagedRemoteDataInitialized<T> {
+  /// {@macro remote_data_loaded}
+  const PagedRemoteDataUpdated(super.data);
+
+  /// {@macro remote_data_initialized.clone}
+  PagedRemoteDataUpdated.clone(super.oldState) : super.clone();
 }

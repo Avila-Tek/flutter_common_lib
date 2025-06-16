@@ -31,7 +31,6 @@ class RemoteDataEventHandler<T> {
       emit(RemoteDataFetched(data));
     } catch (e) {
       emit(RemoteDataInitialFetchingFailure(e));
-      emit(RemoteDataUninitialized());
     }
   }
 
