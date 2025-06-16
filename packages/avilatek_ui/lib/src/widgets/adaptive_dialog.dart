@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -52,6 +50,7 @@ class AdaptiveAlertDialog extends StatelessWidget {
     this.title,
     this.content,
     this.style,
+    this.backgroundColor,
     super.key,
   });
 
@@ -66,6 +65,9 @@ class AdaptiveAlertDialog extends StatelessWidget {
 
   /// The style to use for the dialog.
   final AdaptiveDialogActionStyle? style;
+
+  /// The background color for the dialog.
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +95,8 @@ class AdaptiveAlertDialog extends StatelessWidget {
     return AlertDialog(
       title: title,
       content: content,
+      backgroundColor:
+          backgroundColor ?? Theme.of(context).dialogBackgroundColor,
       actions: actions
           .map(
             (action) => TextButton(
