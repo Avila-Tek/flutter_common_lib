@@ -1,7 +1,8 @@
 # This is a generated file; do not edit or check into version control.
-file_picker=/Users/andrespacheco/.pub-cache/hosted/pub.dev/file_picker-6.1.1/
-flutter_plugin_android_lifecycle=/Users/andrespacheco/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.17/
-permission_handler=/Users/andrespacheco/.pub-cache/hosted/pub.dev/permission_handler-11.0.1/
-permission_handler_android=/Users/andrespacheco/.pub-cache/hosted/pub.dev/permission_handler_android-11.1.0/
-permission_handler_apple=/Users/andrespacheco/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.4/
-permission_handler_windows=/Users/andrespacheco/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/
+file_picker=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/file_picker-6.2.1/
+flutter_plugin_android_lifecycle=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24/
+permission_handler=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/permission_handler-11.3.1/
+permission_handler_android=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.13/
+permission_handler_apple=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.5/
+permission_handler_html=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.3+5/
+permission_handler_windows=/Users/carlosdoffiny/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1/

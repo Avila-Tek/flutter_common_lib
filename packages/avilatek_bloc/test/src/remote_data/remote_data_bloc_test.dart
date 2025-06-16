@@ -44,18 +44,18 @@ void main() {
         act: (bloc) => bloc.add(const FetchRemoteData()),
         expect: () => [
           RemoteDataInitialFetching<int>(),
-          const RemoteDataFetched<int>(1),
+          const FetchRemoteData<int>(1),
         ],
       );
       blocTest<RemoteDataBloc<int>, RemoteDataState<int>>(
         '''should emit RemoteDataRefetching and RemoteDataFetched states when FetchRemoteData event is added from initialized state''',
         build: () => bloc,
-        seed: () => const RemoteDataFetched<int>(2),
+        seed: () => const FetchRemoteData<int>(2),
         act: (bloc) => bloc.add(const FetchRemoteData()),
         expect: () => [
-          RemoteDataRefetching<int>(const RemoteDataFetched<int>(2)),
+          RemoteDataRefetching<int>(const FetchRemoteData<int>(2)),
           const RemoteDataRefetchingSuccess<int>(1),
-          const RemoteDataFetched<int>(1),
+          const FetchRemoteData<int>(1),
         ],
       );
       blocTest<RemoteDataBloc<int>, RemoteDataState<int>>(
@@ -73,17 +73,17 @@ void main() {
       blocTest<RemoteDataBloc<int>, RemoteDataState<int>>(
         '''should emit RemoteDataRefetching and RemoteDataRefetchingFailure states when refetch call fails''',
         build: () => bloc,
-        seed: () => const RemoteDataFetched<int>(2),
+        seed: () => const FetchRemoteData<int>(2),
         act: (bloc) => bloc.add(const FetchRemoteData(simulateError: true)),
         expect: () {
           // Ensure every state is emitted with the previous state.data value
           // (2)
           return [
-            RemoteDataRefetching<int>(const RemoteDataFetched<int>(2)),
+            RemoteDataRefetching<int>(const FetchRemoteData<int>(2)),
             isA<RemoteDataRefetchingFailure<int>>()
                 .having((state) => state.data, 'data', equals(2)),
             // Finally, the state should go back to the previous state (2)
-            const RemoteDataFetched<int>(2),
+            const FetchRemoteData<int>(2),
           ];
         },
       );
@@ -91,7 +91,7 @@ void main() {
       blocTest<RemoteDataBloc<int>, RemoteDataState<int>>(
         '''should emit incrementing values when FetchRemoteData event is added multiple times, and persists the last value when the call fails''',
         build: () => bloc,
-        seed: () => const RemoteDataFetched<int>(2),
+        seed: () => const FetchRemoteData<int>(2),
         act: (bloc) {
           bloc
             ..add(const FetchRemoteData())
@@ -99,14 +99,14 @@ void main() {
             ..add(const FetchRemoteData());
         },
         skip: 8,
-        expect: () => [const RemoteDataFetched<int>(4)],
+        expect: () => [const FetchRemoteData<int>(4)],
       );
       blocTest<RemoteDataBloc<int>, RemoteDataState<int>>(
         '''should start in RemoteDataFetched when initialData parameter is provided''',
         build: () => RemoteDataBlocImpl(initialData: 3),
         verify: (bloc) {
-          expect(bloc.state, isA<RemoteDataFetched<int>>());
-          expect((bloc.state as RemoteDataFetched<int>).data, 3);
+          expect(bloc.state, isA<FetchRemoteData<int>>());
+          expect((bloc.state as FetchRemoteData<int>).data, 3);
         },
       );
     },
