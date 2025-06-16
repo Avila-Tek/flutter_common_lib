@@ -20,11 +20,11 @@ void main() {
       'should return the correct properties of PagedRemoteDataRestart',
       () {
         expect(
-          const PagedRemoteDataRestart().props,
+          const PagedRemoteDataRestarted().props,
           containsAll([false]),
         );
         expect(
-          const PagedRemoteDataRestart(simulateError: true).props,
+          const PagedRemoteDataRestarted(simulateError: true).props,
           containsAll([true]),
         );
       },

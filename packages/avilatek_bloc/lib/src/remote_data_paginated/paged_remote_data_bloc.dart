@@ -14,6 +14,7 @@ export 'package:avilatek_bloc/src/remote_data_paginated/paged_remote_data_state.
 ///
 /// Any Object/Primitive Data can be accessed via the
 /// [PagedRemoteDataInitialized.data] property.
+/// Or via the [getDataFromState] method.
 abstract class PagedRemoteDataBloc<T>
     extends Bloc<PagedRemoteDataEvent, PagedRemoteDataState<T>> {
   ///
@@ -21,12 +22,28 @@ abstract class PagedRemoteDataBloc<T>
     _handler = PagedRemoteDataEventHandler<T>();
     on<PagedRemoteDataFetchNextPage>(_mapFetchNextPageRemoteDataToState);
 
-    on<PagedRemoteDataRestart>((event, emit) {
+    on<PagedRemoteDataRestarted>((event, emit) {
       emit(PagedRemoteDataUninitialized<T>());
+      add(const PagedRemoteDataFetchNextPage());
+    });
+
+    on<PagedRemoteDataRetryFetchNextPage>((event, emit) {
       add(const PagedRemoteDataFetchNextPage());
     });
   }
   late PagedRemoteDataEventHandler<T> _handler;
+
+  /// This method is used to access the data from the current state.
+  /// It returns a [List<T>] if the state is [PagedRemoteDataInitialized],
+  /// otherwise it returns null.
+  /// This method is useful for accessing the data from the current state
+  /// without having to check the state type.
+  List<T>? getDataFromState(PagedRemoteDataState<T> state) {
+    if (state is PagedRemoteDataInitialized<T>) {
+      return state.data;
+    }
+    return null;
+  }
 
   /// Propagates the [PagedRemoteDataFetchNextPage] event down to the corresponding event
   /// handler.
@@ -48,7 +65,7 @@ abstract class PagedRemoteDataBloc<T>
       ),
       onNextPageFetched: () => _handler.mapFetchNextPageRemoteDataToState(
         event,
-        state as PagedRemoteDataNextPageFetched<T>,
+        state as PagedRemoteDataInitialized<T>,
         emit,
         fetchAndParseNextPage,
       ),
@@ -67,7 +84,8 @@ abstract class PagedRemoteDataBloc<T>
     } else if (state is PagedRemoteDataUninitialized &&
         onPagedRemoteDataUninitialized != null) {
       return onPagedRemoteDataUninitialized();
-    } else if (state is PagedRemoteDataNextPageFetched &&
+    } else if ((state is PagedRemoteDataNextPageFetched ||
+            state is PagedRemoteDataNextPageFetchingFailure) &&
         onNextPageFetched != null) {
       return onNextPageFetched();
     } else {
