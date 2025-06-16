@@ -1,6 +1,6 @@
 name: avilatek_ui
 description: A Very Good Project created by Very Good CLI.
-version: 0.2.0
+version: 0.2.1
 publish_to: none
 
 environment:
