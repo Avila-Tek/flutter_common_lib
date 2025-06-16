@@ -41,11 +41,11 @@ class PagedRemoteDataEventHandler<T> {
       }
     } catch (e) {
       emit(PagedRemoteDataFirstPageFetchingFailure(e));
-      emit(PagedRemoteDataUninitialized());
     }
   }
 
-  /// Handler for [PagedRemoteDataFetchNextPage] + [PagedRemoteDataNextPageFetched] combination.
+  /// Handler for [PagedRemoteDataFetchNextPage] + [PagedRemoteDataNextPageFetched] combination, and
+  /// [PagedRemoteDataNextPageFetchingFailure] to retry the fetch.
   /// Handles refetch of the remote data.
   ///
   /// On success it emits: [PagedRemoteDataNextPageFetching],
@@ -55,7 +55,7 @@ class PagedRemoteDataEventHandler<T> {
   /// [PagedRemoteDataNextPageFetchingFailure].
   Future<void> mapFetchNextPageRemoteDataToState(
     PagedRemoteDataFetchNextPage event,
-    PagedRemoteDataNextPageFetched<T> state,
+    PagedRemoteDataInitialized<T> state,
     Emitter<PagedRemoteDataState<T>> emit,
     Future<(List<T>, bool)> Function(
       PagedRemoteDataState<T>,
@@ -63,6 +63,8 @@ class PagedRemoteDataEventHandler<T> {
     ) fetchAndParseNextPage,
   ) async {
     try {
+      if (state is PagedRemoteDataLastPageFetched) return;
+
       emit(PagedRemoteDataNextPageFetching(state));
 
       if (event.simulateError ?? false) {
