@@ -1,6 +1,6 @@
 name: avilatek_core
 description: A Very Good Project created by Very Good CLI.
-version: 1.1.1
+version: 1.1.2
 publish_to: none
 
 environment:
@@ -12,8 +12,8 @@ dependencies:
   http: ^1.2.2
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   mocktail: ^0.3.0
   test: ^1.19.2
   very_good_analysis: ^5.0.0
-  flutter_test:
-    sdk: flutter

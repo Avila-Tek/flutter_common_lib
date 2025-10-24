@@ -99,6 +99,10 @@ abstract class ErrorRadarDelegate {
     return _instance!;
   }
 
+  /// Initializes the error radar service with any required setup.
+  /// This method should be called before using any other methods.
+  Future<void> init();
+
   /// Returns whether the error collection is enabled by the user.
   bool get isCollectionEnabled;
 
@@ -157,6 +161,12 @@ final class MultiErrorRadar extends ErrorRadarDelegate {
   }) : _radars = radars;
 
   final List<ErrorRadarDelegate> _radars;
+
+  /// Initializes all registered error radar services.
+  @override
+  Future<void> init() async {
+    await Future.wait(_radars.map((radar) => radar.init()));
+  }
 
   /// Returns `true` if all radars are enabled.
   @override
